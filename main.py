@@ -1,6 +1,7 @@
 import csv
 import numpy as np
 import sys
+from sklearn import preprocessing
 
 train_data_path = "ML-CUP17-TR.csv"
 test_data_path = "ML-CUP17-TS.csv"
@@ -21,23 +22,33 @@ class Dataset:
         result is returned as a tuple where the first element is an array containing
         the input data subarrays and the second element is an array containing the
         target data subarrays'''
-        input = np.array_split(self.train[0],3)
-        target = np.array_split(self.train[1],3)
+        input = np.array_split(self.train[0],k)
+        target = np.array_split(self.train[1],k)
         return (input, target)
 
     def split_train_percent(self, percent):
-        pass
-        #split train into 2 according to percent
+        '''Splits training data into 2 according to percent. Result is returned as a tuple
+        where the first element is an array containing the input data subarrays
+        and the second element is an array containing the target data subarrays'''
+        l = int(len(dataset.train[0])*percent/100)
+        return (np.array([dataset.train[0][0:l],dataset.train[0][l::]]),
+                np.array([dataset.train[1][0:l], dataset.train[1][l::]]))
 
 class Preprocessor:
 
-    #apply_normalization(dataset, method="min-max"):
+    def normalize(self, dataset, method='min-max', norm_output=False):
+        if method=='min-max':
+            dataset.train[0] =  (dataset.train[0] - dataset.train[0].min(axis=0)) / \
+                               (dataset.train[0].max(axis=0) - dataset.train[0].min(axis=0))
+            if norm_output:
+                dataset.train[1] = (dataset.train[1] - dataset.train[1].min(axis=0)) / \
+                               (dataset.train[1].max(axis=0) - dataset.train[1].min(axis=0))
         #normalize training and test data
 
     def shuffle(self,dataset):
         '''randomly shuffles training data'''
         perm = np.random.permutation(len(dataset.train[0]))
-        dataset.train = (dataset.train[0][perm], dataset.train[1][perm])
+        dataset.train = [dataset.train[0][perm], dataset.train[1][perm]]
 
     def get_means(self):
         pass
@@ -70,10 +81,10 @@ def load_data(path=None, target=True, header_l=0, targets=0):
     if target:
         x = [d[:-targets] for d in data]
         y = [d[-targets:] for d in data]
-        return (np.array(x), np.array(y))
+        return [np.array(x).astype('float32'), np.array(y).astype('float32')]
     else:
         x = [d for d in data]
-        return (np.array(x), None)
+        return [np.array(x).astype('float32'), None]
 
 dataset = Dataset()
 dataset.init_train(load_data(train_data_path, True, header_l=10, targets=2))
@@ -109,6 +120,6 @@ NN.addLayers(type,[array of neurons], <number of layers>,
 NN.compile(loss_func, optimizer,(metric)..)
 
 NN.fit(dataset, batch_size, epochs, cvfolds=0, vsplit=0) #only one of cvfolds, vsplit
-
+#grid search function
 NN.test()'''
 
