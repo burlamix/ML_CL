@@ -5,6 +5,7 @@ from sklearn import preprocessing
 
 train_data_path = "ML-CUP17-TR.csv"
 test_data_path = "ML-CUP17-TS.csv"
+np.random.seed(4)
 
 class Dataset:
     def __init__(self):
@@ -92,27 +93,104 @@ dataset.init_test(load_data(test_data_path, False, header_l=10))
 
 preprocessor = Preprocessor()
 
+def sigmoid(x):
+    return 1/(1+np.exp(-x))
+
+class Activation:
+
+    def __init__(self,f,dxf,gradf):
+        self.f = f
+        self.dxf = dxf
+
 class SimpleOptimizer:
 
-    def optimize(self, epochs, NN, maxIters):
-        NN.fp
-        NN.bp
-        #update weight
-        #for layer in NN.layers:
-            #layer.weights = layer.weights+layer.gradients
+    def optimize(self, y_true, epochs, NN, maxIters):
+        for i in range(epochs):
+            o = NN.fp
+            NN.bp(o, y_true)
+            #update weight
+            #for layer in NN.layers:
+                #layer.weights = layer.weights+layer.gradients
 
 #preprocessing
-'''class Layer:
+class Layer:
+
+    def __init__(self, inputs, neurons, activation, weights=None, bias=0):
+        self.currentOutput = None
+        if inputs<0 or neurons<0: sys.exit("Expected positive value")
+        if weights.any()==None:
+            self.W = np.random.rand(neurons, inputs+1)
+            self.W = np.ones((neurons, inputs+1))
+        else:
+            if isinstance(weights, (np.ndarray, np.generic)):
+                if (weights.shape!=(neurons, inputs)):
+                    sys.exit("Weights wrong dimension")
+                else:
+                    self.W = weights
+                    self.W = np.concatenate((np.ones((self.W.shape[0], 1)) * 0, self.W), axis=1)
+                    self.W[:, 0] = bias
+            else:
+                sys.exit("Expected a nparray")
+
+        self.activation = activation #check for errors(wheter its a func or not)
+
+    def getOutput(self,x):
+        x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
+        print(x)
+        print(self.W.transpose())
+        partial = np.dot(x, self.W.transpose())
+        self.currentOutput = self.activation.f(partial)
+        return self.currentOutput
+
 
 class NeuralNetwork:
 
-    fit():
+    def __init__(self):
+        #TODO initial layers
+        self.layers = []
+
+    def addLayer(self,inputs, neurons, activation, weights=None, bias=0):
+        self.layers.append(Layer(inputs, neurons, activation, weights, bias=bias))
+
+    def FP(self, x_in):
+        x = x_in
+        for layer in self.layers:
+            x = layer.getOutput(x)
+        return x
+
+    def BP(self, prediction, real, x_in):
+        for i in range(len(self.layers)-1, -1, -1):
+            loss_func = 1 / 2 * (real - self.layers[i].currentOutput) * \
+                        (real - self.layers[i].currentOutput)
+            der_loss_func = (prediction - real)
+            logi = self.layers[i].currentOutput * (1 - self.layers[i].currentOutput)
+            if i==(len(self.layers)-1):err = logi*der_loss_func
+            else:
+                err=np.dot(err,self.layers[i+1].W[:,1:])
+            if i==0:curro = x_in
+            else:
+                curro = self.layers[i-1].currentOutput
+            grad = curro*err*logi #TODO save gradient in layer
+
+
+    #def fit():
         #gradient calculation is the same for all optimizers,
         #the update rule changes for each one
         #while backprop set layer.gradient
-        self.optimizer.optimize(self.loss_func(dataset.train))
+     #   self.optimizer.optimize(self.loss_func(dataset.train))
 
+
+toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays
+activation = Activation(sigmoid,sigmoid,sigmoid)
 NN = NeuralNetwork()
+NN.addLayer(2,2,activation,weights=np.array([[0.15,0.20],[0.25,0.3]]),bias=0.35)
+NN.addLayer(2,2,activation,weights=np.array([[0.40,0.45],[0.50,0.55]]),bias=0.6)
+o = NN.FP(toyx)
+print(o)
+print("==========================")
+o1 = NN.BP(o,np.array([0.01,0.99]),toyx)
+print(o1)
+'''NN = NeuralNetwork()
 NN.addLayer(type,regularizer,neurons,activation..)
 
 NN.addLayers(type,[array of neurons], <number of layers>,
