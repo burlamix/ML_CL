@@ -79,7 +79,7 @@ def load_data(path=None, target=True, header_l=0, targets=0):
             data.append(row)
     data = data[header_l::]
     if target:
-        x = [d[:-targets] for d in data]
+        x = [d[1:-targets] for d in data]
         y = [d[-targets:] for d in data]
         return [np.array(x).astype('float32'), np.array(y).astype('float32')]
     else:
@@ -151,7 +151,6 @@ class Layer:
                     self.W[:, 0] = bias
             else:
                 sys.exit("Expected a nparray")
-        print(self.W)
         self.activation = activation #check for errors(wheter its a func or not)
 
     def getOutput(self,x):
@@ -209,6 +208,7 @@ class NeuralNetwork:
 
     def fit(self, dataset, epochs, batch_size=len(dataset.train[0])):
         self.real = dataset.train[1]
+
         for i in range(0, epochs):
             for chunk in range(0,len(dataset.train[0]),batch_size):
                 cap = min([len(dataset.train[0]), chunk + batch_size])
@@ -225,35 +225,38 @@ class NeuralNetwork:
      #   self.optimizer.optimize(self.loss_func(dataset.train))
 
 
-toyx = np.random.rand(1016,11) #TODO make it work with arrays
+#Real dataset
 activation = Activation(sigmoid,sigmoddxf,sigmoid)
 activation1 = Activation(linear,lineardxf,sigmoid)
-NN = NeuralNetwork()
-NN.addLayer(11,2,activation)
-optimizer = SimpleOptimizer(0.01)
-#dataset.train[0] = toyx
-#dataset.train[1] = np.random.rand(1,2)
-preprocessor.normalize(dataset)
-#NN.fit(dataset, 3000, len(dataset.train[0]))
+NN = NeuralNetwork()#276828657
+NN.addLayer(10,20,activation)
+NN.addLayer(20,2,activation1)
+optimizer = SimpleOptimizer(0.000004)
+preprocessor.normalize(dataset,norm_output=False)
+NN.fit(dataset, 100000, len(dataset.train[0]))
 
+#Toy dataset
 toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays
-activation = Activation(sigmoid,sigmoddxf,sigmoid)
 NN = NeuralNetwork()
 NN.addLayer(2,2,activation,weights=np.array([[0.15,0.20],[0.25,0.3]]),bias=0.35)
 NN.addLayer(2,2,activation,weights=np.array([[0.40,0.45],[0.50,0.55]]),bias=0.6)
 dataset.train[0] = toyx
 dataset.train[1] = np.array([0.01, 0.99])
-
 #NN.fit(dataset, 1111, len(dataset.train[0]))
-optimizer = SimpleOptimizer(lr=1.72)
 
-dataset.train[0] = np.array([[3,4]])
-dataset.train[1] = np.array([5])
+#Toy dataset
+optimizer = SimpleOptimizer(lr=0.072)
+dataset.train[0] = np.array([[0.3,0.4]])
+dataset.train[1] = np.array([0.5])
 NN = NeuralNetwork()
-NN.addLayer(2,1,activation)
-NN.fit(dataset, 50000, len(dataset.train[0]))
-for l in NN.layers:
-    print(l.W)
+#NN.addLayer(2,1,activation1,weights=np.array([[0.6, 0.8]]), bias=0.2)
+NN.addLayer(2,3,activation1)
+NN.addLayer(3,5,activation)
+NN.addLayer(5,1,activation)
+#preprocessor.normalize(dataset)
+#NN.fit(dataset, 1000, len(dataset.train[0]))
+
+
 '''o = NN.FP(toyx)
 print("==========================")
 o1 = NN.BP(o,np.array([0.01,0.99]),toyx)
@@ -272,3 +275,7 @@ NN.fit(dataset, batch_size, epochs, cvfolds=0, vsplit=0) #only one of cvfolds, v
 #grid search function
 NN.test()'''
 
+#TODO min max when min=max -> if min=max then normalize as el/(length of list)
+#TODO make dataset work when input is array and not matrix
+#TODO gradient checking http://ufldl.stanford.edu/tutorial/supervised/DebuggingGradientChecking/
+#TODO compare with keras setting seed
