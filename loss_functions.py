@@ -17,18 +17,25 @@ def maedx(target, prediction):
     r[r == 0] = -1
     return r
 
+
+def l2regul(W, rlambda):
+    rlambda*((W**2).sum())
+
+def l2reguldx(W, rlambda):
+    rlambda*(W.sum())
+
+reguls = dict()
+reguls["L2"] = l2regul
 losses = dict()
 losses["mse"] = (mse, msedx)
 losses["mae"] = (mae, maedx)
 
-A = np.random.randn(500,500)
-B = np.random.randn(500,500)
+A = np.round(np.random.rand(2,2)*10)
+B = np.round(np.random.rand(1,2)*10)
 start = time.time()
-for i in range(0,100):
-    mse(A,B)
+
+for i in range(0,1):
+    (mse(A,B))
 end = time.time()
 
 print("TIME:"+str(end-start))
-r = np.equal(A,A).astype("float32")
-r[r==0]=-1
-print(r)

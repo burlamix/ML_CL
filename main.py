@@ -4,7 +4,6 @@ from preproc import *
 from NN import *
 from optimizer import *
 
-
 train_data_path = "data/ML-CUP17-TR.csv"
 test_data_path = "data/ML-CUP17-TS.csv"
 
@@ -36,7 +35,7 @@ NN.addLayer(10,20,activation)
 NN.addLayer(20,2,activation1)
 optimizer = SimpleOptimizer(0.000004)
 preprocessor.normalize(dataset,norm_output=False)
-NN.fit(dataset, 100000, optimizer, batch_size=32)
+#NN.fit(dataset, 100000, optimizer, batch_size=32)
 
 #Toy dataset
 toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays
@@ -48,16 +47,17 @@ dataset.train[1] = np.array([0.01, 0.99])
 #NN.fit(dataset, 1111, optimizer)
 
 #Toy dataset
-optimizer = SimpleOptimizer(lr=0.072)
-dataset.train[0] = np.array([[0.3,0.4]])
-dataset.train[1] = np.array([0.5])
+optimizer = SimpleOptimizer(lr=0.00001)
+np.random.seed(5)
+dataset.train[0] = np.random.rand(500,10)
+dataset.train[1] = np.random.rand(500,1)
+
 NN = NeuralNetwork()
 #NN.addLayer(2,1,activation1,weights=np.array([[0.6, 0.8]]), bias=0.2)
-NN.addLayer(2,3,activation1)
-NN.addLayer(3,5,activation)
-NN.addLayer(5,1,activation)
+NN.addLayer(10,20,activation1)
+NN.addLayer(20,1,activation1)
 #preprocessor.normalize(dataset)
-#NN.fit(dataset, 1000, optimizer)
+NN.fit(dataset, 100000, optimizer,batch_size=500)
 
 
 '''o = NN.FP(toyx)

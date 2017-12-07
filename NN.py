@@ -3,11 +3,24 @@ import sys
 from preproc import *
 from loss_functions import mse, msedx
 from loss_functions import losses
+from loss_functions import reguls
+
 import types
 
 class Layer:
 
-    def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0):
+    def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0,
+                 regularizer="L2", rlambda = 0.01): #TODO find proper default value for lambda
+
+        if isinstance(regularizer[0], types.FunctionType) and \
+            isinstance(regularizer[1], types.FunctionType):
+            self.regularizer = regularizer
+        else:
+            #Otherwise check whether the specified regularizer function exists
+            try: self.regularizer = reguls[regularizer]
+            except KeyError: sys.exit("regularizer function undefined")
+
+        self.rlambda=rlambda
         self.currentOutput = None
         self.grad=None
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
@@ -32,6 +45,8 @@ class Layer:
         self.currentOutput = self.activation.f(partial)
         return self.currentOutput
 
+    def regularize(self):
+        return self.regularizer(self.W, self.rlambda)
 
 class NeuralNetwork:
 
@@ -39,8 +54,10 @@ class NeuralNetwork:
         #TODO initial layers
         self.layers = []
 
-    def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0):
-        self.layers.append(Layer(inputs, neurons, activation, weights, bias=bias))
+    def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
+                 regularization="L2", rlambda = 0.01):
+        self.layers.append(Layer(inputs, neurons, activation, weights, bias,
+                                 regularization, rlambda))
 
     def FP(self, x_in):
         x = x_in
@@ -50,7 +67,7 @@ class NeuralNetwork:
 
     def BP(self, prediction, real, x_in):
         gradients = []
-        loss_func = self.loss_func[0](real,prediction)
+        loss_func = self.loss_func[0](real,prediction) + self.regul()
 
         for i in range(len(self.layers)-1, -1, -1):
 
@@ -71,6 +88,12 @@ class NeuralNetwork:
             gradients.append(grad)
         return loss_func, np.array(gradients)
 
+
+    def regul(self):
+        regul_loss = 0
+        for l in self.layers:
+            regul_loss+=l.regularizer
+        return regul_loss
 
     def f(self, in_chunk, out_chunk):
         def g(W):
@@ -95,7 +118,7 @@ class NeuralNetwork:
         else:
             #Otherwise check whether a the specified loss function exists
             try: self.loss_func = losses[loss_func]
-            except KeyError: sys.exit("Loss functions undefined")
+            except KeyError: sys.exit("Loss function undefined")
 
         if batch_size<0:                        #TODO more check
             batch_size=len(dataset.train[0])
