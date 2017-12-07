@@ -36,7 +36,7 @@ NN.addLayer(10,20,activation)
 NN.addLayer(20,2,activation1)
 optimizer = SimpleOptimizer(0.000004)
 preprocessor.normalize(dataset,norm_output=False)
-NN.fit(dataset, 100000, optimizer)
+NN.fit(dataset, 100000, optimizer, batch_size=32)
 
 #Toy dataset
 toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays

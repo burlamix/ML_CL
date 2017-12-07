@@ -1,5 +1,9 @@
 import numpy as np
+import sys
 from preproc import *
+from loss_functions import mse, msedx
+from loss_functions import losses
+import types
 
 class Layer:
 
@@ -46,18 +50,14 @@ class NeuralNetwork:
 
     def BP(self, prediction, real, x_in):
         gradients = []
-        loss_func = np.sum(1/(2*prediction.shape[0]) * ((real - prediction) * \
-                    (real - prediction)))
+        loss_func = self.loss_func[0](real,prediction)
 
-        #print(loss_func)
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
 
-            #logi = self.layers[i].currentOutput * (1 - self.layers[i].currentOutput)
-
             if i==(len(self.layers)-1):
-                err = logi*(prediction - real)
+                err = logi*self.loss_func[1](prediction, real)
             else:
                 err=np.dot(err,self.layers[i+1].W[:,1:])*logi #error is derivative of activation
                 #at current layer * (weights*error at next layer)
@@ -72,23 +72,39 @@ class NeuralNetwork:
         return loss_func, np.array(gradients)
 
 
-    def f(self, chunk):
+    def f(self, in_chunk, out_chunk):
         def g(W):
-            return self.BP(self.FP(chunk), self.real, chunk)
+            return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
         return g
 
-    def fit(self, dataset, epochs, optimizer, batch_size=-1):
+    def fit(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse"):
+        #***GENERAL DESCRIPTION***
+        #loss_func: can either be a string refering to a standardized defined
+        #loss functions or a tuple where the first element is a loss function
+        #and the second element is the corresponding derivative
+        #
+        #batch_size: the dimension of the samples to use for each update step.
+        #note that a higher value leads to higher stability and parallelization
+        #capabilities, possibly at the cost of a higher number of updates
+        ######################################################################
+
+        #Check whether the user provided a properly formatted loss function
+        if isinstance(loss_func[0], types.FunctionType) and \
+                isinstance(loss_func[1], types.FunctionType):
+            self.loss_func = loss_func
+        else:
+            #Otherwise check whether a the specified loss function exists
+            try: self.loss_func = losses[loss_func]
+            except KeyError: sys.exit("Loss functions undefined")
 
         if batch_size<0:                        #TODO more check
             batch_size=len(dataset.train[0])
-
-        self.real = dataset.train[1]
 
         for i in range(0, epochs):
             for chunk in range(0,len(dataset.train[0]),batch_size):
                 cap = min([len(dataset.train[0]), chunk + batch_size])
 
-                update = optimizer.optimize(self.f(dataset.train[0][chunk:cap]), "ciao")
+                update = optimizer.optimize(self.f(dataset.train[0][chunk:cap], dataset.train[1][chunk:cap]), "ciao")
 
                 for i in range (0,len(self.layers)):
                     self.layers[i].W = self.layers[i].W+update[-i-1].transpose()
