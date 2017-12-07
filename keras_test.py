@@ -24,4 +24,8 @@ np.random.seed(5)
 
 x=np.random.rand(500,10)
 y=np.random.rand(500,1)
-model.fit(x,y,batch_size=500,epochs=10000,shuffle=True)
+model.fit(x,y,batch_size=5000,epochs=500,shuffle=True)
+w = 0
+for m in model.get_weights():
+    w+=np.sum(np.abs(m))
+print(w)

@@ -25,7 +25,6 @@ class SimpleOptimizer:
     def optimize(self, f, W):
         #Could use weights instead of NN
         loss, grad = f(W)
-        print("loss",loss)
 
         return -self.lr*grad
 

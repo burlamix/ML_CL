@@ -47,19 +47,21 @@ dataset.train[1] = np.array([0.01, 0.99])
 #NN.fit(dataset, 1111, optimizer)
 
 #Toy dataset
-optimizer = SimpleOptimizer(lr=0.00001)
+optimizer = SimpleOptimizer(lr=0.00003)
 np.random.seed(5)
 dataset.train[0] = np.random.rand(500,10)
 dataset.train[1] = np.random.rand(500,1)
-
 NN = NeuralNetwork()
 #NN.addLayer(2,1,activation1,weights=np.array([[0.6, 0.8]]), bias=0.2)
 NN.addLayer(10,20,activation1)
 NN.addLayer(20,1,activation1)
 #preprocessor.normalize(dataset)
-NN.fit(dataset, 100000, optimizer,batch_size=500)
+NN.fit(dataset, 2800, optimizer,batch_size=500)
 
-
+s = 0
+for l in NN.layers:
+    s+=np.sum(np.abs(l.W))
+print(np.sum(s))
 '''o = NN.FP(toyx)
 print("==========================")
 o1 = NN.BP(o,np.array([0.01,0.99]),toyx)

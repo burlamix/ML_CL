@@ -46,7 +46,10 @@ class Layer:
         return self.currentOutput
 
     def regularize(self):
-        return self.regularizer(self.W, self.rlambda)
+        return self.regularizer[0](self.W, self.rlambda)
+
+    def regularizedx(self):
+        return self.regularizer[1](self.W, self.rlambda)
 
 class NeuralNetwork:
 
@@ -55,7 +58,7 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda = 0.01):
+                 regularization="L2", rlambda = 0.89):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias,
                                  regularization, rlambda))
 
@@ -67,14 +70,16 @@ class NeuralNetwork:
 
     def BP(self, prediction, real, x_in):
         gradients = []
-        loss_func = self.loss_func[0](real,prediction) + self.regul()
-
+        loss_func = self.loss_func[0](real,prediction) #+ self.regul()
+        print(loss_func)
+       # if(loss_func<0.075):exit(1)
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
 
             if i==(len(self.layers)-1):
-                err = logi*self.loss_func[1](prediction, real)
+                err = np.dot(logi,self.loss_func[1](prediction, real))
+                #err = logi*self.loss_func[1](prediction, real)
             else:
                 err=np.dot(err,self.layers[i+1].W[:,1:])*logi #error is derivative of activation
                 #at current layer * (weights*error at next layer)
@@ -85,6 +90,7 @@ class NeuralNetwork:
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
             grad = np.dot(curro.transpose(),err) #TODO save gradient in layer
             self.layers[i].grad = grad
+            #print("grad:"+str(err))
             gradients.append(grad)
         return loss_func, np.array(gradients)
 
@@ -92,8 +98,14 @@ class NeuralNetwork:
     def regul(self):
         regul_loss = 0
         for l in self.layers:
-            regul_loss+=l.regularizer
-        return regul_loss
+            regul_loss+=l.regularize()
+        return regul_loss/len(self.dataset.train[0])
+
+    def reguldx(self):
+        regul_loss = 0
+        for l in self.layers:
+            regul_loss+=l.regularizedx()
+        return regul_loss/len(self.dataset.train[0])
 
     def f(self, in_chunk, out_chunk):
         def g(W):
@@ -110,7 +122,7 @@ class NeuralNetwork:
         #note that a higher value leads to higher stability and parallelization
         #capabilities, possibly at the cost of a higher number of updates
         ######################################################################
-
+        self.dataset = dataset
         #Check whether the user provided a properly formatted loss function
         if isinstance(loss_func[0], types.FunctionType) and \
                 isinstance(loss_func[1], types.FunctionType):
@@ -124,14 +136,14 @@ class NeuralNetwork:
             batch_size=len(dataset.train[0])
 
         for i in range(0, epochs):
+            print(i)
             for chunk in range(0,len(dataset.train[0]),batch_size):
                 cap = min([len(dataset.train[0]), chunk + batch_size])
 
                 update = optimizer.optimize(self.f(dataset.train[0][chunk:cap], dataset.train[1][chunk:cap]), "ciao")
 
                 for i in range (0,len(self.layers)):
-                    self.layers[i].W = self.layers[i].W+update[-i-1].transpose()
-
+                    self.layers[i].W = self.layers[i].W+update[-i-1].transpose()-self.reguldx()
   #  def w_update(update):
    #     for i in range (0,len(self.layers)):
     #        self.layers[i].W = self.layers[i].W+update[-i-1].transpose()

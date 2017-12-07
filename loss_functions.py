@@ -6,7 +6,7 @@ def mse(target, prediction):
     return ((target - prediction) ** 2).mean()
 
 def msedx(target, prediction):
-    return target - prediction
+    return (target - prediction)
 
 def mae(target, prediction):
     #Mean absolute error
@@ -19,13 +19,13 @@ def maedx(target, prediction):
 
 
 def l2regul(W, rlambda):
-    rlambda*((W**2).sum())
+    return rlambda*((W**2).sum())
 
 def l2reguldx(W, rlambda):
-    rlambda*(W.sum())
+    return rlambda*(W.sum())
 
 reguls = dict()
-reguls["L2"] = l2regul
+reguls["L2"] = (l2regul, l2reguldx)
 losses = dict()
 losses["mse"] = (mse, msedx)
 losses["mae"] = (mae, maedx)
