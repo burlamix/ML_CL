@@ -21,8 +21,11 @@ def maedx(target, prediction):
 def l2regul(W, rlambda):
     return rlambda*((W**2).sum())
 
+#def l2reguldx(W, rlambda):
+ #   return rlambda*(W.sum())
+
 def l2reguldx(W, rlambda):
-    return rlambda*(W.sum())
+    return W
 
 reguls = dict()
 reguls["L2"] = (l2regul, l2reguldx)

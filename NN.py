@@ -101,11 +101,14 @@ class NeuralNetwork:
             regul_loss+=l.regularize()
         return regul_loss/len(self.dataset.train[0])
 
-    def reguldx(self):
-        regul_loss = 0
-        for l in self.layers:
-            regul_loss+=l.regularizedx()
-        return regul_loss/len(self.dataset.train[0])
+#    def reguldx(self):
+#        regul_loss = 0
+#        for l in self.layers:
+#            regul_loss+=l.regularizedx()
+#        return regul_loss/len(self.dataset.train[0])
+    def reguldx(self,i):
+        return self.layers[i].regularizedx()
+
 
     def f(self, in_chunk, out_chunk):
         def g(W):
@@ -136,14 +139,14 @@ class NeuralNetwork:
             batch_size=len(dataset.train[0])
 
         for i in range(0, epochs):
-            print(i)
+            #print(i)
             for chunk in range(0,len(dataset.train[0]),batch_size):
                 cap = min([len(dataset.train[0]), chunk + batch_size])
 
                 update = optimizer.optimize(self.f(dataset.train[0][chunk:cap], dataset.train[1][chunk:cap]), "ciao")
 
                 for i in range (0,len(self.layers)):
-                    self.layers[i].W = self.layers[i].W+update[-i-1].transpose()-self.reguldx()
+                    self.layers[i].W = self.layers[i].W+update[-i-1].transpose()-self.reguldx(i)
   #  def w_update(update):
    #     for i in range (0,len(self.layers)):
     #        self.layers[i].W = self.layers[i].W+update[-i-1].transpose()
