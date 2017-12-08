@@ -25,7 +25,7 @@ def l2regul(W, rlambda):
  #   return rlambda*(W.sum())
 
 def l2reguldx(W, rlambda):
-    return W
+    return W*rlambda*2
 
 reguls = dict()
 reguls["L2"] = (l2regul, l2reguldx)
