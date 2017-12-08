@@ -149,7 +149,8 @@ class NeuralNetwork:
                 update = optimizer.optimize(self.f(dataset.train[0][chunk:cap], dataset.train[1][chunk:cap]), "ciao")
 
                 for i in range (0,len(self.layers)):
-                    self.layers[i].W = self.layers[i].W+update[-i-1].transpose()-self.reguldx(i)
+                    self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i)/batch_size)
+                    #self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i))
   #  def w_update(update):
    #     for i in range (0,len(self.layers)):
     #        self.layers[i].W = self.layers[i].W+update[-i-1].transpose()
