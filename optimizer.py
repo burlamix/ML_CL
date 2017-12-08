@@ -12,6 +12,10 @@ def linear(x):
 def lineardxf(x):
     return 1
 
+activations = dict()
+activations["linear"] = (linear, lineardxf)
+
+
 class Activation:
 
     def __init__(self,f,dxf,gradf):
@@ -25,7 +29,6 @@ class SimpleOptimizer:
     def optimize(self, f, W):
         #Could use weights instead of NN
         loss, grad = f(W)
-
         return -self.lr*grad
 
        # for i in range(epochs):
@@ -36,3 +39,6 @@ class SimpleOptimizer:
             #update weight
             #for layer in NN.layers:
                 #layer.weights = layer.weights+layer.gradients
+
+optimizers = dict()
+optimizers["SGD"] = SimpleOptimizer(lr=0.01)

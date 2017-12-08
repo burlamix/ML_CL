@@ -3,7 +3,7 @@ from sklearn import preprocessing
 from preproc import *
 from NN import *
 from optimizer import *
-
+from validation import *
 train_data_path = "data/ML-CUP17-TR.csv"
 test_data_path = "data/ML-CUP17-TS.csv"
 
@@ -31,11 +31,11 @@ preprocessor = Preprocessor()
 activation = Activation(sigmoid,sigmoddxf,sigmoid)
 activation1 = Activation(linear,lineardxf,sigmoid)
 NN = NeuralNetwork()#276828657
-NN.addLayer(10,20,activation)
+NN.addLayer(10,20,activation1)
 NN.addLayer(20,2,activation1)
-optimizer = SimpleOptimizer(0.000004)
+optimizer = SimpleOptimizer(0.0004)
 preprocessor.normalize(dataset,norm_output=False)
-#NN.fit(dataset, 100000, optimizer, batch_size=32)
+#NN.fit(dataset, 50, optimizer, batch_size=1016)
 
 #Toy dataset
 toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays
@@ -47,8 +47,8 @@ dataset.train[1] = np.array([0.01, 0.99])
 #NN.fit(dataset, 1111, optimizer)
 
 #Toy dataset
-optimizer = SimpleOptimizer(lr=0.00003)
 np.random.seed(5)
+optimizer = SimpleOptimizer(lr=0.1)
 dataset.train[0] = np.random.rand(500,10)
 dataset.train[1] = np.random.rand(500,1)
 NN = NeuralNetwork()
@@ -56,12 +56,16 @@ NN = NeuralNetwork()
 NN.addLayer(10,20,activation1)
 NN.addLayer(20,1,activation1)
 #preprocessor.normalize(dataset)
-NN.fit(dataset, 2800, optimizer,batch_size=500)
-
-s = 0
+NN.fit(dataset, 8000, optimizer,batch_size=500)
+s=0
 for l in NN.layers:
     s+=np.sum(np.abs(l.W))
 print(np.sum(s))
+#print(NN.FP(x_in=dataset.train[0]))
+
+
+
+
 '''o = NN.FP(toyx)
 print("==========================")
 o1 = NN.BP(o,np.array([0.01,0.99]),toyx)

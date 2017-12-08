@@ -25,8 +25,8 @@ class Layer:
         self.grad=None
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
         if weights.any()==None:
-            self.W = np.random.uniform(-1,1,(neurons, inputs+1))
-            self.W[:,0] = 0
+            self.W = np.random.uniform(-0.5,0.5,(neurons, inputs+1))
+            self.W[:,0] = 0 #TODO PROPER WEIGHTS INITIALIZATION(E.G. Xavier)
         else:
             if isinstance(weights, (np.ndarray, np.generic)):
                 if (weights.shape!=(neurons, inputs)):
@@ -58,7 +58,7 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda = 0.89):
+                 regularization="L2", rlambda = 0.0):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias,
                                  regularization, rlambda))
 
@@ -71,15 +71,15 @@ class NeuralNetwork:
     def BP(self, prediction, real, x_in):
         gradients = []
         loss_func = self.loss_func[0](real,prediction) #+ self.regul()
-        print(loss_func)
+        print("loss:"+str(loss_func))
        # if(loss_func<0.075):exit(1)
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
 
             if i==(len(self.layers)-1):
-                err = np.dot(logi,self.loss_func[1](prediction, real))
-                #err = logi*self.loss_func[1](prediction, real)
+                #err = np.dot(logi,self.loss_func[1](prediction, real))
+                err = logi*self.loss_func[1](prediction, real)
             else:
                 err=np.dot(err,self.layers[i+1].W[:,1:])*logi #error is derivative of activation
                 #at current layer * (weights*error at next layer)
@@ -91,7 +91,6 @@ class NeuralNetwork:
             grad = np.dot(curro.transpose(),err) #TODO save gradient in layer
 
             grad = grad/real.size
-
             self.layers[i].grad = grad
             #print("grad:"+str(err))
             gradients.append(grad)
@@ -140,6 +139,7 @@ class NeuralNetwork:
 
         if batch_size<0:                        #TODO more check
             batch_size=len(dataset.train[0])
+
 
         for i in range(0, epochs):
             #print(i)
