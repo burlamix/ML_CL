@@ -25,8 +25,8 @@ class Layer:
         self.grad=None
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
         if weights.any()==None:
-            self.W = np.random.rand(neurons, inputs+1)
-            #self.W = np.ones((neurons, inputs+1))
+            self.W = np.random.uniform(-1,1,(neurons, inputs+1))
+            self.W[:,0] = 0
         else:
             if isinstance(weights, (np.ndarray, np.generic)):
                 if (weights.shape!=(neurons, inputs)):
@@ -89,6 +89,9 @@ class NeuralNetwork:
                 curro = self.layers[i-1].currentOutput
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
             grad = np.dot(curro.transpose(),err) #TODO save gradient in layer
+
+            grad = grad/real.size
+
             self.layers[i].grad = grad
             #print("grad:"+str(err))
             gradients.append(grad)
