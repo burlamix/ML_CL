@@ -7,12 +7,13 @@ import NN
 import preproc
 import NN
 
-
+#TODO make cvfold return avg
+#TODO save results for all hyperparameters configurations
 #object with alla data grom grid search
 #it has inside a NN build with the best hyperparam find
 class grid_result:
 
-	def __init__(self,result_matrix,neurons,activations,optimizer,loss_fun,regularization,n_layers,dataset):
+	def __init__(self,result_matrix, epochs, batch_size, neurons,activations,optimizer,loss_fun,regularization,n_layers,dataset):
 
 		self.neurons=neurons
 		self.activations=activations
@@ -20,6 +21,8 @@ class grid_result:
 		self.loss_fun=loss_fun
 		self.regularization=regularization
 		self.result_matrix=result_matrix
+		self.epochs = epochs
+		self.batch_size = batch_size
 
 		#build neural network
 		net = NN.NeuralNetwork()
@@ -31,17 +34,19 @@ class grid_result:
 		for i in range(0,n_layers):
 
 			if(i!=n_layers-1):
-				net.addLayer(in_l,neurons,activations,regularization=regularization)
-				in_l=neurons
+				net.addLayer(in_l,neurons[i],activations[i],regularization=regularization[i])
+				in_l=neurons[i]
 			else:
-				net.addLayer(in_l,dataset.train[1].shape[1],activations,regularization=regularization)
-
+				net.addLayer(in_l,dataset.train[1].shape[1],activations[i],regularization=regularization[i])
+		print(self.epochs)
+		print(self.batch_size)
+		net.fit(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
 		self.NN = net 
 
 	#you can't chose the optimizer and loss, because grid search chose it for you!
-	def fit(self, dataset, epochs, batch_size):
-
-		return self.NN.fit(dataset, epochs, self.optimizer, batch_size, self.loss_fun)
+	#def fit(self, dataset, epochs, batch_size):
+	#
+	#	return self.NN.fit(dataset, epochs, self.optimizer, batch_size, self.loss_fun)
 
 
 	def evaluate(self,dataset):
@@ -65,14 +70,14 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
 
 	if activations==None:
-		grid['activations']=[optimizer.activations['linear']]
-		#grid['activations']=[optimizer.activations['linear']]*n_layers   ??
+		#grid['activations']=[optimizer.activations['linear']]
+		grid['activations']=[[optimizer.activations['linear']]*n_layers]
 	else:
 		grid['activations'] = activations
 
 	if regularizations==None:
-		grid['regularizations']=[loss_functions.reguls['L2']]
-		#grid['regularizations']=[loss_functions.reguls['L2']]*n_layers   ??
+		#grid['regularizations']=[loss_functions.reguls['L2']]
+		grid['regularizations']=[[loss_functions.reguls['L2']]*n_layers]
 	else:
 		grid['regularizations'] = regularizations
 
@@ -100,7 +105,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
 	k=0
 	for params in all_comb :
-
 		net = NN.NeuralNetwork()
 		in_l = dataset.train[0].shape[1]
 
@@ -109,10 +113,10 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 		for i in range(0,n_layers):
 
 			if(i!=n_layers-1):
-				net.addLayer(in_l,params['neurons'],params['activations'],regularization=params['regularizations'])
-				in_l=params['neurons']
+				net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i])
+				in_l=params['neurons'][i]
 			else:
-				net.addLayer(in_l,dataset.train[1].shape[1],params['activations'],regularization=params['regularizations'])
+				net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i])
 
 		#make k-fold
 		result_grid[k] = k_fold_validation(dataset,cvfolds,net,epochs=params['epochs'],	\
@@ -126,14 +130,13 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 		#TODO in fit call k_fold_validation, moving the epochs cycle into k_fold_validation
 		#TODO save result with the given hyperparameters somewhere to compare later
 
-	result_avg = np.sum(result_grid,axis=1)	
+	result_avg = np.average(result_grid,axis=1)
 
 	min = np.amin(result_avg)
 	ind=np.where(result_avg==min)[0][0]
 
 	best_hyper_param = all_comb[ind]
-	
-	return grid_result(result_avg,best_hyper_param['neurons'],best_hyper_param['activations'],\
+	return grid_result(result_avg, best_hyper_param['epochs'], best_hyper_param['batch_size'], best_hyper_param['neurons'],best_hyper_param['activations'],\
 				best_hyper_param['optimizers'],best_hyper_param['loss_fun'],best_hyper_param['regularizations'],n_layers,dataset)
 
 

@@ -25,7 +25,7 @@ np.random.seed(5)
 x = np.array(x).astype('float32')
 y = np.array(y).astype('float32')
 y = y.reshape((y.shape[0],1))
-optimizer = SimpleOptimizer(lr=0.06)
+optimizer = SimpleOptimizer(lr=0.005)
 activation = Activation(sigmoid,sigmoddxf,sigmoid)
 activation1 = Activation(linear,lineardxf,sigmoid)
 dataset = preproc.Dataset()
@@ -36,14 +36,13 @@ NN.addLayer(6,50,activation1)
 NN.addLayer(50,1,activation1)
 #preprocessor.normalize(dataset)
 NN.fit(dataset, 500, optimizer,batch_size=124)
-exit(1)
 #print(NN.FP(x_in=dataset.train[0]))
 
 model = Sequential()
 model.add(Dense(50, activation= 'linear' ,input_dim=6))
 model.add(Dense(1, activation= 'linear' ))
 
-sgd = SGD(lr=0.005, decay=0, momentum=0.0, nesterov=False)
+sgd = SGD(lr=0.06, decay=0, momentum=0.0, nesterov=False)
 
 model.compile(optimizer= sgd ,
               loss= 'mean_squared_error' ,
@@ -52,4 +51,4 @@ model.compile(optimizer= sgd ,
 np.random.seed(5)
 
 
-model.fit(x,y,batch_size=5,epochs=500,shuffle=False)
+model.fit(x,y,batch_size=124,epochs=500,shuffle=False)
