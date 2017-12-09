@@ -78,7 +78,7 @@ class NeuralNetwork:
     def BP(self, prediction, real, x_in):
         gradients = []
         loss_func = self.loss_func[0](real,prediction) #+ self.regul()
-        print("loss:"+str(loss_func))
+        #print("loss:"+str(loss_func))
        # if(loss_func<0.075):exit(1)
         for i in range(len(self.layers)-1, -1, -1):
 
@@ -160,8 +160,9 @@ class NeuralNetwork:
                     self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i)/batch_size)
                     #self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i))
 
+    #TODO this needs to be on test set not train
+    #TODO Also not very handy to use a dataset here..
     def evaluate(self,dataset):
-
 
         real = self.FP(self.dataset.train[0])
 

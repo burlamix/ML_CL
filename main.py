@@ -8,7 +8,7 @@ train_data_path = "data/ML-CUP17-TR.csv"
 test_data_path = "data/ML-CUP17-TS.csv"
 
 
-
+np.random.seed(5)
 dataset = Dataset()
 dataset.init_train(load_data(train_data_path, True, header_l=10, targets=2))
 dataset.init_test(load_data(test_data_path, False, header_l=10))
@@ -41,15 +41,14 @@ preprocessor.normalize(dataset,norm_output=False)
 NN.fit(dataset, 100, optimizer, batch_size=1016)
 
 a = NN.evaluate(dataset)
-grid_res = grid_search(dataset, epochs=[10], n_layers=2,
-                       neurons=[[11,2],[15,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
+grid_res = grid_search(dataset, epochs=[100], n_layers=2,
+                       neurons=[[2,2],[55,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
 
 #grid_res.fit(dataset,100,1016)
 
-#b = grid_res.evaluate(dataset)
-
-#print(a)#result normal fit
-#print(b)#result from grid search
+b = grid_res.NN.evaluate(dataset)
+print(a)#result normal fit
+print(b)#result from grid search
 
  
 

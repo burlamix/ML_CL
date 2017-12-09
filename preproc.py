@@ -81,5 +81,5 @@ def load_data(path=None, target=True, header_l=0, targets=0):                   
         y = [d[-targets:] for d in data]
         return [np.array(x).astype('float32'), np.array(y).astype('float32')]
     else:
-        x = [d for d in data]
+        x = [d[1:] for d in data]
         return [np.array(x).astype('float32'), None]
