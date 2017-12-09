@@ -33,9 +33,26 @@ activation1 = Activation(linear,lineardxf,sigmoid)
 NN = NeuralNetwork()#276828657
 NN.addLayer(10,20,activation1)
 NN.addLayer(20,2,activation1)
-optimizer = SimpleOptimizer(0.0004)
+optimizer = SimpleOptimizer(0.05)
 preprocessor.normalize(dataset,norm_output=False)
-#NN.fit(dataset, 50, optimizer, batch_size=1016)
+
+
+
+NN.fit(dataset, 100, optimizer, batch_size=1016)
+
+a = NN.evaluate(dataset)
+
+grid_res = grid_search(dataset, epochs=[100], n_layers=2, neurons=[11,15,20,25,30] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
+
+grid_res.fit(dataset,100,1016)
+
+b = grid_res.evaluate(dataset)
+
+print(a)#result normal fit 
+print(b)#result from grid search
+
+ 
+
 
 #Toy dataset
 toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays
@@ -56,11 +73,11 @@ NN = NeuralNetwork()
 NN.addLayer(10,20,activation1)
 NN.addLayer(20,1,activation1)
 #preprocessor.normalize(dataset)
-NN.fit(dataset, 8000, optimizer,batch_size=500)
-s=0
-for l in NN.layers:
-    s+=np.sum(np.abs(l.W))
-print(np.sum(s))
+#NN.fit(dataset, 8000, optimizer,batch_size=500)
+#s=0
+#for l in NN.layers:
+#    s+=np.sum(np.abs(l.W))
+#print(np.sum(s))
 #print(NN.FP(x_in=dataset.train[0]))
 
 

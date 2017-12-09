@@ -24,9 +24,10 @@ class Layer:
         self.currentOutput = None
         self.grad=None
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
+        self.neurons=neurons
+        self.inputs=inputs
         if weights.any()==None:
-            self.W = np.random.uniform(-0.5,0.5,(neurons, inputs+1))
-            self.W[:,0] = 0 #TODO PROPER WEIGHTS INITIALIZATION(E.G. Xavier)
+            self.initialize_random_weight()
         else:
             if isinstance(weights, (np.ndarray, np.generic)):
                 if (weights.shape!=(neurons, inputs)):
@@ -50,6 +51,12 @@ class Layer:
 
     def regularizedx(self):
         return self.regularizer[1](self.W, self.rlambda)
+
+    def initialize_random_weight(self):
+        self.W = np.random.uniform(-0.5,0.5,(self.neurons, self.inputs+1))
+        self.W[:,0] = 0 #TODO PROPER WEIGHTS INITIALIZATION(E.G. Xavier)
+
+
 
 class NeuralNetwork:
 
@@ -108,6 +115,7 @@ class NeuralNetwork:
 #        for l in self.layers:
 #            regul_loss+=l.regularizedx()
 #        return regul_loss/len(self.dataset.train[0])
+
     def reguldx(self,i):
         return self.layers[i].regularizedx()
 
@@ -151,6 +159,24 @@ class NeuralNetwork:
                 for i in range (0,len(self.layers)):
                     self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i)/batch_size)
                     #self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i))
+
+    def evaluate(self,dataset):
+
+
+        real = self.FP(self.dataset.train[0])
+
+        #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così 
+        val_loss_func = self.loss_func[0](real,dataset.train[1]) #+ self.regul()
+
+        return val_loss_func
+
+
+    def initialize_random_weight(self):
+    # inizialize all weight of all layers
+    #                                       Optional set how random inizialize??
+        for layer in self.layers:
+            layer.initialize_random_weight()
+
   #  def w_update(update):
    #     for i in range (0,len(self.layers)):
     #        self.layers[i].W = self.layers[i].W+update[-i-1].transpose()

@@ -5,7 +5,7 @@ import numpy as np
 
 
 class Dataset:
-    def __init__(self):
+    def __init__(self):# TODO option inizialization
         self.train = None
         self.test = None
 
