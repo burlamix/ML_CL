@@ -166,10 +166,21 @@ class NeuralNetwork:
 
         real = self.FP(self.dataset.train[0])
 
-        #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così 
+        #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
         val_loss_func = self.loss_func[0](real,dataset.train[1]) #+ self.regul()
         return val_loss_func
 
+    def evaluate1(self,x_in,y_out):
+
+        real = self.FP(x_in)
+
+        #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
+        val_loss_func = self.loss_func[0](real,y_out) #+ self.regul()
+        return val_loss_func
+
+
+    def predict(self, x_in):
+        return self.FP(x_in)
 
     def initialize_random_weight(self):
     # inizialize all weight of all layers

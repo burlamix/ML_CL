@@ -99,11 +99,13 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	#result_grid=np.zeros((comb_of_param,cvfolds))
 	result_grid = np.zeros(comb_of_param)
 
+	#This list will contain the results for each configuration
+	full_grid = []
+
 	k=0
 	for params in all_comb :
 		net = NN.NeuralNetwork()
 		in_l = dataset.train[0].shape[1]
-
 		#building neural network
 		for i in range(0,n_layers):
 			#if(i!=n_layers-1):
@@ -114,18 +116,20 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 				#make k-fold
 		result_grid[k] = k_fold_validation(dataset,cvfolds,net,epochs=params['epochs'],	\
 				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'])
-
+		full_grid.append({'configuration': params, 'val_loss':result_grid[k]})
 		k=k+1
 
-	print(result_grid)
 	#result_avg = np.average(result_grid,axis=1)
 	min = np.amin(result_grid)
 	ind=np.where(result_grid==min)[0][0]
 
 	best_hyper_param = all_comb[ind]
-	return grid_result(result_grid, best_hyper_param['epochs'], best_hyper_param['batch_size'], best_hyper_param['neurons'],best_hyper_param['activations'],\
+
+	best_config = grid_result(result_grid, best_hyper_param['epochs'], best_hyper_param['batch_size'], best_hyper_param['neurons'],best_hyper_param['activations'],\
 				best_hyper_param['optimizers'],best_hyper_param['loss_fun'],best_hyper_param['regularizations'],n_layers,dataset)
 
+	prediction = best_config.NN.predict(dataset.test[0]) #Prediction on test
+	return full_grid, best_config, prediction
 
 						
 def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_func ):
@@ -166,7 +170,9 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 
 		#test the model #TODO see NN.evaluate
 		#sarebbe stato più elegante con una tupla, ma cosi facendo quando la passiamo al grid search possiamo concatenare tutto con stack e ottenere una matrice dove basta sommare su un determinato asse..
-		result[i] = NN.evaluate(dataset_cv)
+		#result[i] = NN.evaluate(dataset_cv)
+		result[i] = NN.evaluate1(validation_x, validation_y)
+	#TODO return more stuff: in-fold variance, training loss, ..
 	return np.average(result)
 
 
