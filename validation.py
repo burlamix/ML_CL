@@ -56,7 +56,10 @@ class grid_result:
 
 
 def grid_search(dataset, epochs, n_layers, neurons, activations=None,
-				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=1, val_split=0):
+				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None, val_split=0):
+
+	if(cvfolds==None and val_split==0):cvfolds=3 #If no val selected, default to 3-fold
+	if(val_split>0): cvfolds = 1
 
 	if (cvfolds < 1):
 		sys.exit("Specify a positive number of folds")

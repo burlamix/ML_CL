@@ -42,7 +42,7 @@ preprocessor.normalize(dataset,norm_output=False)
 dataset.train[0] = np.random.rand(5000,10)
 dataset.train[1] = np.random.rand(5000,2)
 #a = NN.evaluate(dataset)
-fg,grid_res, pred = grid_search(dataset, epochs=[100], n_layers=2,
+fg,grid_res, pred = grid_search(dataset, epochs=[100], n_layers=2, val_split=30,
                        neurons=[[2,2],[55,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
 
 #grid_res.fit(dataset,100,1016)
