@@ -55,15 +55,10 @@ class grid_result:
 
 
 def grid_search(dataset, epochs, n_layers, neurons, activations=None,
-				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None,
-				val_split=0.25, cvfolds=1):
+				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=3):
 
 	if(cvfolds<1):
 		sys.exit("Specify a positive number of folds")
-	if(val_split<0 or val_split>=1):
-		sys.exit("Validation split must be in the range [0,1]")
-	if(cvfolds!=1 and val_split>0):
-		sys.exit("Combined cross validation and validation split is currently unsupported")
 
 	#Build up grid for grid search
 	grid = dict()
@@ -116,19 +111,14 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 				in_l=params['neurons'][i]
 			#else:
 			#	net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i])
-
-		if (val_split>0):
-			#TODO normal validation
-			pass
-		else:
-			#make k-fold
-			result_grid[k] = k_fold_validation(dataset,cvfolds,net,epochs=params['epochs'],	\
-					optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'])
+				#make k-fold
+		result_grid[k] = k_fold_validation(dataset,cvfolds,net,epochs=params['epochs'],	\
+				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'])
 
 		k=k+1
 
+	print(result_grid)
 	#result_avg = np.average(result_grid,axis=1)
-	print("avg:"+str(result_grid))
 	min = np.amin(result_grid)
 	ind=np.where(result_grid==min)[0][0]
 
@@ -177,7 +167,6 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 		#test the model #TODO see NN.evaluate
 		#sarebbe stato più elegante con una tupla, ma cosi facendo quando la passiamo al grid search possiamo concatenare tutto con stack e ottenere una matrice dove basta sommare su un determinato asse..
 		result[i] = NN.evaluate(dataset_cv)
-
 	return np.average(result)
 
 

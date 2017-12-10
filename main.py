@@ -41,11 +41,11 @@ preprocessor.normalize(dataset,norm_output=False)
 NN.fit(dataset, 100, optimizer, batch_size=1016)
 
 a = NN.evaluate(dataset)
-grid_res = grid_search(dataset, epochs=[100], n_layers=2,
+grid_res = grid_search(dataset, epochs=[10], n_layers=2,
                        neurons=[[2,2],[55,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
 
 #grid_res.fit(dataset,100,1016)
-
+print(grid_res.neurons)
 b = grid_res.NN.evaluate(dataset)
 print(a)#result normal fit
 print(b)#result from grid search

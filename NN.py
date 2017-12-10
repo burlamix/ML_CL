@@ -145,7 +145,7 @@ class NeuralNetwork:
             try: self.loss_func = losses[loss_func]
             except KeyError: sys.exit("Loss function undefined")
 
-        if batch_size<0:                        #TODO more check
+        if batch_size<0 or batch_size>(len(dataset.train[0])):#TODO more check
             batch_size=len(dataset.train[0])
 
 
@@ -168,7 +168,6 @@ class NeuralNetwork:
 
         #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così 
         val_loss_func = self.loss_func[0](real,dataset.train[1]) #+ self.regul()
-
         return val_loss_func
 
 
