@@ -7,10 +7,12 @@ from loss_functions import reguls
 
 import types
 
+
+#TODO move Layer to own file cause this is getting messy..
 class Layer:
 
     def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularizer="L2", rlambda = 0.01): #TODO find proper default value for lambda
+                 regularizer="L2", rlambda = 0.00): #TODO find proper default value for lambda
 
         if isinstance(regularizer[0], types.FunctionType) and \
             isinstance(regularizer[1], types.FunctionType):
@@ -78,14 +80,11 @@ class NeuralNetwork:
     def BP(self, prediction, real, x_in):
         gradients = []
         loss_func = self.loss_func[0](real,prediction) #+ self.regul()
-        #print("loss:"+str(loss_func))
-       # if(loss_func<0.075):exit(1)
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
 
             if i==(len(self.layers)-1):
-                #err = np.dot(logi,self.loss_func[1](prediction, real))
                 err = logi*self.loss_func[1](prediction, real)
             else:
                 err=np.dot(err,self.layers[i+1].W[:,1:])*logi #error is derivative of activation
@@ -95,21 +94,18 @@ class NeuralNetwork:
             else:
                 curro = self.layers[i-1].currentOutput
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
-            grad = np.dot(curro.transpose(),err) #TODO save gradient in layer
-
-            grad = grad/real.size
+            grad = (np.dot(curro.transpose(),err)/real.size)
             self.layers[i].grad = grad
-            #print("grad:"+str(err))
             gradients.append(grad)
         return loss_func, np.array(gradients)
 
 
-    def regul(self):
+    '''def regul(self):
         regul_loss = 0
         for l in self.layers:
             regul_loss+=l.regularize()
-        return regul_loss/len(self.dataset.train[0])
-
+        return regul_loss/len(self.input)
+'''
 #    def reguldx(self):
 #        regul_loss = 0
 #        for l in self.layers:
@@ -125,52 +121,61 @@ class NeuralNetwork:
             return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
         return g
 
-    def fit(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse"):
-        #***GENERAL DESCRIPTION***
-        #loss_func: can either be a string refering to a standardized defined
-        #loss functions or a tuple where the first element is a loss function
-        #and the second element is the corresponding derivative
+    def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
+        # ***GENERAL DESCRIPTION***
+        # loss_func: can either be a string refering to a standardized defined
+        # loss functions or a tuple where the first element is a loss function
+        # and the second element is the corresponding derivative
         #
-        #batch_size: the dimension of the samples to use for each update step.
-        #note that a higher value leads to higher stability and parallelization
-        #capabilities, possibly at the cost of a higher number of updates
+        # batch_size: the dimension of the samples to use for each update step.
+        # note that a higher value leads to higher stability and parallelization
+        # capabilities, possibly at the cost of a higher number of updates
         ######################################################################
-        self.dataset = dataset
-        #Check whether the user provided a properly formatted loss function
+
+        # Check whether the user provided a properly formatted loss function
         if isinstance(loss_func[0], types.FunctionType) and \
                 isinstance(loss_func[1], types.FunctionType):
             self.loss_func = loss_func
         else:
-            #Otherwise check whether a the specified loss function exists
-            try: self.loss_func = losses[loss_func]
-            except KeyError: sys.exit("Loss function undefined")
+            # Otherwise check whether a the specified loss function exists
+            try:
+                self.loss_func = losses[loss_func]
+            except KeyError:
+                sys.exit("Loss function undefined")
 
-        if batch_size<0 or batch_size>(len(dataset.train[0])):#TODO more check
-            batch_size=len(dataset.train[0])
+        if batch_size < 0 or batch_size > (len(x_in)):  # TODO more check
+            batch_size = len(x_in)
 
-
+        if (val_split>0):pass #TODO preproc.split_percent and train only on that
         for i in range(0, epochs):
-            #print(i)
-            for chunk in range(0,len(dataset.train[0]),batch_size):
-                cap = min([len(dataset.train[0]), chunk + batch_size])
+            # print(i)
+            for chunk in range(0, len(x_in), batch_size):
+                cap = min([len(x_in), chunk + batch_size])
 
-                update = optimizer.optimize(self.f(dataset.train[0][chunk:cap], dataset.train[1][chunk:cap]), "ciao")
+                update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), "ciao")
 
-                for i in range (0,len(self.layers)):
-                    self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i)/batch_size)
-                    #self.layers[i].W = self.layers[i].W+update[-i-1].transpose()- (self.reguldx(i))
+                for i in range(0, len(self.layers)):
+                    self.layers[i].W = self.layers[i].W + update[-i - 1].transpose() - (self.reguldx(i) / batch_size)
+        if(verbose==2):print("Training loss:"+str(self.loss_func[0](self.FP(x_in), y_out)))
 
-    #TODO this needs to be on test set not train
+        #if(verbose==1 and val_split>0):
+            # TODO self.evaluate(val_split) and
+            # TODO print("Validation loss:"+str(self.loss_func[0](self.FP(x_in), y_out)))
+
+    def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
+        self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose)
+
+    ''' #TODO this needs to be on test set not train
     #TODO Also not very handy to use a dataset here..
     def evaluate(self,dataset):
 
-        real = self.FP(self.dataset.train[0])
+        real = self.FP(dataset.train[0])
 
         #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
         val_loss_func = self.loss_func[0](real,dataset.train[1]) #+ self.regul()
         return val_loss_func
-
-    def evaluate1(self,x_in,y_out):
+  '''
+    def evaluate(self,x_in,y_out):
 
         real = self.FP(x_in)
 

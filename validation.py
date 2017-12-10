@@ -38,7 +38,7 @@ class grid_result:
 				net.addLayer(in_l,dataset.train[1].shape[1],activations[i],regularization=regularization[i])
 		print(self.epochs)
 		print(self.batch_size)
-		net.fit(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
+		net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
 		self.NN = net 
 
 	#--Not needed
@@ -138,7 +138,7 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 	x_list, y_list = dataset.split_train_k(fold_size)
 
 	#dataset for validation,
-	dataset_cv = preproc.Dataset()
+	#dataset_cv = preproc.Dataset()
 
 	#array of result 
 	result = np.zeros((fold_size)) 
@@ -162,16 +162,17 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 		validation_x  =  x_list[i]
 		validation_y  =  y_list[i]
 
-		dataset_cv.init_train([train_x, train_y])
-		dataset_cv.init_test ([validation_x,  validation_y ])
+		#dataset_cv.init_train([train_x, train_y])
+		#dataset_cv.init_test ([validation_x,  validation_y ])
 
 		#train the model
-		NN.fit(dataset_cv, epochs, optimizer, batch_size, loss_func)
+		NN.fit(train_x, train_y, epochs, optimizer, batch_size, loss_func, verbose=0)
+		#NN.fit(dataset_cv, epochs, optimizer, batch_size, loss_func)
 
 		#test the model #TODO see NN.evaluate
 		#sarebbe stato più elegante con una tupla, ma cosi facendo quando la passiamo al grid search possiamo concatenare tutto con stack e ottenere una matrice dove basta sommare su un determinato asse..
 		#result[i] = NN.evaluate(dataset_cv)
-		result[i] = NN.evaluate1(validation_x, validation_y)
+		result[i] = NN.evaluate(validation_x, validation_y)
 	#TODO return more stuff: in-fold variance, training loss, ..
 	return np.average(result)
 

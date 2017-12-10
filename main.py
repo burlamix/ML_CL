@@ -28,8 +28,8 @@ preprocessor = Preprocessor()
 
 
 #Real dataset
-activation = Activation(sigmoid,sigmoddxf,sigmoid)
-activation1 = Activation(linear,lineardxf,sigmoid)
+activation = Activation(sigmoid,sigmoddxf)
+activation1 = Activation(linear,lineardxf)
 NN = NeuralNetwork()#276828657
 NN.addLayer(10,20,activation1)
 NN.addLayer(20,2,activation1)
@@ -38,17 +38,17 @@ preprocessor.normalize(dataset,norm_output=False)
 
 
 
-NN.fit(dataset, 100, optimizer, batch_size=1016)
+#NN.fit_ds(dataset, 100, optimizer, batch_size=1016)
 
-a = NN.evaluate(dataset)
+#a = NN.evaluate(dataset)
 fg,grid_res, pred = grid_search(dataset, epochs=[10], n_layers=2,
                        neurons=[[2,2],[55,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
 
 #grid_res.fit(dataset,100,1016)
 print(grid_res.neurons)
-b = grid_res.NN.evaluate(dataset)
-print(a)#result normal fit
-print(b)#result from grid search
+#b = grid_res.NN.evaluate(dataset)
+#print(a)#result normal fit
+#print(b)#result from grid search
 
 for i in fg:
     print(i['val_loss'])

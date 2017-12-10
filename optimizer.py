@@ -16,12 +16,12 @@ def lineardxf(x):
 
 class Activation:
 
-    def __init__(self,f,dxf,gradf):
+    def __init__(self,f,dxf):
         self.f = f
         self.dxf = dxf
 
 activations = dict()
-activations["linear"] = Activation(linear, lineardxf,None)
+activations["linear"] = Activation(linear, lineardxf)
 
 
 class SimpleOptimizer:
