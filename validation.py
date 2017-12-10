@@ -37,8 +37,6 @@ class grid_result:
 				in_l=neurons[i]
 			else:
 				net.addLayer(in_l,dataset.train[1].shape[1],activations[i],regularization=regularization[i])
-		print(self.epochs)
-		print(self.batch_size)
 		net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
 		self.NN = net 
 
@@ -189,7 +187,7 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 		#test the model
 		#sarebbe stato più elegante con una tupla, ma cosi facendo quando la passiamo al grid search possiamo concatenare tutto con stack e ottenere una matrice dove basta sommare su un determinato asse..
 		#result[i] = NN.evaluate(dataset_cv)
-		result[i] = NN.evaluate(validation_x, validation_y)
+		result[i],acc = NN.evaluate(validation_x, validation_y)
 	#TODO return more stuff: in-fold variance, training loss, ..
 	return np.average(result)
 

@@ -9,46 +9,57 @@ from keras.models import Model
 from keras.optimizers import SGD
 from NN import *
 from optimizer import *
+import validation
 
-path = "MONK_data/monks-1.train"
+x_train,y_train = load_monk("MONK_data/monks-3.train")
+x_test,y_test = load_monk("MONK_data/monks-3.test")
 
-data = []
-with open(path, 'r') as f:
-    reader = csv.reader(f,delimiter=" ")
-    for row in reader:
-        data.append(row)
 
-x = [d[2:-1] for d in data]
-y = [d[1] for d in data]
-
-np.random.seed(5)
-x = np.array(x).astype('float32')
-y = np.array(y).astype('float32')
-y = y.reshape((y.shape[0],1))
-optimizer = SimpleOptimizer(lr=0.005)
-activation = Activation(sigmoid,sigmoddxf,sigmoid)
-activation1 = Activation(linear,lineardxf,sigmoid)
+optimizer = SimpleOptimizer(lr=0.9)
+activation = Activation(sigmoid,sigmoddxf)
+activation1 = Activation(linear,lineardxf)
 dataset = preproc.Dataset()
-dataset.init_train([x,y])
+dataset.init_train([x_train,y_train])
+dataset.init_test([x_test,y_test])
+
 NN = NeuralNetwork()
 #NN.addLayer(2,1,activation1,weights=np.array([[0.6, 0.8]]), bias=0.2)
-NN.addLayer(6,50,activation1)
-NN.addLayer(50,1,activation1)
+NN.addLayer(6,100,activation)
+NN.addLayer(100,1,activation)
 #preprocessor.normalize(dataset)
-NN.fit(dataset, 500, optimizer,batch_size=124)
-#print(NN.FP(x_in=dataset.train[0]))
+
+NN.fit_ds( dataset, 500, optimizer,batch_size=124,verbose=0)
+
+print("----senza grid search----",NN.evaluate(x_test,y_test))
+
+fg,grid_res, pred = validation.grid_search(dataset, epochs=[500],batch_size=[124], n_layers=2, val_split=0,activations=[[activation]*2],
+                       neurons=[[50,1],[100,1],[150,1]] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
+
+print("-------grid search-------",grid_res.NN.evaluate(x_test,y_test))
+
+
+
+#TODO  asseconda dell'ordine con cui metti i valori di un parametro per fare il grid search cambia il risultati finale...!!!!!!!!!!!!!!
+
+
+
+
+
+y_hot = keras.utils.to_categorical(y_train, num_classes=2)
+
 
 model = Sequential()
-model.add(Dense(50, activation= 'linear' ,input_dim=6))
-model.add(Dense(1, activation= 'linear' ))
+model.add(Dense(11, activation= 'sigmoid' ,input_dim=6))
+model.add(Dense(2, activation= 'sigmoid' ))
 
-sgd = SGD(lr=0.06, decay=0, momentum=0.0, nesterov=False)
+sgd = SGD(lr=0.1, decay=0, momentum=0.0, nesterov=False)
 
 model.compile(optimizer= sgd ,
               loss= 'mean_squared_error' ,
               metrics=[ 'accuracy' ])
 
-np.random.seed(5)
+#np.random.seed(5)
 
 
-model.fit(x,y,batch_size=124,epochs=500,shuffle=False)
+
+#model.fit(x,y_hot,batch_size=124,epochs=500,shuffle=False)

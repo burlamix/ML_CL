@@ -92,3 +92,24 @@ def split_percent(x_in, y_in, percent):
         l = int(len(x_in)*(100-percent)/100)
         return (np.array([x_in[0:l],x_in[l::]]),
                 np.array([y_in[0:l], y_in[l::]]))
+
+
+#TODO use the same of ML CUP
+def load_monk(path):
+
+    data = []
+    with open(path, 'r') as f:
+        reader = csv.reader(f,delimiter=" ")
+        for row in reader:
+            data.append(row)
+
+    x = [d[2:-1] for d in data]
+    y = [d[1] for d in data]
+
+    x = np.array(x).astype('float32')
+    y = np.array(y).astype('float32')
+    y = y.reshape((y.shape[0],1))
+
+
+    return x, y
+
