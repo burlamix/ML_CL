@@ -39,9 +39,10 @@ preprocessor.normalize(dataset,norm_output=False)
 
 
 #NN.fit_ds(dataset, 100, optimizer, batch_size=1016)
-
+dataset.train[0] = np.random.rand(5000,10)
+dataset.train[1] = np.random.rand(5000,2)
 #a = NN.evaluate(dataset)
-fg,grid_res, pred = grid_search(dataset, epochs=[10], n_layers=2,
+fg,grid_res, pred = grid_search(dataset, epochs=[100], n_layers=2,
                        neurons=[[2,2],[55,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
 
 #grid_res.fit(dataset,100,1016)
@@ -49,12 +50,12 @@ print(grid_res.neurons)
 #b = grid_res.NN.evaluate(dataset)
 #print(a)#result normal fit
 #print(b)#result from grid search
-
-for i in fg:
-    print(i['val_loss'])
+print("tloss:"+str(grid_res.NN.evaluate(dataset.train[0],dataset.train[1])))
+#for i in fg:
+#    print(i['val_loss'])
 
 print("PRED:"+str(len(pred)))
-NN.fit_ds(dataset, 100, optimizer=optimizer, val_split=25,verbose=2)
+NN.fit_ds(dataset, 100, optimizer=optimizer, val_split=0,verbose=2)
 #Toy dataset
 toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays
 NN = NeuralNetwork()

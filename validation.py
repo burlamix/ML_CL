@@ -56,11 +56,17 @@ class grid_result:
 
 
 def grid_search(dataset, epochs, n_layers, neurons, activations=None,
-				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=3):
+				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=1, val_split=0):
 
-	if(cvfolds<1):
+	if (cvfolds < 1):
 		sys.exit("Specify a positive number of folds")
+	if (val_split < 0 or val_split >= 100):
+		sys.exit("Validation split must be in the range [0,100)")
+	if (cvfolds != 1 and val_split > 0):
+		sys.exit("Combined cross validation and validation split is currently unsupported")
 
+	validating = False
+	if(cvfolds>1 or val_split>0): validating = True
 	#Build up grid for grid search
 	grid = dict()
 	grid['epochs'] = epochs		
@@ -109,15 +115,22 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 		in_l = dataset.train[0].shape[1]
 		#building neural network
 		for i in range(0,n_layers):
-			#if(i!=n_layers-1):
 				net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i])
 				in_l=params['neurons'][i]
-			#else:
-			#	net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i])
-				#make k-fold
-		result_grid[k] = k_fold_validation(dataset,cvfolds,net,epochs=params['epochs'],	\
+
+		if (val_split > 0 or cvfolds<=1):#Check what kind of validation should be performed
+			r = net.fit_ds(dataset, epochs=params['epochs'],val_split=val_split,	\
 				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'])
-		full_grid.append({'configuration': params, 'val_loss':result_grid[k]})
+			if r[1]==None: result_grid[k] = r[0] #If no validation (val_split=0) then select best based on tr loss
+			else: result_grid[k] = 1
+		else:
+			result_grid[k] = k_fold_validation(dataset,cvfolds,net,epochs=params['epochs'],	\
+				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'])
+
+		if (validating):
+			full_grid.append({'configuration': params, 'val_loss':result_grid[k]})
+		else:#If no validation was done only put config and other stuff(to add..)
+			full_grid.append({'configuration': params})
 		k=k+1
 
 	#result_avg = np.average(result_grid,axis=1)

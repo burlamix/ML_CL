@@ -104,14 +104,19 @@ class NeuralNetwork:
 
                 for i in range(0, len(self.layers)):
                     self.layers[i].W = self.layers[i].W + update[-i - 1].transpose() - (self.reguldx(i) / batch_size)
+
+
+            val_loss = None
+            tr_loss = self.evaluate(x_in, y_out)
+            if(val_split>0):val_loss = self.evaluate(validation_x, validation_y)
             if(verbose>=2):print("Training loss:"+str(self.loss_func[0](self.FP(x_in), y_out)))
             #TODO proper output formatting
             if(verbose>=1 and val_split>0):
-                val_loss=self.evaluate(validation_x, validation_y)
                 print("Validation loss:"+str(val_loss))
+            return (tr_loss,val_loss)
 
     def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
-        self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose)
+        return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose)
 
     ''' #TODO this needs to be on test set not train
     #TODO Also not very handy to use a dataset here..
