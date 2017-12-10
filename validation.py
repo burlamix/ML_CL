@@ -7,8 +7,9 @@ import NN
 import preproc
 import sys
 
+#TODO might be useful adding lambda to hyperparameters
+
 #Object with the best hyperparameters and the NN built and trained with them
-#TODO save results for all hyperparameters configurations
 class grid_result:
 
 	def __init__(self,result_matrix, epochs, batch_size, neurons,activations,optimizer,loss_fun,regularization,n_layers,dataset):
@@ -169,7 +170,7 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 		NN.fit(train_x, train_y, epochs, optimizer, batch_size, loss_func, verbose=0)
 		#NN.fit(dataset_cv, epochs, optimizer, batch_size, loss_func)
 
-		#test the model #TODO see NN.evaluate
+		#test the model
 		#sarebbe stato più elegante con una tupla, ma cosi facendo quando la passiamo al grid search possiamo concatenare tutto con stack e ottenere una matrice dove basta sommare su un determinato asse..
 		#result[i] = NN.evaluate(dataset_cv)
 		result[i] = NN.evaluate(validation_x, validation_y)

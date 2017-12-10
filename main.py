@@ -54,7 +54,7 @@ for i in fg:
     print(i['val_loss'])
 
 print("PRED:"+str(len(pred)))
-
+NN.fit_ds(dataset, 100, optimizer=optimizer, val_split=25,verbose=2)
 #Toy dataset
 toyx = np.asarray([[0.05,0.1]]) #TODO make it work with arrays
 NN = NeuralNetwork()

@@ -28,9 +28,9 @@ class Dataset:
         '''Splits training data into 2 according to percent. Result is returned as a tuple
         where the first element is an array containing the input data subarrays
         and the second element is an array containing the target data subarrays'''
-        l = int(len(dataset.train[0])*percent/100)
-        return (np.array([dataset.train[0][0:l],dataset.train[0][l::]]),
-                np.array([dataset.train[1][0:l], dataset.train[1][l::]]))
+        l = int(len(self.train[0])*percent/100)
+        return (np.array([self.train[0][0:l],self.train[0][l::]]),
+                np.array([self.train[1][0:l], self.train[1][l::]]))
 
 class Preprocessor:
 
@@ -56,6 +56,7 @@ class Preprocessor:
 
     def remove_outliers(self, sensitivity=3.0):
         pass
+
 
 def load_data(path=None, target=True, header_l=0, targets=0):                       #TODO inser it inside of dataset object?
     '''Loads data into numpy arrays from given path. File at specified path
@@ -83,3 +84,11 @@ def load_data(path=None, target=True, header_l=0, targets=0):                   
     else:
         x = [d[1:] for d in data]
         return [np.array(x).astype('float32'), None]
+
+def split_percent(x_in, y_in, percent):
+        '''Splits data into 2 according to percent. Result is returned as a tuple
+        where the first element is an array containing the input data subarrays
+        and the second element is an array containing the target data subarrays'''
+        l = int(len(x_in)*(100-percent)/100)
+        return (np.array([x_in[0:l],x_in[l::]]),
+                np.array([y_in[0:l], y_in[l::]]))
