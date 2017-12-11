@@ -107,22 +107,28 @@ def load_monk(path):
     y = [d[1] for d in data]
 
 
-    k = [0,3,6,8,11,15]
-    one_hot_x = []
-    for row in x:
-        i=0
-        g = np.zeros(17)
-        for col in row:
-            g[k[i]+col-1] = 1
-            i+=1
-        one_hot_x.append(g)
 
-
-    x = np.array(one_hot_x).astype('float32')
+    x = np.array(lazy_one_hot_monk(x)).astype('float32')
     y = np.array(y).astype('float32')
     y = y.reshape((y.shape[0],1))
-    #n_values = np.max(y) + 1
-    #b=np.eye(n_values)[y]
-    #b = np.array(b).astype('float32')
+
     return x, y
 
+
+
+
+
+
+
+#Don't look at this!
+def lazy_one_hot_monk(x):
+    k = [0, 3, 6, 8, 11, 15]
+    one_hot_x = []
+    for row in x:
+        i = 0
+        g = np.zeros(17)
+        for col in row:
+            g[k[i] + col - 1] = 1
+            i += 1
+        one_hot_x.append(g)
+    return one_hot_x

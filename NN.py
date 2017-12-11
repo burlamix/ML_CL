@@ -13,7 +13,7 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda = 0.0):
+                 regularization="L2", rlambda = 0.1):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias,
                                  regularization, rlambda))
 
