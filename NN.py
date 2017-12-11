@@ -144,7 +144,9 @@ class NeuralNetwork:
         
         correct=0
         errate=0
-
+        accuracy=0
+       # print(real)
+        #print(y_out)
         for i in range(0,real.size):
 
             if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): 
@@ -153,6 +155,7 @@ class NeuralNetwork:
                 errate = errate + 1
 
         accuracy = correct/real.size #TOCHECK this is the accuracy that whant micheli?
+
 
         return val_loss_func, accuracy
 
