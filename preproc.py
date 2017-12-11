@@ -62,7 +62,6 @@ def load_data(path=None, target=True, header_l=0, targets=0):                   
     '''Loads data into numpy arrays from given path. File at specified path
     must be in CSV format. If target output is in the file it is assumed to occupy
     the last targets columns.
-
     Attributes:
         path: the path of the CSV file containing the data
         target: set to true to indicate CSV contains target outputs
@@ -132,3 +131,5 @@ def lazy_one_hot_monk(x):
             i += 1
         one_hot_x.append(g)
     return one_hot_x
+
+

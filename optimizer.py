@@ -1,4 +1,6 @@
 import numpy as np
+import types
+
 def sigmoid(x):
     #print(x)
     return 1/(1+np.exp(-x))
@@ -28,8 +30,10 @@ class SimpleOptimizer:
 
     def __init__(self,lr):
         self.lr = lr
+
     def optimize(self, f, W):
-        #Could use weights instead of NN
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
         loss, grad = f(W)
         return -self.lr*grad
 

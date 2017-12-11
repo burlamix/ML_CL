@@ -23,7 +23,7 @@ class Layer:
         self.neurons=neurons
         self.inputs=inputs
         if weights.any()==None:
-            self.initialize_random_weight()
+            self.initialize_random_weights()
         else:
             if isinstance(weights, (np.ndarray, np.generic)):
                 if (weights.shape!=(neurons, inputs)):
@@ -48,6 +48,8 @@ class Layer:
     def regularizedx(self):
         return self.regularizer[1](self.W, self.rlambda)
 
-    def initialize_random_weight(self):
-        self.W = np.random.uniform(-0.5,0.5,(self.neurons, self.inputs+1))
-        self.W[:,0] = 0 #TODO PROPER WEIGHTS INITIALIZATION(E.G. Xavier)
+    def initialize_random_weights(self):
+        var = 2/(self.inputs+self.neurons)
+        self.W = np.random.normal(0, var, (self.neurons, self.inputs+1))
+        #self.W = np.random.uniform(-0.5,0.5,(self.neurons, self.inputs+1))
+        self.W[:,0] = 0

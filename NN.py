@@ -13,7 +13,7 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda = 0.1):
+                 regularization="L2", rlambda = 0.0):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias,
                                  regularization, rlambda))
 
@@ -167,7 +167,7 @@ class NeuralNetwork:
     # inizialize all weight of all layers
     #                                       Optional set how random inizialize??
         for layer in self.layers:
-            layer.initialize_random_weight()
+            layer.initialize_random_weights()
 
   #  def w_update(update):
    #     for i in range (0,len(self.layers)):

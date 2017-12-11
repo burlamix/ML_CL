@@ -12,11 +12,12 @@ from NN import *
 from optimizer import *
 import validation
 
-x_train,y_train = load_monk("MONK_data/monks-2.train")
-x_test,y_test = load_monk("MONK_data/monks-2.test")
+np.random.seed(5)
+x_train,y_train = load_monk("MONK_data/monks-1.train")
+x_test,y_test = load_monk("MONK_data/monks-1.test")
 
 
-optimizer = SimpleOptimizer(lr=2)
+optimizer = SimpleOptimizer(lr=1)
 activation = Activation(sigmoid,sigmoddxf)
 activation1 = Activation(linear,lineardxf)
 dataset = preproc.Dataset()
@@ -25,14 +26,14 @@ dataset.init_test([x_test,y_test])
 
 NN = NeuralNetwork()
 #NN.addLayer(2,1,activation1,weights=np.array([[0.6, 0.8]]), bias=0.2)
-NN.addLayer(17,2,activation)
+NN.addLayer(17,3,activation, rlambda=0.0)
 #NN.addLayer(60,60,activation)
-NN.addLayer(2,1,activation)
+NN.addLayer(3,1,activation,rlambda=0.0)
 #preprocessor.normalize(dataset)
 
 print(dataset.train[0].shape)
 print(dataset.train[1].shape)
-(tloss,vloss)=NN.fit_ds( dataset, 6600, optimizer,batch_size=124,verbose=2)
+(tloss,vloss)=NN.fit_ds( dataset, 500, optimizer,batch_size=124,verbose=2)
 print("----senza grid search----",NN.evaluate(x_test,y_test))
 #fg,grid_res, pred = validation.grid_search(dataset, epochs=[500],batch_size=[124], n_layers=2, val_split=0,
 #                        activations=[[activation]*2, [activation1,activation]],
@@ -52,7 +53,7 @@ model.add(Dense(3, activation= 'sigmoid' ,kernel_initializer='normal',input_dim=
 model.add(Dense(1, activation= 'sigmoid',kernel_initializer='normal' ))
 
 #sgd = SGD(lr=0.5, decay=0, momentum=0.0, nesterov=False)
-sgd = SGD(lr=2, momentum=0.0, decay=0.00 )
+sgd = SGD(lr=0.1, momentum=0.4, decay=0.00 )
 
 model.compile(optimizer= sgd ,
               loss= 'mean_squared_error' ,
@@ -61,5 +62,5 @@ model.compile(optimizer= sgd ,
 #np.random.seed(5)
 
 
-#model.fit(x_train, y_train,batch_size=124,epochs=1500,shuffle=True)
+#model.fit(x_train, y_train,batch_size=124,epochs=5000,shuffle=False)
 #print(model.evaluate(x_test, y_test))
