@@ -54,7 +54,7 @@ class grid_result:
 
 
 def grid_search(dataset, epochs, n_layers, neurons, activations=None,
-				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None, val_split=0):
+				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None, val_split=0, rlambda=[0.0]):
 
 	if(cvfolds==None and val_split==0):cvfolds=3 #If no val selected, default to 3-fold
 	if(val_split>0): cvfolds = 1
@@ -73,6 +73,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	grid['epochs'] = epochs		
 	grid['neurons'] = neurons
 	grid['batch_size'] = batch_size
+	grid['rlambda'] = batch_size
 
 
 	if activations==None:
@@ -116,7 +117,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 		in_l = dataset.train[0].shape[1]
 		#building neural network
 		for i in range(0,n_layers):
-				net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i])
+				net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i],rlambda=params['rlambda'])
 				in_l=params['neurons'][i]
 
 		if (val_split > 0 or cvfolds<=1):#Check what kind of validation should be performed
