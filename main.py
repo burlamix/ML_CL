@@ -6,7 +6,7 @@ from optimizer import *
 from validation import *
 train_data_path = "data/ML-CUP17-TR.csv"
 test_data_path = "data/ML-CUP17-TS.csv"
-
+import Plotter
 import numpy as np
 import tensorflow as tf
 import keras
@@ -50,7 +50,7 @@ preprocessor.normalize(dataset,norm_output=False)
 
 model = Sequential()
 model.add(Dense(30, activation= 'sigmoid' ,input_dim=10))
-model.add(Dense(2, activation= 'linear' ))
+model.add(Dense(2, activation= 'linear'))
 
 sgd = SGD(lr=0.05, decay=0, momentum=0.0, nesterov=False)
 
@@ -70,15 +70,17 @@ NN = NeuralNetwork()#276828657
 NN.addLayer(10,30,"tanh", regularization="L1", rlambda=0.8)
 NN.addLayer(30,2,"linear", regularization="L1", rlambda=0.8)
 
-_,_,_,_,history = NN.fit_ds(dataset, epochs=100, val_split=30, batch_size=1016,verbose=2,optimizer=optimizer)
+#_,_,_,_,history = NN.fit_ds(dataset, epochs=100, val_split=30, batch_size=1016,verbose=2,optimizer=optimizer)
 
 activation = Activation(sigmoid, sigmoddxf)
 #a = NN.evaluate(dataset)
-#fg,grid_res, pred = grid_search(dataset, epochs=[5,10], n_layers=2, cvfolds=3, batch_size=[1016],
-#                       neurons=[[30,2],[55,2]],activations=[['linear', 'sigmoid']] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
+fg,grid_res, pred = grid_search(dataset, epochs=[5,10], n_layers=2, cvfolds=3, batch_size=[1016],
+                       neurons=[[30,2],[55,2]],activations=[['linear', 'sigmoid']] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
 
-#for i in fg:
-#    print(i['history'])
+for i in fg:
+    print(i['history'])
+    Plotter.loss_over_epochs(i['history'])
+
 #grid_res.fit(dataset,100,1016)
 #print(grid_res.neurons)
 #b = grid_res.NN.evaluate(dataset)

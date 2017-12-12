@@ -97,7 +97,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	comb_of_param = len( all_comb )
 
 	#setup matrix to store results (an array is enough if cvfolds returns the avg)
-	#result_grid=np.zeros((comb_of_param,cvfolds))
 	result_grid = np.zeros(comb_of_param)
 
 	#This list will contain the results for each configuration
@@ -107,60 +106,60 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	for params in all_comb :
 		net = NN.NeuralNetwork()
 		in_l = dataset.train[0].shape[1]
-		#building neural network
+		#Build NN according to current configuration
 		for i in range(0,n_layers):
 				net.addLayer(in_l,params['neurons'][i],params['activations'][i],regularization=params['regularizations'][i],rlambda=params['rlambda'][i])
 				in_l=params['neurons'][i]
 
-		if (val_split > 0 or cvfolds<=1):#Check what kind of validation should be performed
-			r,_,_,_,history = net.fit_ds(dataset, epochs=params['epochs'],val_split=val_split,	\
+		#Check what kind of validation should be performed
+		if (val_split > 0 or cvfolds<=1):
+			r,v,_,_,history = net.fit_ds(dataset, epochs=params['epochs'],val_split=val_split,	\
 				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'],verbose=verbose-1)
-			if r[1]==None: result_grid[k] = r[0] #If no validation (val_split=0) then select best based on tr loss
-			else: result_grid[k] = 1
+			if v==None: result_grid[k] = r #If no validation (val_split=0) then select best based on tr loss
+			else: result_grid[k] = v
 		else:
-			result_grid[k],_,_,_,history = k_fold_validation(dataset,cvfolds,net,epochs=params['epochs'],	\
-				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'], verbose=verbose-1)
+			result_grid[k],_,_,_,history = k_fold_validation(dataset,net,epochs=params['epochs'],	\
+				optimizer=params['optimizers'],cvfolds=cvfolds, batch_size=params['batch_size'],loss_func=params['loss_fun'], verbose=verbose-1)
+
 		if (validating):
 			full_grid.append({'configuration': params, 'val_loss':result_grid[k], 'history':history})
 		else:#If no validation was done only put config and other stuff(to add..)
 			full_grid.append({'configuration': params, 'history':history})
-		k=k+1
+
 		if (verbose==1):
 			pass
 			#TODO print params with validation/training loss (results_grid[k-1])
+		k=k+1
 
-	#result_avg = np.average(result_grid,axis=1)
+	#Fetch best configuration based on validation loss, or training if no validation was done
 	min = np.amin(result_grid)
 	ind=np.where(result_grid==min)[0][0]
-
 	best_hyper_param = all_comb[ind]
-
 	best_config = grid_result(result_grid, best_hyper_param['epochs'], best_hyper_param['batch_size'], best_hyper_param['neurons'],best_hyper_param['activations'],\
 				best_hyper_param['optimizers'],best_hyper_param['loss_fun'],best_hyper_param['regularizations'], best_hyper_param['rlambda'],n_layers,dataset)
 
-	prediction = best_config.NN.predict(dataset.test[0]) #Prediction on test
+	#Predict on test set, if available
+	if(dataset.test != None): prediction = best_config.NN.predict(dataset.test[0])
+	else: prediction = None
 	return full_grid, best_config, prediction
 
 						
-def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_func, verbose=0 ):
+def k_fold_validation(dataset, NN, epochs, optimizer, cvfolds=3, batch_size=32, loss_func='mse', verbose=0):
 
 
-	x_list, y_list = dataset.split_train_k(fold_size)
+	x_list, y_list = dataset.split_train_k(cvfolds)
 
-	#dataset for validation,
-	#dataset_cv = preproc.Dataset()
-
-	#array of result 
-	val_loss = np.zeros((fold_size))
-	val_acc = np.zeros((fold_size))
-	tr_loss = np.zeros((fold_size))
-	tr_acc = np.zeros((fold_size))
+	#Arrays of result
+	val_loss = np.zeros((cvfolds))
+	val_acc = np.zeros((cvfolds))
+	tr_loss = np.zeros((cvfolds))
+	tr_acc = np.zeros((cvfolds))
 	history = []
 
 	for i in range(0,len(x_list)):
 		# make the new test- set and train-set
 
-		#initialize random weights
+		#Initialize random weights
 		NN.initialize_random_weight()
 
 		if i == 0:
@@ -176,22 +175,19 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 		validation_x  =  x_list[i]
 		validation_y  =  y_list[i]
 
-		#dataset_cv.init_train([train_x, train_y])
-		#dataset_cv.init_test ([validation_x,  validation_y ])
-		#train the model
+		#Train the model
 		tr_loss[i],tr_acc[i], _, _, c =\
 			NN.fit(train_x, train_y, epochs, optimizer, batch_size, loss_func, verbose=verbose, val_split=0)
-		#NN.fit(dataset_cv, epochs, optimizer, batch_size, loss_func)
+
 		history.append(c)
-		#test the model
-		#sarebbe stato più elegante con una tupla, ma cosi facendo quando la passiamo al grid search possiamo concatenare tutto con stack e ottenere una matrice dove basta sommare su un determinato asse..
-		#result[i] = NN.evaluate(dataset_cv)
 		val_loss[i],val_acc[i] = NN.evaluate(validation_x, validation_y)
-	#TODO return more stuff: in-fold variance, training loss, ..
+	#TODO return more stuff: in-fold variance, ..
 	r = {'tr_loss':[], 'tr_acc':[], 'val_loss':[], 'val_acc':[]}
 	for d in history:
 		for k in d.keys():
-			r[k] += d[k]
+			r[k]=r[k]+d[k]
+	print('his',r)
+
 	return np.average(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), \
 		   r
 
