@@ -1,6 +1,7 @@
 import numpy as np
 from loss_functions import reguls
 from loss_functions import mse, msedx
+from optimizer import activations
 import types
 
 class Layer:
@@ -15,6 +16,18 @@ class Layer:
             #Otherwise check whether the specified regularizer function exists
             try: self.regularizer = reguls[regularizer]
             except KeyError: sys.exit("regularizer function undefined")
+
+
+        if isinstance(activation[0], types.FunctionType) and \
+            isinstance(activation[1], types.FunctionType):
+            self.activation = activation
+        else:
+            #Otherwise check whether the specified activation function exists
+            try: self.activation = activations[activation]
+            except KeyError: sys.exit("activation function undefined")
+
+
+
 
         self.rlambda=rlambda
         self.currentOutput = None
@@ -34,7 +47,8 @@ class Layer:
                     self.W[:, 0] = bias
             else:
                 sys.exit("Expected a nparray")
-        self.activation = activation #check for errors(wheter its a func or not)
+
+
 
     def getOutput(self,x):
         x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
@@ -50,6 +64,6 @@ class Layer:
 
     def initialize_random_weights(self):
         var = 2/(self.inputs+self.neurons)
-        self.W = np.random.normal(0, var, (self.neurons, self.inputs+1))
-        #self.W = np.random.uniform(-0.5,0.5,(self.neurons, self.inputs+1))
+        #self.W = np.random.normal(0, var/100, (self.neurons, self.inputs+1))
+        self.W = np.random.uniform(-0.00000005,0.000000005,(self.neurons, self.inputs+1))
         self.W[:,0] = 0

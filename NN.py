@@ -40,7 +40,7 @@ class NeuralNetwork:
             else:
                 curro = self.layers[i-1].currentOutput
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
-            grad = (np.dot(curro.transpose(),err)/real.size)
+            grad = (np.dot(curro.transpose(),err)/(real.shape[0]))
             self.layers[i].grad = grad
             gradients.append(grad)
         return loss_func, np.array(gradients)
@@ -147,8 +147,8 @@ class NeuralNetwork:
         accuracy=0
        # print(real)
         #print(y_out)
-        for i in range(0,real.size):
 
+        for i in range(0,real.shape[0]):
             if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): 
                 correct = correct +1
             else:

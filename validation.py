@@ -77,7 +77,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
 
 	if activations==None:
-		grid['activations']=[[optimizer.activations['linear']]*n_layers]
+		grid['activations']=[['linear']*n_layers]
 	else:
 		grid['activations'] = activations
 
@@ -122,7 +122,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
 		if (val_split > 0 or cvfolds<=1):#Check what kind of validation should be performed
 			r = net.fit_ds(dataset, epochs=params['epochs'],val_split=val_split,	\
-				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'])
+				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'],verbose=2)
 			if r[1]==None: result_grid[k] = r[0] #If no validation (val_split=0) then select best based on tr loss
 			else: result_grid[k] = 1
 		else:
@@ -148,7 +148,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	return full_grid, best_config, prediction
 
 						
-def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_func ):
+def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_func,verbose =0 ):
 
 
 	x_list, y_list = dataset.split_train_k(fold_size)
@@ -180,9 +180,8 @@ def k_fold_validation(dataset,fold_size,NN, epochs, optimizer, batch_size, loss_
 
 		#dataset_cv.init_train([train_x, train_y])
 		#dataset_cv.init_test ([validation_x,  validation_y ])
-
 		#train the model
-		NN.fit(train_x, train_y, epochs, optimizer, batch_size, loss_func, verbose=0)
+		NN.fit(train_x, train_y, epochs, optimizer, batch_size, loss_func, verbose=2)
 		#NN.fit(dataset_cv, epochs, optimizer, batch_size, loss_func)
 
 		#test the model
