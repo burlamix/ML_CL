@@ -133,16 +133,7 @@ class NeuralNetwork:
     def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
         return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose)
 
-    ''' #TODO this needs to be on test set not train
-    #TODO Also not very handy to use a dataset here..
-    def evaluate(self,dataset):
 
-        real = self.FP(dataset.train[0])
-
-        #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
-        val_loss_func = self.loss_func[0](real,dataset.train[1]) #+ self.regul()
-        return val_loss_func
-  '''
     def evaluate(self,x_in,y_out):
 
         real = self.FP(x_in)
@@ -153,9 +144,7 @@ class NeuralNetwork:
         correct=0
         errate=0
         accuracy=0
-       # print(real)
-        #print(y_out)
-
+        #TODO -> make it work in the general case
         for i in range(0,real.shape[0]):
             if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): 
                 correct = correct +1
@@ -171,11 +160,9 @@ class NeuralNetwork:
     def predict(self, x_in):
         return self.FP(x_in)
 
-    def initialize_random_weight(self):
-    # inizialize all weight of all layers
-    #                                       Optional set how random inizialize??
+    def initialize_random_weight(self, method='xavier'):
         for layer in self.layers:
-            layer.initialize_random_weights()
+            layer.initialize_random_weights(method)
 
   #  def w_update(update):
    #     for i in range (0,len(self.layers)):
