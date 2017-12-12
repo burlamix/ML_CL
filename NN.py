@@ -125,11 +125,10 @@ class NeuralNetwork:
                 #print("loss=",loss,"        acc=",acc)
                 print (i,' loss = {0:.8f} '.format(loss),'accuracy = {0:.8f} '.format(acc))
             #TODO inefficente..
-        tr_loss = self.evaluate(x_in, y_out)
         #TODO proper output formatting
         if(verbose>=1 and val_split>0):
             print("Validation loss:"+str(val_loss))
-        return (tr_loss, acc, val_loss, val_acc, history)
+        return (loss, acc, val_loss, val_acc, history)
 
     def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
         return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose)

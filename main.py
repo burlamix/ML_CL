@@ -70,12 +70,15 @@ NN = NeuralNetwork()#276828657
 NN.addLayer(10,30,"tanh")
 NN.addLayer(30,2,"linear")
 
-NN.fit_ds(dataset, epochs=1000, val_split=30, verbose=2,optimizer=optimizer)
+#_,_,_,_,history = NN.fit_ds(dataset, epochs=100, val_split=30, verbose=2,optimizer=optimizer)
+
 activation = Activation(sigmoid, sigmoddxf)
 #a = NN.evaluate(dataset)
-#fg,grid_res, pred = grid_search(dataset, epochs=[1000], n_layers=2, val_split=30, batch_size=[1016],
- #                      neurons=[[30,2]],activations=[['linear', 'sigmoid']] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
+fg,grid_res, pred = grid_search(dataset, epochs=[5,10], n_layers=2, cvfolds=3, batch_size=[1016],
+                       neurons=[[30,2],[55,2]],activations=[['linear', 'sigmoid']] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
 
+for i in fg:
+    print(i['history'])
 #grid_res.fit(dataset,100,1016)
 #print(grid_res.neurons)
 #b = grid_res.NN.evaluate(dataset)
