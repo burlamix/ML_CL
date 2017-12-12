@@ -37,11 +37,8 @@ preprocessor.normalize(dataset,norm_output=False)
 #Real dataset
 # test with only string-------------------------------------------------------------------
 
-NN = NeuralNetwork()#276828657
-NN.addLayer(10,20,"linear")
-NN.addLayer(20,2,"linear")
 
-optimizer = SimpleOptimizer(0.0005)
+
 
 
 
@@ -65,27 +62,30 @@ np.random.seed(5)
 
 
 
-model.fit(dataset.train[0],dataset.train[1],batch_size=32,epochs=500,shuffle=False)
+#model.fit(dataset.train[0],dataset.train[1],batch_size=32,epochs=500,shuffle=False)
 
+optimizer = SimpleOptimizer(0.0005)
 
+NN = NeuralNetwork()#276828657
+NN.addLayer(10,55,"linear")
+NN.addLayer(55,2,"linear")
 
-
-
+NN.fit_ds(dataset, epochs=100, val_split=30, verbose=2, optimizer=optimizer)
 
 #a = NN.evaluate(dataset)
-fg,grid_res, pred = grid_search(dataset, epochs=[100], n_layers=2, val_split=30,
-                       neurons=[[2,2],[55,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer],rlambda=[[0.1,0.1]])   #with 10 neurons error! i don't now why
+#fg,grid_res, pred = grid_search(dataset, epochs=[100], n_layers=2, val_split=30,
+#                       neurons=[[2,2],[55,2],[20,2],[25,2],[30,2]] ,optimizers=[optimizer],rlambda=[[0.1,0.1]])   #with 10 neurons error! i don't now why
 
 #grid_res.fit(dataset,100,1016)
-print(grid_res.neurons)
+#print(grid_res.neurons)
 #b = grid_res.NN.evaluate(dataset)
 #print(a)#result normal fit
 #print(b)#result from grid search
-print("tloss:"+str(grid_res.NN.evaluate(dataset.train[0],dataset.train[1])))
+#print("tloss:"+str(grid_res.NN.evaluate(dataset.train[0],dataset.train[1])))
 #for i in fg:
 #    print(i['val_loss'])
 
-print("PRED:"+str(len(pred)))
+#print("PRED:"+str(len(pred)))
 #NN.fit_ds(dataset, 100, optimizer=optimizer, val_split=0,verbose=2)
 
 
