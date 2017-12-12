@@ -14,12 +14,11 @@ def linear(x):
 def lineardxf(x):
     return 1
 
-#TODO test this
-def hyperbolic_tangent(x):
+def tanh(x):
     return (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))
 
-def hyperbolic_tangentdx(x):
-    return (1-(np.power(hyperbolic_tangent(x),2)))
+def tanhdx(x):
+    return (1-(np.power(tanh(x),2)))
 
 class Activation:
 
@@ -30,8 +29,8 @@ class Activation:
 activations = dict()
 activations["linear"] = Activation(linear, lineardxf)
 activations["sigmoid"] = Activation(sigmoid, sigmoddxf)
-activations["hyperbolic_tangent"] = Activation(hyperbolic_tangent, hyperbolic_tangentdx)
-
+activations["tanh"] = Activation(tanh, tanhdx)
+#TODO add relu
 
 class SimpleOptimizer:
 

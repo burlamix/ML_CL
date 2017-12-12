@@ -3,6 +3,7 @@ from loss_functions import reguls
 from loss_functions import mse, msedx
 from optimizer import activations
 import types
+import sys
 
 class Layer:
 
@@ -64,6 +65,6 @@ class Layer:
 
     def initialize_random_weights(self):
         var = 2/(self.inputs+self.neurons)
-        #self.W = np.random.normal(0, var/100, (self.neurons, self.inputs+1))
-        self.W = np.random.uniform(-0.00000005,0.000000005,(self.neurons, self.inputs+1))
+        self.W = np.random.normal(0, var, (self.neurons, self.inputs+1))
+        #self.W = np.random.uniform(-0.00000005,0.000000005,(self.neurons, self.inputs+1))
         self.W[:,0] = 0

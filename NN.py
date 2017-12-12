@@ -95,6 +95,8 @@ class NeuralNetwork:
         if (val_split>0):
             (x_in, validation_x),(y_out, validation_y) = \
                 preproc.split_percent(x_in, y_out, val_split)
+
+        history = {'tr_loss':[], 'val_loss':[], 'tr_acc':[], 'val_acc':[]}
         for i in range(0, epochs):
             #print(i)
             for chunk in range(0, len(x_in), batch_size):
@@ -107,20 +109,27 @@ class NeuralNetwork:
                 for j in range(0, len(self.layers)):
                     self.layers[j].W = self.layers[j].W + update[-j - 1].transpose() - (self.reguldx(j) / batch_size)
 
-            if(verbose >= 1):
-                loss,acc = self.evaluate(x_in,y_out)
+            loss, acc = self.evaluate(x_in, y_out)
+            val_loss = None
+            val_acc = None
+            if (val_split > 0):
+                val_loss, val_acc = self.evaluate(validation_x, validation_y)
+                history['val_loss'].append(val_loss)
+                history['val_acc'].append(val_acc)
+            history['tr_loss'].append(loss)
+            history['tr_acc'].append(acc)
+
+
+            if(verbose >= 2):
+                #loss,acc = self.evaluate(x_in,y_out)
                 #print("loss=",loss,"        acc=",acc)
                 print (i,' loss = {0:.8f} '.format(loss),'accuracy = {0:.8f} '.format(acc))
             #TODO inefficente..
-
-        val_loss = None
         tr_loss = self.evaluate(x_in, y_out)
-        if(val_split>0):val_loss = self.evaluate(validation_x, validation_y)
-        if(verbose>=2):print("Training loss:"+str(self.loss_func[0](self.FP(x_in), y_out)))
         #TODO proper output formatting
         if(verbose>=1 and val_split>0):
             print("Validation loss:"+str(val_loss))
-        return (tr_loss,val_loss)
+        return (tr_loss, acc, val_loss, val_acc, history)
 
     def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
         return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose)
