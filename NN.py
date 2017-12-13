@@ -41,6 +41,7 @@ class NeuralNetwork:
                 curro = self.layers[i-1].currentOutput
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
             grad = (np.dot(curro.transpose(),err)/(real.shape[0]))
+            #grad = (np.dot(curro.transpose(),err))
             self.layers[i].grad = grad
             gradients.append(grad)
         return loss_func, np.array(gradients)
