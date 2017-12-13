@@ -67,7 +67,7 @@ class NeuralNetwork:
             return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
         return g
 
-    def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
+    def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0, val_set=None):
         # ***GENERAL DESCRIPTION***
         # loss_func: can either be a string refering to a standardized defined
         # loss functions or a tuple where the first element is a loss function
@@ -77,6 +77,9 @@ class NeuralNetwork:
         # note that a higher value leads to higher stability and parallelization
         # capabilities, possibly at the cost of a higher number of updates
         ######################################################################
+
+        if(val_set!=None and val_split>0 ):
+            sys.exit(" o uno o l'altro OH ")
 
         # Check whether the user provided a properly formatted loss function
         if isinstance(loss_func[0], types.FunctionType) and \
@@ -95,6 +98,10 @@ class NeuralNetwork:
         if (val_split>0):
             (x_in, validation_x),(y_out, validation_y) = \
                 preproc.split_percent(x_in, y_out, val_split)
+        elif val_set!=None:
+            validation_x=val_set[0]
+            validation_y=val_set[1]
+
 
         history = {'tr_loss':[], 'val_loss':[], 'tr_acc':[], 'val_acc':[]}
         for i in range(0, epochs):
@@ -112,7 +119,7 @@ class NeuralNetwork:
             loss, acc = self.evaluate(x_in, y_out)
             val_loss = None
             val_acc = None
-            if (val_split > 0):
+            if (val_split > 0 or val_set!=None ):
                 val_loss, val_acc = self.evaluate(validation_x, validation_y)
                 history['val_loss'].append(val_loss)
                 history['val_acc'].append(val_acc)
@@ -126,12 +133,12 @@ class NeuralNetwork:
                 print (i,' loss = {0:.8f} '.format(loss),'accuracy = {0:.8f} '.format(acc))
             #TODO inefficente..
         #TODO proper output formatting
-        if(verbose>=1 and val_split>0):
+        if(verbose>=1 and val_split>0 or val_set!=None ):
             print("Validation loss:"+str(val_loss))
         return (loss, acc, val_loss, val_acc, history)
 
-    def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0):
-        return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose)
+    def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0,val_set=None):
+        return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose,val_set)
 
 
     def evaluate(self,x_in,y_out):

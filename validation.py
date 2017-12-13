@@ -41,7 +41,10 @@ class grid_result:
 
 
 def grid_search(dataset, epochs, n_layers, neurons, activations=None,
-				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None, val_split=0, rlambda=None, verbose=0):
+				regularizations=None, optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None, val_split=0, rlambda=None, verbose=0,val_set=None):
+
+
+	#TODO mutua esclusione val_set ecc
 
 	if(cvfolds==None and val_split==0):cvfolds=3 #If no val selected, default to 3-fold
 	if(val_split>0): cvfolds = 1
@@ -112,8 +115,8 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 				in_l=params['neurons'][i]
 
 		#Check what kind of validation should be performed
-		if (val_split > 0 or cvfolds<=1):
-			r,v,_,_,history = net.fit_ds(dataset, epochs=params['epochs'],val_split=val_split,	\
+		if (val_split > 0 or cvfolds<=1 or val_set!= None):
+			r,v,_,_,history = net.fit_ds(dataset, epochs=params['epochs'],val_split=val_split,val_set=val_set,	\
 				optimizer=params['optimizers'],batch_size=params['batch_size'],loss_func=params['loss_fun'],verbose=verbose-1)
 			if v==None: result_grid[k] = r #If no validation (val_split=0) then select best based on tr loss
 			else: result_grid[k] = v

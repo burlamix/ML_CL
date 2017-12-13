@@ -11,29 +11,37 @@ from keras.optimizers import SGD
 from NN import *
 from optimizer import *
 import validation
+import Plotter
 
-np.random.seed(5)
+#np.random.seed(5)
+
 x_train,y_train = load_monk("MONK_data/monks-1.train")
 x_test,y_test = load_monk("MONK_data/monks-1.test")
 
 
-optimizer = SimpleOptimizer(lr=1)
-activation = Activation(sigmoid,sigmoddxf)
-activation1 = Activation(linear,lineardxf)
+optimizer = SimpleOptimizer(lr=0.9)
+
 dataset = preproc.Dataset()
 dataset.init_train([x_train,y_train])
 dataset.init_test([x_test,y_test])
 
 NN = NeuralNetwork()
 #NN.addLayer(2,1,activation1,weights=np.array([[0.6, 0.8]]), bias=0.2)
-NN.addLayer(17,3,activation, rlambda=0.0)
+NN.addLayer(17,2,"sigmoid", rlambda=0.0)
 #NN.addLayer(60,60,activation)
-NN.addLayer(3,1,activation,rlambda=0.0)
+NN.addLayer(2,1,"sigmoid",rlambda=0.0)
 #preprocessor.normalize(dataset)
 
 print(dataset.train[0].shape)
 print(dataset.train[1].shape)
-(tloss,vloss)=NN.fit_ds( dataset, 500, optimizer,batch_size=124,verbose=2)
+
+(loss, acc, val_loss, val_acc, history)=NN.fit_ds( dataset, 50000, optimizer,batch_size=32,verbose=3)
+
+
+
+Plotter.loss_over_epochs(history)
+
+
 print("----senza grid search----",NN.evaluate(x_test,y_test))
 #fg,grid_res, pred = validation.grid_search(dataset, epochs=[500],batch_size=[124], n_layers=2, val_split=0,
 #                        activations=[[activation]*2, [activation1,activation]],
