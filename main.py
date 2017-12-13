@@ -64,7 +64,12 @@ np.random.seed(5)
 
 #model.fit(dataset.train[0],dataset.train[1],batch_size=1016,epochs=5000,shuffle=False)
 
-optimizer = SimpleOptimizer(0.05)
+optimizer1 = SimpleOptimizer(0.001)
+optimizer2 = SimpleOptimizer(0.02)
+optimizer3 = SimpleOptimizer(0.03)
+optimizer4 = SimpleOptimizer(0.04)
+optimizer5 = SimpleOptimizer(0.005)
+
 np.random.seed(5)
 NN = NeuralNetwork()#276828657
 NN.addLayer(10,30,"tanh", regularization="L1", rlambda=0.8)
@@ -74,8 +79,8 @@ NN.addLayer(30,2,"linear", regularization="L1", rlambda=0.8)
 
 activation = Activation(sigmoid, sigmoddxf)
 #a = NN.evaluate(dataset)
-fg,grid_res, pred = grid_search(dataset, epochs=[5,10], n_layers=2, cvfolds=3, batch_size=[1016],
-                       neurons=[[30,2],[55,2]],activations=[['linear', 'sigmoid']] ,optimizers=[optimizer])   #with 10 neurons error! i don't now why
+fg,grid_res, pred = grid_search(dataset, epochs=[500], n_layers=2, val_split = 30,batch_size=[1],
+                       neurons=[[30,2]],activations=[['linear', 'linear']] ,optimizers=[optimizer1],verbose=3)   #with 10 neurons error! i don't now why
 
 for i in fg:
     print(i['history'])

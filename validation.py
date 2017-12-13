@@ -182,10 +182,15 @@ def k_fold_validation(dataset, NN, epochs, optimizer, cvfolds=3, batch_size=32, 
 		history.append(c)
 		val_loss[i],val_acc[i] = NN.evaluate(validation_x, validation_y)
 	#TODO return more stuff: in-fold variance, ..
-	r = {'tr_loss':[], 'tr_acc':[], 'val_loss':[], 'val_acc':[]}
+	r = {'tr_loss':[0]*epochs, 'tr_acc':[0]*epochs, 'val_loss':[0]*epochs, 'val_acc':[0]*epochs}
+
 	for d in history:
+		#print("d--",d)
 		for k in d.keys():
-			r[k]=r[k]+d[k]
+			#print("KKKKKK----",k)
+			r[k]= [np.average(x) for x in zip(d[k], r[k])]
+			#for z in range(0,len(r[k])):
+			#r[k]=r[k]+d[k]
 	print('his',r)
 
 	return np.average(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), \
