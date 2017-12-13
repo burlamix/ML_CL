@@ -20,6 +20,13 @@ def tanh(x):
 def tanhdx(x):
     return (1-(np.power(tanh(x),2)))
 
+def softmax(x):
+    e_x = np.exp(x - np.max(x))
+    return e_x / e_x.sum(axis=0) # only difference
+
+def softmaxdx(x):
+    pass
+
 class Activation:
 
     def __init__(self,f,dxf):
@@ -31,7 +38,12 @@ activations["linear"] = Activation(linear, lineardxf)
 activations["sigmoid"] = Activation(sigmoid, sigmoddxf)
 activations["tanh"] = Activation(tanh, tanhdx)
 #TODO add relu
-
+#If only linear acts do we have exact sol?
+#Learn learning rate
+#https://www.neuraldesigner.com/blog/5_algorithms_to_train_a_neural_network
+#Minkowski error as loss func
+#line search https://www.cs.cmu.edu/~ggordon/10725-F12/scribes/10725_Lecture5.pdf
+#TODO conjugate gradient http://matlab.izmiran.ru/help/toolbox/nnet/backpr59.html
 class SimpleOptimizer:
 
     def __init__(self,lr):

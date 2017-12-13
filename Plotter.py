@@ -4,4 +4,7 @@ def loss_over_epochs(history):
     loss = history['tr_loss']
     print(len(loss))
     pyplot.plot(loss)
+    loss = history['val_loss']
+    pyplot.plot(loss)
+
     pyplot.show()
