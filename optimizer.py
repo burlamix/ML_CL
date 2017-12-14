@@ -1,12 +1,14 @@
-import numpy as np
+#import numpy as np
 import types
+import autograd.numpy as np
+
+from autograd import elementwise_grad as egrad
 
 def sigmoid(x):
-    #print(x)
     return 1/(1+np.exp(-x))
 
 def sigmoddxf(x):
-    return x*(1-x)
+    return sigmoid(x)*(1-sigmoid(x))
 
 def linear(x):
     return x
@@ -21,11 +23,19 @@ def tanhdx(x):
     return (1-(np.power(tanh(x),2)))
 
 def softmax(x):
-    e_x = np.exp(x - np.max(x))
-    return e_x / e_x.sum(axis=0) # only difference
+    e_x = np.exp( x - np.max(x,axis=1,keepdims=True))
+    #print(e_x)
+    return e_x / np.sum(e_x,axis=1,keepdims=True) # only differencen
 
-def softmaxdx(x):
-    pass
+def softmaxdx(signal):
+    J = - signal[..., None] * signal[:, None, :] # off-diagonal Jacobian
+    iy, ix = np.diag_indices_from(J[0])
+    J[:, iy, ix] = signal # diagonal
+    #print(J.shape)
+    return J.sum(axis=1) # sum across-rows for each sample
+
+
+
 
 class Activation:
 
@@ -33,10 +43,12 @@ class Activation:
         self.f = f
         self.dxf = dxf
 
+ss = egrad(softmax)
 activations = dict()
 activations["linear"] = Activation(linear, lineardxf)
 activations["sigmoid"] = Activation(sigmoid, sigmoddxf)
 activations["tanh"] = Activation(tanh, tanhdx)
+activations["softmax"] = Activation(softmax, ss)
 #TODO add relu
 #If only linear acts do we have exact sol?
 #Learn learning rate

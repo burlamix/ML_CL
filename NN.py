@@ -154,7 +154,7 @@ class NeuralNetwork:
         accuracy=0
         #TODO -> make it work in the general case
         for i in range(0,real.shape[0]):
-            if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): 
+            if ( (real[i][0]>0 and y_out[i][0]==1) or (real[i][0]<=0 and y_out[i][0]==-1) ): #TODO time? make it automaticaly
                 correct = correct +1
             else:
                 errate = errate + 1

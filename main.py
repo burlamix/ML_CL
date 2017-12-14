@@ -102,7 +102,7 @@ for i in fg:
 
 
 
-#check weight 
+	#check weight 
 #s=0
 #for l in NN.layers:
 #    s+=np.sum(np.abs(l.W))

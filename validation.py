@@ -16,7 +16,7 @@ class grid_result:
 		self.neurons=neurons
 		self.activations=activations
 		self.optimizer=optimizer
-		self.loss_fun=loss_fun
+		self.loss_fun=loss_functions	#TODO REMOVE IT!!
 		self.regularization=regularization
 		self.result_matrix=result_matrix
 		self.epochs = epochs
