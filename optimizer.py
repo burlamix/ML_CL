@@ -1,6 +1,7 @@
-#import numpy as np
+import numpy
 import types
 import autograd.numpy as np
+import sys
 
 from autograd import elementwise_grad as egrad
 
@@ -17,7 +18,8 @@ def lineardxf(x):
     return 1
 
 def tanh(x):
-    return (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))
+    return numpy.tanh(x)
+    #return (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))
 
 def tanhdx(x):
     return (1-(np.power(tanh(x),2)))
@@ -58,7 +60,7 @@ activations["softmax"] = Activation(softmax, ss)
 #TODO conjugate gradient http://matlab.izmiran.ru/help/toolbox/nnet/backpr59.html
 class SimpleOptimizer:
 
-    def __init__(self,lr):
+    def __init__(self,lr=0.1):
         self.lr = lr
 
     def optimize(self, f, W):
@@ -76,5 +78,44 @@ class SimpleOptimizer:
             #for layer in NN.layers:
                 #layer.weights = layer.weights+layer.gradients
 
+class Adam:
+    #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
+    #A gradient based method, enriched with the first and second moment
+    #information of past gradients. --TODO broader explaination (parameters descrp etc--
+    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
+        self.lr = lr
+        self.b1 = b1
+        self.b2 = b2
+        self.eps = eps
+        self.reset()
+
+    def reset(self):
+        self.m = [0]
+        self.v = [0]
+        self.grad = 0
+        self.t = 0
+
+    def optimize(self, f, W):
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
+
+        self.t+=1 #Update timestamp
+        loss, grad = f(W) #Compute the gradient
+
+        #First and second moment estimation(biased by b1 and b2)
+        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*grad)
+        self.v.append(self.b2*self.v[self.t-1]+(1-self.b2)*(grad**2))
+
+        #Correction on the estimations as to avoid 0-bias due to initialization
+        mcap = self.m[self.t]/(1-self.b1**self.t)
+        vcap = self.v[self.t]/(1-self.b2**self.t)
+        for i in range(len(vcap)):
+            vcap[i] = numpy.sqrt(vcap[i])
+        return -self.lr*mcap/(vcap+self.eps)
+
+
 optimizers = dict()
-optimizers["SGD"] = SimpleOptimizer(lr=0.01)
+
+
+optimizers["SGD"] = SimpleOptimizer()
+optimizers["adam"] = Adam()

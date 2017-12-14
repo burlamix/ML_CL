@@ -64,8 +64,8 @@ class Layer:
         return self.regularizer[1](self.W, self.rlambda)
 
     def initialize_random_weights(self, method='xavier'):
-        var = 2/(self.inputs+self.neurons)
         if method == 'xavier':
+            var = 2 / (self.inputs + self.neurons)
             self.W = np.random.normal(0, var, (self.neurons, self.inputs+1))
         elif method == 'fan_in':
             self.W =  np.random.uniform(-1 / np.sqrt(self.inputs+1), 1/np.sqrt(self.inputs+1),(self.neurons, self.inputs+1))

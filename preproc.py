@@ -103,15 +103,16 @@ def load_monk(path):
             data.append(row)
 
     x = np.array([d[2:-1] for d in data]).astype('int')
-    y = [(2*float(d[1])-1) for d in data]
+    y = [(1*float(d[1])-0) for d in data]
 
 
 
     x = np.array(lazy_one_hot_monk(x)).astype('float32')
-    y = np.array(y).astype('float32')
+    y = np.array(y).astype('int')
 
     y = y.reshape((y.shape[0],1))
-    print(y)
+    print(type(x[0][0]))
+    print(y[0])
     return x, y
 
 
