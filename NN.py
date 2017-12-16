@@ -44,6 +44,7 @@ class NeuralNetwork:
             #grad = (np.dot(curro.transpose(),err))
             self.layers[i].grad = grad
             gradients.append(grad)
+            #gradients.insert(0,grad.transpose())
         return loss_func, np.array(gradients)
 
 
@@ -63,10 +64,24 @@ class NeuralNetwork:
         return self.layers[i].regularizedx()
 
 
+#    def f(self, in_chunk, out_chunk):
+#        def g(W):
+#            return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
+#        return g
+
     def f(self, in_chunk, out_chunk):
-        def g(W):
-            return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
+        def g(W,only_fp=False):
+
+            self.set_weight(W)
+            
+            if only_fp:
+                return self.FP(in_chunk)
+            else:
+                return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
         return g
+
+
+
 
     def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0, val_set=None):
         # ***GENERAL DESCRIPTION***
@@ -110,7 +125,7 @@ class NeuralNetwork:
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
 
-                update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), "ciao")
+                update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weight())
 
                 #predicted = self.FP(x_in[chunk:cap],)
 
@@ -172,6 +187,27 @@ class NeuralNetwork:
     def initialize_random_weight(self, method='xavier'):
         for layer in self.layers:
             layer.initialize_random_weights(method)
+
+    #take a list of matrix, for inizializa layers wheight
+    def set_weight(self, W):
+        #for i in range(len(W)-1,-1,-1):
+            #print("||||||||||||||||||||||||||||||||||||||||",i)
+            #self.layers[i].set_weights(W[i].transpose())
+            #self.layers[i].set_weights(W[i])
+
+
+        for layer,W_i in zip(self.layers,W):
+            layer.set_weights(W_i)
+
+    def get_weight(self):
+        W=[]
+
+        for layer in self.layers:
+            #W.insert(0,layer.W)
+            W.append(layer.W.transpose())
+        return W
+
+
 
   #  def w_update(update):
    #     for i in range (0,len(self.layers)):

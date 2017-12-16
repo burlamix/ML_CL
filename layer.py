@@ -52,9 +52,15 @@ class Layer:
 
 
     def getOutput(self,x):
+        
         x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
+        #print("x------",x)
+        #print("W------1x",self.W.transpose())
+        #print("W------1x",self.W.transpose().shape)
+        #print("x------1x",x.shape)
         partial = np.dot(x, self.W.transpose())
         self.currentOutput = self.activation.f(partial)
+        #print("------------------------------------------")
         return self.currentOutput
 
     def regularize(self):
@@ -62,6 +68,9 @@ class Layer:
 
     def regularizedx(self):
         return self.regularizer[1](self.W, self.rlambda)
+
+    def set_weights(self,W):
+        self.W=W
 
     def initialize_random_weights(self, method='xavier'):
         if method == 'xavier':

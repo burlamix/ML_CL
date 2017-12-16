@@ -45,7 +45,7 @@ preproc.Preprocessor().shuffle(dataset)
 
 
 
-#(loss, acc, val_loss, val_acc, history)=NN.fit_ds( dataset, 1000, optimizer2 ,batch_size=32,verbose=3, val_set = dataset.test )
+(loss, acc, val_loss, val_acc, history)=NN.fit_ds( dataset, 10, optimizer2 ,batch_size=32,verbose=3, val_set = dataset.test )
 
 
 
@@ -78,20 +78,28 @@ optimizer4 = SimpleOptimizer(lr=0.7)
 #TODO automatizzare -1 1, 0 -1
 
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
-fg,grid_res, pred = validation.grid_search(dataset, epochs=[10000],batch_size=[124], n_layers=2, val_split=0,
-                        activations=[["tanh","sigmoid"], ["sigmoid","sigmoid"]],
-                       neurons=[[3,1],[9,1],[20,1],[50,1],[100,1]] ,optimizers=[optimizer1,optimizer2,optimizer3,optimizer4])   #with 10 neurons error! i don't now why
+#fg,grid_res, pred = validation.grid_search(dataset, epochs=[10000],batch_size=[124], n_layers=2, val_split=0,
+ #                       activations=[["tanh","sigmoid"], ["sigmoid","sigmoid"]],
+  #                     neurons=[[100,1],[9,1],[20,1],[3,1],[50,1]] ,optimizers=[optimizer1,optimizer2,optimizer3,optimizer4])   #with 10 neurons error! i don't now why
 
-print("-----------------------")
-for i in fg:
+#print("-----------------------")
+#for i in fg:
     #print(i["configuration"])
     #print(i["val_loss"])
     #print("storia e val acc ",i["history"]["val_loss"])
     #print("++++++\n")
-    None
+ #   None
 
-print(grid_res.neurons)
-print(grid_res.activations)
+#print(grid_res.neurons)
+#print(grid_res.activations)
+
+
+
+
+
+
+
+
 
 #y_hot = keras.utils.to_categorical(y_train, num_classes=2)
 ini1 = keras.initializers.RandomNormal(mean=0.0, stddev=(2/20), seed=None)
@@ -126,3 +134,5 @@ for l in model.layers:
 
 
 #2 functions or param (want grad or not)
+
+print(" \n\n      END ")

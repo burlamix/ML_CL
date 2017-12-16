@@ -41,8 +41,8 @@ A = np.round(np.random.rand(2,2)*10)
 B = np.round(np.random.rand(1,2)*10)
 start = time.time()
 
-for i in range(0,1):
-    (mse(A,B))
-end = time.time()
+#for i in range(0,1):
+#    (mse(A,B))
+#end = time.time()
 
-print("TIME:"+str(end-start))
+#print("TIME:"+str(end-start))

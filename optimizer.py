@@ -64,9 +64,15 @@ class SimpleOptimizer:
         self.lr = lr
 
     def optimize(self, f, W):
+        print("w.-----123",np.array(W))
+        W=list(reversed(W))
+        #print("w.-----dopo",np.array(Wx))
+
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
+
+        print("grad-------123",grad)
         return -self.lr*grad
 
        # for i in range(epochs):
@@ -77,6 +83,26 @@ class SimpleOptimizer:
             #update weight
             #for layer in NN.layers:
                 #layer.weights = layer.weights+layer.gradients
+class momentum_descent:
+    def __init__(self, mu=0.001, eps=0.9, nesterov=False):
+        self.mu = mu
+        self.nesterov = nesterov
+        self.eps = eps
+        self.reset()
+
+    def reset(self):
+        self.last_w = []
+
+
+    def optimize(self,f,W):
+        loss, grad = f(W)
+
+        return self.mu
+
+
+
+        return None
+
 
 class Adam:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
