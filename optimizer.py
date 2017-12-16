@@ -9,7 +9,7 @@ def sigmoid(x):
     return 1/(1+np.exp(-x))
 
 def sigmoddxf(x):
-    return sigmoid(x)*(1-sigmoid(x))
+    return x*(1-x)
 
 def linear(x):
     return x
@@ -22,7 +22,7 @@ def tanh(x):
     #return (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))
 
 def tanhdx(x):
-    return (1-(np.power(tanh(x),2)))
+    return (1-(np.power(x,2)))
 
 def softmax(x):
     e_x = np.exp( x - np.max(x,axis=1,keepdims=True))

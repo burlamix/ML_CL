@@ -104,6 +104,7 @@ def load_monk(path):
 
     x = np.array([d[2:-1] for d in data]).astype('int')
     y = [(1*float(d[1])-0) for d in data]
+    #y = [(2*float(d[1])-1) for d in data]
 
 
 

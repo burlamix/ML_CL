@@ -16,7 +16,7 @@ class grid_result:
 		self.neurons=neurons
 		self.activations=activations
 		self.optimizer=optimizer
-		self.loss_fun=loss_functions	#TODO REMOVE IT!!
+		self.loss_fun=loss_fun	#TODO REMOVE IT!!
 		self.regularization=regularization
 		self.result_matrix=result_matrix
 		self.epochs = epochs
@@ -91,6 +91,8 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	else:
 		grid['rlambda'] = rlambda
 
+	print(type(grid['loss_fun']))
+
 	#Generate all possible hyperparameters configurations
 	labels, terms = zip(*grid.items())
 	#generate list to iterate on
@@ -121,9 +123,9 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 			if v==None: result_grid[k] = r #If no validation (val_split=0) then select best based on tr loss
 			else: result_grid[k] = v
 		else:
+
 			result_grid[k],_,_,_,history = k_fold_validation(dataset,net,epochs=params['epochs'],	\
 				optimizer=params['optimizers'],cvfolds=cvfolds, batch_size=params['batch_size'],loss_func=params['loss_fun'], verbose=verbose-1)
-
 		if (validating):
 			full_grid.append({'configuration': params, 'val_loss':result_grid[k], 'history':history})
 		else:#If no validation was done only put config and other stuff(to add..)
@@ -178,25 +180,30 @@ def k_fold_validation(dataset, NN, epochs, optimizer, cvfolds=3, batch_size=32, 
 		validation_x  =  x_list[i]
 		validation_y  =  y_list[i]
 
+
 		#Train the model
 		tr_loss[i],tr_acc[i], _, _, c =\
-			NN.fit(train_x, train_y, epochs, optimizer, batch_size, loss_func, verbose=verbose, val_split=0)
+			NN.fit(train_x, train_y, epochs, optimizer, batch_size, loss_func, verbose=verbose, val_set=(validation_x, validation_y))
+
+		val_loss[i],val_acc[i] = NN.evaluate(validation_x, validation_y)
+
 
 		history.append(c)
-		val_loss[i],val_acc[i] = NN.evaluate(validation_x, validation_y)
+
+
 	#TODO return more stuff: in-fold variance, ..
 	r = {'tr_loss':[0]*epochs, 'tr_acc':[0]*epochs, 'val_loss':[0]*epochs, 'val_acc':[0]*epochs}
 
-	for d in history:
-		#print("d--",d)
+	for d in history:#per ogni k split
 		for k in d.keys():
-			#print("KKKKKK----",k)
-			r[k]= [np.average(x) for x in zip(d[k], r[k])]
-			#for z in range(0,len(r[k])):
-			#r[k]=r[k]+d[k]
-	print('his',r)
+			r[k]= [np.sum(x) for x in zip(d[k], r[k])]
 
-	return np.average(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), \
-		   r
+	for k in r.keys():
+		for z in range(0,len(r[k])):
+			r[k][z]=r[k][z]/cvfolds
 
+
+	return np.average(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), r
+	#r is the average for each epoch
+	#the other are the total average of the end
 

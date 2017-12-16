@@ -155,12 +155,13 @@ class NeuralNetwork:
         #TODO -> make it work in the general case
         for i in range(0,real.shape[0]):
             if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): #TODO time? make it automaticaly
+            #if ( (real[i][0]>0 and y_out[i][0]==1) or (real[i][0]<=0 and y_out[i][0]==-1) ): #TODO time? make it automaticaly
                 correct = correct +1
             else:
                 errate = errate + 1
 
         accuracy = correct/real.size #TOCHECK this is the accuracy that whant micheli?
-
+        
         #if(accuracy>0.999):exit(1)
         return val_loss_func, accuracy
 
