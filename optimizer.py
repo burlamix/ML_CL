@@ -64,15 +64,14 @@ class SimpleOptimizer:
         self.lr = lr
 
     def optimize(self, f, W):
-        print("w.-----123",np.array(W))
-        W=list(reversed(W))
-        #print("w.-----dopo",np.array(Wx))
 
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
 
-        print("grad-------123",grad)
+        #the grad are reversed, so use a reversed W
+        W=np.array(list(reversed(W)))
+        a = grad + W
         return -self.lr*grad
 
        # for i in range(epochs):

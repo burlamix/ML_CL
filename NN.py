@@ -72,8 +72,11 @@ class NeuralNetwork:
     def f(self, in_chunk, out_chunk):
         def g(W,only_fp=False):
 
+            #print("1-1-1-1-1",self.layers[0].W)
+            #print("1-1-1-1-1",self.layers[1].W)
             self.set_weight(W)
-            
+            #print("1-1-1-1-1",self.layers[0].W)
+            #print("1-1-1-1-1",self.layers[1].W)
             if only_fp:
                 return self.FP(in_chunk)
             else:
@@ -190,14 +193,14 @@ class NeuralNetwork:
 
     #take a list of matrix, for inizializa layers wheight
     def set_weight(self, W):
-        #for i in range(len(W)-1,-1,-1):
+        for i in range(len(W)-1,-1,-1):
             #print("||||||||||||||||||||||||||||||||||||||||",i)
             #self.layers[i].set_weights(W[i].transpose())
-            #self.layers[i].set_weights(W[i])
+            self.layers[i].set_weights(W[i])
 
 
-        for layer,W_i in zip(self.layers,W):
-            layer.set_weights(W_i)
+        #for layer,W_i in zip(self.layers,W):
+        #    layer.set_weights(W_i)
 
     def get_weight(self):
         W=[]

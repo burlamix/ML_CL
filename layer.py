@@ -70,7 +70,7 @@ class Layer:
         return self.regularizer[1](self.W, self.rlambda)
 
     def set_weights(self,W):
-        self.W=W
+        self.W=W.transpose()
 
     def initialize_random_weights(self, method='xavier'):
         if method == 'xavier':
