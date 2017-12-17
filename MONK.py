@@ -28,6 +28,7 @@ x_test,y_test = load_monk("MONK_data/monks-1.test")
 
 optimizer = Adam(lr=0.001,b1=0.9,b2=0.999)
 optimizer2 = SimpleOptimizer(lr=0.5)
+optimizer3 = Momentum( mu=0.3, eps=0.9)
 #momentum dei tipo 0.9
 dataset = preproc.Dataset()
 dataset.init_train([x_train,y_train])
@@ -45,7 +46,7 @@ preproc.Preprocessor().shuffle(dataset)
 
 
 
-(loss, acc, val_loss, val_acc, history)=NN.fit_ds( dataset, 10, optimizer2 ,batch_size=32,verbose=3, val_set = dataset.test )
+(loss, acc, val_loss, val_acc, history)=NN.fit_ds( dataset, 1000, optimizer3 ,batch_size=32,verbose=3, val_set = dataset.test )
 
 
 

@@ -69,9 +69,6 @@ class SimpleOptimizer:
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
 
-        #the grad are reversed, so use a reversed W
-        W=np.array(list(reversed(W)))
-        a = grad + W
         return -self.lr*grad
 
        # for i in range(epochs):
@@ -82,7 +79,7 @@ class SimpleOptimizer:
             #update weight
             #for layer in NN.layers:
                 #layer.weights = layer.weights+layer.gradients
-class momentum_descent:
+class Momentum:
     def __init__(self, mu=0.001, eps=0.9, nesterov=False):
         self.mu = mu
         self.nesterov = nesterov
@@ -90,18 +87,39 @@ class momentum_descent:
         self.reset()
 
     def reset(self):
-        self.last_w = []
+        self.last_g = [0]
 
 
     def optimize(self,f,W):
-        loss, grad = f(W)
 
-        return self.mu
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
 
 
+        #W=np.array(list(reversed(W)))            #the grad are reversed, so use a reversed W if you want do W+gradient
 
-        return None
+        if self.nesterov:
 
+            print("-g-",self.last_g)
+            print("-W-",W)
+            print("-x-",self.last_g+W)
+
+            #c'è ancora qualche problema con il nesterov
+            loss, grad = f(self.last_g+W)
+            #loss, grad = f(W)
+
+            back = self.mu*self.last_g
+            now = self.eps*grad
+        else:
+            
+            loss, grad = f(W)
+            
+            back = self.mu*self.last_g
+            now = self.eps*grad
+
+        self.last_g = back-now
+        return self.last_g
+#TODO better if we return the updated weight rather than the stuff for update the weight?
 
 class Adam:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
@@ -144,3 +162,4 @@ optimizers = dict()
 
 optimizers["SGD"] = SimpleOptimizer()
 optimizers["adam"] = Adam()
+optimizers["momentum"] = Momentum()
