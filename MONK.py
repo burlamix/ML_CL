@@ -12,6 +12,7 @@ from NN import *
 from optimizer import *
 import validation
 import Plotter
+import time
 
 #TODO target relativlo alla funzione finale di attivazione
 #usare 0.9 per la saturazione !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -21,14 +22,14 @@ import Plotter
 
 
 
-x_train,y_train = load_monk("MONK_data/monks-1.train")
-x_test,y_test = load_monk("MONK_data/monks-1.test")
+x_train,y_train = load_monk("MONK_data/monks-3.train")
+x_test,y_test = load_monk("MONK_data/monks-3.test")
 
-#np.random.seed(5)
+#np.random.seed(525)
 
 optimizer = Adam(lr=0.001,b1=0.9,b2=0.999)
 optimizer2 = SimpleOptimizer(lr=0.5)
-optimizer3 = Momentum( mu=0.3, eps=0.9)
+optimizer3 = Momentum( lr=0.3, eps=0.9 ,nesterov=True)
 #momentum dei tipo 0.9
 dataset = preproc.Dataset()
 dataset.init_train([x_train,y_train])
@@ -37,18 +38,21 @@ dataset.init_test([x_test,y_test])
 
 NN = NeuralNetwork()
 #NN.addLayer(2,1,activation1,weights=np.array([[0.6, 0.8]]), bias=0.2)
-NN.addLayer(17,3,"tanh", rlambda=0)
+NN.addLayer(17,3,"tanh", rlambda=0.0)
 #NN.addLayer(60,60,activation)
-NN.addLayer(3,1,"sigmoid",rlambda=0)
+NN.addLayer(3,1,"sigmoid",rlambda=0.0)
 #preprocessor.normalize(dataset)
-preproc.Preprocessor().shuffle(dataset)
+#preproc.Preprocessor().shuffle(dataset)
 
+#dataset.train[0] = np.random.randn(50,17)
+#dataset.train[1] = np.random.randn(50,1)
 
+s = time.time()
+(loss, acc, val_loss, val_acc, history)=\
+    NN.fit_ds( dataset, 500, optimizer3 ,batch_size=32,verbose=3, val_set = dataset.test )
 
-
-(loss, acc, val_loss, val_acc, history)=NN.fit_ds( dataset, 1000, optimizer3 ,batch_size=32,verbose=3, val_set = dataset.test )
-
-
+t=time.time()-s
+print('time:',t)
 
 
 
@@ -56,7 +60,7 @@ preproc.Preprocessor().shuffle(dataset)
 
 
 #input('..')
-#check weight 
+#check weight
 
 
 
@@ -108,14 +112,14 @@ ini2 = keras.initializers.RandomNormal(mean=0.0, stddev=(2/4), seed=None)
 
 
 model = Sequential()
-model.add(Dense(20, activation= 'tanh' ,kernel_initializer=ini1,input_dim=17,use_bias=False))
-model.add(Dense(1, activation= 'tanh',kernel_initializer=ini2 ,use_bias=False))
+model.add(Dense(3, activation= 'linear' ,kernel_initializer=ini1,input_dim=17,use_bias=True))
+model.add(Dense(1, activation= 'linear',kernel_initializer=ini2 ,use_bias=True))
 
-
+input("..")
 
 
 #sgd = SGD(lr=0.5, decay=0, momentum=0.0, nesterov=False)
-sgd = opts.SGD(lr=0.5, momentum=0.0, decay=0.00 )
+sgd = opts.SGD(lr=0.3, momentum=0.6, decay=0.00,nesterov=True )
 
 adada = opts.adam(lr=0.01,beta_1=0.9,beta_2=0.999)
 
@@ -124,16 +128,16 @@ model.compile(optimizer=sgd,
               metrics=[ 'accuracy' ])
 
 s=0
-for l in model.layers:
-    s+=np.sum(np.abs(l.get_weights()))
+#for l in model.layers:
+#    s+=np.sum(np.abs(l.get_weights()))
 #àprint(np.sum(s))
 #np.random.seed(5)
 
 
-#model.fit(dataset.train[0], dataset.train[1],batch_size=32,epochs=10000,shuffle=True)
+model.fit(dataset.train[0], dataset.train[1],batch_size=50,epochs=500,shuffle=False)
 #print(model.evaluate(x_test, y_test))
 
 
 #2 functions or param (want grad or not)
 
-print(" \n\n      END ")
+print(" \n\n done ")

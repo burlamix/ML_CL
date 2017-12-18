@@ -69,7 +69,7 @@ class SimpleOptimizer:
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
 
-        return -self.lr*grad
+        return W-self.lr*grad
 
        # for i in range(epochs):
         #    o = NN.fp(x_in)
@@ -80,14 +80,14 @@ class SimpleOptimizer:
             #for layer in NN.layers:
                 #layer.weights = layer.weights+layer.gradients
 class Momentum:
-    def __init__(self, mu=0.001, eps=0.9, nesterov=False):
-        self.mu = mu
+    def __init__(self, lr=0.001, eps=0.9, nesterov=False):
+        self.lr = lr
         self.nesterov = nesterov
         self.eps = eps
         self.reset()
 
     def reset(self):
-        self.last_g = [0]
+        self.last_g = None
 
 
     def optimize(self,f,W):
@@ -95,31 +95,17 @@ class Momentum:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
 
-
-        #W=np.array(list(reversed(W)))            #the grad are reversed, so use a reversed W if you want do W+gradient
-
         if self.nesterov:
+            #If nesterov, "look ahead" first
+            loss, grad = \
+                (f(self.eps*self.last_g+W) if (self.last_g != None) else f(W))
 
-            print("-g-",self.last_g)
-            print("-W-",W)
-            print("-x-",self.last_g+W)
-
-            #c'è ancora qualche problema con il nesterov
-            loss, grad = f(self.last_g+W)
-            #loss, grad = f(W)
-
-            back = self.mu*self.last_g
-            now = self.eps*grad
+            v = self.lr*grad+self.eps*self.last_g if (self.last_g != None) else 0
         else:
-            
             loss, grad = f(W)
-            
-            back = self.mu*self.last_g
-            now = self.eps*grad
-
-        self.last_g = back-now
-        return self.last_g
-#TODO better if we return the updated weight rather than the stuff for update the weight?
+            v = self.eps*(self.last_g if (self.last_g != None) else 0) + self.lr*grad
+        self.last_g = grad
+        return W-v
 
 class Adam:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
@@ -154,7 +140,7 @@ class Adam:
         vcap = self.v[self.t]/(1-self.b2**self.t)
         for i in range(len(vcap)):
             vcap[i] = numpy.sqrt(vcap[i])
-        return -self.lr*mcap/(vcap+self.eps)
+        return W-self.lr*mcap/(vcap+self.eps)
 
 
 optimizers = dict()

@@ -43,8 +43,8 @@ class NeuralNetwork:
             grad = (np.dot(curro.transpose(),err)/(real.shape[0]))
             #grad = (np.dot(curro.transpose(),err))
             self.layers[i].grad = grad
-            gradients.append(grad)
-            #gradients.insert(0,grad.transpose())
+            #gradients.append(grad)
+            gradients.insert(0,grad)
         return loss_func, np.array(gradients)
 
 
@@ -127,9 +127,12 @@ class NeuralNetwork:
                 update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weight())
 
                 #predicted = self.FP(x_in[chunk:cap],)
-
+                self.set_weight(update)
                 for j in range(0, len(self.layers)):
-                    self.layers[j].W = self.layers[j].W + update[-j - 1].transpose() - (self.reguldx(j) / batch_size)
+                    self.layers[j].W -= (self.reguldx(j) / batch_size)
+                #for j in range(0, len(self.layers)):
+                    #self.layers[j].W = self.layers[j].W + update[j].transpose() - (self.reguldx(j) / batch_size)
+                    #self.layers[j].W = self.layers[j].W + update[-j - 1].transpose() - (self.reguldx(j) / batch_size)
 
             loss, acc = self.evaluate(x_in, y_out)
             val_loss = None
@@ -149,11 +152,11 @@ class NeuralNetwork:
             #TODO inefficente..
         #TODO proper output formatting
         if(verbose>=1 and val_split>0 or val_set!=None ):
-            print("Validation loss:"+str(val_loss))
+            print("Validation loss:"+str(val_loss)+' val acc:'+str(val_acc))
         return (loss, acc, val_loss, val_acc, history)
 
     def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0,val_set=None):
-        return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose,val_set)
+            return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose,val_set)
 
 
     def evaluate(self,x_in,y_out):
@@ -201,7 +204,7 @@ class NeuralNetwork:
         for layer in self.layers:
             #W.insert(0,layer.W)
             W.append(layer.W.transpose())
-        return W
+        return np.array(W)
 
 
 
