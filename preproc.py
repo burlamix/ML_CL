@@ -111,9 +111,14 @@ def load_monk(path):
     x = np.array(lazy_one_hot_monk(x)).astype('float32')
     y = np.array(y).astype('int')
 
+    #yt = np.zeros((y.shape[0],2))
     y = y.reshape((y.shape[0],1))
-    print(type(x[0][0]))
-    print(y[0])
+
+    #for i in range(0,y.shape[0]):
+    #    if y[i]==0:yt[i][0]=1
+    #    else:yt[i][1]=1
+
+
     return x, y
 
 

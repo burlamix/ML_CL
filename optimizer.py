@@ -59,16 +59,18 @@ activations["softmax"] = Activation(softmax, ss)
 #line search https://www.cs.cmu.edu/~ggordon/10725-F12/scribes/10725_Lecture5.pdf
 #TODO conjugate gradient http://matlab.izmiran.ru/help/toolbox/nnet/backpr59.html
 class SimpleOptimizer:
-
+    def pprint(self):
+        return "sgd,lr="+str(self.lr)
     def __init__(self,lr=0.1):
         self.lr = lr
 
+    def getLr(self):
+        return self.lr
     def optimize(self, f, W):
 
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-
         return W-self.lr*grad
 
        # for i in range(epochs):
