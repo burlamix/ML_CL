@@ -7,7 +7,7 @@ import keras
 
 def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, epochs=1500,trials=5):
     #Setup -- don't mind this (just need to modify weights by hand)
-    file = "bm"#+str(np.random.randn())
+    file = "bm_"+monk#+str(np.random.randn())
     s=monk + ",act1=" + act1 + ",weights=xavier(uniform),act2=" + act2 + ",reg=" + str(reg) + \
       ",bs=" + str(bs) + ",epochs=" + str(epochs) +","+optimizer.pprint()+"\n"
     h= open(file,"a")
@@ -20,8 +20,8 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
     x_train, y_train = load_monk("MONK_data/monks-"+str(mk)+".train")
     x_test, y_test = load_monk("MONK_data/monks-"+str(mk)+".test")
 
-    x_train = np.random.randn(50,17)
-    y_train = np.random.randn(50,1)
+    #x_train = np.random.randn(50,17)
+    #y_train = np.random.randn(50,1)
     dataset = preproc.Dataset()
     dataset.init_train([x_train, y_train])
     dataset.init_test([x_test, y_test])
@@ -42,7 +42,8 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
             for i in range(0,len(l.W)):
                 for j in range(1,len(l.W[i])):
                     w[j-1][i] = l.W[i][j]
-            currwg.append(w)
+            currwg.append(w)    #Actual weights
+            currwg.append(np.zeros(len(l.W))) #Bias
         wgs.append(currwg)
 
         (loss, acc, val_loss, val_acc, history) = \
@@ -64,12 +65,13 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
     for i in range(0,trials):
         ini1 = keras.initializers.RandomNormal(mean=0.0, stddev=(2 / 20), seed=None)
         ini2 = keras.initializers.RandomNormal(mean=0.0, stddev=(2 / 4), seed=None)
+        l1_reg=keras.regularizers.l2(0.0)
+
         model = Sequential()
-        model.add(Dense(units, activation=act1, kernel_initializer=ini1, input_dim=17, use_bias=False))
-        model.add(Dense(1, activation=act2, kernel_initializer=ini2, use_bias=False))
+        model.add(Dense(units, activation=act1, bias_initializer='zeros', kernel_initializer=ini1, input_dim=17, use_bias=True,kernel_regularizer=l1_reg))
+        model.add(Dense(1, activation=act2, bias_initializer='zeros', kernel_initializer=ini2, use_bias=True,kernel_regularizer=l1_reg))
         sgd = opts.SGD(lr=optimizer.getLr(), momentum=0.0, decay=0.00, nesterov=False)
         model.compile(optimizer=sgd, loss='mean_squared_error', metrics=['accuracy'])
-
         #Load weights
         wc=wgs[i]
         model.set_weights(wc)
@@ -87,4 +89,6 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
         conv+=1 if val_acc==1 else 0
         h.flush()
     h.write("converged:"+str(conv)+"\nnot converged:"+str(trials-conv)+"\n")
+    h.write("\n\n******************************************************************************************\n")
+
     h.close()

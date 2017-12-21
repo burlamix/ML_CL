@@ -25,7 +25,7 @@ class NeuralNetwork:
 
     def BP(self, prediction, real, x_in):
         gradients = []
-        loss_func = self.loss_func[0](real,prediction) #+ self.regul()
+        loss_func = self.loss_func[0](real,prediction) 
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
@@ -48,12 +48,13 @@ class NeuralNetwork:
         return loss_func, np.array(gradients)
 
 
-    '''def regul(self):
+    def regul(self):
         regul_loss = 0
         for l in self.layers:
             regul_loss+=l.regularize()
-        return regul_loss/len(self.input)
-'''
+        #return regul_loss/len(self.input)      #TODO Input WTF?, pheraps
+        return regul_loss
+
 #    def reguldx(self):
 #        regul_loss = 0
 #        for l in self.layers:
@@ -74,9 +75,10 @@ class NeuralNetwork:
 
             self.set_weight(W)
             if only_fp:
-                return self.FP(in_chunk)
+                return self.loss_func[0](in_chunk,self.FP(in_chunk)) #+ self.regul()
             else:
-                return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
+                loss, grad = self.BP(self.FP(in_chunk), out_chunk, in_chunk)
+                return loss + self.regul(),grad
         return g
 
 
@@ -126,10 +128,15 @@ class NeuralNetwork:
 
                 update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weight())
 
+
                 #predicted = self.FP(x_in[chunk:cap],)
-                self.set_weight(update)
                 for j in range(0, len(self.layers)):
-                    self.layers[j].W -= (self.reguldx(j) / batch_size)
+                    #print("-----1----",update[j])
+                    #print("-----2----",(self.reguldx(j) / batch_size).transpose())
+                    update[j]-= (self.reguldx(j) / batch_size).transpose()
+
+                self.set_weight(update)
+
                 #for j in range(0, len(self.layers)):
                     #self.layers[j].W = self.layers[j].W + update[j].transpose() - (self.reguldx(j) / batch_size)
                     #self.layers[j].W = self.layers[j].W + update[-j - 1].transpose() - (self.reguldx(j) / batch_size)

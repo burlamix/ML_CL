@@ -19,11 +19,11 @@ from benchmarkMonk import *
 
 
 #plottare MSE  per il cuore del modello
-optimizer2 = SimpleOptimizer(lr=0.3)
+optimizer2 = SimpleOptimizer(lr=0.5)
 
 #Check benchmarkMonk file
-bm_monk(optimizer=optimizer2,monk='monk1',act1='sigmoid',act2='linear',
-        reg=0.0,bs=2,epochs=1000,trials=1)
+bm_monk(optimizer=optimizer2,monk='monk1',act1='tanh',act2='sigmoid',
+        reg=0.0,bs=8,epochs=1000,trials=30)
 exit(1)
 
 x_train,y_train = load_monk("MONK_data/monks-1.train")
