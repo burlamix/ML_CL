@@ -1,18 +1,123 @@
-monk1,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=8,epochs=1000,sgd,lr=0.5
+monk1,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1300,sgd,lr=0.5
+monk1,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1300,sgd,lr=0.5
+tr_acc=0.9354838709677419, val_acc=0.9166666666666666
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=0.958333333333
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:1
+
+
+******************************************************************************************
+monk1,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1000,sgd,lr=0.5
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.9354838709677419, val_acc=0.9166666666666666
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.9354838709677419, val_acc=0.9166666666666666
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.9354838709677419, val_acc=0.9166666666666666
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.9354838709677419, val_acc=0.9166666666666666
 tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
 tr_acc=0.9596774193548387, val_acc=0.9166666666666666
 tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=0.9884259259259259
 tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
-tr_acc=0.8951612903225806, val_acc=0.8333333333333334
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=0.9976851851851852
+tr_acc=1.0, val_acc=1.0
 tr_acc=1.0, val_acc=1.0
 tr_acc=0.9596774193548387, val_acc=0.9166666666666666
 tr_acc=0.9354838709677419, val_acc=0.9166666666666666
 tr_acc=1.0, val_acc=1.0
-tr_acc=0.9596774193548387, val_acc=0.9166666666666666
+converged:41
+not converged:9
+-------------------
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.959677425123, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.935483870968, val_acc=0.916666666667
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+converged:37
+not converged:13
+
+
+******************************************************************************************

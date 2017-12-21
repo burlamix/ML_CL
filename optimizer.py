@@ -37,7 +37,11 @@ def softmaxdx(signal):
     return J.sum(axis=1) # sum across-rows for each sample
 
 
+def relu(x):
+    return np.maximum(x,0)
 
+def reludx(x):
+    return 1*(x>0)
 
 class Activation:
 
@@ -51,6 +55,7 @@ activations["linear"] = Activation(linear, lineardxf)
 activations["sigmoid"] = Activation(sigmoid, sigmoddxf)
 activations["tanh"] = Activation(tanh, tanhdx)
 activations["softmax"] = Activation(softmax, ss)
+activations["relu"] = Activation(relu, reludx)
 #TODO add relu
 #If only linear acts do we have exact sol?
 #Learn learning rate

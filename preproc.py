@@ -103,6 +103,7 @@ def load_monk(path):
             data.append(row)
 
     x = np.array([d[2:-1] for d in data]).astype('int')
+    print("xshape",x.shape)
     y = [(1*float(d[1])-0) for d in data]
     #y = [(2*float(d[1])-1) for d in data]
 
@@ -110,6 +111,7 @@ def load_monk(path):
 
     x = np.array(lazy_one_hot_monk(x)).astype('float32')
     y = np.array(y).astype('int')
+    print("xshape",x.shape)
 
     #yt = np.zeros((y.shape[0],2))
     y = y.reshape((y.shape[0],1))

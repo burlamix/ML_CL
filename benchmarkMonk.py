@@ -4,6 +4,7 @@ from keras.models import Sequential
 import keras.optimizers as opts
 from keras.layers import Dense
 import keras
+np.set_printoptions(threshold=np.nan)
 
 def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, epochs=1500,trials=5):
     #Setup -- don't mind this (just need to modify weights by hand)
@@ -19,12 +20,14 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
 
     x_train, y_train = load_monk("MONK_data/monks-"+str(mk)+".train")
     x_test, y_test = load_monk("MONK_data/monks-"+str(mk)+".test")
-
+    print("x_train-----------------",x_train)
+    print("y_train---------------",y_train)
     #x_train = np.random.randn(50,17)
     #y_train = np.random.randn(50,1)
     dataset = preproc.Dataset()
     dataset.init_train([x_train, y_train])
     dataset.init_test([x_test, y_test])
+    #preproc.Preprocessor().shuffle(dataset)
     conv=0
     wgs = []
 
@@ -68,13 +71,13 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
         l1_reg=keras.regularizers.l2(0.0)
 
         model = Sequential()
-        model.add(Dense(units, activation=act1, bias_initializer='zeros', kernel_initializer=ini1, input_dim=17, use_bias=True,kernel_regularizer=l1_reg))
-        model.add(Dense(1, activation=act2, bias_initializer='zeros', kernel_initializer=ini2, use_bias=True,kernel_regularizer=l1_reg))
+        model.add(Dense(units, activation=act1, bias_initializer='zeros', kernel_initializer="normal", input_dim=17, use_bias=True,kernel_regularizer=l1_reg))
+        model.add(Dense(1, activation=act2, bias_initializer='zeros', kernel_initializer="normal", use_bias=True,kernel_regularizer=l1_reg))
         sgd = opts.SGD(lr=optimizer.getLr(), momentum=0.0, decay=0.00, nesterov=False)
         model.compile(optimizer=sgd, loss='mean_squared_error', metrics=['accuracy'])
         #Load weights
         wc=wgs[i]
-        model.set_weights(wc)
+        #model.set_weights(wc)
 
         model.fit(dataset.train[0], dataset.train[1], batch_size=bs, verbose=0, epochs=epochs, shuffle=False)
 

@@ -23,11 +23,14 @@ optimizer2 = SimpleOptimizer(lr=0.5)
 
 #Check benchmarkMonk file
 bm_monk(optimizer=optimizer2,monk='monk1',act1='tanh',act2='sigmoid',
-        reg=0.0,bs=8,epochs=1000,trials=30)
+        reg=0.0,bs=32,epochs=1000,trials=50)
 exit(1)
 
 x_train,y_train = load_monk("MONK_data/monks-1.train")
 x_test,y_test = load_monk("MONK_data/monks-1.test")
+
+
+
 
 dataset = preproc.Dataset()
 dataset.init_train([x_train,y_train])

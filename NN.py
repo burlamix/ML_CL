@@ -121,8 +121,17 @@ class NeuralNetwork:
 
 
         history = {'tr_loss':[], 'val_loss':[], 'tr_acc':[], 'val_acc':[]}
+
+
+
         for i in range(0, epochs):
             #print(i)
+            perm = np.random.permutation(len(x_in))
+            x_in = x_in[perm]
+            y_out = y_out[perm]
+            #print(x_in[1:2])
+
+
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
 
