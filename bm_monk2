@@ -2075,3 +2075,838 @@ tr_acc=0, val_acc=None
 converged:0
 not converged:1
 -------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=0.621301775853, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+tr_acc=0.621301775147929, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=0.621301775853, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.09
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.009
+tr_acc=0.5621301775147929, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=0.621301775853, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.2
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.2
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.0
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=200,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=200,momentum,lr=0.2
+tr_acc=0.9526627218934911, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=200,momentum,lr=0.2
+tr_acc=0.9940828402366864, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.2
+tr_acc=0.8757396449704142, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.2
+tr_acc=0.5857988165680473, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=0.99537037037
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.8816568047337278, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.7218934911242604, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=0.997685185185
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.7455621301775148, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.6804733727810651, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.7751479289940828, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.9230769230769231, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.8816568047337278, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=0.378698224852071, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=0.993055555556
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,sgd,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1000,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,sgd,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,sgd,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=0.621301775147929, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.5
+tr_acc=0.621301775147929, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=0.621301775147929, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=0.621301775147929, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.02
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.1
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=700,momentum,lr=0.1
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.2
+tr_acc=0.621301775147929, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=0.639053255849, val_acc=0.631944444444
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.9763313609467456, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.9763313609467456, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.6804733727810651, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.7514792899408284, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.727810650887574, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.8816568047337278, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.757396449704142, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.863905325443787, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.863905325443787, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.7751479289940828, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.7810650887573964, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.7869822485207101, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=700,momentum,lr=0.9
+tr_acc=0.8757396449704142, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.7869822485207101, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.7869822485207101, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.9940828402366864, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.7988165680473372, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.8875739644970414, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.863905325443787, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.7869822485207101, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.8284023668639053, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.7869822485207101, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=0.8284023668639053, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------
+tr_acc=1.0, val_acc=1.0
+converged:1
+not converged:0
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=1000,momentum,lr=0.9
+tr_acc=1.0, val_acc=None
+converged:0
+not converged:1
+-------------------

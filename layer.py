@@ -7,7 +7,7 @@ import sys
 
 class Layer:
 
-    def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0,
+    def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0, weights_init='xavier',
                  regularizer="L2", rlambda = 0.00): #TODO find proper default value for lambda
 
         if isinstance(regularizer[0], types.FunctionType) and \
@@ -72,12 +72,11 @@ class Layer:
     def set_weights(self,W):
         self.W=W.transpose()
 
-    def initialize_random_weights(self, method='xavier'):
+    def initialize_random_weights(self, weights_init='xavier'):
         method='fan_in'
         if method == 'xavier':
             var = 2 / (self.inputs + self.neurons)
             self.W = np.random.normal(0, var, (self.neurons, self.inputs+1))
         elif method == 'fan_in':
             self.W =  np.random.uniform(-0.7 / self.inputs, 0.7/self.inputs,(self.neurons, self.inputs+1))
-        self.W = np.zeros((self.neurons, self.inputs+1))
         self.W[:,0] = 0

@@ -13,9 +13,9 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda = 0.0):
+                 regularization="L2", rlambda = 0.0,weights_init='xavier'):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias,
-                                 regularization, rlambda))
+                                 regularization, rlambda,weights_init))
 
     def FP(self, x_in):
         x = x_in
@@ -78,7 +78,7 @@ class NeuralNetwork:
 
     def f(self, in_chunk, out_chunk):
         def g(W,only_fp=False):
-            self.set_weight(W)
+            self.set_weight(W)      #TODO TODO put this inside at FP and BP
             if only_fp:
                 return self.loss_func[0](in_chunk,self.FP(in_chunk)) #+ self.regul()
             else:
@@ -132,12 +132,9 @@ class NeuralNetwork:
         for i in range(0, epochs):
             #hprint(i)
             perm = np.random.permutation(len(x_in))
-            #print(x_in.shape)
-            #print(y_out.shape)
+
             x_in = x_in[perm]
             y_out = y_out[perm]
-            print(y_out.shape)
-            #print(x_in[1:2])
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
 
@@ -173,7 +170,7 @@ class NeuralNetwork:
                 print (i,' loss = {0:.8f} '.format(loss),'accuracy = {0:.8f} '.format(acc))
             #TODO inefficente..
         #TODO proper output formatting
-        if(verbose>=1 and val_split>0 or val_set!=None ):
+        if(verbose>=1 and (val_split>0 or val_set!=None) ):
             print("Validation loss:"+str(val_loss)+' val acc:'+str(val_acc))
         return (loss, acc, val_loss, val_acc, history)
 
@@ -191,18 +188,17 @@ class NeuralNetwork:
         correct=0
         errate=0
         accuracy=0
-        return 0,0
         #TODO -> make it work in the general case
         for i in range(0,real.shape[0]):
-            if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): #TODO time? make it automaticaly
-            #if ( (real[i][0]>0 and y_out[i][0]==1) or (real[i][0]<=0 and y_out[i][0]==-1) ): #TODO time? make it automaticaly
+            #if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): #TODO time? make it automaticaly
+            if ( (real[i][0]>0 and y_out[i][0]==1) or (real[i][0]<=0 and y_out[i][0]==-1) ): #TODO time? make it automaticaly
                 correct = correct +1
             else:
                 errate = errate + 1
 
         accuracy = correct/real.size #TOCHECK this is the accuracy that whant micheli?
         
-        if(accuracy>0.999):exit(1)
+        #if(accuracy>0.999):exit(1)
         return val_loss_func, accuracy
 
 

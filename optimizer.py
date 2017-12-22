@@ -64,13 +64,16 @@ activations["relu"] = Activation(relu, reludx)
 #line search https://www.cs.cmu.edu/~ggordon/10725-F12/scribes/10725_Lecture5.pdf
 #TODO conjugate gradient http://matlab.izmiran.ru/help/toolbox/nnet/backpr59.html
 class SimpleOptimizer:
+
+    def __init__(self, lr=0.1):
+        self.lr = lr
+
     def pprint(self):
         return "sgd,lr="+str(self.lr)
-    def __init__(self,lr=0.1):
-        self.lr = lr
 
     def getLr(self):
         return self.lr
+
     def optimize(self, f, W):
 
         if not(isinstance(f, types.FunctionType)):
@@ -96,6 +99,11 @@ class Momentum:
     def reset(self):
         self.last_g = None
 
+    def pprint(self):
+        return "momentum,lr=" + str(self.lr)
+
+    def getLr(self):
+        return self.lr
 
     def optimize(self,f,W):
 
@@ -107,10 +115,10 @@ class Momentum:
             loss, grad = \
                 (f(self.eps*self.last_g+W) if (self.last_g != None) else f(W))
 
-            v = self.lr*grad+self.eps*self.last_g if (self.last_g != None) else 0
+            v = self.lr*np.array(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
         else:
             loss, grad = f(W)
-            v = self.eps*(self.last_g if (self.last_g != None) else 0) + self.lr*grad
+            v = self.eps*(self.last_g if (self.last_g != None) else 0) + self.lr*np.array(grad)
         self.last_g = v
         return W-v
 
@@ -139,8 +147,8 @@ class Adam:
         loss, grad = f(W) #Compute the gradient
 
         #First and second moment estimation(biased by b1 and b2)
-        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*grad)
-        self.v.append(self.b2*self.v[self.t-1]+(1-self.b2)*(grad**2))
+        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*np.array(grad))
+        self.v.append(self.b2*self.v[self.t-1]+(1-self.b2)*(np.array(grad)**2))
 
         #Correction on the estimations as to avoid 0-bias due to initialization
         mcap = self.m[self.t]/(1-self.b1**self.t)

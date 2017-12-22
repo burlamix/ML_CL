@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/MONK.py" line="76" mnemonic="7" />
+    <bookmark url="file://$PROJECT_DIR$/MONK.py" line="79" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5aaa53d6-f969-45a6-bb6c-96a8a0b27e09" name="Default" comment="">
@@ -9,9 +9,8 @@
       <change beforePath="$PROJECT_DIR$/MONK.py" afterPath="$PROJECT_DIR$/MONK.py" />
       <change beforePath="$PROJECT_DIR$/NN.py" afterPath="$PROJECT_DIR$/NN.py" />
       <change beforePath="$PROJECT_DIR$/benchmarkMonk.py" afterPath="$PROJECT_DIR$/benchmarkMonk.py" />
-      <change beforePath="$PROJECT_DIR$/bm_monk1" afterPath="$PROJECT_DIR$/bm_monk1" />
+      <change beforePath="$PROJECT_DIR$/bm_monk2" afterPath="$PROJECT_DIR$/bm_monk2" />
       <change beforePath="$PROJECT_DIR$/layer.py" afterPath="$PROJECT_DIR$/layer.py" />
-      <change beforePath="$PROJECT_DIR$/loss_functions.py" afterPath="$PROJECT_DIR$/loss_functions.py" />
       <change beforePath="$PROJECT_DIR$/optimizer.py" afterPath="$PROJECT_DIR$/optimizer.py" />
       <change beforePath="$PROJECT_DIR$/preproc.py" afterPath="$PROJECT_DIR$/preproc.py" />
     </list>
@@ -27,20 +26,32 @@
       <file leaf-file-name="layer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="55" column="35" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="35" />
+            <state relative-caret-position="72">
+              <caret line="9" column="104" lean-forward="false" selection-start-line="9" selection-start-column="98" selection-end-line="9" selection-end-column="104" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="validation.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="validation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/validation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+            <state relative-caret-position="-949">
+              <caret line="43" column="145" lean-forward="false" selection-start-line="43" selection-start-column="138" selection-end-line="43" selection-end-column="145" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="preproc.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/preproc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,8 +60,8 @@
       <file leaf-file-name="MONK.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MONK.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+            <state relative-caret-position="432">
+              <caret line="93" column="49" lean-forward="false" selection-start-line="93" selection-start-column="45" selection-end-line="93" selection-end-column="49" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -61,8 +72,8 @@
       <file leaf-file-name="benchmarkMonk.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarkMonk.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="90" column="53" lean-forward="false" selection-start-line="90" selection-start-column="49" selection-end-line="90" selection-end-column="53" />
+            <state relative-caret-position="-252">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -100,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="optimizer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="optimizer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/optimizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="845">
-              <caret line="109" column="28" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="28" />
+            <state relative-caret-position="1751">
+              <caret line="150" column="74" lean-forward="false" selection-start-line="150" selection-start-column="74" selection-end-line="150" selection-end-column="74" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -115,8 +126,8 @@
       <file leaf-file-name="NN.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-702">
-              <caret line="138" column="29" lean-forward="false" selection-start-line="138" selection-start-column="29" selection-end-line="138" selection-end-column="29" />
+            <state relative-caret-position="306">
+              <caret line="17" column="69" lean-forward="false" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -135,7 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>print(</find>
       <find>grid_result</find>
       <find>loss:</find>
       <find>dataset</find>
@@ -164,6 +174,7 @@
       <find>np.array</find>
       <find>print</find>
       <find>us</find>
+      <find>alse</find>
       <find>2</find>
     </findStrings>
   </component>
@@ -181,13 +192,13 @@
         <option value="$PROJECT_DIR$/Plotter.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Domande" />
-        <option value="$PROJECT_DIR$/preproc.py" />
         <option value="$PROJECT_DIR$/loss_functions.py" />
-        <option value="$PROJECT_DIR$/layer.py" />
-        <option value="$PROJECT_DIR$/MONK.py" />
         <option value="$PROJECT_DIR$/benchmarkMonk.py" />
-        <option value="$PROJECT_DIR$/NN.py" />
+        <option value="$PROJECT_DIR$/preproc.py" />
         <option value="$PROJECT_DIR$/optimizer.py" />
+        <option value="$PROJECT_DIR$/MONK.py" />
+        <option value="$PROJECT_DIR$/layer.py" />
+        <option value="$PROJECT_DIR$/NN.py" />
       </list>
     </option>
   </component>
@@ -377,11 +388,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1431" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17740175" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34059098" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22094241" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22094241" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -745,16 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/preproc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="34" column="7" lean-forward="false" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/loss_functions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -762,24 +764,6 @@
           <folding>
             <marker date="1513934507588" expanded="true" signature="72:131" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Plotter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -799,24 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/layer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="55" column="35" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MONK.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/tensorflow/python/framework/common_shapes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -825,32 +791,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/preproc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Plotter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/benchmarkMonk.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="90" column="53" lean-forward="false" selection-start-line="90" selection-start-column="49" selection-end-line="90" selection-end-column="53" />
+        <state relative-caret-position="-252">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="150" column="74" lean-forward="false" selection-start-line="150" selection-start-column="74" selection-end-line="150" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MONK.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="93" column="49" lean-forward="false" selection-start-line="93" selection-start-column="45" selection-end-line="93" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="9" column="104" lean-forward="false" selection-start-line="9" selection-start-column="98" selection-end-line="9" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/NN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-702">
-          <caret line="138" column="29" lean-forward="false" selection-start-line="138" selection-start-column="29" selection-end-line="138" selection-end-column="29" />
+        <state relative-caret-position="306">
+          <caret line="17" column="69" lean-forward="false" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/optimizer.py">
+    <entry file="file://$PROJECT_DIR$/validation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="845">
-          <caret line="109" column="28" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="28" />
+        <state relative-caret-position="-949">
+          <caret line="43" column="145" lean-forward="false" selection-start-line="43" selection-start-column="138" selection-end-line="43" selection-end-column="145" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
