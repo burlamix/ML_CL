@@ -48,7 +48,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
 	if(cvfolds==None and val_split==0):cvfolds=3 #If no val selected, default to 3-fold
 	if(val_split>0): cvfolds = 1
-
 	if (cvfolds < 1):
 		sys.exit("Specify a positive number of folds")
 	if (val_split < 0 or val_split >= 100):
@@ -84,13 +83,11 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	if loss_fun==None:
 		grid['loss_fun']=[loss_functions.losses['mse']]
 	else:
-		grid['loss_fun'] = loss_fun
-
+		grid['loss_fun'] = [loss_fun]
 	if rlambda==None:
 		grid['rlambda']=[[0.0]*n_layers]
 	else:
 		grid['rlambda'] = rlambda
-
 
 	#Generate all possible hyperparameters configurations
 	labels, terms = zip(*grid.items())
@@ -105,7 +102,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
 	#This list will contain the results for each configuration
 	full_grid = []
-
 	k=0
 	for params in all_comb :
 		net = NN.NeuralNetwork()

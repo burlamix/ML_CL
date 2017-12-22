@@ -1,9 +1,11 @@
 import numpy as np
 import time
-
+from autograd import elementwise_grad as egrad
+from sympy import *
+from sympy.stats import density,E
 def mse(target, prediction):
     #Mean squared error
-    return ((target - prediction) ** 2).mean()
+    return ((prediction - target) ** 2).mean()
 
 def msedx(target, prediction):
     return -(target - prediction)
@@ -13,7 +15,7 @@ def mae(target, prediction):
     return np.abs(target - prediction).mean()
 
 def maedx(target, prediction):
-    r = np.greater(target, prediction).astype("float32")
+    r = np.greater(prediction, target).astype("float32")
     r[r == 0] = -1
     return r
 

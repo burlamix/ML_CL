@@ -99,7 +99,6 @@ class NeuralNetwork:
         # note that a higher value leads to higher stability and parallelization
         # capabilities, possibly at the cost of a higher number of updates
         ######################################################################
-
         if(val_set!=None and val_split>0 ):
             sys.exit(" o uno o l'altro OH ")
 
@@ -175,7 +174,7 @@ class NeuralNetwork:
         return (loss, acc, val_loss, val_acc, history)
 
     def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0,val_set=None):
-            return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose,val_set)
+        return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose,val_set)
 
 
     def evaluate(self,x_in,y_out):

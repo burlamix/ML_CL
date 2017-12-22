@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 #TODO target relativo alla funzione finale di attivazione
 #250 160
-#np.random.seed(11)
+np.random.seed(11)
 optimizer2 = SimpleOptimizer(lr=0.2)
 optimizer3 = Momentum(lr=0.9,eps=0.9, nesterov=True)
 
@@ -97,10 +97,10 @@ neurs=[[2,1]]
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
 
 fgs = list()
-trials = 20
+trials = 1
 for i in range(0,trials):
     fg,grid_res, pred = validation.grid_search(dataset, epochs=[700],batch_size=[169], n_layers=2, val_split=0,
-                        activations=acts,cvfolds=1,val_set=dataset.test,verbose=2,
+                        activations=acts,cvfolds=1,val_set=dataset.test,verbose=2,loss_fun="mse",
                      neurons=neurs ,optimizers=opts)   #with 10 neurons error! i don't now why
     fgs.append(fg)
 
@@ -111,6 +111,7 @@ for i in fg:
     fgmean.append({'configuration':i['configuration'], 'val_acc':[], 'val_loss':[],
                    'tr_loss':[], 'tr_acc':[]})
 
+#TODO black and white plot(use symbols)
 #Sum up the contributions from each trial
 for fullgrid in fgs:
     for i in fullgrid:
@@ -148,14 +149,14 @@ for row in a:
                         ',a1:' + fgforplot[i]['configuration']['activations'][0]+
                         ',a2:' + fgforplot[i]['configuration']['activations'][1],fontsize=9)
         if hist:
-            col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc')
+            col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
             col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
             col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
             col.plot(fgforplot[i]['history']['val_loss'],label='val err')
         else:
-            col.plot(fgforplot[i]['tr_acc'], label='tr acc')
-            col.plot(fgforplot[i]['val_acc'], label='val acc')
-            col.plot(fgforplot[i]['tr_loss'], label='tr err')
+            col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
+            col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
+            col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-')
             col.plot(fgforplot[i]['val_loss'], label='val err')
         col.legend(loc=3,prop={'size':10})
         i+=1
