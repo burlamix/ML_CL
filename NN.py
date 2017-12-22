@@ -29,23 +29,29 @@ class NeuralNetwork:
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
-
             if i==(len(self.layers)-1):
-                err = logi*self.loss_func[1](prediction, real)
+                e= self.loss_func[1](real, prediction)
+                err = logi*e#self.loss_func[1](real, prediction)
+                #print('errerewe',self.loss_func[1](prediction, real))
             else:
-                err=np.dot(err,self.layers[i+1].W[:,1:])*logi #error is derivative of activation
+                err=logi*np.dot(err,self.layers[i+1].W[:,1:]) #error is derivative of activation
                 #at current layer * (weights*error at next layer)
             if i==0:
                 curro = x_in
             else:
                 curro = self.layers[i-1].currentOutput
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
+            #print('err', curro)
+
+            #print('curr',curro.shape)
             grad = np.dot(curro.transpose(),err)/(real.shape[0])
+            #print(grad)
+
             #grad = (np.dot(curro.transpose(),err))
             self.layers[i].grad = grad
             #gradients.append(grad)
             gradients.insert(0,grad)
-        return loss_func, np.array(gradients)
+        return loss_func, gradients
 
 
     def regul(self):
@@ -72,7 +78,6 @@ class NeuralNetwork:
 
     def f(self, in_chunk, out_chunk):
         def g(W,only_fp=False):
-
             self.set_weight(W)
             if only_fp:
                 return self.loss_func[0](in_chunk,self.FP(in_chunk)) #+ self.regul()
@@ -125,18 +130,18 @@ class NeuralNetwork:
 
 
         for i in range(0, epochs):
-            #print(i)
+            #hprint(i)
             perm = np.random.permutation(len(x_in))
+            #print(x_in.shape)
+            #print(y_out.shape)
             x_in = x_in[perm]
             y_out = y_out[perm]
+            print(y_out.shape)
             #print(x_in[1:2])
-
-
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
 
                 update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weight())
-
 
                 #predicted = self.FP(x_in[chunk:cap],)
                 for j in range(0, len(self.layers)):
@@ -151,6 +156,7 @@ class NeuralNetwork:
                     #self.layers[j].W = self.layers[j].W + update[-j - 1].transpose() - (self.reguldx(j) / batch_size)
 
             loss, acc = self.evaluate(x_in, y_out)
+
             val_loss = None
             val_acc = None
             if (val_split > 0 or val_set!=None ):
@@ -185,6 +191,7 @@ class NeuralNetwork:
         correct=0
         errate=0
         accuracy=0
+        return 0,0
         #TODO -> make it work in the general case
         for i in range(0,real.shape[0]):
             if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): #TODO time? make it automaticaly
@@ -195,7 +202,7 @@ class NeuralNetwork:
 
         accuracy = correct/real.size #TOCHECK this is the accuracy that whant micheli?
         
-        #if(accuracy>0.999):exit(1)
+        if(accuracy>0.999):exit(1)
         return val_loss_func, accuracy
 
 
@@ -220,7 +227,7 @@ class NeuralNetwork:
         for layer in self.layers:
             #W.insert(0,layer.W)
             W.append(layer.W.transpose())
-        return np.array(W)
+        return W
 
 
 

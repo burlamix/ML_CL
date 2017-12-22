@@ -76,7 +76,7 @@ class SimpleOptimizer:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-        return W-self.lr*grad
+        return [W[i]-self.lr*grad[i] for i in range(0,len(W))]#W-self.lr*grad
 
        # for i in range(epochs):
         #    o = NN.fp(x_in)
@@ -111,7 +111,7 @@ class Momentum:
         else:
             loss, grad = f(W)
             v = self.eps*(self.last_g if (self.last_g != None) else 0) + self.lr*grad
-        self.last_g = grad
+        self.last_g = v
         return W-v
 
 class Adam:

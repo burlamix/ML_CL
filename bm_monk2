@@ -1,0 +1,2077 @@
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=32,epochs=650,sgd,lr=0.5
+tr_acc=0.7869822485207101, val_acc=0.7731481481481481
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8816568047337278, val_acc=0.8379629629629629
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.757396449704142, val_acc=0.7314814814814815
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.7869822485207101, val_acc=0.7731481481481481
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.7869822485207101, val_acc=0.7731481481481481
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=0.8047337278106509, val_acc=0.7777777777777778
+tr_acc=0.7869822485207101, val_acc=0.7731481481481481
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.7869822485207101, val_acc=0.7731481481481481
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.757396449704142, val_acc=0.7314814814814815
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.7869822485207101, val_acc=0.7731481481481481
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.757396449704142, val_acc=0.7314814814814815
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=0.7869822485207101, val_acc=0.7708333333333334
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8816568047337278, val_acc=0.8379629629629629
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.7928994082840237, val_acc=0.7731481481481481
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.757396449704142, val_acc=0.7314814814814815
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.757396449704142, val_acc=0.7314814814814815
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=0.8579881656804734, val_acc=0.8263888888888888
+tr_acc=1.0, val_acc=1.0
+converged:68
+not converged:32
+-------------------
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.857988166386, val_acc=0.826388888889
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=0.674556214429, val_acc=0.655092592593
+tr_acc=1.0, val_acc=1.0
+tr_acc=1.0, val_acc=1.0
+tr_acc=0.573964497086, val_acc=0.560185185185
+tr_acc=0.786982249579, val_acc=0.773148148148
+tr_acc=0.786982249579, val_acc=0.773148148148
+converged:46
+not converged:54
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+tr_acc=0.7869822485207101, val_acc=0.7731481481481481
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=169,epochs=1650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.5
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+monk2,act1=tanh,weights=xavier(uniform),act2=relu,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+monk2,act1=relu,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+tr_acc=0.8284023668639053, val_acc=0.7708333333333334
+monk2,act1=linear,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+tr_acc=0.6390532544378699, val_acc=0.6296296296296297
+monk2,act1=linear,weights=xavier(uniform),act2=relu,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+tr_acc=0.6094674556213018, val_acc=0.6064814814814815
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=169,epochs=3650,sgd,lr=0.9
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:100
+-------------------
+tr_acc=0.0, val_acc=0.671296296296
+tr_acc=0.0, val_acc=0.671296296296
+tr_acc=0.0, val_acc=0.671296296296
+tr_acc=0.0, val_acc=0.671296296296
+tr_acc=0.0, val_acc=0.671296296296
+tr_acc=0.0, val_acc=0.671296296296
+tr_acc=0.0, val_acc=0.671296296296
+tr_acc=0.0, val_acc=0.671296296296
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=32,epochs=1,sgd,lr=9e-06
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=50,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=50,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.3287037037037037
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.328703703704
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=50,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.3287037037037037
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.328703703704
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=50,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.671296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=50,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.3287037037037037
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.328703703704
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=50,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.127314814815
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.0
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6712962962962963
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.113425925926
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.49074074074074076
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.296296296296
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=tanh,weights=xavier(uniform),act2=tanh,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.6041666666666666
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.219907407407
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=relu,weights=xavier(uniform),act2=relu,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.5046296296296297
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.462962962963
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0.0, val_acc=0.5648148148148148
+converged:0
+not converged:1
+-------------------
+tr_acc=0.0, val_acc=0.428240740741
+converged:0
+not converged:1
+
+
+******************************************************************************************
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=1,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=100,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=100,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=5,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=2,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=sigmoid,weights=xavier(uniform),act2=sigmoid,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.0
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.0
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=5e-06
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.005
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.05
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.2
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.3
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.4
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.45
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.48
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.499
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.499
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.8
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.33
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.9
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=1
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.25
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=0.5
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=2,epochs=1,sgd,lr=1
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=1
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------
+monk2,act1=linear,weights=xavier(uniform),act2=linear,reg=0.0,bs=1,epochs=1,sgd,lr=1
+tr_acc=0, val_acc=None
+converged:0
+not converged:1
+-------------------

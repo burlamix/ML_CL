@@ -6,7 +6,7 @@ def mse(target, prediction):
     return ((target - prediction) ** 2).mean()
 
 def msedx(target, prediction):
-    return (target - prediction)
+    return -(target - prediction)
 
 def mae(target, prediction):
     #Mean absolute error
