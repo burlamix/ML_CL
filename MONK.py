@@ -95,24 +95,68 @@ acts=[["tanh","tanh"], ["sigmoid","tanh"], ["relu","tanh"]]
 opts=[optimizer2,optimizer3,optimizer4]
 neurs=[[2,1]]
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
-fg,grid_res, pred = validation.grid_search(dataset, epochs=[700],batch_size=[169], n_layers=2, val_split=0,
+
+fgs = list()
+trials = 20
+for i in range(0,trials):
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[700],batch_size=[169], n_layers=2, val_split=0,
                         activations=acts,cvfolds=1,val_set=dataset.test,verbose=2,
                      neurons=neurs ,optimizers=opts)   #with 10 neurons error! i don't now why
+    fgs.append(fg)
 
-#TODO MEDIA SU PIu test vedi k validation
+fgmean = list() #List for holding means
+
+#Create initial configs
+for i in fg:
+    fgmean.append({'configuration':i['configuration'], 'val_acc':[], 'val_loss':[],
+                   'tr_loss':[], 'tr_acc':[]})
+
+#Sum up the contributions from each trial
+for fullgrid in fgs:
+    for i in fullgrid:
+        for j in range(0,len(fgmean)):
+            if i['configuration']==fgmean[j]['configuration']:
+                if fgmean[j]['val_acc']!=[]:
+                    fgmean[j]['val_acc']+=np.array(i['history']['val_acc'])
+                    fgmean[j]['val_loss']+=np.array(i['history']['val_loss'])
+                    fgmean[j]['tr_acc']+=np.array(i['history']['tr_acc'])
+                    fgmean[j]['tr_loss']+=np.array(i['history']['tr_loss'])
+                else:
+                    fgmean[j]['val_acc']=np.array(i['history']['val_acc'])
+                    fgmean[j]['val_loss']=np.array(i['history']['val_loss'])
+                    fgmean[j]['tr_acc']=np.array(i['history']['tr_acc'])
+                    fgmean[j]['tr_loss']=np.array(i['history']['tr_loss'])
+                break
+
+for i in range(0,len(fgmean)):
+    fgmean[i]['val_acc']/=trials
+    fgmean[i]['val_loss']/=trials
+    fgmean[i]['tr_acc']/=trials
+    fgmean[i]['tr_loss']/=trials
+
+
 nconfig = len(acts)*len(opts)*len(neurs)
+#TODO MEDIA SU PIu test vedi k validation
 f, (a) = plt.subplots(nrows=len(acts), ncols=len(opts), sharex='col', sharey='row')
 i=0
+
+fgforplot=fgmean
+hist=False
 for row in a:
     for col in row:
-        print(fg[i])
-        col.set_title('lr:'+str(fg[i]['configuration']['optimizers'].lr)+
-                                                  ',a1:' + fg[i]['configuration']['activations'][0]+
-                                                    ',a2:' + fg[i]['configuration']['activations'][1],fontsize=9)
-        col.plot(fg[i]['history']['tr_acc'],label='tr acc')
-        col.plot(fg[i]['history']['val_acc'],label='val acc')
-        col.plot(fg[i]['history']['tr_loss'],label='tr err')
-        col.plot(fg[i]['history']['val_loss'],label='val err')
+        col.set_title('lr:'+str(fgforplot[i]['configuration']['optimizers'].lr)+
+                        ',a1:' + fgforplot[i]['configuration']['activations'][0]+
+                        ',a2:' + fgforplot[i]['configuration']['activations'][1],fontsize=9)
+        if hist:
+            col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc')
+            col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
+            col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
+            col.plot(fgforplot[i]['history']['val_loss'],label='val err')
+        else:
+            col.plot(fgforplot[i]['tr_acc'], label='tr acc')
+            col.plot(fgforplot[i]['val_acc'], label='val acc')
+            col.plot(fgforplot[i]['tr_loss'], label='tr err')
+            col.plot(fgforplot[i]['val_loss'], label='val err')
         col.legend(loc=3,prop={'size':10})
         i+=1
 plt.show()

@@ -91,7 +91,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 	else:
 		grid['rlambda'] = rlambda
 
-	print(type(grid['loss_fun']))
 
 	#Generate all possible hyperparameters configurations
 	labels, terms = zip(*grid.items())
