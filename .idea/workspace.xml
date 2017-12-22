@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5aaa53d6-f969-45a6-bb6c-96a8a0b27e09" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/MONK.py" afterPath="$PROJECT_DIR$/MONK.py" />
       <change beforePath="$PROJECT_DIR$/NN.py" afterPath="$PROJECT_DIR$/NN.py" />
-      <change beforePath="$PROJECT_DIR$/benchmarkMonk.py" afterPath="$PROJECT_DIR$/benchmarkMonk.py" />
-      <change beforePath="$PROJECT_DIR$/bm_monk2" afterPath="$PROJECT_DIR$/bm_monk2" />
       <change beforePath="$PROJECT_DIR$/layer.py" afterPath="$PROJECT_DIR$/layer.py" />
-      <change beforePath="$PROJECT_DIR$/optimizer.py" afterPath="$PROJECT_DIR$/optimizer.py" />
-      <change beforePath="$PROJECT_DIR$/preproc.py" afterPath="$PROJECT_DIR$/preproc.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,18 +21,18 @@
       <file leaf-file-name="layer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="9" column="104" lean-forward="false" selection-start-line="9" selection-start-column="98" selection-end-line="9" selection-end-column="104" />
+            <state relative-caret-position="144">
+              <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="validation.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="validation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/validation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-949">
-              <caret line="43" column="145" lean-forward="false" selection-start-line="43" selection-start-column="138" selection-end-line="43" selection-end-column="145" />
+            <state relative-caret-position="387">
+              <caret line="196" column="9" lean-forward="false" selection-start-line="196" selection-start-column="8" selection-end-line="196" selection-end-column="9" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -57,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MONK.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MONK.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MONK.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="93" column="49" lean-forward="false" selection-start-line="93" selection-start-column="45" selection-end-line="93" selection-end-column="49" />
+            <state relative-caret-position="306">
+              <caret line="101" column="41" lean-forward="false" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -72,7 +67,7 @@
       <file leaf-file-name="benchmarkMonk.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarkMonk.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-252">
+            <state relative-caret-position="-414">
               <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -126,8 +121,8 @@
       <file leaf-file-name="NN.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="69" lean-forward="false" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
+            <state relative-caret-position="201">
+              <caret line="16" column="69" lean-forward="true" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="69" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -173,9 +168,9 @@
       <find>get_we</find>
       <find>np.array</find>
       <find>print</find>
+      <find>2</find>
       <find>us</find>
       <find>alse</find>
-      <find>2</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -196,9 +191,9 @@
         <option value="$PROJECT_DIR$/benchmarkMonk.py" />
         <option value="$PROJECT_DIR$/preproc.py" />
         <option value="$PROJECT_DIR$/optimizer.py" />
-        <option value="$PROJECT_DIR$/MONK.py" />
         <option value="$PROJECT_DIR$/layer.py" />
         <option value="$PROJECT_DIR$/NN.py" />
+        <option value="$PROJECT_DIR$/MONK.py" />
       </list>
     </option>
   </component>
@@ -791,31 +786,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/preproc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Plotter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/benchmarkMonk.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,40 +804,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MONK.py">
+    <entry file="file://$PROJECT_DIR$/preproc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="93" column="49" lean-forward="false" selection-start-line="93" selection-start-column="45" selection-end-line="93" selection-end-column="49" />
+        <state relative-caret-position="270">
+          <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/layer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="9" column="104" lean-forward="false" selection-start-line="9" selection-start-column="98" selection-end-line="9" selection-end-column="104" />
+        <state relative-caret-position="144">
+          <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="69" lean-forward="false" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
+        <state relative-caret-position="201">
+          <caret line="16" column="69" lean-forward="true" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="69" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarkMonk.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-414">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/validation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-949">
-          <caret line="43" column="145" lean-forward="false" selection-start-line="43" selection-start-column="138" selection-end-line="43" selection-end-column="145" />
+        <state relative-caret-position="387">
+          <caret line="196" column="9" lean-forward="false" selection-start-line="196" selection-start-column="8" selection-end-line="196" selection-end-column="9" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MONK.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="101" column="41" lean-forward="false" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>

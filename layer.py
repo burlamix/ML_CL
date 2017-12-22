@@ -10,6 +10,7 @@ class Layer:
     def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0, weights_init='xavier',
                  regularizer="L2", rlambda = 0.00): #TODO find proper default value for lambda
 
+
         if isinstance(regularizer[0], types.FunctionType) and \
             isinstance(regularizer[1], types.FunctionType):
             self.regularizer = regularizer
@@ -37,7 +38,7 @@ class Layer:
         self.neurons=neurons
         self.inputs=inputs
         if weights.any()==None:
-            self.initialize_random_weights()
+            self.initialize_random_weights(weights_init)
         else:
             if isinstance(weights, (np.ndarray, np.generic)):
                 if (weights.shape!=(neurons, inputs)):

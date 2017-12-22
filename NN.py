@@ -15,7 +15,7 @@ class NeuralNetwork:
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
                  regularization="L2", rlambda = 0.0,weights_init='xavier'):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias,
-                                 regularization, rlambda,weights_init))
+                                 regularizer=regularization, rlambda=rlambda,weights_init=weights_init))
 
     def FP(self, x_in):
         x = x_in

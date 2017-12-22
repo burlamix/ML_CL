@@ -48,8 +48,8 @@ optimizer3 = Momentum( lr=0.5, eps=0.4 ,nesterov=False)
 
 
 NN = NeuralNetwork()
-NN.addLayer(17,2,"sigmoid", rlambda=0.0)
-NN.addLayer(2,1,"tanh",rlambda=0.0)
+NN.addLayer(inputs=17,neurons=2,activation="sigmoid", rlambda=0.0)
+NN.addLayer(inputs=2,neurons=1,activation="tanh",rlambda=0.0)
 #preprocessor.normalize(dataset)
 preproc.Preprocessor().shuffle(dataset)
 
@@ -83,7 +83,7 @@ print(np.sum(s))
 #Plotter.loss_over_epochs(history)
 
 
-optimizer1 = SimpleOptimizer(lr=0.1)
+#optimizer1 = SimpleOptimizer(lr=0.1)
 optimizer2 = SimpleOptimizer(lr=0.2)
 optimizer3 = SimpleOptimizer(lr=0.5)
 optimizer4 = SimpleOptimizer(lr=0.7)
@@ -92,13 +92,14 @@ optimizer4 = SimpleOptimizer(lr=0.7)
 #TODO automatizzare -1 1, 0 -1
 
 acts=[["tanh","tanh"], ["sigmoid","tanh"], ["relu","tanh"]]
-opts=[optimizer1,optimizer2,optimizer3]
+opts=[optimizer2,optimizer3,optimizer4]
 neurs=[[2,1]]
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
 fg,grid_res, pred = validation.grid_search(dataset, epochs=[700],batch_size=[169], n_layers=2, val_split=0,
                         activations=acts,cvfolds=1,val_set=dataset.test,verbose=2,
                      neurons=neurs ,optimizers=opts)   #with 10 neurons error! i don't now why
 
+#TODO MEDIA SU PIu test vedi k validation
 nconfig = len(acts)*len(opts)*len(neurs)
 f, (a) = plt.subplots(nrows=len(acts), ncols=len(opts), sharex='col', sharey='row')
 i=0
@@ -112,7 +113,7 @@ for row in a:
         col.plot(fg[i]['history']['val_acc'],label='val acc')
         col.plot(fg[i]['history']['tr_loss'],label='tr err')
         col.plot(fg[i]['history']['val_loss'],label='val err')
-        col.legend(loc=4,prop={'size':10})
+        col.legend(loc=3,prop={'size':10})
         i+=1
 plt.show()
 #print("-----------------------")
