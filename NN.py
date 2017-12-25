@@ -100,7 +100,7 @@ class NeuralNetwork:
         # capabilities, possibly at the cost of a higher number of updates
         ######################################################################
         if(val_set!=None and val_split>0 ):
-            sys.exit(" o uno o l'altro OH ")
+            sys.exit("Cannot use both a separate set and a split for validation ")
 
         # Check whether the user provided a properly formatted loss function
         if isinstance(loss_func[0], types.FunctionType) and \
@@ -129,11 +129,12 @@ class NeuralNetwork:
 
 
         for i in range(0, epochs):
-            #hprint(i)
-            perm = np.random.permutation(len(x_in))
 
+            #Randomly permute the data before each epoch
+            perm = np.random.permutation(len(x_in))
             x_in = x_in[perm]
             y_out = y_out[perm]
+
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
 

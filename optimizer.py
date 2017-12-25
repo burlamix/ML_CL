@@ -56,8 +56,7 @@ activations["sigmoid"] = Activation(sigmoid, sigmoddxf)
 activations["tanh"] = Activation(tanh, tanhdx)
 activations["softmax"] = Activation(softmax, ss)
 activations["relu"] = Activation(relu, reludx)
-#TODO add relu
-#If only linear acts do we have exact sol?
+
 #Learn learning rate
 #https://www.neuraldesigner.com/blog/5_algorithms_to_train_a_neural_network
 #Minkowski error as loss func
@@ -115,12 +114,12 @@ class Momentum:
             loss, grad = \
                 (f(self.eps*self.last_g+W) if (self.last_g != None) else f(W))
 
-            v = self.lr*np.array(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
+            v = -self.lr*np.array(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
         else:
             loss, grad = f(W)
-            v = self.eps*(self.last_g if (self.last_g != None) else 0) + self.lr*np.array(grad)
+            v = self.eps*(self.last_g if (self.last_g != None) else 0) - self.lr*np.array(grad)
         self.last_g = v
-        return W-v
+        return W+v
 
 class Adam:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
@@ -156,6 +155,20 @@ class Adam:
         for i in range(len(vcap)):
             vcap[i] = numpy.sqrt(vcap[i])
         return W-self.lr*mcap/(vcap+self.eps)
+
+class RMSProp:
+    #TODO add documentation
+    def __init__(self, lr=0.001, delta=0.9):
+        self.lr = lr
+        self.delta = delta
+        self.R = None
+
+    def optimize(self, f, W):
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
+        loss, grad = f(W) #Compute the gradient
+        self.R = (1-self.delta)*(self.R if self.R!=None else 1)+(self.delta)*np.array(grad)**2
+        return W-self.lr*np.array(grad)/(self.R+1e-6)**(1/2)
 
 
 optimizers = dict()

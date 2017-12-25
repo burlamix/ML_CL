@@ -7,8 +7,8 @@ import sys
 
 class Layer:
 
-    def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0, weights_init='xavier',
-                 regularizer="L2", rlambda = 0.00): #TODO find proper default value for lambda
+    def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0, weights_init='fan_in',
+                 regularizer="L2", rlambda = 0.00):
 
 
         if isinstance(regularizer[0], types.FunctionType) and \
@@ -27,9 +27,6 @@ class Layer:
             #Otherwise check whether the specified activation function exists
             try: self.activation = activations[activation]
             except KeyError: sys.exit("activation function undefined")
-
-
-
 
         self.rlambda=rlambda
         self.currentOutput = None
@@ -55,13 +52,8 @@ class Layer:
     def getOutput(self,x):
         
         x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
-        #print("x------",x)
-        #print("W------1x",self.W.transpose())
-        #print("W------1x",self.W.transpose().shape)
-        #print("x------1x",x.shape)
         partial = np.dot(x, self.W.transpose())
         self.currentOutput = self.activation.f(partial)
-        #print("------------------------------------------")
         return self.currentOutput
 
     def regularize(self):
@@ -73,11 +65,10 @@ class Layer:
     def set_weights(self,W):
         self.W=W.transpose()
 
-    def initialize_random_weights(self, weights_init='xavier'):
-        method='fan_in'
-        if method == 'xavier':
+    def initialize_random_weights(self, weights_init='fan_in'):
+        if weights_init == 'xavier':
             var = 2 / (self.inputs + self.neurons)
             self.W = np.random.normal(0, var, (self.neurons, self.inputs+1))
-        elif method == 'fan_in':
+        elif weights_init == 'fan_in':
             self.W =  np.random.uniform(-0.7 / self.inputs, 0.7/self.inputs,(self.neurons, self.inputs+1))
         self.W[:,0] = 0

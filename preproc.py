@@ -93,7 +93,6 @@ def split_percent(x_in, y_in, percent):
                 np.array([y_in[0:l], y_in[l::]]))
 
 
-#TODO use the same of ML CUP
 def load_monk(path):
 
     data = []

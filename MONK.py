@@ -16,8 +16,6 @@ import time
 from benchmarkMonk import *
 import matplotlib.pyplot as plt
 
-#TODO target relativo alla funzione finale di attivazione
-#250 160
 np.random.seed(11)
 optimizer2 = SimpleOptimizer(lr=0.2)
 optimizer3 = Momentum(lr=0.9,eps=0.9, nesterov=True)
@@ -31,54 +29,32 @@ optimizer3 = Momentum(lr=0.9,eps=0.9, nesterov=True)
 x_train,y_train = load_monk("MONK_data/monks-2.train")
 x_test,y_test = load_monk("MONK_data/monks-2.test")
 
-
-
-
 dataset = preproc.Dataset()
 dataset.init_train([x_train,y_train])
 dataset.init_test([x_test,y_test])
 
-#np.random.--------------------seed(525)
 
 optimizer = Adam(lr=0.005,b1=0.9,b2=0.999)
 optimizer2 = SimpleOptimizer(lr=0.9)
 optimizer3 = Momentum( lr=0.5, eps=0.4 ,nesterov=False)
 
 
-
-
+#https://elearning.di.unipi.it/pluginfile.php/15587/mod_resource/content/2/ML-17-NN-part2-v0.23.pdfx
+#TODO LR decay (more important with mini batch)
 NN = NeuralNetwork()
 NN.addLayer(inputs=17,neurons=2,activation="sigmoid", rlambda=0.0)
 NN.addLayer(inputs=2,neurons=1,activation="tanh",rlambda=0.0)
-#preprocessor.normalize(dataset)
-preproc.Preprocessor().shuffle(dataset)
 
 #dataset.train[0] = np.random.randn(50,17)
 #dataset.train[1] = np.random.randn(50,1)
 
-s = time.time()
 #(loss, acc, val_loss, val_acc, history)=\
  #   NN.fit_ds( dataset,1000, optimizer2 ,batch_size=169,verbose=3, val_set = dataset.test )
-
-t=time.time()-s
-print('time:',t)
-
-
-
-
-
-
-#input('..')
-#check weight
-
-
 
 s=0
 for l in NN.layers:
     s+=np.sum(np.abs(l.W))
 print(np.sum(s))
-
-#print(NN.FP(x_in=dataset.train[0]))
 
 #Plotter.loss_over_epochs(history)
 
@@ -87,12 +63,16 @@ print(np.sum(s))
 optimizer2 = SimpleOptimizer(lr=0.2)
 optimizer3 = SimpleOptimizer(lr=0.5)
 optimizer4 = SimpleOptimizer(lr=0.7)
+optimizer5 = Momentum(lr=0.5,eps=0.5)
+optimizer6 = Momentum(lr=0.5,eps=0.9)
+optimizer7 = Momentum(lr=0.3,eps=0.5)
+optimizer8 = Momentum(lr=0.3,eps=0.9)
+optimizer9 = Adam(lr=0.005,b1=0.9,b2=0.999)
+optimizer10 = RMSProp(lr=0.0051)
 
 
-#TODO automatizzare -1 1, 0 -1
-
-acts=[["tanh","tanh"], ["sigmoid","tanh"], ["relu","tanh"]]
-opts=[optimizer2,optimizer3,optimizer4]
+acts=[["tanh","tanh"], ["sigmoid","tanh"]]
+opts=[optimizer9,optimizer10]#,optimizer6,optimizer7,optimizer8]
 neurs=[[2,1]]
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
 
@@ -156,7 +136,7 @@ for row in a:
         else:
             col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
             col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
-            col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-')
+            col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
             col.plot(fgforplot[i]['val_loss'], label='val err')
         col.legend(loc=3,prop={'size':10})
         i+=1
@@ -175,12 +155,6 @@ plt.show()
 
 
 
-
-
-
-
-
-#y_hot = keras.utils.to_categorical(y_train, num_classes=2)
 ini1 = keras.initializers.RandomNormal(mean=0.0, stddev=(2/20), seed=None)
 ini2 = keras.initializers.RandomNormal(mean=0.0, stddev=(2/4), seed=None)
 
@@ -191,8 +165,6 @@ model.add(Dense(1, activation= 'tanh',kernel_initializer=ini2 ,use_bias=True))
 
 #input("..")
 
-
-#sgd = SGD(lr=0.5, decay=0, momentum=0.0, nesterov=False)
 sgd = optims.SGD(lr=0.5, momentum=0.0, decay=0.00,nesterov=False )
 
 adada = optims.adam(lr=0.01,beta_1=0.9,beta_2=0.999)
