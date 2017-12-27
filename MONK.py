@@ -48,8 +48,8 @@ NN.addLayer(inputs=2,neurons=1,activation="tanh",rlambda=0.0)
 #dataset.train[0] = np.random.randn(50,17)
 #dataset.train[1] = np.random.randn(50,1)
 
-#(loss, acc, val_loss, val_acc, history)=\
- #   NN.fit_ds( dataset,1000, optimizer2 ,batch_size=169,verbose=3, val_set = dataset.test )
+(loss, acc, val_loss, val_acc, history)=\
+    NN.fit_ds( dataset,1000, optimizer2 ,batch_size=169,verbose=3, val_set = dataset.test,loss_func="mee")
 
 s=0
 for l in NN.layers:
@@ -76,6 +76,7 @@ opts=[optimizer9,optimizer10]#,optimizer6,optimizer7,optimizer8]
 neurs=[[2,1]]
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
 
+exit(1)
 fgs = list()
 trials = 1
 for i in range(0,trials):
