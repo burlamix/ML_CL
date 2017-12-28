@@ -13,7 +13,7 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda = 0.0,weights_init='xavier'):
+                 regularization="L2", rlambda = 0.0,weights_init='fan_in'):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias,
                                  regularizer=regularization, rlambda=rlambda,weights_init=weights_init))
 
@@ -24,7 +24,7 @@ class NeuralNetwork:
         return x
 
     def BP(self, prediction, real, x_in):
-        gradients = []
+        gradients = np.empty(len(self.layers),dtype=object)
         loss_func = self.loss_func[0](real,prediction) 
         for i in range(len(self.layers)-1, -1, -1):
 
@@ -50,7 +50,7 @@ class NeuralNetwork:
             #grad = (np.dot(curro.transpose(),err))
             self.layers[i].grad = grad
             #gradients.append(grad)
-            gradients.insert(0,grad)
+            gradients[-i]=grad
         return loss_func, gradients
 
 
@@ -89,7 +89,7 @@ class NeuralNetwork:
 
 
 
-    def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0, val_set=None):
+    def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0, val_set=None, val_loss_fun=None):
         # ***GENERAL DESCRIPTION***
         # loss_func: can either be a string refering to a standardized defined
         # loss functions or a tuple where the first element is a loss function
@@ -157,7 +157,7 @@ class NeuralNetwork:
             val_loss = None
             val_acc = None
             if (val_split > 0 or val_set!=None ):
-                val_loss, val_acc = self.evaluate(validation_x, validation_y)
+                val_loss, val_acc = self.evaluate(validation_x, validation_y,val_loss_fun)
                 history['val_loss'].append(val_loss)
                 history['val_acc'].append(val_acc)
             history['tr_loss'].append(loss)
@@ -167,23 +167,28 @@ class NeuralNetwork:
             if(verbose >= 2):
                 #loss,acc = self.evaluate(x_in,y_out)
                 #print("loss=",loss,"        acc=",acc)
-                print (i,' loss = {0:.8f} '.format(loss),'accuracy = {0:.8f} '.format(acc))
+                print (i,' loss = {0:.8f} '.format(loss),'accuracy = {0:.8f} '.format(acc),
+                       (' val_loss = {0:.8f} '.format(val_loss),
+                       ' val_acc = {0:.8f} '.format(val_acc))if (val_split>0 or val_set!=None) else "")
             #TODO inefficente..
         #TODO proper output formatting
-        if(verbose>=1 and (val_split>0 or val_set!=None) ):
-            print("Validation loss:"+str(val_loss)+' val acc:'+str(val_acc))
+            #if(verbose>=2 and (val_split>0 or val_set!=None) ):
+              #  print("Validation loss:"+str(val_loss)+' val acc:'+str(val_acc))
+        if (verbose >= 1 and (val_split > 0 or val_set != None)):
+            print("Validation loss:" + str(val_loss) + ' val acc:' + str(val_acc))
         return (loss, acc, val_loss, val_acc, history)
 
-    def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0,val_set=None):
-        return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose,val_set)
+    def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0,val_set=None,val_loss_fun=None):
+        return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split, verbose,val_set,val_loss_fun)
 
 
-    def evaluate(self,x_in,y_out):
+    def evaluate(self,x_in,y_out, loss_fun=None):
 
+        if loss_fun == None:loss_fun = self.loss_func
         real = self.FP(x_in)
 
         #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
-        val_loss_func = self.loss_func[0](real,y_out) #+ self.regul()
+        val_loss_func = loss_fun[0](real,y_out) #+ self.regul()
         
         correct=0
         errate=0
@@ -205,7 +210,7 @@ class NeuralNetwork:
     def predict(self, x_in):
         return self.FP(x_in)
 
-    def initialize_random_weight(self, method='xavier'):
+    def initialize_random_weight(self, method='fan_in'):
         for layer in self.layers:
             layer.initialize_random_weights(method)
 
@@ -218,11 +223,9 @@ class NeuralNetwork:
         #    layer.set_weights(W_i)
 
     def get_weight(self):
-        W=[]
-
-        for layer in self.layers:
-            #W.insert(0,layer.W)
-            W.append(layer.W.transpose())
+        W = np.empty(len(self.layers), dtype=object)
+        for i in range(0,len(self.layers)):
+            W[i] = self.layers[i].W.transpose()
         return W
 
 

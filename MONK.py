@@ -10,12 +10,14 @@ from keras.models import Model
 import keras.optimizers as optims
 from NN import *
 from optimizer import *
+from loss_functions import *
 import validation
 import Plotter
 import time
 from benchmarkMonk import *
 import matplotlib.pyplot as plt
-
+train_data_path = "data/ML-CUP17-TR.csv"
+test_data_path = "data/ML-CUP17-TS.csv"
 np.random.seed(11)
 optimizer2 = SimpleOptimizer(lr=0.2)
 optimizer3 = Momentum(lr=0.9,eps=0.9, nesterov=True)
@@ -34,23 +36,31 @@ dataset.init_train([x_train,y_train])
 dataset.init_test([x_test,y_test])
 
 
-optimizer = Adam(lr=0.005,b1=0.9,b2=0.999)
-optimizer2 = SimpleOptimizer(lr=0.9)
-optimizer3 = Momentum( lr=0.5, eps=0.4 ,nesterov=False)
+optimizer = Adam(lr=0.05,b1=0.9,b2=0.999)
+optimizer4 = RMSProp(lr=0.005,delta=0.9)
+optimizer2 = SimpleOptimizer(lr=0.05)
+optimizer3 = Momentum( lr=0.005, eps=0.9 ,nesterov=False)
 
 
 #https://elearning.di.unipi.it/pluginfile.php/15587/mod_resource/content/2/ML-17-NN-part2-v0.23.pdfx
 #TODO LR decay (more important with mini batch)
 NN = NeuralNetwork()
-NN.addLayer(inputs=17,neurons=2,activation="sigmoid", rlambda=0.0)
-NN.addLayer(inputs=2,neurons=1,activation="tanh",rlambda=0.0)
-
+NN.addLayer(inputs=10,neurons=10,activation="sigmoid", rlambda=0.0)
+NN.addLayer(inputs=10,neurons=2,activation="linear", rlambda=0.0)
+#NN.addLayer(inputs=2,neurons=2,activation="linear",rlambda=0.0)
+dataset.init_train(load_data(train_data_path, True, header_l=10, targets=2))
+dataset.init_test(load_data(test_data_path, False, header_l=10))
 #dataset.train[0] = np.random.randn(50,17)
 #dataset.train[1] = np.random.randn(50,1)
 
+#mee 1.4824787316
+#mae 1.47128940766
+#mse 1.43456660918
 (loss, acc, val_loss, val_acc, history)=\
-    NN.fit_ds( dataset,1000, optimizer2 ,batch_size=169,verbose=3, val_set = dataset.test,loss_func="mee")
-
+    NN.fit_ds( dataset,1000, optimizer3 ,batch_size=1024,verbose=3,loss_func="mee")
+print(mse(NN.predict(dataset.train[0]),dataset.train[1]))
+print(NN.evaluate(dataset.train[0],dataset.train[1]))
+exit(1)
 s=0
 for l in NN.layers:
     s+=np.sum(np.abs(l.W))
@@ -76,7 +86,6 @@ opts=[optimizer9,optimizer10]#,optimizer6,optimizer7,optimizer8]
 neurs=[[2,1]]
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
 
-exit(1)
 fgs = list()
 trials = 1
 for i in range(0,trials):
@@ -84,6 +93,7 @@ for i in range(0,trials):
                         activations=acts,cvfolds=1,val_set=dataset.test,verbose=2,loss_fun="mse",
                      neurons=neurs ,optimizers=opts)   #with 10 neurons error! i don't now why
     fgs.append(fg)
+exit(1)
 
 fgmean = list() #List for holding means
 

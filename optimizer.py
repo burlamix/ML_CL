@@ -114,10 +114,10 @@ class Momentum:
             loss, grad = \
                 (f(self.eps*self.last_g+W) if (self.last_g != None) else f(W))
 
-            v = -self.lr*np.array(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
+            v = -self.lr*(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
         else:
             loss, grad = f(W)
-            v = self.eps*(self.last_g if (self.last_g != None) else 0) - self.lr*np.array(grad)
+            v = self.eps*(self.last_g if (self.last_g != None) else 0) - self.lr*(grad)
         self.last_g = v
         return W+v
 
@@ -146,8 +146,8 @@ class Adam:
         loss, grad = f(W) #Compute the gradient
 
         #First and second moment estimation(biased by b1 and b2)
-        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*np.array(grad))
-        self.v.append(self.b2*self.v[self.t-1]+(1-self.b2)*(np.array(grad)**2))
+        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*(grad))
+        self.v.append(self.b2*self.v[self.t-1]+(1-self.b2)*((grad)**2))
 
         #Correction on the estimations as to avoid 0-bias due to initialization
         mcap = self.m[self.t]/(1-self.b1**self.t)
