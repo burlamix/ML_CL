@@ -1,19 +1,7 @@
-import preproc
-import csv
-import numpy as np
-import tensorflow as tf
-import keras
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.models import Model
 import keras.optimizers as optims
-from NN import *
-from optimizer import *
-from loss_functions import *
-import validation
-import Plotter
-import time
+from NN_lib.optimizers import *
+from NN_lib.loss_functions import *
+from NN_lib import validation
 from benchmarkMonk import *
 import matplotlib.pyplot as plt
 train_data_path = "data/ML-CUP17-TR.csv"
@@ -89,9 +77,9 @@ neurs=[[2,1]]
 fgs = list()
 trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[700],batch_size=[169], n_layers=2, val_split=0,
-                        activations=acts,cvfolds=1,val_set=dataset.test,verbose=2,loss_fun="mse",
-                     neurons=neurs ,optimizers=opts)   #with 10 neurons error! i don't now why
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[700], batch_size=[169], n_layers=2, val_split=0,
+                                               activations=acts, cvfolds=1, val_set=dataset.test, verbose=2, loss_fun="mse",
+                                               neurons=neurs, optimizers=opts)   #with 10 neurons error! i don't now why
     fgs.append(fg)
 exit(1)
 

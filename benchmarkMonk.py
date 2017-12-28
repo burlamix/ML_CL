@@ -1,11 +1,9 @@
-from preproc import *
-from NN import *
+from NN_lib.NN import *
 from keras.models import Sequential
 import keras.optimizers as opts
 from keras.layers import Dense
 import keras
-from keras import backend as k
-import tensorflow as tf
+
 np.set_printoptions(threshold=np.nan)
 
 def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, epochs=1500,trials=5):

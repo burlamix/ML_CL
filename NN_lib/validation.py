@@ -1,11 +1,7 @@
 import numpy as np
 import itertools
-import loss_functions
-import optimizer
-from optimizer import *
-import NN
-import preproc
-import sys
+from NN_lib.optimizers import *
+from NN_lib import regularizations as regs, loss_functions, NN
 
 
 # Object with the best hyperparameters and the NN built and trained with them
@@ -62,8 +58,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
     validating = False
     if (cvfolds > 1 or val_split > 0 or val_set!=None): validating = True
-    if (validating == False and len(loss_fun) > 1):
-        sys.exit("Cannot compare multiple loss functions without validation")
 
     # Build up grid for grid search
     grid = dict()
@@ -78,12 +72,12 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
         grid['activations'] = activations
 
     if regularizations == None:
-        grid['regularizations'] = [[loss_functions.reguls['L2']] * n_layers]
+        grid['regularizations'] = [[regs.reguls['L2']] * n_layers]
     else:
         grid['regularizations'] = regularizations
 
     if optimizers == None:
-        grid['optimizers'] = [optimizer.optimizers['SGD']]
+        grid['optimizers'] = [optimizers.optimizers['SGD']]
     else:
         grid['optimizers'] = optimizers
 
@@ -96,6 +90,10 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
         grid['rlambda'] = [[0.0] * n_layers]
     else:
         grid['rlambda'] = rlambda
+
+    if (validating == False and len(grid['loss_fun']) > 1):
+        print(grid['loss_fun'])
+        sys.exit("Cannot compare multiple loss functions without validation")
 
     # If multiple loss functions, cannot automatically select validation one
     if (validating and val_loss_fun == None and len(loss_fun) > 1):

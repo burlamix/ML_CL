@@ -1,18 +1,11 @@
-import sys
-from sklearn import preprocessing
-from preproc import *
-from NN import *
-from optimizer import *
-from validation import *
+from NN_lib.NN import *
+from NN_lib.validation import *
 train_data_path = "data/ML-CUP17-TR.csv"
 test_data_path = "data/ML-CUP17-TS.csv"
 import Plotter
 import numpy as np
-import tensorflow as tf
-import keras
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.models import Model
 from keras.optimizers import SGD
 np.random.seed(5)
 dataset = Dataset()

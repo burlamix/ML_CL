@@ -1,9 +1,7 @@
-import numpy as np
 import sys
 from preproc import *
-from loss_functions import losses
-import types
-from layer import Layer
+from NN_lib import loss_functions
+from NN_lib.layer import Layer
 import preproc
 
 class NeuralNetwork:
@@ -25,12 +23,12 @@ class NeuralNetwork:
 
     def BP(self, prediction, real, x_in):
         gradients = np.empty(len(self.layers),dtype=object)
-        loss_func = self.loss_func[0](real,prediction) 
+        loss_func = self.loss_func.f(real,prediction)
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
             if i==(len(self.layers)-1):
-                e= self.loss_func[1](real, prediction)
+                e= self.loss_func.dxf(real, prediction)
                 err = logi*e#self.loss_func[1](real, prediction)
                 #print('errerewe',self.loss_func[1](prediction, real))
             else:
@@ -103,15 +101,7 @@ class NeuralNetwork:
             sys.exit("Cannot use both a separate set and a split for validation ")
 
         # Check whether the user provided a properly formatted loss function
-        if isinstance(loss_func[0], types.FunctionType) and \
-                isinstance(loss_func[1], types.FunctionType):
-            self.loss_func = loss_func
-        else:
-            # Otherwise check whether a the specified loss function exists
-            try:
-                self.loss_func = losses[loss_func]
-            except KeyError:
-                sys.exit("Loss function undefined")
+        self.loss_func = loss_functions.validate_loss(loss_func)
 
         if batch_size < 0 or batch_size > (len(x_in)):  # TODO more check
             batch_size = len(x_in)
@@ -185,10 +175,12 @@ class NeuralNetwork:
     def evaluate(self,x_in,y_out, loss_fun=None):
 
         if loss_fun == None:loss_fun = self.loss_func
+        loss_fun = loss_functions.validate_loss(loss_fun)
+
         real = self.FP(x_in)
 
         #val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
-        val_loss_func = loss_fun[0](real,y_out) #+ self.regul()
+        val_loss_func = loss_fun.f(real,y_out) #+ self.regul()
         
         correct=0
         errate=0

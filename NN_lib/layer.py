@@ -1,9 +1,7 @@
 import numpy as np
-from loss_functions import reguls
-from loss_functions import mse, msedx
-from optimizer import activations
-import types
+from NN_lib import regularizations, activations
 import sys
+
 
 class Layer:
 
@@ -11,22 +9,8 @@ class Layer:
                  regularizer="L2", rlambda = 0.00):
 
 
-        if isinstance(regularizer[0], types.FunctionType) and \
-            isinstance(regularizer[1], types.FunctionType):
-            self.regularizer = regularizer
-        else:
-            #Otherwise check whether the specified regularizer function exists
-            try: self.regularizer = reguls[regularizer]
-            except KeyError: sys.exit("regularizer function undefined")
-
-
-        if isinstance(activation[0], types.FunctionType) and \
-            isinstance(activation[1], types.FunctionType):
-            self.activation = activation
-        else:
-            #Otherwise check whether the specified activation function exists
-            try: self.activation = activations[activation]
-            except KeyError: sys.exit("activation function undefined")
+        self.regularizer = regularizations.validate_regularizer(regularizer)
+        self.activation = activations.validate_activation(activation)
 
         self.rlambda=rlambda
         self.currentOutput = None
@@ -57,10 +41,10 @@ class Layer:
         return self.currentOutput
 
     def regularize(self):
-        return self.regularizer[0](self.W, self.rlambda)
+        return self.regularizer.f(self.W, self.rlambda)
 
     def regularizedx(self):
-        return self.regularizer[1](self.W, self.rlambda)
+        return self.regularizer.dxf(self.W, self.rlambda)
 
     def set_weights(self,W):
         self.W=W.transpose()

@@ -1,25 +1,11 @@
-import sys
-from sklearn import preprocessing
-from preproc import *
-from NN import *
-from optimizer import *
-from validation import *
 from keras.datasets import mnist
 from keras.utils import np_utils
-import preproc
-import csv
-import numpy as np
-import tensorflow as tf
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.layers import Dropout
-from keras.models import Model
 from keras.optimizers import SGD
-from NN import *
-from optimizer import *
-import validation
-import Plotter
+from NN_lib.NN import *
+from NN_lib.optimizers import *
 
 (x_train,y_train) ,(x_test, y_test) = mnist.load_data()
 
