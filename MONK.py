@@ -12,8 +12,8 @@ optimizer3 = Momentum(lr=0.9,eps=0.9, nesterov=True)
 #Check benchmarkMonk file
 #bm_monk(optimizer=optimizer3,monk='monk2',act1='tanh',act2='sigmoid',
  #       reg=0.0,bs=169,epochs=1000,trials=1)
-
-
+outs=20
+valr=0
 
 x_train,y_train = load_monk("MONK_data/monks-2.train")
 x_test,y_test = load_monk("MONK_data/monks-2.test")
@@ -32,11 +32,11 @@ rmsp = RMSProp(lr=0.001,delta=0.9)
 #https://elearning.di.unipi.it/pluginfile.php/15587/mod_resource/content/2/ML-17-NN-part2-v0.23.pdfx
 #TODO LR decay (more important with mini batch)
 NN = NeuralNetwork()
-NN.addLayer(inputs=17,neurons=2,activation="tanh", rlambda=0.0001,regularization="L1",bias=0)
-NN.addLayer(inputs=2,neurons=1,activation="sigmoid",rlambda=0.0001,regularization="L1",bias=0)
+NN.addLayer(inputs=17,neurons=2,activation="tanh", rlambda=valr,regularization="L2",bias=0)
+NN.addLayer(inputs=2,neurons=outs,activation="sigmoid",rlambda=valr,regularization="L2",bias=0)
 
 dataset.train[0] = np.random.randn(50,17)
-dataset.train[1] = np.random.randn(50,1)
+dataset.train[1] = np.random.randn(50,outs)
 
 currwg = []
 for l in NN.layers:
@@ -57,7 +57,7 @@ print(history['val_acc'])
 #history['tr_loss']
 #plt.plot(history['val_acc'])
 #plt.plot(history['val_loss'])
-plt.plot(history['tr_acc'], label='tr_acc',ls="-",)
+#plt.plot(history['tr_acc'], label='tr_acc',ls="-",)
 plt.plot(history['tr_loss'], label='tr_loss',ls="-",color="red")
 
 #plt.show()
@@ -68,8 +68,8 @@ ini1 = keras.initializers.RandomUniform(minval=-0.7 / 17, maxval=0.7 / 17, seed=
 ini2 = keras.initializers.RandomUniform(minval=-0.7 / 2, maxval=0.7 / 2, seed=None)
 
 model = Sequential()
-model.add(Dense(2, activation= 'tanh' ,kernel_initializer=ini1,input_dim=17,use_bias=True,bias_initializer="zeros",kernel_regularizer=regularizers.l1(0.001),bias_regularizer=regularizers.l1(0.001)))
-model.add(Dense(1, activation= 'sigmoid',kernel_initializer=ini2 ,use_bias=True,bias_initializer="zeros",kernel_regularizer=regularizers.l1(0.001),bias_regularizer=regularizers.l1(0.001)))
+model.add(Dense(2, activation= 'tanh' ,kernel_initializer=ini1,input_dim=17,use_bias=True,bias_initializer="zeros",kernel_regularizer=regularizers.l2(valr),bias_regularizer=regularizers.l2(valr)))
+model.add(Dense(outs, activation= 'sigmoid',kernel_initializer=ini2 ,use_bias=True,bias_initializer="zeros",kernel_regularizer=regularizers.l2(valr),bias_regularizer=regularizers.l2(valr)))
 
 
 sgd = optims.SGD(lr=0.9, momentum=0.0, decay=0.00,nesterov=False )
@@ -91,7 +91,7 @@ s=0
 his= model.fit(dataset.train[0], dataset.train[1],batch_size=169,epochs=1000,shuffle=True)
 #print(model.evaluate(x_test, y_test))
 print(his.history.keys())
-plt.plot(his.history['acc'], label='tr_loss_k',ls=":")
+#plt.plot(his.history['acc'], label='tr_loss_k',ls=":")
 plt.plot(his.history['loss'], label='tr_loss_k',ls=":")
 plt.title('model accuracy')
 plt.ylabel('accuracy')
