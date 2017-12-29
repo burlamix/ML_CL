@@ -124,6 +124,7 @@ class NeuralNetwork:
             perm = np.random.permutation(len(x_in))
             x_in = x_in[perm]
             y_out = y_out[perm]
+            loss, acc = self.evaluate(x_in, y_out)
 
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
@@ -135,6 +136,7 @@ class NeuralNetwork:
                     #print("-----1----",update[j])
                     #print("-----2----",(self.reguldx(j) / batch_size).transpose())
                     update[j]-= (self.reguldx(j) / 1).transpose()
+                    update[j]/=1
 
                 self.set_weight(update)
 
@@ -142,7 +144,6 @@ class NeuralNetwork:
                     #self.layers[j].W = self.layers[j].W + update[j].transpose() - (self.reguldx(j) / batch_size)
                     #self.layers[j].W = self.layers[j].W + update[-j - 1].transpose() - (self.reguldx(j) / batch_size)
 
-            loss, acc = self.evaluate(x_in, y_out)
 
             val_loss = None
             val_acc = None

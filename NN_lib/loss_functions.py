@@ -23,7 +23,7 @@ def mse(target, prediction):
     return ((prediction - target) ** 2).mean()
 
 def msedx(target, prediction):
-    return -2*(target - prediction)
+    return -(2*(target - prediction))/target.shape[1]
 
 def mae(target, prediction):
     #Mean absolute error
@@ -32,17 +32,15 @@ def mae(target, prediction):
 def maedx(target, prediction):
     r = np.greater(prediction, target).astype("float32")
     r[r == 0] = -1
-    return r
+    return r/target.shape[1]
 
 def mee(target,prediction):
     return np.sqrt(np.sum((target-prediction)**2,axis=1)).mean()
 
 def meedx(target,prediction):
-    #print("target",target)
-    #print("prediction",prediction)
     a= np.expand_dims((np.sqrt(np.sum((target-prediction+1e-6)**2,axis=1))),axis=1)
     #a=np.tile(a,(1,prediction.shape[1]))
-    return -(target-prediction)/a
+    return -((target-prediction)/a)
 
 
 
