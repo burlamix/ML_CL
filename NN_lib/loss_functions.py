@@ -23,7 +23,7 @@ def mse(target, prediction):
     return ((prediction - target) ** 2).mean()
 
 def msedx(target, prediction):
-    return -(target - prediction)
+    return -2*(target - prediction)
 
 def mae(target, prediction):
     #Mean absolute error

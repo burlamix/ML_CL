@@ -17,10 +17,10 @@ class Regularization:
         self.dxf = dxf
 
 def l2regul(W, rlambda):
-    return rlambda*((W**2).sum())
+    return (rlambda*(W**2)).sum()
 
 def l1regul(W, rlambda):
-    return W*rlambda.sum()
+    return (W*rlambda).sum()
 
 def l1reguldx(W, rlambda):
     return rlambda*(np.sign(W))
