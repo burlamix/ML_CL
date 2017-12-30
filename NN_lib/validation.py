@@ -76,6 +76,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
     else:
         grid['regularizations'] = regularizations
 
+
     if optimizers == None:
         grid['optimizers'] = [optimizers.optimizers['SGD']]
     else:

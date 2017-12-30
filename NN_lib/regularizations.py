@@ -12,20 +12,21 @@ def validate_regularizer(regularizer):
             sys.exit("regularizer function undefined")
 
 class Regularization:
+
     def __init__(self, f, dxf):
         self.f = f
         self.dxf = dxf
 
-def l2regul(W, rlambda):
+def l2regul(W, rlambda=0.0):
     return (rlambda*(W**2)).sum()
 
-def l1regul(W, rlambda):
+def l1regul(W, rlambda=0.0):
     return (W*rlambda).sum()
 
-def l1reguldx(W, rlambda):
+def l1reguldx(W, rlambda=0.0):
     return rlambda*(np.sign(W))
 
-def l2reguldx(W, rlambda):
+def l2reguldx(W, rlambda=0.0):
     return W*rlambda*2
 
 reguls = dict()
