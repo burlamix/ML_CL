@@ -49,7 +49,7 @@ class Momentum:
         self.last_g = None
 
     def pprint(self):
-        return "momentum,lr=" + str(self.lr)
+        return "lr=" + str(self.lr)+",mom="+self.eps
 
     def getLr(self):
         return self.lr
@@ -88,6 +88,9 @@ class Adam:
         self.grad = 0
         self.t = 0
 
+    def pprint(self):
+        return "adam,lr=" + str(self.lr)
+
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
@@ -112,6 +115,9 @@ class RMSProp:
         self.lr = lr
         self.delta = delta
         self.R = None
+
+    def pprint(self):
+        return "RMSprop,lr=" + str(self.lr)
 
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
