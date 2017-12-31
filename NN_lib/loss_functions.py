@@ -19,7 +19,6 @@ class Loss:
         self.dxf = dxf
 
 def mse(target, prediction):
-    #Mean squared error
     return ((prediction - target) ** 2).mean()
 
 def msedx(target, prediction):

@@ -2,7 +2,7 @@ import numpy
 import types
 import autograd.numpy as np
 import sys
-
+from numpy import linalg as LA
 from autograd import elementwise_grad as egrad
 
 
@@ -28,7 +28,7 @@ class SimpleOptimizer:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-        return [W[i]-self.lr*grad[i] for i in range(0,len(W))]#W-self.lr*grad
+        return W-self.lr*grad
 
        # for i in range(epochs):
         #    o = NN.fp(x_in)
@@ -109,6 +109,41 @@ class Adam:
             vcap[i] = numpy.sqrt(vcap[i])
         return W-self.lr*mcap/(vcap+self.eps)
 
+
+class Adamax:
+    #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
+    #--TODO broader explaination (parameters descrp etc--
+    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
+        self.lr = lr
+        self.b1 = b1
+        self.b2 = b2
+        self.eps = eps
+        self.reset()
+
+    def reset(self):
+        self.m = [0]
+        self.v = []
+        self.grad = 0
+        self.t = 0
+
+    def pprint(self):
+        return "adamax,lr=" + str(self.lr)
+
+    def optimize(self, f, W):
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
+
+        self.t+=1 #Update timestamp
+        loss, grad = f(W) #Compute the gradient
+
+        #First and second moment estimation(biased by b1 and b2)
+        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*(grad))
+
+        k = self.b2*(self.v[-1] if self.v!=[] else numpy.zeros_like(grad))
+        o = np.array([numpy.maximum(k[e],numpy.abs(grad[e])) for e in range(0,len(grad))])
+        self.v.append(o)
+        return W-(self.lr/(1-self.b1**self.t))*self.m[-1]/(np.array(self.v[-1])+self.eps)
+
 class RMSProp:
     #TODO add documentation
     def __init__(self, lr=0.001, delta=0.9):
@@ -133,3 +168,4 @@ optimizers = dict()
 optimizers["SGD"] = SimpleOptimizer()
 optimizers["adam"] = Adam()
 optimizers["momentum"] = Momentum()
+optimizers["adamax"] = Adamax()

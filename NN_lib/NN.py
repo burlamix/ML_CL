@@ -78,7 +78,7 @@ class NeuralNetwork:
         def g(W,only_fp=False):
             self.set_weight(W)      #TODO TODO put this inside at FP and BP
             if only_fp:
-                return self.loss_func[0](in_chunk,self.FP(in_chunk)) #+ self.regul()
+                return self.loss_func.f(out_chunk,self.FP(in_chunk)) #+ self.regul()
             else:
                 loss, grad = self.BP(self.FP(in_chunk), out_chunk, in_chunk)
                 return loss + self.regul(),grad
