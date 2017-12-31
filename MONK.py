@@ -12,18 +12,22 @@ optimizer3 = Momentum(lr=0.9,eps=0.9, nesterov=True)
 #Check benchmarkMonk file
 #bm_monk(optimizer=optimizer3,monk='monk2',act1='tanh',act2='sigmoid',
  #       reg=0.0,bs=169,epochs=1000,trials=1)
-outs=20
+outs=2
 valr=0
 
 x_train,y_train = load_monk("MONK_data/monks-2.train")
 x_test,y_test = load_monk("MONK_data/monks-2.test")
+train_data_path = "data/ML-CUP17-TR.csv"
+test_data_path = "data/ML-CUP17-TS.csv"
 
 dataset = preproc.Dataset()
+#dataset.init_train(load_data(train_data_path, True, header_l=10, targets=2))
+#dataset.init_test(load_data(test_data_path, False, header_l=10))
 dataset.init_train([x_train,y_train])
 dataset.init_test([x_test,y_test])
 
-
-optimizer = Adam(lr=0.005,b1=0.9,b2=0.999)
+'''
+optimizer = Adam(lr=0.001,b1=0.9,b2=0.999)
 optimizer2 = SimpleOptimizer(lr=0.9)
 optimizer3 = Momentum( lr=0.9, eps=0.9 ,nesterov=True)
 rmsp = RMSProp(lr=0.001,delta=0.9)
@@ -32,11 +36,11 @@ rmsp = RMSProp(lr=0.001,delta=0.9)
 #https://elearning.di.unipi.it/pluginfile.php/15587/mod_resource/content/2/ML-17-NN-part2-v0.23.pdfx
 #TODO LR decay (more important with mini batch)
 NN = NeuralNetwork()
-NN.addLayer(inputs=17,neurons=2,activation="tanh", rlambda=valr,regularization="L2",bias=0)
-NN.addLayer(inputs=2,neurons=outs,activation="sigmoid",rlambda=valr,regularization="L2",bias=0)
+NN.addLayer(inputs=10,neurons=2,activation="tanh", rlambda=valr,regularization="L2",bias=0)
+NN.addLayer(inputs=2,neurons=outs,activation="linear",rlambda=valr,regularization="L2",bias=0)
 
-dataset.train[0] = np.random.randn(50,17)
-dataset.train[1] = np.random.randn(50,outs)
+#dataset.train[0] = np.random.randn(50,17)
+#dataset.train[1] = np.random.randn(50,outs)
 
 currwg = []
 for l in NN.layers:
@@ -48,7 +52,7 @@ for l in NN.layers:
     currwg.append(np.zeros(len(l.W))) #Bias
 
 (loss, acc, val_loss, val_acc, history)=\
-    NN.fit_ds( dataset,1000, optimizer2 ,batch_size=169,verbose=0, val_set = dataset.test,loss_func="mae")
+    NN.fit_ds( dataset,1000, optimizer ,batch_size=169,verbose=0,loss_func="mae")
 
 
 print(history['val_acc'])
@@ -58,7 +62,7 @@ print(history['val_acc'])
 #plt.plot(history['val_acc'])
 #plt.plot(history['val_loss'])
 #plt.plot(history['tr_acc'], label='tr_acc',ls="-",)
-plt.plot(history['tr_loss'], label='tr_loss',ls="-",color="red")
+plt.plot(history['tr_loss'], label='loss',ls="-",color="red")
 
 #plt.show()
 
@@ -68,15 +72,18 @@ ini1 = keras.initializers.RandomUniform(minval=-0.7 / 17, maxval=0.7 / 17, seed=
 ini2 = keras.initializers.RandomUniform(minval=-0.7 / 2, maxval=0.7 / 2, seed=None)
 
 model = Sequential()
-model.add(Dense(2, activation= 'tanh' ,kernel_initializer=ini1,input_dim=17,use_bias=True,bias_initializer="zeros",kernel_regularizer=regularizers.l2(valr),bias_regularizer=regularizers.l2(valr)))
-model.add(Dense(outs, activation= 'sigmoid',kernel_initializer=ini2 ,use_bias=True,bias_initializer="zeros",kernel_regularizer=regularizers.l2(valr),bias_regularizer=regularizers.l2(valr)))
+model.add(Dense(2, activation= 'tanh' ,kernel_initializer=ini1,input_dim=10,use_bias=True,
+    bias_initializer="zeros",kernel_regularizer=regularizers.l2(valr),bias_regularizer=regularizers.l2(valr)))
+
+model.add(Dense(outs, activation= 'linear',kernel_initializer=ini2 ,use_bias=True,
+    bias_initializer="zeros",kernel_regularizer=regularizers.l2(valr),bias_regularizer=regularizers.l2(valr)))
 
 
-sgd = optims.SGD(lr=0.9, momentum=0.0, decay=0.00,nesterov=False )
+sgd = optims.SGD(lr=0.9, momentum=0.9, decay=0.00,nesterov=True )
 adada = optims.adam(lr=0.005,beta_1=0.9,beta_2=0.999)
 rmsp = optims.RMSprop(lr=0.001,rho=0.9,epsilon=1e-6)
 
-model.compile(optimizer=sgd,
+model.compile(optimizer=adada,
               loss= 'mean_absolute_error' ,
               metrics=[ 'accuracy' ])
 
@@ -92,16 +99,17 @@ his= model.fit(dataset.train[0], dataset.train[1],batch_size=169,epochs=1000,shu
 #print(model.evaluate(x_test, y_test))
 print(his.history.keys())
 #plt.plot(his.history['acc'], label='tr_loss_k',ls=":")
-plt.plot(his.history['loss'], label='tr_loss_k',ls=":")
-plt.title('model accuracy')
+plt.plot(his.history['loss'], label='keras loss',ls=":")
+plt.title('keras comparison')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
-plt.legend(loc='upper left')
+plt.legend(loc='upper right',prop={'size':18})
 plt.show()
 ###################################################################### sopra a qui è per confrontare keras 
 
 print(mse(NN.predict(dataset.train[0]),dataset.train[1]))
 print(NN.evaluate(dataset.train[0],dataset.train[1]))
+
 exit(1)
 s=0
 for l in NN.layers:
@@ -109,33 +117,34 @@ for l in NN.layers:
 print(np.sum(s))
 
 #Plotter.loss_over_epochs(history)
+'''
 
-
-#optimizer1 = SimpleOptimizer(lr=0.1)
+optimizer1 = SimpleOptimizer(lr=0.1)
 optimizer2 = SimpleOptimizer(lr=0.2)
-optimizer3 = SimpleOptimizer(lr=0.5)
+optimizer3 = SimpleOptimizer(lr=0.2)
 optimizer4 = SimpleOptimizer(lr=0.7)
-optimizer5 = Momentum(lr=0.5,eps=0.5)
-optimizer6 = Momentum(lr=0.5,eps=0.9)
+optimizer41 = SimpleOptimizer(lr=0.9)
+optimizer5 = Momentum(lr=0.1,eps=0.5,nesterov=True)
+optimizer6 = Momentum(lr=0.2,eps=0.5,nesterov=True)
 optimizer7 = Momentum(lr=0.3,eps=0.5)
 optimizer8 = Momentum(lr=0.3,eps=0.9)
 optimizer9 = Adam(lr=0.005,b1=0.9,b2=0.999)
 optimizer10 = RMSProp(lr=0.0051)
 
 
-acts=[["tanh","tanh"], ["sigmoid","tanh"]]
-opts=[optimizer9,optimizer10]#,optimizer6,optimizer7,optimizer8]
+acts=[["sigmoid","tanh"],["tanh","tanh"]]
+opts=[optimizer5,optimizer6]#,optimizer6,optimizer7,optimizer8]
 neurs=[[2,1]]
+rlambda=[[0.0,0.0]]
 #print("----senza grid search----",NN.evaluate(x_test,y_test))
 
 fgs = list()
 trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[700], batch_size=[169], n_layers=2, val_split=0,
-                                               activations=acts, cvfolds=1, val_set=dataset.test, verbose=2, loss_fun="mse",
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[2000], batch_size=[169], n_layers=2, val_split=0,
+                                               activations=acts, cvfolds=1, val_set=dataset.test, verbose=1, loss_fun="mse",val_loss_fun="mse",rlambda=rlambda,
                                                neurons=neurs, optimizers=opts)   #with 10 neurons error! i don't now why
     fgs.append(fg)
-exit(1)
 
 fgmean = list() #List for holding means
 
@@ -171,7 +180,7 @@ for i in range(0,len(fgmean)):
 
 nconfig = len(acts)*len(opts)*len(neurs)
 #TODO MEDIA SU PIu test vedi k validation
-f, (a) = plt.subplots(nrows=len(acts), ncols=len(opts), sharex='col', sharey='row')
+f, (a) = plt.subplots(nrows=2, ncols=2, sharex='col', sharey='row',squeeze=False)
 i=0
 
 fgforplot=fgmean
@@ -180,7 +189,8 @@ for row in a:
     for col in row:
         col.set_title('lr:'+str(fgforplot[i]['configuration']['optimizers'].lr)+
                         ',a1:' + fgforplot[i]['configuration']['activations'][0]+
-                        ',a2:' + fgforplot[i]['configuration']['activations'][1],fontsize=9)
+                        ',a2:' + fgforplot[i]['configuration']['activations'][1]+
+                        ',batch_size:' + str(fgforplot[i]['configuration']['batch_size']),fontsize=9)
         if hist:
             col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
             col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
@@ -191,9 +201,10 @@ for row in a:
             col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
             col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
             col.plot(fgforplot[i]['val_loss'], label='val err')
-        col.legend(loc=3,prop={'size':10})
+        col.legend(loc="best",prop={'size':10})
         i+=1
 plt.show()
+
 #print("-----------------------")
 #for i in fg:
     #print(i["configuration"])
@@ -213,7 +224,7 @@ ini2 = keras.initializers.RandomNormal(mean=0.0, stddev=(2/4), seed=None)
 
 
 model = Sequential()
-model.add(Dense(2, activation= 'tanh' ,kernel_initializer=ini1,input_dim=17,use_bias=True))
+model.add(Dense(2, activation= 'tanh' ,kernel_initializer=ini1,input_dim=17,use_bias=False))
 model.add(Dense(1, activation= 'tanh',kernel_initializer=ini2 ,use_bias=True))
 
 #input("..")
@@ -232,8 +243,8 @@ s=0
 #print(np.sum(s))
 
 
-model.fit(dataset.train[0], dataset.train[1],batch_size=124,epochs=500,shuffle=False)
-print(model.evaluate(x_test, y_test))
+#model.fit(dataset.train[0], dataset.train[1],batch_size=124,epochs=500,shuffle=False)
+#print(model.evaluate(x_test, y_test))
 
 
 #2 functions or param (want grad or not)

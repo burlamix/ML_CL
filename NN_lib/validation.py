@@ -85,7 +85,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
     if loss_fun == None:
         grid['loss_fun'] = [loss_functions.losses['mse']]
     else:
-        grid['loss_fun'] = loss_fun
+        grid['loss_fun'] = [loss_fun]
 
     if rlambda == None:
         grid['rlambda'] = [[0.0] * n_layers]
