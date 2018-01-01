@@ -27,7 +27,7 @@ def linear(x):
 
 
 def lineardxf(x):
-    return 1
+    return np.ones_like(x)
 
 
 def tanh(x):

@@ -11,8 +11,8 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self,inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda = 0.0,weights_init='fan_in'):
-        self.layers.append(Layer(inputs, neurons, activation, weights, bias,
+                 regularization="L2", rlambda = 0.0,weights_init='fan_in',dropout=0.5):
+        self.layers.append(Layer(inputs, neurons, activation, weights, bias,dropout=dropout,
                                  regularizer=regularization, rlambda=rlambda,weights_init=weights_init))
 
     def FP(self, x_in):
@@ -27,6 +27,16 @@ class NeuralNetwork:
         for i in range(len(self.layers)-1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
+            logi = logi*self.layers[i].mask
+            #print('curro:',np.count_nonzero(self.layers[i].currentOutput),
+            #      's',np.array(self.layers[i].currentOutput).shape)
+            #print('nonzeros:',np.count_nonzero(logi),'s',(logi).shape)
+            #print('before:',np.count_nonzero(logi))
+
+            #logi = logi*np.random.binomial(1,1-self.layers[i].dropout,self.layers[i].currentOutput.shape)/\
+            #       ((1-self.layers[i].dropout))
+            #print('zeris:',np.count_nonzero(logi))
+            #print('after:',np.count_nonzero(logi),'s',logi.shape)
             if i==(len(self.layers)-1):
                 e= self.loss_func.dxf(real, prediction)
                 err = logi*e#self.loss_func[1](real, prediction)
@@ -38,7 +48,11 @@ class NeuralNetwork:
                 curro = x_in
             else:
                 curro = self.layers[i-1].currentOutput
+            #curro = curro*self.layers[i-1].mask if i>0 else curro
+
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
+            #curro *= np.random.binomial(1, self.layers[i].dropout, size=curro.shape)
+
             #print('err', curro)
 
             #print('curr',curro.shape)

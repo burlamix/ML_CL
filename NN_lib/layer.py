@@ -6,13 +6,14 @@ import sys
 class Layer:
 
     def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0, weights_init='fan_in',
-                 regularizer="L2", rlambda = 0.00):
+                 regularizer="L2", rlambda = 0.00, dropout=0.5):
 
 
         self.regularizer = regularizations.validate_regularizer(regularizer)
         self.activation = activations.validate_activation(activation)
-
-        self.rlambda=rlambda
+        self.rlambda = rlambda
+        self.dropout = dropout
+        self.mask = np.ones(neurons)
         self.currentOutput = None
         self.grad=None
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
@@ -26,18 +27,21 @@ class Layer:
                     sys.exit("Weights wrong dimension")
                 else:
                     self.W = weights
-                    self.W = np.concatenate((np.ones((self.W.shape[0], 1)) * 0, self.W), axis=1)
-                    self.W[:, 0] = bias
+                    self.W = np.concatenate((np.ones((self.W.shape[0], 1)) , self.W), axis=1)
             else:
                 sys.exit("Expected a nparray")
 
-
+        self.W[:, 0] = bias
 
     def getOutput(self,x):
         
         x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
         partial = np.dot(x, self.W.transpose())
         self.currentOutput = self.activation.f(partial)
+
+        self.mask = np.random.binomial(1,1-self.dropout,self.currentOutput.shape)
+        self.currentOutput = self.currentOutput*self.mask
+        self.mask= self.mask/(1-self.dropout if self.dropout!=1 else 1)
         return self.currentOutput
 
     def regularize(self):
