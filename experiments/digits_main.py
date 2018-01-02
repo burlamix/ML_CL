@@ -12,6 +12,7 @@ from NN_lib.optimizers import *
 x_train = x_train.reshape(x_train.shape[0],784).astype('float32')
 y_train = np_utils.to_categorical(y_train,10).astype('float32')
 x_test = x_test.reshape(x_test.shape[0],784)
+y_test = np_utils.to_categorical(y_test,10).astype('float32')
 
 dataset = Dataset()
 dataset.init_train((x_train,y_train))
