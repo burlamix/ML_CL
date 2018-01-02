@@ -6,7 +6,7 @@ import sys
 class Layer:
 
     def __init__(self, inputs, neurons, activation, weights=np.array(None), bias=0, weights_init='fan_in',
-                 regularizer="L2", rlambda = 0.00, dropout=0.5):
+                 regularizer="L2", rlambda = 0.00, dropout=0.0):
 
 
         self.regularizer = regularizations.validate_regularizer(regularizer)
@@ -43,7 +43,6 @@ class Layer:
 
         if self.dropout==1:self.mask=np.zeros_like(self.currentOutput)
         else:self.mask= self.mask/(1-self.dropout)
-
         #self.mask = self.mask / (1 - self.dropout if self.dropout != 1 else 1)
         return self.currentOutput
 

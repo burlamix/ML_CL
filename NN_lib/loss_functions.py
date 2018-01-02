@@ -18,6 +18,12 @@ class Loss:
         self.f = f
         self.dxf = dxf
 
+    def __str__(self):
+        return str(self.f.__name__)
+
+    def __repr__(self):
+        return str(self.f.__name__)
+
 def mse(target, prediction):
     return ((prediction - target) ** 2).mean()
 

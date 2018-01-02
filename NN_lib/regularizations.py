@@ -17,18 +17,31 @@ class Regularization:
         self.f = f
         self.dxf = dxf
 
-def l2regul(W, rlambda=0.0):
-    return (rlambda*(W**2)).sum()
+    def __str__(self):
+        return str(self.f.__name__)
 
-def l1regul(W, rlambda=0.0):
-    return (W*rlambda).sum()
+    def __repr__(self):
+        return str(self.f.__name__)
+
+def l2(W, rlambda=0.0):
+    return rlambda*np.sum((np.square(W)))
+
+def l1(W, rlambda=0.0):
+    return (np.abs(W)).sum()*rlambda
+
+def elasticNet(W,rlambda):
+    return l1(W,rlambda[0])+l2(W,rlambda[1])
+
+def elasticNetdx(W, rlambda):
+    return l1reguldx(W, rlambda[0]) + l2reguldx(W,rlambda[1])
 
 def l1reguldx(W, rlambda=0.0):
     return rlambda*(np.sign(W))
 
 def l2reguldx(W, rlambda=0.0):
-    return W*rlambda*2
+    return 2*(W*rlambda)
 
 reguls = dict()
-reguls["L2"] = Regularization(l2regul, l2reguldx)
-reguls["L1"] = Regularization(l1regul, l1reguldx)
+reguls["L2"] = Regularization(l2, l2reguldx)
+reguls["L1"] = Regularization(l1, l1reguldx)
+reguls["EN"] = Regularization(elasticNet, elasticNetdx)

@@ -138,14 +138,15 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
                 result_grid[k] = r  # If no validation (val_split=0) then select best based on tr loss
             else:
                 result_grid[k] = v
+            var = 0
         else:
 
-            result_grid[k], _, _, _, history = k_fold_validation(dataset, net, epochs=params['epochs'], \
+            result_grid[k], var, _, _, _, history = k_fold_validation(dataset, net, epochs=params['epochs'], \
                                                                  optimizer=params['optimizers'], cvfolds=cvfolds,
                                                                  batch_size=params['batch_size'],val_loss_fun=val_loss_fun,
                                                                  loss_func=params['loss_fun'], verbose=verbose - 0)
         if (validating):
-            full_grid.append({'configuration': params, 'val_loss': result_grid[k], 'history': history})
+            full_grid.append({'configuration': params, 'val_loss': result_grid[k], 'in-fold var':var,'history': history})
         else:  # If no validation was done only put config and other stuff(to add..)
             full_grid.append({'configuration': params, 'history': history})
 
@@ -219,6 +220,6 @@ def k_fold_validation(dataset, NN, epochs, optimizer, cvfolds=3, batch_size=32, 
         for z in range(0, len(r[k])):
             r[k][z] = r[k][z] / cvfolds
 
-    return np.average(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), r
+    return np.average(val_loss), np.var(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), r
 # r is the average for each epoch
 # the other are the total average of the end

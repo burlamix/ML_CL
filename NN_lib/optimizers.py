@@ -17,6 +17,9 @@ class SimpleOptimizer:
     def __init__(self, lr=0.1):
         self.lr = lr
 
+    def reset(self):
+        pass
+
     def pprint(self):
         return "sgd,lr="+str(self.lr)
 
@@ -24,7 +27,7 @@ class SimpleOptimizer:
         return self.lr
 
     def optimize(self, f, W):
-
+        print('as')
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
@@ -149,6 +152,9 @@ class RMSProp:
     def __init__(self, lr=0.001, delta=0.9):
         self.lr = lr
         self.delta = delta
+        self.reset()
+
+    def reset(self):
         self.R = None
 
     def pprint(self):

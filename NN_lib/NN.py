@@ -12,7 +12,7 @@ class NeuralNetwork:
         self.layers = []
 
     def addLayer(self, inputs, neurons, activation, weights=np.array(None), bias=0,
-                 regularization="L2", rlambda=0.0, weights_init='fan_in', dropout=0.5):
+                 regularization="L2", rlambda=0.0, weights_init='fan_in', dropout=0.0):
         self.layers.append(Layer(inputs, neurons, activation, weights, bias, dropout=dropout,
                                  regularizer=regularization, rlambda=rlambda, weights_init=weights_init))
 
@@ -57,8 +57,10 @@ class NeuralNetwork:
             # print('err', curro)
 
             # print('curr',curro.shape)
-            grad = np.dot(curro.transpose(), err) / (real.shape[0])
-            # print(grad)
+            grad = (np.dot(curro.transpose(), err) / (real.shape[0]))
+            #print(self.reguldx(i).shape)
+
+            grad= grad + self.reguldx(i).transpose()#/real.shape[0]
 
             # grad = (np.dot(curro.transpose(),err))
             self.layers[i].grad = grad
@@ -94,7 +96,10 @@ class NeuralNetwork:
                 return self.loss_func.f(out_chunk, self.FP(in_chunk))  # + self.regul()
             else:
                 loss, grad = self.BP(self.FP(in_chunk), out_chunk, in_chunk)
-                return loss + self.regul(), grad
+                #print('grad',grad.shape)
+               # print('after',(grad+np.array([self.reguldx(i) for i in range(0,len(self.layers))])
+#).shap#e)
+                return loss + self.regul(), grad#+np.array([self.reguldx(i) for i in range(0,len(self.layers))])
 
         return g
 
@@ -126,9 +131,8 @@ class NeuralNetwork:
             validation_y = val_set[1]
 
         history = {'tr_loss': [], 'val_loss': [], 'tr_acc': [], 'val_acc': []}
-
+        optimizer.reset()
         for i in range(0, epochs):
-
             # Randomly permute the data before each epoch
             perm = np.random.permutation(len(x_in))
             x_in = x_in[perm]
@@ -139,13 +143,13 @@ class NeuralNetwork:
                 cap = min([len(x_in), chunk + batch_size])
 
                 update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weight())
-
+                print('s',update.shape)
                 # predicted = self.FP(x_in[chunk:cap],)
                 for j in range(0, len(self.layers)):
                     # print("-----1----",update[j])
                     # print("-----2----",(self.reguldx(j) / batch_size).transpose())
-                    update[j] -= (self.reguldx(j) / 1).transpose()
-                    update[j] /= 1
+                    update[j] = update[j]#-optimizer.lr* (self.reguldx(j)).transpose()
+                    #update[j] /= 1
 
                 self.set_weight(update)
 
@@ -189,7 +193,7 @@ class NeuralNetwork:
         real = self.FP(x_in)
 
         # val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
-        val_loss_func = loss_fun.f(real, y_out)  # + self.regul()
+        val_loss_func = loss_fun.f(real, y_out)   + self.regul()
 
         correct = 0
         errate = 0
