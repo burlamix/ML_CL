@@ -34,14 +34,17 @@ class Layer:
         self.W[:, 0] = bias
 
     def getOutput(self,x):
-        
+
         x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
         partial = np.dot(x, self.W.transpose())
         self.currentOutput = self.activation.f(partial)
-
         self.mask = np.random.binomial(1,1-self.dropout,self.currentOutput.shape)
         self.currentOutput = self.currentOutput*self.mask
-        self.mask= self.mask/(1-self.dropout if self.dropout!=1 else 1)
+
+        if self.dropout==1:self.mask=np.zeros_like(self.currentOutput)
+        else:self.mask= self.mask/(1-self.dropout)
+
+        #self.mask = self.mask / (1 - self.dropout if self.dropout != 1 else 1)
         return self.currentOutput
 
     def regularize(self):

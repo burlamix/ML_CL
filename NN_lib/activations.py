@@ -50,7 +50,7 @@ def softmaxdx1(signal):
     iy, ix = np.diag_indices_from(J[0])
     J[:, iy, ix] = signal  # diagonal
     # print(J.shape)
-    return J.sum(axis=1)  # sum across-rows for each sample
+    return J.sum(axis=2)  # sum across-rows for each sample
 
 
 def relu(x):
@@ -74,9 +74,18 @@ def softmax(x):
 
 
 def softmaxdx( a):
-    return a[..., None, :] * (np.eye(a.shape[-1], dtype=a.dtype) -
-                              a[..., None])
+    return [np.diag(e) for e in a[..., None, :] * (np.eye(a.shape[-1], dtype=a.dtype) -
+                              a[..., None])]
+    return np.diag(a[..., None, :] * (np.eye(a.shape[-1], dtype=a.dtype) -
+                              a[..., None]),axis=1)
 
+def loss(x):
+    num_classes = x.shape[0]
+    num_train = x.shape[1]
+    for i in range(num_train):
+      for j in range(num_classes):
+        p = np.exp(f_i[j])/sum_i
+        dW[j, :] += (p-(j == y[i])) * X[:, i]
 
 class Activation:
 
@@ -89,5 +98,5 @@ activations = dict()
 activations["linear"] = Activation(linear, lineardxf)
 activations["sigmoid"] = Activation(sigmoid, sigmoddxf)
 activations["tanh"] = Activation(tanh, tanhdx)
-#activations["softmax"] = Activation(softmax, softmaxdx)
+activations["softmax"] = Activation(softmax, softmaxdx)
 activations["relu"] = Activation(relu, reludx)
