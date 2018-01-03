@@ -1,10 +1,8 @@
 import sys
-from preproc import *
 from NN_lib import loss_functions
 from NN_lib.layer import Layer
+import numpy as np
 import preproc
-
-
 class NeuralNetwork:
 
     def __init__(self):

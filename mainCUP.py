@@ -113,9 +113,11 @@ nconfig = len(acts)*len(opts)*len(neurs)
 
 i=0
 
-for att in opts:
 
-    f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
+for att in opts:
+    f, (a) = plt.subplots(figsize=(30, 30), nrows=len(batches) * len(neurs) * len(acts),
+                          ncols=len(rlambdas) * len(losses),
+                          sharex='col', sharey='row', squeeze=False)
     fgforplot=fgmean
     fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
     temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
@@ -152,12 +154,15 @@ for att in opts:
     #plt.show()
 
     pp.savefig(f)
-
 plt.figure()
 plt.axis("off")
 plt.text(0.5,0.5,"range 0.5-1.2",ha= "center",va="center")
 pp.savefig()
-
+f.clear()
+f.clf()
+plt.clf()
+plt.cla()
+plt.close()
 i=0
 
 for att in opts:
@@ -205,6 +210,12 @@ plt.figure()
 plt.axis("off")
 plt.text(0.5,0.5,"range 0.5-1.2",ha= "center",va="center")
 pp.savefig()
+f.clear()
+plt.clf()
+f.clf()
+plt.cla()
+plt.close()
+
 
 i=0
 
@@ -248,6 +259,11 @@ for att in opts:
     #plt.show()
 
     pp.savefig(f)
+f.clear()
+f.clf()
+plt.clf()
+plt.cla()
+plt.close()
 
 
 pp.close()

@@ -1,9 +1,6 @@
-import numpy
+import numpy as np
 import types
-import autograd.numpy as np
 import sys
-from numpy import linalg as LA
-from autograd import elementwise_grad as egrad
 
 
 
@@ -126,7 +123,7 @@ class Adam:
         mcap = self.m[self.t]/(np.subtract(1,np.power(self.b1,self.t)))
         vcap = self.v[self.t]/(np.subtract(1,np.power(self.b2,self.t)))
         for i in range(len(vcap)):
-            vcap[i] = numpy.sqrt(vcap[i])
+            vcap[i] = np.sqrt(vcap[i])
         return np.subtract(W,self.lr*mcap/((vcap+self.eps)))
 
 
@@ -164,8 +161,8 @@ class Adamax:
         #First and second moment estimation(biased by b1 and b2)
         self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*(grad))
 
-        k = self.b2*(self.v[-1] if self.v!=[] else numpy.zeros_like(grad))
-        o = np.array([numpy.maximum(k[e],numpy.abs(grad[e])) for e in range(0,len(grad))])
+        k = self.b2*(self.v[-1] if self.v!=[] else np.zeros_like(grad))
+        o = np.array([np.maximum(k[e],np.abs(grad[e])) for e in range(0,len(grad))])
         self.v.append(o)
         return W-(self.lr/(1-self.b1**self.t))*self.m[-1]/(np.array(self.v[-1])+self.eps)
 
