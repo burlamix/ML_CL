@@ -25,12 +25,20 @@ optimizer2 = SimpleOptimizer(lr=0.2)
 optimizer5 = Momentum(lr=0.5,eps=0.5)
 optimizer10 = RMSProp(lr=0.0151)
 
-adam1 = Adamax(lr=0.011)
-adam2 = Adam(lr=0.03,b1=0.9,b2=0.999)
-adam3 = RMSProp(lr=0.01)
-adam4 = RMSProp(lr=0.1)
+#adam1 = Adamax(lr=0.011)
+
+adam1 = Adam(lr=0.03,b1=0.9,b2=0.999)
+adam2 = Adam(lr=0.2,b1=0.9,b2=0.999)
+adam3 = Adam(lr=0.007,b1=0.9,b2=0.999)
+
+RMSP1 = RMSProp(lr=0.01)
+RMSP2 = RMSProp(lr=0.05)
+RMSP3 = RMSProp(lr=0.1)
+
 m1 = Momentum(lr=0.001,eps=0.9,nesterov=True)
-m2 = Momentum(lr=0.04,eps=0.9,nesterov=True)
+m2 = Momentum(lr=0.008,eps=0.9,nesterov=True)
+m3 = Momentum(lr=0.04,eps=0.9,nesterov=True)
+
 #no m3 = Momentum(lr=0.3,eps=0.9,nesterov=True)
 
 preprocessor = preproc.Preprocessor()
@@ -39,7 +47,7 @@ preprocessor = preproc.Preprocessor()
 preprocessor.shuffle(dataset)
 #preprocessor.normalize(dataset,method='minmax')
 acts=[["relu","linear"],["tanh","linear"],["sigmoid","linear"]]
-opts=[adam1,adam2,adam3,adam4,m1,m2]#,optimizer6,optimizer7,optimizer8]
+opts=[adam1,adam2,adam3,RMSP1,RMSP2,RMSP3,m1,m2,m3]
 neurs=[[5,2],[20,2],[80,2]]
 batches = [dataset.train[0].shape[0]]
 losses = ["mee"]
