@@ -72,7 +72,7 @@ class Momentum:
             loss, grad = f(W)
             v = self.eps*(self.last_g if (self.last_g != None) else 0) - self.lr*(grad)
         self.last_g = v
-        return W+v
+        return (W+v)
 
 class Adam:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
@@ -92,7 +92,7 @@ class Adam:
         self.t = 0
 
     def pprint(self):
-        return "adam,lr=" + str(self.lr)
+        return "adam:" + str(self.lr)
 
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
@@ -102,15 +102,15 @@ class Adam:
         loss, grad = f(W) #Compute the gradient
 
         #First and second moment estimation(biased by b1 and b2)
-        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*(grad))
-        self.v.append(self.b2*self.v[self.t-1]+(1-self.b2)*((grad)**2))
+        self.m.append((self.b1*self.m[self.t-1]+(1-self.b1)*(grad)))
+        self.v.append((self.b2*self.v[self.t-1]+(1-self.b2)*(np.power((grad),2))))
 
         #Correction on the estimations as to avoid 0-bias due to initialization
-        mcap = self.m[self.t]/(1-self.b1**self.t)
-        vcap = self.v[self.t]/(1-self.b2**self.t)
+        mcap = self.m[self.t]/(np.subtract(1,np.power(self.b1,self.t)))
+        vcap = self.v[self.t]/(np.subtract(1,np.power(self.b2,self.t)))
         for i in range(len(vcap)):
             vcap[i] = numpy.sqrt(vcap[i])
-        return W-self.lr*mcap/(vcap+self.eps)
+        return np.subtract(W,self.lr*mcap/((vcap+self.eps)))
 
 
 class Adamax:
@@ -158,7 +158,7 @@ class RMSProp:
         self.R = None
 
     def pprint(self):
-        return "RMSprop,lr=" + str(self.lr)
+        return "rms:" + str(self.lr)
 
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
