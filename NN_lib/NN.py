@@ -195,7 +195,7 @@ class NeuralNetwork:
         real = self.FP(x_in)
 
         # val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
-        val_loss_func = loss_fun.f(real, y_out)   + self.regul()
+        val_loss_func = loss_fun.f(real, y_out)   #+ self.regul()
 
         correct = 0
         errate = 0

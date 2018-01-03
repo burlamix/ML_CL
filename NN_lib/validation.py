@@ -123,6 +123,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
     tot= len(all_comb)
     for params in all_comb:
         print(k,"/",tot)
+        print(params)
         net = NN.NeuralNetwork()
         in_l = dataset.train[0].shape[1]
         # Build NN according to current configuration
