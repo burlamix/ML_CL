@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5aaa53d6-f969-45a6-bb6c-96a8a0b27e09" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/NN_lib/optimizers.py" afterPath="$PROJECT_DIR$/NN_lib/optimizers.py" />
       <change beforePath="$PROJECT_DIR$/foo.pdf" afterPath="$PROJECT_DIR$/foo.pdf" />
       <change beforePath="$PROJECT_DIR$/grids.pkl" afterPath="$PROJECT_DIR$/grids.pkl" />
       <change beforePath="$PROJECT_DIR$/mainCUP.py" afterPath="$PROJECT_DIR$/mainCUP.py" />
@@ -20,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="mainCUP.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mainCUP.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainCUP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state relative-caret-position="504">
+              <caret line="49" column="17" lean-forward="false" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -67,8 +65,8 @@
       <file leaf-file-name="NN.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NN_lib/NN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2077">
-              <caret line="197" column="48" lean-forward="false" selection-start-line="197" selection-start-column="48" selection-end-line="197" selection-end-column="48" />
+            <state relative-caret-position="115">
+              <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -76,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="optimizers.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="optimizers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NN_lib/optimizers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+            <state relative-caret-position="126">
+              <caret line="91" column="22" lean-forward="true" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -141,13 +139,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>update</find>
-      <find>out</find>
-      <find>get_we</find>
-      <find>2</find>
       <find>us</find>
       <find>alse</find>
-      <find>type</find>
       <find>undef</find>
       <find>loss =</find>
       <find>np.arra</find>
@@ -171,6 +164,11 @@
       <find>.f</find>
       <find>nconfig</find>
       <find>print</find>
+      <find>adam0.03</find>
+      <find>type</find>
+      <find>__name__</find>
+      <find>str__</find>
+      <find>print(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -207,8 +205,8 @@
         <option value="$PROJECT_DIR$/MONK.py" />
         <option value="$PROJECT_DIR$/NN_lib/NN.py" />
         <option value="$PROJECT_DIR$/NN_lib/regularizations.py" />
-        <option value="$PROJECT_DIR$/mainCUP.py" />
         <option value="$PROJECT_DIR$/NN_lib/optimizers.py" />
+        <option value="$PROJECT_DIR$/mainCUP.py" />
       </list>
     </option>
   </component>
@@ -814,16 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NN_lib/NN.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2077">
-          <caret line="197" column="48" lean-forward="false" selection-start-line="197" selection-start-column="48" selection-end-line="197" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NN_lib/regularizations.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -834,22 +822,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mainCUP.py">
+    <entry file="file://$PROJECT_DIR$/NN_lib/optimizers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+        <state relative-caret-position="126">
+          <caret line="91" column="22" lean-forward="true" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NN_lib/optimizers.py">
+    <entry file="file://$PROJECT_DIR$/NN_lib/NN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+        <state relative-caret-position="115">
+          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mainCUP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="49" column="17" lean-forward="false" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>

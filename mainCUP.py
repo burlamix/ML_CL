@@ -117,8 +117,7 @@ for att in opts:
 
     f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
     fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:type(k['configuration']['optimizers']).__name__)
-
+    fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
     temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
     temp = sorted(temp, key=lambda k:k['val_loss'][-1])
     j=0
@@ -165,7 +164,7 @@ for att in opts:
 
     f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
     fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:type(k['configuration']['optimizers']).__name__)
+    fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
 
     temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
     temp = sorted(temp, key=lambda k:k['val_loss'][-1])
@@ -213,7 +212,7 @@ for att in opts:
 
     f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
     fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:type(k['configuration']['optimizers']).__name__)
+    fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
 
     temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
     temp = sorted(temp, key=lambda k:k['val_loss'][-1])
