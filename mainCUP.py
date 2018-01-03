@@ -28,8 +28,12 @@ optimizer10 = RMSProp(lr=0.0151)
 #adam1 = Adamax(lr=0.011)
 
 adam1 = Adam(lr=0.03,b1=0.9,b2=0.999)
-adam2 = Adam(lr=0.2,b1=0.9,b2=0.999)
+adam2 = Adam(lr=0.4,b1=0.9,b2=0.999)
 adam3 = Adam(lr=0.007,b1=0.9,b2=0.999)
+
+adamax1 = Adamax(lr=0.03,b1=0.9,b2=0.999)
+adamax2 = Adamax(lr=0.2,b1=0.9,b2=0.999)
+adamax3 = Adamax(lr=0.007,b1=0.9,b2=0.999)
 
 RMSP1 = RMSProp(lr=0.01)
 RMSP2 = RMSProp(lr=0.05)
@@ -47,7 +51,7 @@ preprocessor = preproc.Preprocessor()
 preprocessor.shuffle(dataset)
 #preprocessor.normalize(dataset,method='minmax')
 acts=[["relu","linear"],["tanh","linear"],["sigmoid","linear"]]
-opts=[adam1,adam2,adam3,RMSP1,RMSP2,RMSP3,m1,m2,m3]
+opts=[adam1,adam2,adam3,RMSP1,RMSP2,RMSP3,m1,m2,m3,adamax1,adamax2,adamax3]
 neurs=[[5,2],[20,2],[80,2]]
 batches = [dataset.train[0].shape[0]]
 losses = ["mee"]
@@ -60,7 +64,7 @@ fgs = list()
 
 trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3000], batch_size=batches,
                                                n_layers=2, val_split=25,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=1, val_set=None, verbose=1,
@@ -107,12 +111,11 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_loss']/=trials
 
 pp = PdfPages("foo.pdf")
-nconfig = len(acts)*len(opts)*len(neurs)
+#nconfig = len(acts)*len(opts)*len(neurs)
 #TODO MEDIA SU PIu test vedi k validation
 
 
 i=0
-
 
 for att in opts:
     f, (a) = plt.subplots(figsize=(30, 30), nrows=len(batches) * len(neurs) * len(acts),
@@ -156,7 +159,7 @@ for att in opts:
     pp.savefig(f)
 plt.figure()
 plt.axis("off")
-plt.text(0.5,0.5,"range 0.5-1.2",ha= "center",va="center")
+plt.text(0.5,0.5,"range 0-3",ha= "center",va="center")
 pp.savefig()
 f.clear()
 f.clf()
@@ -200,7 +203,7 @@ for att in opts:
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=6)
             col.set_ylim([0,3])
-
+            j+=1
             i+=1
     #plt.show()
 
@@ -254,7 +257,7 @@ for att in opts:
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=6)
             col.set_ylim([0.5,1.2])
-
+            j+=1
             i+=1
     #plt.show()
 

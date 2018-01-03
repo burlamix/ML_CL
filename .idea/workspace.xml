@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5aaa53d6-f969-45a6-bb6c-96a8a0b27e09" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/NN_lib/NN.py" afterPath="$PROJECT_DIR$/NN_lib/NN.py" />
-      <change beforePath="$PROJECT_DIR$/NN_lib/optimizers.py" afterPath="$PROJECT_DIR$/NN_lib/optimizers.py" />
       <change beforePath="$PROJECT_DIR$/foo.pdf" afterPath="$PROJECT_DIR$/foo.pdf" />
       <change beforePath="$PROJECT_DIR$/grids.pkl" afterPath="$PROJECT_DIR$/grids.pkl" />
       <change beforePath="$PROJECT_DIR$/mainCUP.py" afterPath="$PROJECT_DIR$/mainCUP.py" />
@@ -24,8 +21,8 @@
       <file leaf-file-name="mainCUP.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainCUP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="119" column="68" lean-forward="false" selection-start-line="119" selection-start-column="68" selection-end-line="119" selection-end-column="68" />
+            <state relative-caret-position="432">
+              <caret line="66" column="68" lean-forward="false" selection-start-line="66" selection-start-column="68" selection-end-line="66" selection-end-column="68" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -148,9 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>undef</find>
-      <find>loss =</find>
-      <find>np.arra</find>
       <find>np.array</find>
       <find>evalua</find>
       <find>result_m</find>
@@ -178,6 +172,9 @@
       <find>__name__</find>
       <find>numpy</find>
       <find>.sub</find>
+      <find>range</find>
+      <find>range 0.</find>
+      <find>att</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -767,7 +764,7 @@
         <state relative-caret-position="143">
           <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -860,8 +857,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mainCUP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="119" column="68" lean-forward="false" selection-start-line="119" selection-start-column="68" selection-end-line="119" selection-end-column="68" />
+        <state relative-caret-position="432">
+          <caret line="66" column="68" lean-forward="false" selection-start-line="66" selection-start-column="68" selection-end-line="66" selection-end-column="68" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
