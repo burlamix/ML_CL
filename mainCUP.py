@@ -3,6 +3,7 @@ from NN_lib import validation
 from NN_lib.optimizers import *
 import matplotlib.pyplot as plt
 from NN_lib import regularizations
+from matplotlib.backends.backend_pdf import PdfPages
 np.random.seed(915)
 dataset = preproc.Dataset()
 dataset2016 = preproc.Dataset()
@@ -27,31 +28,32 @@ adam2 = Adam(lr=0.03,b1=0.9,b2=0.999)
 adam3 = Adam(lr=0.6,b1=0.9,b2=0.999)
 m1 = Momentum(lr=0.001,eps=0.9,nesterov=True)
 m2 = Momentum(lr=0.04,eps=0.9,nesterov=True)
-m3 = Momentum(lr=0.6,eps=0.9,nesterov=True)
+m3 = Momentum(lr=0.3,eps=0.9,nesterov=True)
 
 preprocessor = preproc.Preprocessor()
 #preprocessor.remove_outliers(dataset)
 #print(preprocessor.remove_outliers(dataset2016))
 preprocessor.shuffle(dataset)
 #preprocessor.normalize(dataset,method='minmax')
-acts=[["relu","linear"],["tanh","linear"],["sigmoid","linear"]]
-opts=[m3]#,optimizer6,optimizer7,optimizer8]
-neurs=[[5,2],[20,2],[80,2],[7,2]]
+acts=[["tanh","linear"],["sigmoid","linear"]]
+opts=[adam1,adam2,adam3,m1,m2,m3]#,optimizer6,optimizer7,optimizer8]
+neurs=[[5,2],[20,2],[80,2]]
 batches = [dataset.train[0].shape[0]]
-losses = ["mse"]
+losses = ["mee"]
 regs = [[regularizations.reguls["EN"],regularizations.reguls["EN"]]]
 rlambdas = [[(0.0,0.0),(0.0,0.0)],[(0.01,0.0),(0.01,0.0)],
             [(0.0,0.01),(0.0,0.01)],[(0.01,0.01),(0.01,0.01)]]
            # [(0.001), (0,0)]]
 
 fgs = list()
+
 trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[5], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[50], batch_size=batches,
                                                n_layers=2, val_split=20,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
-                                               cvfolds=1, val_set=None, verbose=2,
-                                               loss_fun=losses, val_loss_fun="mse",
+                                               cvfolds=1, val_set=None, verbose=1,
+                                               loss_fun=losses, val_loss_fun="mee",
                                                neurons=neurs, optimizers=opts)
     fgs.append(fg)
 #print(grid_res.NN.evaluate(dataset2016.train[0],dataset2016.train[1],"mee"))
@@ -62,6 +64,7 @@ fgmean = list() #List for holding means
 for i in fg:
     fgmean.append({'configuration':i['configuration'], 'val_acc':[], 'val_loss':[],
                    'tr_loss':[], 'tr_acc':[]})
+
 
 #TODO black and white plot(use symbols)
 #Sum up the contributions from each trial
@@ -87,35 +90,86 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
 
-
+pp = PdfPages("foo.pdf")
 nconfig = len(acts)*len(opts)*len(neurs)
 #TODO MEDIA SU PIu test vedi k validation
-f, (a) = plt.subplots(nrows=len(acts)*len(batches)*len(neurs), ncols=len(rlambdas)*len(opts)*len(losses), sharex='col', sharey='row',squeeze=False)
-i=0
-fgforplot=fgmean
-hist=False
-for row in a:
-    for col in row:
-        col.set_title('tl:'+str(fgforplot[i]['configuration']['loss_fun'])+
-                      ',vl:'+str(fgforplot[i]['configuration']['val_loss_fun'])+
-                       ',rg:{'+str(fgforplot[i]['configuration']['regularizations'])+','+
-                        str(fgforplot[i]['configuration']['rlambda'])+'}'+
-                      '\nn:'+str(fgforplot[i]['configuration']['neurons'])+
-                       ',bs:'+str(fgforplot[i]['configuration']['batch_size'])+
-                      ',a1:' + fgforplot[i]['configuration']['activations'][0]+
-                        ',a2:' + fgforplot[i]['configuration']['activations'][1]+
-                      ',{'+fgforplot[i]['configuration']['optimizers'].pprint()+"}",fontsize=6)
-        if hist:
-            col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
-            col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
-            col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
-            col.plot(fgforplot[i]['history']['val_loss'],label='val err')
-        else:
-            col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
-            col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
-            col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
-            col.plot(fgforplot[i]['val_loss'], label='val err')
-        #col.legend(loc=3,prop={'size':10})
-        col.tick_params(labelsize=6)
-        i+=1
-plt.show()
+
+
+
+for att in acts:
+
+    f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(opts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
+    i=0
+
+    fgforplot=fgmean
+    hist=False
+    for row in a:
+        for col in row:
+            col.set_title('tl:'+str(fgforplot[i]['configuration']['loss_fun'])+
+                          ',vl:'+str(fgforplot[i]['configuration']['val_loss_fun'])+
+                           ',rg:{'+str(fgforplot[i]['configuration']['regularizations'])+','+
+                            str(fgforplot[i]['configuration']['rlambda'])+'}'+
+                          '\nn:'+str(fgforplot[i]['configuration']['neurons'])+
+                           ',bs:'+str(fgforplot[i]['configuration']['batch_size'])+
+                          ',a1:' + fgforplot[i]['configuration']['activations'][0]+
+                            ',a2:' + fgforplot[i]['configuration']['activations'][1]+
+                          ',{'+fgforplot[i]['configuration']['optimizers'].pprint()+"}",fontsize=10)
+
+            if hist:
+                #col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
+                #col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
+                col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
+                col.plot(fgforplot[i]['history']['val_loss'],label='val err')
+            else:
+                #col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
+                #col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
+                col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
+                col.plot(fgforplot[i]['val_loss'], label='val err')
+            #col.legend(loc=3,prop={'size':10})
+            col.tick_params(labelsize=6)
+            col.set_ylim([0,22])
+
+            i+=1
+    #plt.show()
+
+    pp.savefig(f)
+
+for att in acts:
+
+    f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(opts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
+    i=0
+
+    fgforplot=fgmean
+    hist=False
+    for row in a:
+        for col in row:
+            col.set_title('tl:'+str(fgforplot[i]['configuration']['loss_fun'])+
+                          ',vl:'+str(fgforplot[i]['configuration']['val_loss_fun'])+
+                           ',rg:{'+str(fgforplot[i]['configuration']['regularizations'])+','+
+                            str(fgforplot[i]['configuration']['rlambda'])+'}'+
+                          '\nn:'+str(fgforplot[i]['configuration']['neurons'])+
+                           ',bs:'+str(fgforplot[i]['configuration']['batch_size'])+
+                          ',a1:' + fgforplot[i]['configuration']['activations'][0]+
+                            ',a2:' + fgforplot[i]['configuration']['activations'][1]+
+                          ',{'+fgforplot[i]['configuration']['optimizers'].pprint()+"}",fontsize=10)
+
+            if hist:
+                #col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
+                #col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
+                col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
+                col.plot(fgforplot[i]['history']['val_loss'],label='val err')
+            else:
+                #col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
+                #col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
+                col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
+                col.plot(fgforplot[i]['val_loss'], label='val err')
+            #col.legend(loc=3,prop={'size':10})
+            col.tick_params(labelsize=6)
+            col.set_ylim([0,3])
+
+            i+=1
+    #plt.show()
+
+    pp.savefig(f)
+
+pp.close()

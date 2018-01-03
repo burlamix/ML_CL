@@ -124,6 +124,9 @@ class NeuralNetwork:
             batch_size = len(x_in)
 
         if (val_split > 0):
+            perm = np.random.permutation(len(x_in))
+            x_in = x_in[perm]
+            y_out = y_out[perm]
             (x_in, validation_x), (y_out, validation_y) = \
                 preproc.split_percent(x_in, y_out, val_split)
         elif val_set != None:
