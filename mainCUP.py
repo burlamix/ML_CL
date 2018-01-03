@@ -60,7 +60,7 @@ fgs = list()
 
 trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[1000], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3], batch_size=batches,
                                                n_layers=2, val_split=25,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=1, val_set=None, verbose=1,
@@ -116,35 +116,39 @@ i=0
 for att in opts:
 
     f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
-
     fgforplot=fgmean
+    fgforplot=sorted(fgforplot,key=lambda k:type(k['configuration']['optimizers']).__name__)
+
+    temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+    temp = sorted(temp, key=lambda k:k['val_loss'][-1])
+    j=0
     hist=False
     for row in a:
         for col in row:
-            col.set_title('tl:'+str(fgforplot[i]['configuration']['loss_fun'])+
-                          ',vl:'+str(fgforplot[i]['configuration']['val_loss_fun'])+
-                           ',rg:{'+str(fgforplot[i]['configuration']['regularizations'])+','+
-                            str(fgforplot[i]['configuration']['rlambda'])+'}'+
-                          '\nn:'+str(fgforplot[i]['configuration']['neurons'])+
-                           ',bs:'+str(fgforplot[i]['configuration']['batch_size'])+
-                          ',a1:' + fgforplot[i]['configuration']['activations'][0]+
-                            ',a2:' + fgforplot[i]['configuration']['activations'][1]+
-                          ',{'+fgforplot[i]['configuration']['optimizers'].pprint()+"}",fontsize=10)
+            col.set_title('tl:'+str(temp[j]['configuration']['loss_fun'])+
+                          ',vl:'+str(temp[j]['configuration']['val_loss_fun'])+
+                           ',rg:{'+str(temp[j]['configuration']['regularizations'])+','+
+                            str(temp[j]['configuration']['rlambda'])+'}'+
+                          '\nn:'+str(temp[j]['configuration']['neurons'])+
+                           ',bs:'+str(temp[j]['configuration']['batch_size'])+
+                          ',a1:' + temp[j]['configuration']['activations'][0]+
+                            ',a2:' + temp[j]['configuration']['activations'][1]+
+                          ',{'+temp[j]['configuration']['optimizers'].pprint()+"}",fontsize=10)
 
             if hist:
                 #col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
                 #col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
-                col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
-                col.plot(fgforplot[i]['history']['val_loss'],label='val err')
+                col.plot(temp[j]['history']['tr_loss'],label='tr err')
+                col.plot(temp[j]['history']['val_loss'],label='val err')
             else:
                 #col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
                 #col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
-                col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
-                col.plot(fgforplot[i]['val_loss'], label='val err')
+                col.plot(temp[j]['tr_loss'], label='tr err',ls='-.')
+                col.plot(temp[j]['val_loss'], label='val err')
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=6)
             col.set_ylim([0,22])
-
+            j+=1
             i+=1
     #plt.show()
 
@@ -160,31 +164,35 @@ i=0
 for att in opts:
 
     f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
-
     fgforplot=fgmean
+    fgforplot=sorted(fgforplot,key=lambda k:type(k['configuration']['optimizers']).__name__)
+
+    temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+    temp = sorted(temp, key=lambda k:k['val_loss'][-1])
+    j=0
     hist=False
     for row in a:
         for col in row:
-            col.set_title('tl:'+str(fgforplot[i]['configuration']['loss_fun'])+
-                          ',vl:'+str(fgforplot[i]['configuration']['val_loss_fun'])+
-                           ',rg:{'+str(fgforplot[i]['configuration']['regularizations'])+','+
-                            str(fgforplot[i]['configuration']['rlambda'])+'}'+
-                          '\nn:'+str(fgforplot[i]['configuration']['neurons'])+
-                           ',bs:'+str(fgforplot[i]['configuration']['batch_size'])+
-                          ',a1:' + fgforplot[i]['configuration']['activations'][0]+
-                            ',a2:' + fgforplot[i]['configuration']['activations'][1]+
-                          ',{'+fgforplot[i]['configuration']['optimizers'].pprint()+"}",fontsize=10)
+            col.set_title('tl:'+str(temp[j]['configuration']['loss_fun'])+
+                          ',vl:'+str(temp[j]['configuration']['val_loss_fun'])+
+                           ',rg:{'+str(temp[j]['configuration']['regularizations'])+','+
+                            str(temp[j]['configuration']['rlambda'])+'}'+
+                          '\nn:'+str(temp[j]['configuration']['neurons'])+
+                           ',bs:'+str(temp[j]['configuration']['batch_size'])+
+                          ',a1:' + temp[j]['configuration']['activations'][0]+
+                            ',a2:' + temp[j]['configuration']['activations'][1]+
+                          ',{'+temp[j]['configuration']['optimizers'].pprint()+"}",fontsize=10)
 
             if hist:
                 #col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
                 #col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
-                col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
-                col.plot(fgforplot[i]['history']['val_loss'],label='val err')
+                col.plot(temp[j]['history']['tr_loss'],label='tr err')
+                col.plot(temp[j]['history']['val_loss'],label='val err')
             else:
                 #col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
                 #col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
-                col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
-                col.plot(fgforplot[i]['val_loss'], label='val err')
+                col.plot(temp[j]['tr_loss'], label='tr err',ls='-.')
+                col.plot(temp[j]['val_loss'], label='val err')
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=6)
             col.set_ylim([0,3])
@@ -204,31 +212,35 @@ i=0
 for att in opts:
 
     f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
-
     fgforplot=fgmean
+    fgforplot=sorted(fgforplot,key=lambda k:type(k['configuration']['optimizers']).__name__)
+
+    temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+    temp = sorted(temp, key=lambda k:k['val_loss'][-1])
+    j=0
     hist=False
     for row in a:
         for col in row:
-            col.set_title('tl:'+str(fgforplot[i]['configuration']['loss_fun'])+
-                          ',vl:'+str(fgforplot[i]['configuration']['val_loss_fun'])+
-                           ',rg:{'+str(fgforplot[i]['configuration']['regularizations'])+','+
-                            str(fgforplot[i]['configuration']['rlambda'])+'}'+
-                          '\nn:'+str(fgforplot[i]['configuration']['neurons'])+
-                           ',bs:'+str(fgforplot[i]['configuration']['batch_size'])+
-                          ',a1:' + fgforplot[i]['configuration']['activations'][0]+
-                            ',a2:' + fgforplot[i]['configuration']['activations'][1]+
-                          ',{'+fgforplot[i]['configuration']['optimizers'].pprint()+"}",fontsize=10)
+            col.set_title('tl:'+str(temp[j]['configuration']['loss_fun'])+
+                          ',vl:'+str(temp[j]['configuration']['val_loss_fun'])+
+                           ',rg:{'+str(temp[j]['configuration']['regularizations'])+','+
+                            str(temp[j]['configuration']['rlambda'])+'}'+
+                          '\nn:'+str(temp[j]['configuration']['neurons'])+
+                           ',bs:'+str(temp[j]['configuration']['batch_size'])+
+                          ',a1:' + temp[j]['configuration']['activations'][0]+
+                            ',a2:' + temp[j]['configuration']['activations'][1]+
+                          ',{'+temp[j]['configuration']['optimizers'].pprint()+"}",fontsize=10)
 
             if hist:
                 #col.plot(fgforplot[i]['history']['tr_acc'],label='tr acc',marker='1')
                 #col.plot(fgforplot[i]['history']['val_acc'],label='val acc')
-                col.plot(fgforplot[i]['history']['tr_loss'],label='tr err')
-                col.plot(fgforplot[i]['history']['val_loss'],label='val err')
+                col.plot(temp[j]['history']['tr_loss'],label='tr err')
+                col.plot(temp[j]['history']['val_loss'],label='val err')
             else:
                 #col.plot(fgforplot[i]['tr_acc'], label='tr acc',ls=":")
                 #col.plot(fgforplot[i]['val_acc'], label='val acc',ls="--")
-                col.plot(fgforplot[i]['tr_loss'], label='tr err',ls='-.')
-                col.plot(fgforplot[i]['val_loss'], label='val err')
+                col.plot(temp[j]['tr_loss'], label='tr err',ls='-.')
+                col.plot(temp[j]['val_loss'], label='val err')
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=6)
             col.set_ylim([0.5,1.2])

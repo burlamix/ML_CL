@@ -13,6 +13,11 @@ from autograd import elementwise_grad as egrad
 #line search https://www.cs.cmu.edu/~ggordon/10725-F12/scribes/10725_Lecture5.pdf
 #TODO conjugate gradient http://matlab.izmiran.ru/help/toolbox/nnet/backpr59.html
 class SimpleOptimizer:
+    def __str__(self):
+        return str('sgd'+str(self.lr))
+
+    def __repr__(self):
+        return str('sgd'+str(self.lr))
 
     def __init__(self, lr=0.1):
         self.lr = lr
@@ -42,6 +47,12 @@ class SimpleOptimizer:
             #for layer in NN.layers:
                 #layer.weights = layer.weights+layer.gradients
 class Momentum:
+    def __str__(self):
+        return str('momentum'+str(self.lr))
+
+    def __repr__(self):
+        return str('momentum'+str(self.lr))
+
     def __init__(self, lr=0.001, eps=0.9, nesterov=False):
         self.lr = lr
         self.nesterov = nesterov
@@ -78,6 +89,12 @@ class Adam:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
     #A gradient based method, enriched with the first and second moment
     #information of past gradients. --TODO broader explaination (parameters descrp etc--
+    def __str__(self):
+        return str('adam'+str(self.lr))
+
+    def __repr__(self):
+        return str('adam'+str(self.lr))
+
     def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
         self.lr = lr
         self.b1 = b1
@@ -116,6 +133,11 @@ class Adam:
 class Adamax:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
     #--TODO broader explaination (parameters descrp etc--
+    def __str__(self):
+        return str('adamax'+str(self.lr))
+
+    def __repr__(self):
+        return str('adamax'+str(self.lr))
     def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
         self.lr = lr
         self.b1 = b1
@@ -149,6 +171,12 @@ class Adamax:
 
 class RMSProp:
     #TODO add documentation
+    def __str__(self):
+        return str('rmsprop'+str(self.lr))
+
+    def __repr__(self):
+        return str('rmsprop'+str(self.lr))
+
     def __init__(self, lr=0.001, delta=0.9):
         self.lr = lr
         self.delta = delta
