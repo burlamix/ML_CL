@@ -29,10 +29,10 @@ def l2(W, rlambda=0.0):
 def l1(W, rlambda=0.0):
     return (np.abs(W)).sum()*rlambda
 
-def elasticNet(W,rlambda):
+def EN(W,rlambda):
     return l1(W,rlambda[0])+l2(W,rlambda[1])
 
-def elasticNetdx(W, rlambda):
+def ENdx(W, rlambda):
     return l1reguldx(W, rlambda[0]) + l2reguldx(W,rlambda[1])
 
 def l1reguldx(W, rlambda=0.0):
@@ -44,4 +44,4 @@ def l2reguldx(W, rlambda=0.0):
 reguls = dict()
 reguls["L2"] = Regularization(l2, l2reguldx)
 reguls["L1"] = Regularization(l1, l1reguldx)
-reguls["EN"] = Regularization(elasticNet, elasticNetdx)
+reguls["EN"] = Regularization(EN, ENdx)

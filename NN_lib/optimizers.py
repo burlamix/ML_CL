@@ -52,7 +52,7 @@ class Momentum:
         self.last_g = None
 
     def pprint(self):
-        return "lr=" + str(self.lr)+",mom="+self.eps
+        return "lr=" + str(self.lr)+",m="+str(self.eps)
 
     def getLr(self):
         return self.lr

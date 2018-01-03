@@ -143,7 +143,6 @@ class NeuralNetwork:
                 cap = min([len(x_in), chunk + batch_size])
 
                 update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weight())
-                print('s',update.shape)
                 # predicted = self.FP(x_in[chunk:cap],)
                 for j in range(0, len(self.layers)):
                     # print("-----1----",update[j])

@@ -15,12 +15,12 @@ optimizer3 = Momentum(lr=0.5,eps=0.9, nesterov=True)
 #bm_monk(optimizer=optimizer3,monk='monk2',act1='tanh',act2='sigmoid',
  #       reg=0.0,bs=169,epochs=1000,trials=1)tanh
 outs=1
-valr2=(0.8,0.8)
-valr=0.8
-clr=0.0004
+valr2=(0.0,0.0)
+valr=0.0
+clr=0.04
 drop=0.0
 drop2=0.0
-epochs=200
+epochs=1000
 x_train,y_train = load_monk("MONK_data/monks-2.train")
 x_test,y_test = load_monk("MONK_data/monks-2.test")
 train_data_path = "data/ML-CUP17-TR.csv"
@@ -57,7 +57,7 @@ rmsp = RMSProp(lr=clr,delta=0.9)
 NN = NeuralNetwork()
 NN.addLayer(inputs=inps,neurons=2,activation="tanh", rlambda=valr2,regularization="EN",
             dropout=drop,bias=0.0)
-NN.addLayer(inputs=2,neurons=outs,activation="linear",rlambda=valr2,regularization="EN",
+NN.addLayer(inputs=2,neurons=outs,activation="tanh",rlambda=valr2,regularization="EN",
             dropout=drop2,bias=0.0)
 
 #dataset.train[0] = np.random.randn(50,17)
@@ -97,7 +97,8 @@ ini2 = keras.initializers.RandomUniform(minval=-0.7 / 2, maxval=0.7 / 2, seed=No
 model = Sequential()
 model.add(Dense(2  , activation= 'tanh' ,kernel_initializer=ini1,input_dim=inps,use_bias=True,
     bias_initializer="zeros",kernel_regularizer=regularizers.l1_l2(valr2[0],valr2[1]),bias_regularizer=regularizers.l1_l2(valr2[0],valr2[1])))
-model.add(Dense(outs, activation= 'linear',kernel_initializer=ini2 ,use_bias=True,
+model.add(Dropout(drop))
+model.add(Dense(outs, activation= 'tanh',kernel_initializer=ini2 ,use_bias=True,
     bias_initializer="zeros",kernel_regularizer=regularizers.l1_l2(valr2[0],valr2[1]),bias_regularizer=regularizers.l1_l2(valr2[0],valr2[1])))
 
 sgd = optims.SGD(lr=clr, momentum=0.9, decay=0.00,nesterov=False )
