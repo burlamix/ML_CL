@@ -130,7 +130,7 @@ class Adamax:
         self.t = 0
 
     def pprint(self):
-        return "adamax,lr=" + str(self.lr)
+        return "adamax:" + str(self.lr)
 
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):

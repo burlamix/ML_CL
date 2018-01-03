@@ -23,20 +23,21 @@ optimizer2 = SimpleOptimizer(lr=0.2)
 optimizer5 = Momentum(lr=0.5,eps=0.5)
 optimizer10 = RMSProp(lr=0.0151)
 
-adam1 = Adam(lr=0.001,b1=0.9,b2=0.999)
+adam1 = Adamax(lr=0.011,)
 adam2 = Adam(lr=0.03,b1=0.9,b2=0.999)
-adam3 = Adam(lr=0.6,b1=0.9,b2=0.999)
+adam3 = RMSProp(lr=0.01)
+adam4 = RMSProp(lr=0.1)
 m1 = Momentum(lr=0.001,eps=0.9,nesterov=True)
 m2 = Momentum(lr=0.04,eps=0.9,nesterov=True)
-m3 = Momentum(lr=0.3,eps=0.9,nesterov=True)
+#no m3 = Momentum(lr=0.3,eps=0.9,nesterov=True)
 
 preprocessor = preproc.Preprocessor()
 #preprocessor.remove_outliers(dataset)
 #print(preprocessor.remove_outliers(dataset2016))
 preprocessor.shuffle(dataset)
 #preprocessor.normalize(dataset,method='minmax')
-acts=[["tanh","linear"],["sigmoid","linear"]]
-opts=[adam1,adam2,adam3,m1,m2,m3]#,optimizer6,optimizer7,optimizer8]
+acts=[["relu","linear"],["tanh","linear"],["sigmoid","linear"]]
+opts=[adam1,adam2,adam3,adam4,m1,m2]#,optimizer6,optimizer7,optimizer8]
 neurs=[[5,2],[20,2],[80,2]]
 batches = [dataset.train[0].shape[0]]
 losses = ["mee"]
@@ -50,7 +51,7 @@ fgs = list()
 trials = 1
 for i in range(0,trials):
     fg,grid_res, pred = validation.grid_search(dataset, epochs=[50], batch_size=batches,
-                                               n_layers=2, val_split=20,activations=acts,
+                                               n_layers=2, val_split=25,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=1, val_set=None, verbose=1,
                                                loss_fun=losses, val_loss_fun="mee",
@@ -96,9 +97,9 @@ nconfig = len(acts)*len(opts)*len(neurs)
 
 
 
-for att in acts:
+for att in opts:
 
-    f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(opts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
+    f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
     i=0
 
     fgforplot=fgmean
@@ -134,9 +135,9 @@ for att in acts:
 
     pp.savefig(f)
 
-for att in acts:
+for att in opts:
 
-    f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(opts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
+    f, (a) = plt.subplots(figsize=(30,30),nrows=len(batches)*len(neurs)*len(acts), ncols=len(rlambdas)*len(losses), sharex='col', sharey='row',squeeze=False)
     i=0
 
     fgforplot=fgmean
