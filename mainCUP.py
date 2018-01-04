@@ -6,7 +6,7 @@ from NN_lib import regularizations
 from matplotlib.backends.backend_pdf import PdfPages
 import pickle
 
-np.random.seed(555)
+np.random.seed(5555)
 dataset = preproc.Dataset()
 dataset2016 = preproc.Dataset()
 
@@ -31,7 +31,7 @@ adam1 = Adam(lr=0.03,b1=0.9,b2=0.999)
 adam2 = Adam(lr=0.4,b1=0.9,b2=0.999)
 adam3 = Adam(lr=0.007,b1=0.9,b2=0.999)
 
-adamax1 = Adamax(lr=0.0173,b1=0.9,b2=0.999)
+adamax1 = Adamax(lr=0.016,b1=0.9,b2=0.999)
 
 adamax2 = Adamax(lr=0.2,b1=0.9,b2=0.999)
 adamax3 = Adamax(lr=0.007,b1=0.9,b2=0.999)
@@ -47,23 +47,27 @@ m3 = Momentum(lr=0.04,eps=0.9,nesterov=True)
 
 preprocessor = preproc.Preprocessor()
 #preprocessor.remove_outliers(dataset)
-#print(preprocessor.remove_outliers(dataset))
+print(preprocessor.remove_outliers(dataset,sensitivity=2))
+
+preprocessor.outlier_range(dataset,0.0001,2,3)
+exit(1)
+
 preprocessor.shuffle(dataset)
 #preprocessor.normalize(dataset,method='minmax')
 acts=[["sigmoid","linear"]]
 opts=[adamax1]
-neurs=[[75,2],[43,2]]
+neurs=[[50,2],[51,2]]
 batches = [dataset.train[0].shape[0]]
-losses = ["mee","mse"]
+losses = ["mee"]
 regs = [[regularizations.reguls["EN"],regularizations.reguls["EN"]]]
-rlambdas = [[(0.0,0.0),(0.0,0.0)]]
+rlambdas = [[(0.00006,0.00004),(0.00006,0.00004)]]
            # [(0.001), (0,0)]]
 
 fgs = list()
 
-trials = 2
+trials = 10
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[4000], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=3, val_set=None, verbose=1,
@@ -255,7 +259,7 @@ for att in opts:
                 col.plot(temp[j]['val_loss'], label='val err')
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=6)
-            col.set_ylim([0.75,1.23])
+            col.set_ylim([0.75,1.2])
             j+=1
             i+=1
     #plt.show()

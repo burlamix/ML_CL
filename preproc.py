@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 
@@ -65,6 +66,31 @@ class Preprocessor:
         dataset.train[0]=np.delete(dataset.train[0],out,axis=0)
         dataset.train[1]=np.delete(dataset.train[1],out,axis=0)
         return len(out)
+
+    def outlier_range(self,dataset,hop,start,end):
+        mean = self.get_means(dataset)
+        var = self.get_variance(dataset)
+        ax=[]
+
+        x=start
+        while x<end:
+            c=0
+            x=x+hop
+            print(x)
+            for el in range(0,len(dataset.train[0])):
+                for i in range(0,len(var)):
+                    if np.abs(dataset.train[0][el][i])>np.abs(mean[i])+x*var[i]:
+                        c=c+1
+                        break
+            ax.append(c)
+        
+        #for x in range (start,end,hop):
+         #   print(x)
+        print(ax)
+        plt.plot(ax)
+        plt.ylabel('some numbers')
+        plt.show()
+
 
 def load_data(path=None, target=True, header_l=0, targets=0):                       #TODO inser it inside of dataset object?
     '''Loads data into numpy arrays from given path. File at specified path

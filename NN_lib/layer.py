@@ -16,10 +16,8 @@ class Layer:
         self.mask = np.ones(neurons)
         self.currentOutput = None
         self.grad=None
-        if neurons==43:
-            self.dropout=0.0013        
-        if neurons==75:
-            self.dropout=0.003
+        if neurons==51:
+            self.dropout=0.002        
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
         self.neurons=neurons
         self.inputs=inputs
