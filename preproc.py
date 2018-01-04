@@ -48,15 +48,23 @@ class Preprocessor:
         perm = np.random.permutation(len(dataset.train[0]))
         dataset.train = [dataset.train[0][perm], dataset.train[1][perm]]
 
-    def get_means(self):
-        pass
+    def get_means(self,dataset):
+        return np.mean(dataset.train[0],axis=0)
 
-    def get_variance(self):
-        pass
+    def get_variance(self,dataset):
+        return np.var(dataset.train[0],axis=0)
 
-    def remove_outliers(self, sensitivity=3.0):
-        pass
-
+    def remove_outliers(self, dataset, sensitivity=3):
+        mean = self.get_means(dataset)
+        var = self.get_variance(dataset)
+        out = []
+        for el in range(0,len(dataset.train[0])):
+            for i in range(0,len(var)):
+                if np.abs(dataset.train[0][el][i])>np.abs(mean[i])+sensitivity*var[i]:
+                    out.append(el)
+        dataset.train[0]=np.delete(dataset.train[0],out,axis=0)
+        dataset.train[1]=np.delete(dataset.train[1],out,axis=0)
+        return len(out)
 
 def load_data(path=None, target=True, header_l=0, targets=0):                       #TODO inser it inside of dataset object?
     '''Loads data into numpy arrays from given path. File at specified path

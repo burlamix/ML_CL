@@ -16,6 +16,10 @@ class Layer:
         self.mask = np.ones(neurons)
         self.currentOutput = None
         self.grad=None
+        if neurons==43:
+            self.dropout=0.0013        
+        if neurons==75:
+            self.dropout=0.003
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
         self.neurons=neurons
         self.inputs=inputs
@@ -40,7 +44,6 @@ class Layer:
         self.currentOutput = self.activation.f(partial)
         self.mask = np.random.binomial(1,1-self.dropout,self.currentOutput.shape)
         self.currentOutput = self.currentOutput*self.mask
-
         if self.dropout==1:self.mask=np.zeros_like(self.currentOutput)
         else:self.mask= self.mask/(1-self.dropout)
         #self.mask = self.mask / (1 - self.dropout if self.dropout != 1 else 1)
