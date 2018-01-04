@@ -6,7 +6,7 @@ from NN_lib import regularizations
 from matplotlib.backends.backend_pdf import PdfPages
 import pickle
 
-np.random.seed(915)
+np.random.seed(555)
 dataset = preproc.Dataset()
 dataset2016 = preproc.Dataset()
 
@@ -36,8 +36,7 @@ adamax2 = Adamax(lr=0.2,b1=0.9,b2=0.999)
 adamax3 = Adamax(lr=0.007,b1=0.9,b2=0.999)
 
 RMSP1 = RMSProp(lr=0.01)
-RMSP2 = RMSProp(lr=0.05)
-RMSP3 = RMSProp(lr=0.1)
+
 
 m1 = Momentum(lr=0.001,eps=0.9,nesterov=True)
 m2 = Momentum(lr=0.008,eps=0.9,nesterov=True)
@@ -50,24 +49,24 @@ preprocessor = preproc.Preprocessor()
 #print(preprocessor.remove_outliers(dataset2016))
 preprocessor.shuffle(dataset)
 #preprocessor.normalize(dataset,method='minmax')
-acts=[["relu","linear"],["tanh","linear"],["sigmoid","linear"]]
-opts=[adam1,adam2,adam3,RMSP1,RMSP2,RMSP3,m1,m2,m3,adamax1,adamax2,adamax3]
-neurs=[[5,2],[20,2],[80,2]]
+acts=[["tanh","linear"],["sigmoid","linear"]]
+opts=[RMSP1]
+neurs=[[20,2],[35,2],[50,2]]
 batches = [dataset.train[0].shape[0]]
 losses = ["mee"]
 regs = [[regularizations.reguls["EN"],regularizations.reguls["EN"]]]
-rlambdas = [[(0.0,0.0),(0.0,0.0)],[(0.01,0.0),(0.01,0.0)],
-            [(0.0,0.01),(0.0,0.01)],[(0.01,0.01),(0.01,0.01)]]
+rlambdas = [[(0.001,0.000),(0.001,0.000)], [(0.000,0.0007),(0.000,0.0007)],[(0.0001,0.0001),(0.0001,0.0001)], [(0.0001,0.0000),(0.0001,0.0000)]
+    ,[(0.00006,0.00004),(0.00006,0.00004)]]
            # [(0.001), (0,0)]]
 
 fgs = list()
 
-trials = 1
+trials = 2
 for i in range(0,trials):
     fg,grid_res, pred = validation.grid_search(dataset, epochs=[3000], batch_size=batches,
-                                               n_layers=2, val_split=25,activations=acts,
+                                               n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
-                                               cvfolds=1, val_set=None, verbose=1,
+                                               cvfolds=3, val_set=None, verbose=1,
                                                loss_fun=losses, val_loss_fun="mee",
                                                neurons=neurs, optimizers=opts)
     fgs.append(fg)
