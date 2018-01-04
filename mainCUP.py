@@ -47,9 +47,9 @@ m3 = Momentum(lr=0.04,eps=0.9,nesterov=True)
 
 preprocessor = preproc.Preprocessor()
 #preprocessor.remove_outliers(dataset)
-print(preprocessor.remove_outliers(dataset,sensitivity=2))
+#print(preprocessor.remove_outliers(dataset,sensitivity=2))
 
-preprocessor.outlier_range(dataset,0.0001,2,3)
+preprocessor.outlier_range(dataset,0.001,2,3)
 exit(1)
 
 preprocessor.shuffle(dataset)

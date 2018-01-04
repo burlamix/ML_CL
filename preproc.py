@@ -36,7 +36,14 @@ class Dataset:
 class Preprocessor:
 
     def normalize(self, dataset, method='min-max', norm_output=False):
-        if method=='min-max':
+        if method=='zscore':
+            mean = self.get_means(dataset)
+            dataset.train[0] = (dataset.train[0] - mean) / \
+                               np.std(dataset.train[0])
+            if norm_output:
+                dataset.train[1] = (dataset.train[1] - np.mean(dataset.train[1],axis=0)) / \
+                                   np.std(dataset.train[1])
+        elif method=='min-max':
             dataset.train[0] =  (dataset.train[0] - dataset.train[0].min(axis=0)) / \
                                (dataset.train[0].max(axis=0) - dataset.train[0].min(axis=0))
             if norm_output:
