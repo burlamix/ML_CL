@@ -12,12 +12,11 @@ class Layer:
         self.regularizer = regularizations.validate_regularizer(regularizer)
         self.activation = activations.validate_activation(activation)
         self.rlambda = rlambda
-        self.dropout = dropout
-        self.mask = np.ones(neurons)
+        #self.dropout = dropout
+        #self.mask = np.ones(neurons)
         self.currentOutput = None
         self.grad=None
-        if neurons==51:
-            self.dropout=0.002        
+  
         if inputs<0 or neurons<0: sys.exit("Expected positive value")
         self.neurons=neurons
         self.inputs=inputs
@@ -40,10 +39,10 @@ class Layer:
         x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
         partial = np.dot(x, self.W.transpose())
         self.currentOutput = self.activation.f(partial)
-        self.mask = np.random.binomial(1,1-self.dropout,self.currentOutput.shape)
-        self.currentOutput = self.currentOutput*self.mask
-        if self.dropout==1:self.mask=np.zeros_like(self.currentOutput)
-        else:self.mask= self.mask/(1-self.dropout)
+        #self.mask = np.random.binomial(1,1-self.dropout,self.currentOutput.shape)
+        #self.currentOutput = self.currentOutput*self.mask
+        #if self.dropout==1:self.mask=np.zeros_like(self.currentOutput)
+        #else:self.mask= self.mask/(1-self.dropout)
         #self.mask = self.mask / (1 - self.dropout if self.dropout != 1 else 1)
         return self.currentOutput
 

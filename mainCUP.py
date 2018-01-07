@@ -6,7 +6,7 @@ from NN_lib import regularizations
 from matplotlib.backends.backend_pdf import PdfPages
 import pickle
 
-np.random.seed(5555)
+np.random.seed(5)
 dataset = preproc.Dataset()
 dataset2016 = preproc.Dataset()
 
@@ -47,30 +47,30 @@ m3 = Momentum(lr=0.04,eps=0.9,nesterov=True)
 
 preprocessor = preproc.Preprocessor()
 #preprocessor.remove_outliers(dataset)
-#print(preprocessor.remove_outliers(dataset,sensitivity=2))
+#print(preprocessor.remove_outliers(dataset,sensitivity=2.5))
 
-preprocessor.outlier_range(dataset,0.001,2,3)
-exit(1)
+#preprocessor.outlier_range(dataset,0.001,2,3)
+#exit(1)
 
 preprocessor.shuffle(dataset)
 #preprocessor.normalize(dataset,method='minmax')
 acts=[["sigmoid","linear"]]
 opts=[adamax1]
-neurs=[[50,2],[51,2]]
+neurs=[[50,2]]
 batches = [dataset.train[0].shape[0]]
 losses = ["mee"]
 regs = [[regularizations.reguls["EN"],regularizations.reguls["EN"]]]
-rlambdas = [[(0.00006,0.00004),(0.00006,0.00004)]]
+rlambdas = [[(0.0001,0.0001),(0.0001,0.0001)]]
            # [(0.001), (0,0)]]
 
 fgs = list()
 
-trials = 10
+trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[4000], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3105], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
-                                               cvfolds=3, val_set=None, verbose=1,
+                                               cvfolds=1, val_set=None, verbose=1,
                                                loss_fun=losses, val_loss_fun="mee",
                                                neurons=neurs, optimizers=opts)
     fgs.append(fg)
@@ -78,7 +78,7 @@ for i in range(0,trials):
 #exit(1)
 fgmean = list() #List for holding means
 
-with open('grids.pkl', 'wb') as output:
+with open('rimuovendo_out.pkl', 'wb') as output:
     pickle.dump(fgs, output, pickle.HIGHEST_PROTOCOL)
     pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
@@ -113,7 +113,7 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
 
-pp = PdfPages("foo.pdf")
+pp = PdfPages("rimuovendo_out.pdf")
 #nconfig = len(acts)*len(opts)*len(neurs)
 #TODO MEDIA SU PIu test vedi k validation
 
@@ -127,7 +127,7 @@ for att in opts:
     fgforplot=fgmean
     fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
     temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    temp = sorted(temp, key=lambda k:k['val_loss'][-1])
+    #temp = sorted(temp, key=lambda k:k['val_loss'][-1])
     j=0
     hist=False
     for row in a:
@@ -178,7 +178,7 @@ for att in opts:
     fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
 
     temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    temp = sorted(temp, key=lambda k:k['val_loss'][-1])
+    #temp = sorted(temp, key=lambda k:k['val_loss'][-1])
     j=0
     hist=False
     for row in a:
@@ -232,7 +232,7 @@ for att in opts:
     fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
 
     temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    temp = sorted(temp, key=lambda k:k['val_loss'][-1])
+    #temp = sorted(temp, key=lambda k:k['val_loss'][-1])
     j=0
     hist=False
     for row in a:

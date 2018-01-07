@@ -26,7 +26,7 @@ class NeuralNetwork:
         for i in range(len(self.layers) - 1, -1, -1):
 
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
-            logi = logi*self.layers[i].mask
+            #logi = logi*self.layers[i].mask
             # print('curro:',np.count_nonzero(self.layers[i].currentOutput),
             #      's',np.array(self.layers[i].currentOutput).shape)
             # print('nonzeros:',np.count_nonzero(logi),'s',(logi).shape)
