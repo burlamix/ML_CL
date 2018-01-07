@@ -1,5 +1,6 @@
 import preproc
 from NN_lib import validation
+from NN_lib.NN import *
 from NN_lib.optimizers import *
 import matplotlib.pyplot as plt
 from NN_lib import regularizations
@@ -63,6 +64,25 @@ regs = [[regularizations.reguls["EN"],regularizations.reguls["EN"]]]
 rlambdas = [[(0.0001,0.0001),(0.0001,0.0001)]]
            # [(0.001), (0,0)]]
 
+
+#############################################################################
+
+NN = NeuralNetwork()
+NN.addLayer(inputs=10,neurons=50,activation="sigmoid", rlambda=(0.0001,0.0001),regularization="EN",
+            dropout=0,bias=0.0)
+NN.addLayer(inputs=50,neurons=2,activation="linear",rlambda=(0.0001,0.0001),regularization="EN",
+            dropout=0,bias=0.0)
+
+
+NN.fit_ds( dataset,epochs=3105, optimizer=adamax1 ,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mee")
+
+with open('finale_NN_Model.pkl', 'wb') as output:
+    pickle.dump(NN, output, pickle.HIGHEST_PROTOCOL)
+print("-------")
+
+exit(1)
+############################################################################à
+
 fgs = list()
 
 trials = 1
@@ -70,7 +90,7 @@ for i in range(0,trials):
     fg,grid_res, pred = validation.grid_search(dataset, epochs=[3105], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
-                                               cvfolds=1, val_set=None, verbose=1,
+                                               cvfolds=1, val_set=None, verbose=2,
                                                loss_fun=losses, val_loss_fun="mee",
                                                neurons=neurs, optimizers=opts)
     fgs.append(fg)
