@@ -5,7 +5,13 @@ import numpy as np
 import preproc
 class NeuralNetwork:
 
-    def __init__(self):
+    def __init__(self, eval_method='binary'):
+        '''
+        :param eval_method: Evaluation method for calculating the accuracy
+        '''
+        if (eval_method!='binary' and eval_method!='one-hot'):
+            sys.exit('Evaluation method not found.')
+        self.eval_method = eval_method
         self.layers = []
 
     def addLayer(self, inputs, neurons, activation, weights=np.array(None), bias=0,
@@ -103,7 +109,6 @@ class NeuralNetwork:
 
     def reguldx(self, i):
         '''
-
         :param i: The layer for which the derivative of the regularization term
         is to be calculated
         :return: the array of regularization terms for the given layer
@@ -111,40 +116,61 @@ class NeuralNetwork:
         return self.layers[i].regularizedx()
 
     def f(self, in_chunk, out_chunk):
+        '''
+        Evaluates the function represented by the neural network and returns
+        either the value only or the gradient as well. Note that the second
+        case is cimputationally heavier.
+        :param in_chunk: input values to propagate through the network
+        :param out_chunk: real output
+        :return: loss value or loss and gradient based on only_fp parameter
+        '''
         def g(W, only_fp=False):
-            self.set_weight(W)  # TODO TODO put this inside at FP and BP
+            self.set_weights(W)
             if only_fp:
-                return self.loss_func.f(out_chunk, self.FP(in_chunk))  # + self.regul()
+                return self.loss_func.f(out_chunk, self.FP(in_chunk))
             else:
                 loss, grad = self.BP(self.FP(in_chunk), out_chunk, in_chunk)
-                #print('grad',grad.shape)
-               # print('after',(grad+np.array([self.reguldx(i) for i in range(0,len(self.layers))])
-#).shap#e)
-                return loss + self.regul(), grad#+np.array([self.reguldx(i) for i in range(0,len(self.layers))])
-
+                return loss + self.regul(), grad
         return g
 
     def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0, val_set=None,
             val_loss_fun=None):
-        # *GENERAL DESCRIPTION*
-        # loss_func: can either be a string refering to a standardized defined
-        # loss functions or a tuple where the first element is a loss function
-        # and the second element is the corresponding derivative
-        #
-        # batch_size: the dimension of the samples to use for each update step.
-        # note that a higher value leads to higher stability and parallelization
-        # capabilities, possibly at the cost of a higher number of updates
-        ######################################################################
+        '''
+        Trains the network and returns the training and validation losses. Refer
+        to the following description of parameters for a more precise description.
+        :param x_in: The input values of the network, that is the labelled samples.
+        :param y_out: The real labels of the input values.
+        :param epochs: The number of epochs. An epoch is completed when all the input
+        samples have been seen once.
+        :param optimizer: The optimizer that updates the weights of the network. May
+        be one of the available ones such as "adam", "sgd", "rmsprop" or a custom one.
+        :param batch_size: The size of the input chunks to consider at a time.
+        :param loss_func: The loss function used by the network, can either be an available
+        one such as "mse", "mee" or a custom one.
+        :param val_split: The percentage of the input samples to be used for validaiton
+        purposes.
+        :param verbose: A value of 1 will display the errors and accuracies at the end of
+        the training, a value >=2 will display the the errors and accuracies after every
+        epoch
+        :param val_set: A separate set to be used for validation purposes. Note that only
+        one of val_set and validation_split may be used at a time.
+        :param val_loss_fun: The loss function to be used on the validation set.
+        :return: The final training and validation losses and accuracies and a
+        history object containing the training and validation values for each epoch.
+        More precisely history is a dictionary of lists with the following keys:
+        'tr_loss', 'val_loss', 'tr_acc', 'val_acc'.
+        '''
         if (val_set != None and val_split > 0):
             sys.exit("Cannot use both a separate set and a split for validation ")
 
         # Check whether the user provided a properly formatted loss function
         self.loss_func = loss_functions.validate_loss(loss_func)
 
-        if batch_size < 0 or batch_size > (len(x_in)):  # TODO more check
+        if batch_size < 0 or batch_size > (len(x_in)):
             batch_size = len(x_in)
 
         if (val_split > 0):
+            #Use a random validation split
             perm = np.random.permutation(len(x_in))
             x_in = x_in[perm]
             y_out = y_out[perm]
@@ -156,6 +182,7 @@ class NeuralNetwork:
 
         history = {'tr_loss': [], 'val_loss': [], 'tr_acc': [], 'val_acc': []}
         optimizer.reset()
+
         for i in range(0, epochs):
             # Randomly permute the data before each epoch
             perm = np.random.permutation(len(x_in))
@@ -163,25 +190,18 @@ class NeuralNetwork:
             y_out = y_out[perm]
             loss, acc = self.evaluate(x_in, y_out)
 
+            #Handle input chunks, that is mini-batches.
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
+                update = optimizer.optimize(
+                    self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weights())
 
-                update = optimizer.optimize(self.f(x_in[chunk:cap], y_out[chunk:cap]), self.get_weight())
-                # predicted = self.FP(x_in[chunk:cap],)
-                for j in range(0, len(self.layers)):
-                    # print("-----1----",update[j])
-                    # print("-----2----",(self.reguldx(j) / batch_size).transpose())
-                    update[j] = update[j]#-optimizer.lr* (self.reguldx(j)).transpose()
-                    #update[j] /= 1
-
-                self.set_weight(update)
-
-                # for j in range(0, len(self.layers)):
-                # self.layers[j].W = self.layers[j].W + update[j].transpose() - (self.reguldx(j) / batch_size)
-                # self.layers[j].W = self.layers[j].W + update[-j - 1].transpose() - (self.reguldx(j) / batch_size)
+                #Update the weights with the ones returned by the optimizer
+                self.set_weights(update)
 
             val_loss = None
             val_acc = None
+            #Update the history object
             if (val_split > 0 or val_set != None):
                 val_loss, val_acc = self.evaluate(validation_x, validation_y, val_loss_fun)
                 history['val_loss'].append(val_loss)
@@ -189,73 +209,88 @@ class NeuralNetwork:
             history['tr_loss'].append(loss)
             history['tr_acc'].append(acc)
 
+        #Display losses and accuracies according to verbose
             if (verbose >= 2):
-                # loss,acc = self.evaluate(x_in,y_out)
-                # print("loss=",loss,"        acc=",acc)
                 print(i, ' loss = {0:.8f} '.format(loss), 'accuracy = {0:.8f} '.format(acc),
                       (' val_loss = {0:.8f} '.format(val_loss),
                        ' val_acc = {0:.8f} '.format(val_acc)) if (val_split > 0 or val_set != None) else "")
-            # TODO inefficente..
-        # TODO proper output formatting
-        # if(verbose>=2 and (val_split>0 or val_set!=None) ):
-        #  print("Validation loss:"+str(val_loss)+' val acc:'+str(val_acc))
         if (verbose >= 1 and (val_split > 0 or val_set != None)):
             print("Validation loss:" + str(val_loss) + ' val acc:' + str(val_acc))
+
         return (loss, acc, val_loss, val_acc, history)
+
 
     def fit_ds(self, dataset, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0, val_set=None,
                val_loss_fun=None):
+        '''
+        @fit
+        '''
         return self.fit(dataset.train[0], dataset.train[1], epochs, optimizer, batch_size, loss_func, val_split,
                         verbose, val_set, val_loss_fun)
 
-    def evaluate(self, x_in, y_out, loss_fun=None):
 
+    def evaluate(self, x_in, y_out, loss_fun=None):
+        '''
+        Evaluates the loss of the network with the given input, labels and loss function.
+        :param x_in: The input to propagate throught the network
+        :param y_out: The real labels of the input
+        :param loss_fun: The loss function to calculate the error on.
+        :return:
+        '''
         if loss_fun == None: loss_fun = self.loss_func
         loss_fun = loss_functions.validate_loss(loss_fun)
 
+        #Predicted output
         real = self.FP(x_in)
 
-        # val_loss_func = self.loss_func[0](real,dataset.test[0]) #+ self.regul()        TODO TODO TODO MUST cambiare così
-        val_loss_func = loss_fun.f(real, y_out)   #+ self.regul()
+        val_loss_func = loss_fun.f(real, y_out)
 
         correct = 0
-        errate = 0
-        accuracy = 0
-        # TODO -> make it work in the general case
-        for i in range(0, real.shape[0]):
-            # if ( (real[i][0]>0.5 and y_out[i][0]==1) or (real[i][0]<=0.5 and y_out[i][0]==0) ): #TODO time? make it automaticaly
-            if ((real[i][0] > 0 and y_out[i][0] == 1) or (
-                    real[i][0] <= 0 and y_out[i][0] == -1)):  # TODO time? make it automaticaly
-                correct = correct + 1
-            else:
-                errate = errate + 1
+        errors = 0
 
-        accuracy = correct / real.size  # TOCHECK this is the accuracy that whant micheli?
-
-        # if(accuracy>0.999):exit(1)
+        if (self.eval_method=='one--hot'):
+            for i in range(0, real.shape[0]):
+                if np.argmax(y_out[i]) == np.argmax(real[i]):
+                    correct += 1
+                else:
+                    errors += 1
+        elif (self.eval_method=='binary'):
+            for i in range(0, real.shape[0]):
+                if ((real[i][0] > 0 and y_out[i][0] == 1) or
+                        (real[i][0] <= 0 and y_out[i][0] == -1)):
+                    correct = correct + 1
+                else:
+                    errors = errors + 1
+        accuracy = correct / real.shape[0]
         return val_loss_func, accuracy
 
+
     def predict(self, x_in):
+        '''
+        Returns the prediction of the network on the given input
+        '''
         return self.FP(x_in)
 
-    def initialize_random_weight(self, method='fan_in'):
+    def initialize_random_weights(self, method='fan_in'):
         for layer in self.layers:
             layer.initialize_random_weights(method)
 
-    # take a list of matrix, for inizializa layers wheight
-    def set_weight(self, W):
+    def set_weights(self, W):
+        '''
+        Sets the weights of the network according to the given matrix W.
+        :param W: weights matrix to set the layers of the network with.
+        :return:
+        '''
         for i in range(len(W) - 1, -1, -1):
-            # self.layers[i].set_weights(W[i].transpose())
             self.layers[i].set_weights(W[i])
-        # for layer,W_i in zip(self.layers,W):
-        #    layer.set_weights(W_i)
 
-    def get_weight(self):
+    def get_weights(self):
+        '''
+        Returns a matrix of shape (len(layers),) containing
+        the weights matrices of the layers.
+        :return:
+        '''
         W = np.empty(len(self.layers), dtype=object)
         for i in range(0, len(self.layers)):
             W[i] = self.layers[i].W.transpose()
         return W
-
-#  def w_update(update):
-#     for i in range (0,len(self.layers)):
-#        self.layers[i].W = self.layers[i].W+update[-i-1].transpose()

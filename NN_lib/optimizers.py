@@ -3,14 +3,9 @@ import types
 import sys
 
 
-
-#Learn learning rate
-#https://www.neuraldesigner.com/blog/5_algorithms_to_train_a_neural_network
-#Minkowski error as loss func
-#line search https://www.cs.cmu.edu/~ggordon/10725-F12/scribes/10725_Lecture5.pdf
-#TODO conjugate gradient http://matlab.izmiran.ru/help/toolbox/nnet/backpr59.html
-
 class SimpleOptimizer:
+    #SGD optimizer without momentum
+    #TODO: merge with momentum optimizer
     def __str__(self):
         return str('sgd'+str(self.lr))
 
@@ -30,7 +25,6 @@ class SimpleOptimizer:
         return self.lr
 
     def optimize(self, f, W):
-        print('as')
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
@@ -38,6 +32,13 @@ class SimpleOptimizer:
 
 
 class Momentum:
+    '''
+    SGD optimizer with momentum
+    Refer to: https://www.sciencedirect.com/science/article/pii/0041555364901375
+    and 'A method of solving a convex programming problem with convergence rate O (1/k2)'
+    for a more in-depth description
+    TODO: merge with SimpleOptimizer
+    '''
     def __str__(self):
         return str('momentum'+str(self.lr))
 
@@ -68,7 +69,6 @@ class Momentum:
             #If nesterov, "look ahead" first
             loss, grad = \
                 (f(self.eps*self.last_g+W) if (self.last_g != None) else f(W))
-
             v = -self.lr*(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
         else:
             loss, grad = f(W)
@@ -79,7 +79,7 @@ class Momentum:
 class Adam:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
     #A gradient based method, enriched with the first and second moment
-    #information of past gradients. --TODO broader explaination (parameters descrp etc--
+    #information of past gradients.
     def __str__(self):
         return str('adam'+str(self.lr))
 
@@ -123,12 +123,13 @@ class Adam:
 
 class Adamax:
     #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
-    #--TODO broader explaination (parameters descrp etc--
+    #Similar to adam but using the infinity norm
     def __str__(self):
         return str('adamax'+str(self.lr))
 
     def __repr__(self):
         return str('adamax'+str(self.lr))
+
     def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
         self.lr = lr
         self.b1 = b1
@@ -161,7 +162,9 @@ class Adamax:
         return W-(self.lr/(1-self.b1**self.t))*self.m[-1]/(np.array(self.v[-1])+self.eps)
 
 class RMSProp:
-    #TODO add documentation
+    #RMSprop optimizer. It uses a running average of the past gradients.
+    #Refer to https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf
+    #for a more in-depth description.
     def __str__(self):
         return str('rmsprop'+str(self.lr))
 
@@ -182,15 +185,15 @@ class RMSProp:
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
-        loss, grad = f(W) #Compute the gradient
+        loss, grad = f(W)
         self.R = (1-self.delta)*(self.R if self.R!=None else 1)+(self.delta)*np.array(grad)**2
         return W-self.lr*np.array(grad)/(self.R+1e-6)**(1/2)
 
 
 optimizers = dict()
 
-
 optimizers["SGD"] = SimpleOptimizer()
 optimizers["adam"] = Adam()
 optimizers["momentum"] = Momentum()
 optimizers["adamax"] = Adamax()
+optimizers["rmsprop"] = RMSProp()
