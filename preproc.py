@@ -74,6 +74,7 @@ class Preprocessor:
         dataset.train[1]=np.delete(dataset.train[1],out,axis=0)
         return len(out)
 
+    #print the number of outlier deleted
     def outlier_range(self,dataset,hop,start,end):
         mean = self.get_means(dataset)
         var = self.get_variance(dataset)
@@ -91,15 +92,12 @@ class Preprocessor:
                         break
             ax.append(c)
         
-        #for x in range (start,end,hop):
-         #   print(x)
-        print(ax)
         plt.plot(ax)
-        plt.ylabel('some numbers')
+        plt.ylabel('outlier detection')
         plt.show()
 
 
-def load_data(path=None, target=True, header_l=0, targets=0):                       #TODO inser it inside of dataset object?
+def load_data(path=None, target=True, header_l=0, targets=0):                       
     '''Loads data into numpy arrays from given path. File at specified path
     must be in CSV format. If target output is in the file it is assumed to occupy
     the last targets columns.
@@ -143,31 +141,20 @@ def load_monk(path):
             data.append(row)
 
     x = np.array([d[2:-1] for d in data]).astype('int')
-    #y = [(1*float(d[1])-0) for d in data]
+    #y = [(1*float(d[1])-0) for d in data]#TODO 
     y = [(2*float(d[1])-1) for d in data]
-
 
 
     x = np.array(lazy_one_hot_monk(x)).astype('float32')
     y = np.array(y).astype('int')
 
-    #yt = np.zeros((y.shape[0],2))
     y = y.reshape((y.shape[0],1))
-
-    #for i in range(0,y.shape[0]):
-    #    if y[i]==0:yt[i][0]=1
-    #    else:yt[i][1]=1
-
 
     return x, y
 
 
 
-
-
-
-
-#Don't look at this!
+#Don't look at this!#TODO
 def lazy_one_hot_monk(x):
     k = [0, 3, 6, 8, 11, 15]
     one_hot_x = []

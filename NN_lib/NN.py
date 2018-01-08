@@ -6,86 +6,109 @@ import preproc
 class NeuralNetwork:
 
     def __init__(self):
-        # TODO initial layers
         self.layers = []
 
     def addLayer(self, inputs, neurons, activation, weights=np.array(None), bias=0,
                  regularization="L2", rlambda=0.0, weights_init='fan_in', dropout=0.0):
+        '''
+        Adds a layer to the network. Note that the number of inputs must be equal to
+        the number of neurons of the previous layer or to the number of features of the
+        dataset if it is the first layer.
+        :param inputs: Number of inputs for each neuron in the layer
+        :param neurons: Number of neurons in the layer
+        :param activation: Activation function performed by each neuron
+        :param weights: An initial weights matrix of dimension (inputs,neurons) may be
+        used. Otherwise the weights will be randomly initialized according to the method
+        specified in weights_init.
+        :param bias: A custom value for the bias unit may be specified. Otherwise it will be
+        initialized to 0.
+        :param regularization: Type of regularization to be used. It can either be one of L1, L2
+        , EN(elastic net) or a custom function providing the required interface may be used.
+        :param rlambda: The value of the regularization parameter. It should be a float for L1,
+        L2 or a tuple for EN.
+        :param weights_init: The method to initialize weights with. The possible values are
+        fan_in and xavier.
+        :param dropout: Value of the dropout in the layer. By default it is 0, meaning no dropout
+        is applied. Note, this not the standard dropout but inverted one.
+        :return:
+        '''
         self.layers.append(Layer(inputs, neurons, activation, weights, bias, dropout=dropout,
                                  regularizer=regularization, rlambda=rlambda, weights_init=weights_init))
 
     def FP(self, x_in):
+        '''
+        :param x_in:  Input value for the forward propagation.
+        :return: Returns the propagated output
+        '''
         x = x_in
         for layer in self.layers:
             x = layer.getOutput(x)
         return x
 
     def BP(self, prediction, real, x_in):
+        '''
+        Performs a backward propagation through the network.
+        :param prediction: The values predicted by the network.
+        :param real: The real output in order to propagate the error
+        :param x_in: The input value of the network
+        :return: The value of the loss and the gradients matrix.
+        '''
         gradients = np.empty(len(self.layers), dtype=object)
         loss_func = self.loss_func.f(real, prediction)
+
+        #Propagate the error through the layers of the network
         for i in range(len(self.layers) - 1, -1, -1):
 
+            #The derivative of the layer's current output
             logi = self.layers[i].activation.dxf(self.layers[i].currentOutput)
-            #logi = logi*self.layers[i].mask
-            # print('curro:',np.count_nonzero(self.layers[i].currentOutput),
-            #      's',np.array(self.layers[i].currentOutput).shape)
-            # print('nonzeros:',np.count_nonzero(logi),'s',(logi).shape)
-            # print('before:',np.count_nonzero(logi))
 
-            # logi = logi*np.random.binomial(1,1-self.layers[i].dropout,self.layers[i].currentOutput.shape)/\
-            #       ((1-self.layers[i].dropout))
-            # print('zeris:',np.count_nonzero(logi))
-            # print('after:',np.count_nonzero(logi),'s',logi.shape)
+            #Apply dropout if present.
+            if(self.layers[i].dropout!=0):
+                logi = logi*self.layers[i].mask
+
+            #Calculate the error on the last layer
             if i == (len(self.layers) - 1):
                 e = self.loss_func.dxf(real, prediction)
-                err = logi * e  # self.loss_func[1](real, prediction)
-                # print('errerewe',self.loss_func[1](prediction, real))
+                err = logi * e
+            #Calculate the error on the hidden layers
+            # the error is equal to the derivative of the activation
+            # at current layer * (weights*(error at next layer))
             else:
-                err = logi * np.dot(err, self.layers[i + 1].W[:, 1:])  # error is derivative of activation
-                # at current layer * (weights*error at next layer)
+                err = logi * np.dot(err, self.layers[i + 1].W[:, 1:])
+
+            #Get the last piece to calculate the gradient, that is the
+            #output of the previous layer or the input value for the first
+            #layer
             if i == 0:
                 curro = x_in
             else:
                 curro = self.layers[i - 1].currentOutput
-            # curro = curro*self.layers[i-1].mask if i>0 else curro
-
             curro = np.concatenate((np.ones((curro.shape[0], 1)), curro), axis=1)
-            # curro *= np.random.binomial(1, self.layers[i].dropout, size=curro.shape)
 
-            # print('err', curro)
-
-            # print('curr',curro.shape)
+            #Calculate gradient+regularization
             grad = (np.dot(curro.transpose(), err) / (real.shape[0]))
-            #print(self.reguldx(i).shape)
-
-            grad= grad + self.reguldx(i).transpose()#/real.shape[0]
-
-            # grad = (np.dot(curro.transpose(),err))
+            grad= grad + self.reguldx(i).transpose()
             self.layers[i].grad = grad
-            # gradients.append(grad)
-            gradients[-i] = grad
+            gradients[i] = grad
         return loss_func, gradients
 
     def regul(self):
+        '''
+        :return: Regularization value for the network
+        '''
         regul_loss = 0
         for l in self.layers:
             regul_loss += l.regularize()
-        # return regul_loss/len(self.input)      #TODO Input WTF?, pheraps
         return regul_loss
 
-    #    def reguldx(self):
-    #        regul_loss = 0
-    #        for l in self.layers:
-    #            regul_loss+=l.regularizedx()
-    #        return regul_loss/len(self.dataset.train[0])
-
     def reguldx(self, i):
-        return self.layers[i].regularizedx()
+        '''
 
-    #    def f(self, in_chunk, out_chunk):
-    #        def g(W):
-    #            return self.BP(self.FP(in_chunk), out_chunk, in_chunk)
-    #        return g
+        :param i: The layer for which the derivative of the regularization term
+        is to be calculated
+        :return: the array of regularization terms for the given layer
+        '''
+        return self.layers[i].regularizedx()
 
     def f(self, in_chunk, out_chunk):
         def g(W, only_fp=False):
@@ -103,7 +126,7 @@ class NeuralNetwork:
 
     def fit(self, x_in, y_out, epochs, optimizer, batch_size=-1, loss_func="mse", val_split=0, verbose=0, val_set=None,
             val_loss_fun=None):
-        # ***GENERAL DESCRIPTION***
+        # *GENERAL DESCRIPTION*
         # loss_func: can either be a string refering to a standardized defined
         # loss functions or a tuple where the first element is a loss function
         # and the second element is the corresponding derivative

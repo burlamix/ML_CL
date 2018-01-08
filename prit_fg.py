@@ -11,9 +11,6 @@ import pickle
 
 pp = PdfPages("momgrids.pdf")
 
-#dddddddddddddddddddddddd 
-#ddddddddddddddddddddddd 
-#dddddddddddddddddddddd
 
 with open('momgrids.pkl', 'rb') as inputt:
      fgs=pickle.load(inputt)

@@ -34,7 +34,7 @@ class grid_result:
             else:
                 net.addLayer(in_l, dataset.train[1].shape[1], activations[i], regularization=regularization[i],
                              rlambda=rlambda[i])
-        net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
+        #net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
         self.NN = net
 
 
@@ -134,6 +134,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
 
         # Check what kind of validation should be performed
         if (val_split > 0 or cvfolds <= 1 or val_set != None):
+            print("inside")
             r, _, v, _, history = net.fit_ds(dataset, epochs=params['epochs'], val_split=val_split, val_set=val_set, \
                                              optimizer=params['optimizers'], batch_size=params['batch_size'],
                                              loss_func=params['loss_fun'], val_loss_fun=params['val_loss_fun'],verbose=verbose - 0)
@@ -153,9 +154,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None,
         else:  # If no validation was done only put config and other stuff(to add..)
             full_grid.append({'configuration': params, 'history': history})
 
-        if (verbose == 1):
-            pass
-        # TODO print params with validation/training loss (results_grid[k-1])
+
         k = k + 1
 
     # Fetch best configuration based on validation loss, or training if no validation was done

@@ -9,6 +9,7 @@ import sys
 #Minkowski error as loss func
 #line search https://www.cs.cmu.edu/~ggordon/10725-F12/scribes/10725_Lecture5.pdf
 #TODO conjugate gradient http://matlab.izmiran.ru/help/toolbox/nnet/backpr59.html
+
 class SimpleOptimizer:
     def __str__(self):
         return str('sgd'+str(self.lr))
@@ -35,14 +36,7 @@ class SimpleOptimizer:
         loss, grad = f(W)
         return W-self.lr*grad
 
-       # for i in range(epochs):
-        #    o = NN.fp(x_in)
-         #   loss, grad = NN.bp(o, y_true, x_in)
-          #  print("Loss:"+str(loss))
-            #TODO other constraints
-            #update weight
-            #for layer in NN.layers:
-                #layer.weights = layer.weights+layer.gradients
+
 class Momentum:
     def __str__(self):
         return str('momentum'+str(self.lr))

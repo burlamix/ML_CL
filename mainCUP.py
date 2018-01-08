@@ -66,36 +66,49 @@ rlambdas = [[(0.0001,0.0001),(0.0001,0.0001)]]
 
 
 #############################################################################
+'''
+#with open('predizione.pkl', 'rb') as inputt:
+#     predizione=pickle.load(inputt)
+#plt.plot(predizione)
+#plt.show()
 
+#exit(1)
 NN = NeuralNetwork()
 NN.addLayer(inputs=10,neurons=50,activation="sigmoid", rlambda=(0.0001,0.0001),regularization="EN",
-            dropout=0,bias=0.0)
+            dropout=0)
 NN.addLayer(inputs=50,neurons=2,activation="linear",rlambda=(0.0001,0.0001),regularization="EN",
-            dropout=0,bias=0.0)
+            dropout=0)
 
 
-NN.fit_ds( dataset,epochs=3105, optimizer=adamax1 ,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mee")
+NN.fit_ds( dataset2016,epochs=5, optimizer=adamax1 ,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mee")
 
 with open('finale_NN_Model.pkl', 'wb') as output:
     pickle.dump(NN, output, pickle.HIGHEST_PROTOCOL)
 print("-------")
 
-exit(1)
-############################################################################à
+predizione = NN.predict(dataset.test[0])
 
+with open('predizione.pkl', 'wb') as output:
+    pickle.dump(predizione, output, pickle.HIGHEST_PROTOCOL)
+
+exit(1)
+'''
+############################################################################à
+preprocessor.shuffle(dataset2016)
 fgs = list()
 
-trials = 1
+trials = 10
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3105], batch_size=batches,
-                                               n_layers=2, val_split=0,activations=acts,
+    fg,grid_res, pred = validation.grid_search(dataset2016, epochs=[3105], batch_size=batches,
+                                               n_layers=2, val_split=15,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
-                                               cvfolds=1, val_set=None, verbose=2,
+                                               cvfolds=1, val_set=None, verbose=1,
                                                loss_fun=losses, val_loss_fun="mee",
                                                neurons=neurs, optimizers=opts)
     fgs.append(fg)
 #print(grid_res.NN.evaluate(dataset2016.train[0],dataset2016.train[1],"mee"))
-#exit(1)
+exit(1)
+
 fgmean = list() #List for holding means
 
 with open('rimuovendo_out.pkl', 'wb') as output:
@@ -133,7 +146,7 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
 
-pp = PdfPages("rimuovendo_out.pdf")
+pp = PdfPages("final.pdf")
 #nconfig = len(acts)*len(opts)*len(neurs)
 #TODO MEDIA SU PIu test vedi k validation
 

@@ -33,8 +33,7 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
     for i in range(0,trials):
 
         NN = NeuralNetwork()
-        #NN.addLayer(2, 2, "sigmoid", weights=np.array([[0.15, 0.20], [0.25, 0.3]]), bias=0.35)
-        #NN.addLayer(2, 2, "sigmoid", weights=np.array([[0.40, 0.45], [0.50, 0.55]]), bias=0.6)
+
         NN.addLayer(17, units, act1, rlambda=reg)
         NN.addLayer(units, 1, act2, rlambda=reg)
 
@@ -49,8 +48,7 @@ def bm_monk(optimizer, monk='monk1',act1='tanh',act2='sigmoid', reg=0.0, bs=32, 
             currwg.append(np.zeros(len(l.W))) #Bias
         wgs.append(currwg)
 
-        #for l in NN.layers:
-            #print('W',l.W)
+
         (loss, acc, val_loss, val_acc, history) = \
             NN.fit_ds(dataset, epochs, optimizer, batch_size=bs, verbose=3)
 

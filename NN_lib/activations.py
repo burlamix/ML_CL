@@ -41,7 +41,6 @@ def tanhdx(x):
 
 def softmax1(x):
     e_x = np.exp(x - np.max(x, axis=1, keepdims=True))
-    # print(e_x)
     return e_x / np.sum(e_x, axis=1, keepdims=True)  # only differencen
 
 
@@ -49,7 +48,6 @@ def softmaxdx1(signal):
     J = - signal[..., None] * signal[:, None, :]  # off-diagonal Jacobian
     iy, ix = np.diag_indices_from(J[0])
     J[:, iy, ix] = signal  # diagonal
-    # print(J.shape)
     return J.sum(axis=2)  # sum across-rows for each sample
 
 

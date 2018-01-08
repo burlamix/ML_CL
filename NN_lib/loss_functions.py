@@ -44,7 +44,6 @@ def mee(target,prediction):
 
 def meedx(target,prediction):
     a= np.expand_dims((np.sqrt(np.sum((target-prediction+1e-6)**2,axis=1))),axis=1)
-    #a=np.tile(a,(1,prediction.shape[1]))
     return -((target-prediction)/a)
 
 
