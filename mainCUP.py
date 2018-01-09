@@ -1,4 +1,3 @@
-import preproc
 from NN_lib import validation
 from NN_lib.NN import *
 from NN_lib.optimizers import *
@@ -7,7 +6,7 @@ from NN_lib import regularizations
 from matplotlib.backends.backend_pdf import PdfPages
 import pickle
 
-np.random.seed(5)
+np.random.seed(55)
 dataset = preproc.Dataset()
 dataset2016 = preproc.Dataset()
 
@@ -66,13 +65,14 @@ rlambdas = [[(0.0001,0.0001),(0.0001,0.0001)]]
 
 
 #############################################################################
-'''
+
 #with open('predizione.pkl', 'rb') as inputt:
 #     predizione=pickle.load(inputt)
 #plt.plot(predizione)
 #plt.show()
 
 #exit(1)
+
 NN = NeuralNetwork()
 NN.addLayer(inputs=10,neurons=50,activation="sigmoid", rlambda=(0.0001,0.0001),regularization="EN",
             dropout=0)
@@ -92,7 +92,7 @@ with open('predizione.pkl', 'wb') as output:
     pickle.dump(predizione, output, pickle.HIGHEST_PROTOCOL)
 
 exit(1)
-'''
+
 ############################################################################à
 preprocessor.shuffle(dataset2016)
 fgs = list()
@@ -107,7 +107,6 @@ for i in range(0,trials):
                                                neurons=neurs, optimizers=opts)
     fgs.append(fg)
 #print(grid_res.NN.evaluate(dataset2016.train[0],dataset2016.train[1],"mee"))
-exit(1)
 
 fgmean = list() #List for holding means
 

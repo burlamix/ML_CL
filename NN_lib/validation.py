@@ -172,7 +172,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None, regulariza
 
         # Check what kind of validation should be performed
         if (val_split > 0 or cvfolds <= 1 or val_set != None):
-            print("inside")
             r, _, v, _, history = net.fit_ds(dataset, epochs=params['epochs'], val_split=val_split, val_set=val_set, \
                                              optimizer=params['optimizers'], batch_size=params['batch_size'],
                                              loss_func=params['loss_fun'], val_loss_fun=params['val_loss_fun'],verbose=verbose - 0)
