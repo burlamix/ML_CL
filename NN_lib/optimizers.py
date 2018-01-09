@@ -2,6 +2,46 @@ import numpy as np
 import types
 import sys
 
+class LineSearchOptimizer:
+    def __str__(self):
+        return str('ls'+str(self.lr))
+
+    def __repr__(self):
+        return str('ls'+str(self.lr))
+
+    def __init__(self, lr=0.1, eps=1e-5):
+        self.lr = lr
+        self.eps = eps
+
+    def reset(self):
+        pass
+
+    def pprint(self):
+        return "ls,lr="+str(self.lr)
+
+    def getLr(self):
+        return self.lr
+
+    def optimize(self, f, W):
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
+        loss, grad = f(W)
+        a_minus = 0
+        a_plus = 10
+        max_iter = 10
+        while (max_iter>0):
+            max_iter-=1
+            alpha = np.average([a_minus,a_plus])
+            val, v = f(W-alpha*grad)
+            if (np.abs(v)<=self.eps):
+                break
+            if (v>0):
+                a_minus = alpha
+            else:
+                a_plus = alpha
+
+        return W-alpha*grad
+
 
 class SimpleOptimizer:
     #SGD optimizer without momentum
