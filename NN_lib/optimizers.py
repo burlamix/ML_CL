@@ -1,6 +1,50 @@
 import numpy as np
 import types
 import sys
+import sklearn as sk
+
+def bisection( f, W,phi0,grad,eps):
+    a_minus = 0
+    a_plus = 10
+    max_iter = 10
+    while (max_iter>0):
+        max_iter-=1
+        alpha = np.average([a_minus,a_plus])
+        val, v = f(W-alpha*grad)
+        if (np.abs(v)<=eps):
+            break
+        if (v>0):
+            a_minus = alpha
+        else:
+            a_plus = alpha
+    return alpha
+
+def back_track( f, W, phi0 , grad , ass , m1 , tau ):
+    max_iter=100
+    min_lr = 1e-4
+    phip0 = -(np.linalg.norm(grad))
+    print("phip0",phip0)
+    print("grad",grad)
+    while max_iter>0 and ass > min_lr:
+        phia = f(W-ass*grad,only_fp=True)
+        print(" phia",phia)
+        print(" phi0",phi0)
+        if phia <= phi0 + m1 * ass * phip0:
+            print("max_iter-",max_iter)
+            break
+        
+        ass = ass * tau
+        max_iter -= 1
+
+    print("max_iter",max_iter)
+
+    return ass
+
+
+
+
+
+
 
 class LineSearchOptimizer:
     def __str__(self):
@@ -26,21 +70,11 @@ class LineSearchOptimizer:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-        a_minus = 0
-        a_plus = 10
-        max_iter = 10
-        while (max_iter>0):
-            max_iter-=1
-            alpha = np.average([a_minus,a_plus])
-            val, v = f(W-alpha*grad)
-            if (np.abs(v)<=self.eps):
-                break
-            if (v>0):
-                a_minus = alpha
-            else:
-                a_plus = alpha
+        #actual_lr = bisection(f,W,loss,grad,self.eps)*grad
+        actual_lr = back_track(f, W, loss, grad, self.lr, 0.001, 0.5)
 
-        return W-alpha*grad
+
+        return W-actual_lr*grad
 
 
 class SimpleOptimizer:
