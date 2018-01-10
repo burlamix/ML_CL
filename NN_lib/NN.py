@@ -127,7 +127,7 @@ class NeuralNetwork:
         def g(W, only_fp=False):
             self.set_weights(W)
             if only_fp:
-                return self.loss_func.f(out_chunk, self.FP(in_chunk))
+                return self.loss_func.f(out_chunk, self.FP(in_chunk))+ self.regul()
             else:
                 loss, grad = self.BP(self.FP(in_chunk), out_chunk, in_chunk)
                 return loss + self.regul(), grad
@@ -243,7 +243,7 @@ class NeuralNetwork:
         #Predicted output
         real = self.FP(x_in)
 
-        val_loss_func = loss_fun.f(real, y_out)
+        val_loss_func = loss_fun.f(real, y_out)+self.regul()
 
         correct = 0
         errors = 0

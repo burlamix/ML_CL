@@ -3,7 +3,7 @@ import types
 import sys
 import sklearn as sk
 
-def bisection( f, W,phi0,grad,eps):
+def bisection( f, W,grad,eps):
     a_minus = 0
     a_plus = 10
     max_iter = 10
@@ -19,24 +19,43 @@ def bisection( f, W,phi0,grad,eps):
             a_plus = alpha
     return alpha
 
-def back_track( f, W, phi0 , grad , ass , m1 , tau ):
-    max_iter=100
-    min_lr = 1e-4
-    phip0 = -(np.linalg.norm(grad))
-    print("phip0",phip0)
-    print("grad",grad)
+#phi0 where we are
+#phi(a_i) = where we'd go
+def armj_w(f, W, phi0, grad, ass, m1, tau, max_iter, min_lr):
+    i = 1
+    a_0 = 0
+    a_max = 1
+    a_i = (a_max-a_0)/50
+    phip0 = -(np.linalg.norm(
+        np.concatenate(
+            [grad[i].reshape(grad[i].shape[1] * grad[i].shape[0], 1) for i in range(0, len(grad))])
+    )
+    )
+    phi_ipast = None
+    while max_iter>0:
+        phi_i = f(W-a_i*grad)
+        if phi_i>phi0+m1*a_i*phip0 or (phi_ipast!=None and phi_i>=phi_ipast):
+            a_star = zoom(phi_ipast,phi_i)
+        
+        if 
+        max_iter-=1
+
+def back_track( f, W, phi0 , grad , ass , m1 , tau,max_iter , min_lr ):
+
+    #Black magic
+    phip0 = -(np.linalg.norm(
+        np.concatenate(
+            [grad[i].reshape(grad[i].shape[1]*grad[i].shape[0],1) for i in range(0,len(grad))])
+        )
+    )
+
     while max_iter>0 and ass > min_lr:
         phia = f(W-ass*grad,only_fp=True)
-        print(" phia",phia)
-        print(" phi0",phi0)
         if phia <= phi0 + m1 * ass * phip0:
-            print("max_iter-",max_iter)
             break
         
         ass = ass * tau
         max_iter -= 1
-
-    print("max_iter",max_iter)
 
     return ass
 
@@ -53,9 +72,13 @@ class LineSearchOptimizer:
     def __repr__(self):
         return str('ls'+str(self.lr))
 
-    def __init__(self, lr=0.1, eps=1e-5):
+    def __init__(self, lr=0.1, eps=1e-5, ls=None, m1=1e-7, max_iter=10, r=0.3):
         self.lr = lr
         self.eps = eps
+        self.ls = ls
+        self.m1 = m1
+        self.max_iter = max_iter
+        self.r = r
 
     def reset(self):
         pass
@@ -70,9 +93,10 @@ class LineSearchOptimizer:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-        #actual_lr = bisection(f,W,loss,grad,self.eps)*grad
-        actual_lr = back_track(f, W, loss, grad, self.lr, 0.001, 0.5)
-
+        if self.ls == 'back_tracking':
+            actual_lr = back_track(f, W, loss, grad, self.lr,self.m1,self.r, self.max_iter, self.eps)
+        else:
+            actual_lr=self.lr
 
         return W-actual_lr*grad
 
@@ -88,6 +112,7 @@ class SimpleOptimizer:
 
     def __init__(self, lr=0.1,ls=False):
         self.lr = lr
+        self.ls = ls
 
     def reset(self):
         pass
@@ -102,7 +127,7 @@ class SimpleOptimizer:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-        if ls :
+        if self.ls :
             max_iter=20
             a=self.lr
             while(f(W-a,only_fp=True)>f(W-a*1.5,only_fp=True)):
