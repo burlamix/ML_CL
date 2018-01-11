@@ -1,15 +1,15 @@
-
-import ptimizers 
-form NN_lib import loss_functions 
-form NN_lib import NN 
+import numpy as np
+from NN_lib.optimizers import *
+from NN_lib import loss_functions
+from NN_lib.NN import *
 import matplotlib.pyplot as plt
-import preproc
+from NN_lib import preproc
 
 outs=2
 valr=(0.00,0.000)
 clr=0.01
 drop=0.0
-epochs=1000
+epochs=200
 inps=10
 
 np.random.seed(5)
@@ -25,7 +25,8 @@ dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=
 
 
 optimizer = SimpleOptimizer( lr=clr)
-optimizer2 = LineSearchOptimizer( lr=clr)
+optimizer2 = LineSearchOptimizer(lr=10,eps=1e-8,ls="armj-wolfe")
+optimizer2 = LineSearchOptimizer(lr=10,eps=1e-8,ls="back_track")
 
 
 NN = NeuralNetwork()
@@ -43,13 +44,13 @@ NN.addLayer(inputs=inps,neurons=50,activation="sigmoid", rlambda=valr,regulariza
 NN.addLayer(inputs=15,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
 NN.set_weights(weights)
 (loss, acc, val_loss, val_acc, history2)=\
-    NN.fit_ds( dataset,epochs, optimizer2 ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
+    NN.fit_ds( dataset,epochs, optimizer2  ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
 
 
 #plt.plot(history['tr_loss'], label='loss',ls="-",color="red")
 plt.plot(history2['tr_loss'], label='loss',ls="-",color="blue")
 plt.plot(history2['val_loss'], label='vloss',ls="-",color="red")
-plt.axes().set_ylim([0,2])
+plt.axes().set_ylim([0,20])
 
 plt.show()
 '''

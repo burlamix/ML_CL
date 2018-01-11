@@ -11,10 +11,10 @@ def g(W, only_fp=False):
     else:
         return r,  np.array([2*(200*W[0]**3 -200*W[0]*W[1]+W[0]-1), 200*(W[1]-W[0]**2)])
 
-lso = optimizers.LineSearchOptimizer(lr=0.1, eps=1e-8,ls="back_tracking")
-initW = np.array([132,32])
+lso = optimizers.LineSearchOptimizer(lr=0.5,eps=1e-8,ls="armj-wolfe")
+initW = np.array([6,0])
 
-for i in range(0,10):
+for i in range(0,500):
     #print('initial',g(initW,only_fp=True))
     newW = lso.optimize(g, initW)
 

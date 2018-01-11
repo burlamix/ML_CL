@@ -30,101 +30,95 @@ def bisection( f, W,grad,eps):
 
 #phi(a_i) = where we'd go
 
-def armj_w(f, W, phi0, grad, m1, m2, tau, max_iter, min_lr, max_lr):
-    i = 1
-    a_0 = 0
-    a_max = 1
-    a_i = (a_max-a_0)/50
+def armj_w(f, W, phi0, grad, m1, m2, max_iter, lr, mina, tau):
+    ass = lr
     
     #phip0- directional derivaive, norm of gradient
     phip0 = us_norm(grad)
-
-
-    phi_ipast = None
-    a_ipast = None
-
     while max_iter>0:
         #phi_i value of function where we test to go
         #gradp gradient where we test to go
-        phi_i, gradp = f(W-a_i*grad)
+        phia, phips_p = f(W-ass*grad)
+        phips = us_norm2(grad,phips_p)
 
         #test armijo strong wolfe condiction
-        if phi_i>phi0+m1*a_i*phip0 or (phi_ipast!=None and phi_i>=phi_ipast):
-            a_star,max_iter = zoom(a_ipast,a_i,phipg,phip0,phi0,grad,max_iter)
-            return a_star
-
-        phipg = us_norm(gradp)
-        #phipp norm of the gradient where we go
-
-        if (np.abs(phipg)<= -(m2*phip0)):
-            return a_i
-        elif phipg >=0:
-            return zoom(a_i,a_ipast)
+        if phia<=phi0+m1*ass*phip0 and (np.abs(phips)<=-m2*phip0):
+            a = ass
+            return a
+        if phips>=0:
+            break
         else:
-            a_ipast = a_i
-            a_i = (a_max + a_i)/deno    
+            ass=ass/tau
+            max_iter-=1
 
-        phi_ipast = phi_i
+    am = 0
+    a = ass
+    sf=1e-3
+    phipm = phip0
+    while(max_iter>0) and ((ass-am)>mina and phips>1e-12):
+        a = (am * phips - ass * phipm) / (phips - phipm)
+        #print(a)
+        temp = min([ass * (1 - sf), a])
+        #print(temp)
+        a = max([am * (1 + sf), temp])
+        #print(a)
+       # exit(1)
+        #input('/.')
+        phia,phipp = f(W-a*grad)
+        #phip = us_norm(phipp)
+        phip = us_norm2(grad,phipp)
+        #print(phip)
+        #print(m2*np.abs(phip0))
+        if((phia<=phi0 + m1*a*phip0) and (np.abs(phip)<=-m2*(phip0))):
+            return a
+        if phip<0:
+            am = a
+            phipm = phip
+        else:
+            ass = a
+            if ass<mina:
+                return a
+            phips=phip
+        max_iter-=1
 
-
-#do quadrati interpolation
-def quad_interpol(f,W,a_i,a_ipast,phipg,phip0):
-    safe_g = 1e-2
-    a = (a_ipast*phipg-phip0*a_i)(phipg-phip0)
-    a = max(a_ipast*(1+safe_g),min(a_i*(1+safe_g),a))
-
+    print('here',max_iter)
     return a
-
-
-def zoom(a_ipast,a_i,phipg,phip0,phi0,grad,max_iter):
-
-    a_j = a_i
-    a_j = quad_interpol(a_i,a_ipast,a,phipg,phip0)
-    #
-    phi_a_j, grad_a_j = f(W-a_j*grad)
-
-    phipg_a_j = us_norm(grad_a_j)
-
-
-    if phi_a_j>phi0+m1*a_j*phip0 or (phi_j>=a_ipast):
-        a_i=a_j
-    else:
-        if (np.abs(phipg_a_j) <= -(m2*phip0)):
-            return a_j
-        elif (phipg_a_j*(a_ipast-a_i)>=0 ):
-            a_i=a_ipast
-        a_ipast=a_j
-
-
-
 
 
 def back_track( f, W, phi0 , grad , ass , m1 , tau,max_iter , min_lr ):
 
     #Black magic
-    print(grad.shape)
-    phip0 = us_norm(grad)
+    if (grad[0].shape==()):
+        phip0 = -np.linalg.norm(grad)
+    else:
+        phip0 = us_norm(grad)
 
 
     while max_iter>0 and ass > min_lr:
         phia = f(W-ass*grad,only_fp=True)
         if phia <= phi0 + m1 * ass * phip0:
+            print('ass', ass)
+
             break
-        
         ass = ass * tau
         max_iter -= 1
-
     return ass
 
+def us_norm2(grad, lastg):
+    a = np.concatenate(
+        [grad[i].reshape(grad[i].shape[1] * grad[i].shape[0], 1) for i in range(0, len(grad))])
+    b = np.concatenate(
+        [lastg[i].reshape(lastg[i].shape[1] * lastg[i].shape[0], 1) for i in range(0, len(lastg))])
+    return np.sum(-a * b)
 
 def us_norm(x):
-    x = -(np.linalg.norm(
-    np.concatenate(
-        [x[i].reshape(x[i].shape[1] * x[i].shape[0], 1) for i in range(0, len(x))])
-        )
-    )
-    return x
-
+    if (x[0].shape==()):
+        return -np.linalg.norm(x)
+    else:
+        return  -(np.linalg.norm(
+                np.concatenate(
+                [x[i].reshape(x[i].shape[1] * x[i].shape[0], 1) for i in range(0, len(x))])
+                ))
 
 
 
@@ -135,11 +129,12 @@ class LineSearchOptimizer:
     def __repr__(self):
         return str('ls'+str(self.lr))
 
-    def __init__(self, lr=0.1, eps=1e-5, ls=None, m1=1e-7, max_iter=10, r=0.3):
+    def __init__(self, lr=0.1, eps=1e-16, ls=None, m1=0.0001, m2=0.9, max_iter=1000, r=0.9):
         self.lr = lr
         self.eps = eps
         self.ls = ls
         self.m1 = m1
+        self.m2 = m2
         self.max_iter = max_iter
         self.r = r
 
@@ -157,7 +152,13 @@ class LineSearchOptimizer:
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
         if self.ls == 'back_tracking':
-            actual_lr = back_track(f, W, loss, grad, self.lr,self.m1,self.r, self.max_iter, self.eps)
+            actual_lr = back_track\
+                (f = f, W=W, phi0=loss, grad=grad, ass=self.lr,m1=self.m1,
+                 tau=self.r, max_iter=self.max_iter, min_lr=self.eps)
+        if self.ls == 'armj-wolfe':
+            actual_lr = armj_w \
+                (f=f, W=W, phi0=loss, grad=grad, m1=self.m1, m2=self.m2,
+                     max_iter=self.max_iter, mina=0, lr = self.lr, tau=self.r)
         else:
             actual_lr=self.lr
 
