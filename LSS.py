@@ -1,7 +1,5 @@
-import sys
-import os
-sys.path.append(os.getcwd()+"/NN_lib")
-import optimizers
+
+from NN_lib import optimizers
 import numpy as np
 
 

@@ -1,10 +1,11 @@
-import sys
-import os
-sys.path.append(os.getcwd()+"/NN_lib")
 import numpy as np
 import itertools
-import optimizers 
-import regularizations as regs, loss_functions, NN
+from NN_lib import optimizers 
+from NN_lib import NN 
+from NN_lib import regularizations
+from NN_lib import loss_functions
+from NN_lib import regularizations as  regs
+
 
 
 class grid_result:

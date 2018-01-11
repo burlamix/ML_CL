@@ -1,6 +1,6 @@
 import sys
-import loss_functions 
-from layer import *
+from NN_lib import loss_functions 
+from NN_lib.layer import *
 import numpy as np
 from preproc import *
 class NeuralNetwork:

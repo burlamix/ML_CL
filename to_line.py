@@ -1,9 +1,7 @@
-import sys
-import os
-sys.path.append(os.getcwd()+"/NN_lib")
+
 import ptimizers 
-import loss_functions 
-import NN 
+form NN_lib import loss_functions 
+form NN_lib import NN 
 import matplotlib.pyplot as plt
 import preproc
 

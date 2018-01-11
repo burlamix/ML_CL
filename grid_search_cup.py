@@ -1,14 +1,12 @@
-import sys
-import os
-sys.path.append(os.getcwd()+"/NN_lib")
-import validation
-from NN import *
+
+from NN_lib import validation
 import matplotlib.pyplot as plt
-import regularizations
+from NN_lib import regularizations
 from matplotlib.backends.backend_pdf import PdfPages
 import pickle
 import preproc
-from optimizers import *
+from NN_lib.optimizers import *
+import numpy as np
 
 np.random.seed(5)
 dataset = preproc.Dataset()

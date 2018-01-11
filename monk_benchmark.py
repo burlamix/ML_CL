@@ -1,19 +1,20 @@
-import sys
-import os
-sys.path.append(os.getcwd()+"/NN_lib")
+
 import keras.optimizers as optims
-from optimizers import *
-from loss_functions import *
-from validation import *
+from NN_lib.optimizers import Momentum
+
+
+from NN_lib import loss_functions 
+from NN_lib import validation 
 import matplotlib.pyplot as plt
 from keras import regularizers
+from keras.layers import Dense
 from keras.layers import Dropout
 from keras.utils import np_utils
 from keras.datasets import mnist
 from keras import *
-from keras.layers import *
+from keras.models import Sequential
 import preproc
-from NN import *
+from NN_lib.NN import *
 
 outs=1
 valr=(0.0,0.0)
