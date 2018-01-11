@@ -1,11 +1,14 @@
+import sys
+import os
+sys.path.append(os.getcwd()+"/NN_lib")
 from keras.datasets import mnist
 from keras.utils import np_utils
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import SGD
-from NN_lib.NN import *
-from NN_lib.optimizers import *
+import NN 
+import optimizers 
 
 (x_train,y_train) ,(x_test, y_test) = mnist.load_data()
 

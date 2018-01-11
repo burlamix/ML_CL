@@ -37,8 +37,8 @@ def armj_w(f, W, phi0, grad, ass, m1, tau, max_iter, min_lr):
         if phi_i>phi0+m1*a_i*phip0 or (phi_ipast!=None and phi_i>=phi_ipast):
             a_star = zoom(phi_ipast,phi_i)
         
-        if 
-        max_iter-=1
+        #if max_iter-=1:
+         #   None
 
 def back_track( f, W, phi0 , grad , ass , m1 , tau,max_iter , min_lr ):
 

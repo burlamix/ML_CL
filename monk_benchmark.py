@@ -1,14 +1,19 @@
+import sys
+import os
+sys.path.append(os.getcwd()+"/NN_lib")
 import keras.optimizers as optims
-from NN_lib.optimizers import *
-from NN_lib.loss_functions import *
-from NN_lib import validation
-from benchmarkMonk import *
+from optimizers import *
+from loss_functions import *
+from validation import *
 import matplotlib.pyplot as plt
 from keras import regularizers
 from keras.layers import Dropout
 from keras.utils import np_utils
 from keras.datasets import mnist
+from keras import *
+from keras.layers import *
 import preproc
+from NN import *
 
 outs=1
 valr=(0.0,0.0)

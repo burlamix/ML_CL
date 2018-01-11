@@ -1,5 +1,5 @@
 import numpy as np
-from NN_lib import regularizations, activations
+import regularizations, activations
 import sys
 
 

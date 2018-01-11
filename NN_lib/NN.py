@@ -1,8 +1,8 @@
 import sys
-from NN_lib import loss_functions
-from NN_lib.layer import Layer
+import loss_functions 
+from layer import *
 import numpy as np
-import preproc
+from preproc import *
 class NeuralNetwork:
 
     def __init__(self, eval_method='binary'):

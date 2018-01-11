@@ -1,6 +1,9 @@
-from NN_lib.optimizers import *
-from NN_lib.loss_functions import *
-from NN_lib.NN import *
+import sys
+import os
+sys.path.append(os.getcwd()+"/NN_lib")
+import ptimizers 
+import loss_functions 
+import NN 
 import matplotlib.pyplot as plt
 import preproc
 

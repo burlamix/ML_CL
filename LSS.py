@@ -1,6 +1,7 @@
 import sys
-sys.path.append("/home/simone/Documents/universita/Magistrale/ML/ambiente_virtuale/ML_CL/NN_lib")
-from NN_lib import optimizers
+import os
+sys.path.append(os.getcwd()+"/NN_lib")
+import optimizers
 import numpy as np
 
 
