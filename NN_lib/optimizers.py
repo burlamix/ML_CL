@@ -19,35 +19,92 @@ def bisection( f, W,grad,eps):
             a_plus = alpha
     return alpha
 
-#phi0 where we are
+
+#phi0- where we are - value of loss funcion
+#grad- gradient of loss function where we are
+# ass-
+#m1- armj_W param
+#m2 armj_w param
+#max_iter num of max iteration 
+#min_lr, max_lr min and max value for learing rate
+
 #phi(a_i) = where we'd go
-def armj_w(f, W, phi0, grad, ass, m1, tau, max_iter, min_lr):
+
+def armj_w(f, W, phi0, grad, m1, m2, tau, max_iter, min_lr, max_lr):
     i = 1
     a_0 = 0
     a_max = 1
     a_i = (a_max-a_0)/50
-    phip0 = -(np.linalg.norm(
-        np.concatenate(
-            [grad[i].reshape(grad[i].shape[1] * grad[i].shape[0], 1) for i in range(0, len(grad))])
-    )
-    )
+    
+    #phip0- directional derivaive, norm of gradient
+    phip0 = us_norm(grad)
+
+
     phi_ipast = None
+    a_ipast = None
+
     while max_iter>0:
-        phi_i = f(W-a_i*grad)
+        #phi_i value of function where we test to go
+        #gradp gradient where we test to go
+        phi_i, gradp = f(W-a_i*grad)
+
+        #test armijo strong wolfe condiction
         if phi_i>phi0+m1*a_i*phip0 or (phi_ipast!=None and phi_i>=phi_ipast):
-            a_star = zoom(phi_ipast,phi_i)
-        
-        #if max_iter-=1:
-         #   None
+            a_star,max_iter = zoom(a_ipast,a_i,phipg,phip0,phi0,grad,max_iter)
+            return a_star
+
+        phipg = us_norm(gradp)
+        #phipp norm of the gradient where we go
+
+        if (np.abs(phipg)<= -(m2*phip0)):
+            return a_i
+        elif phipg >=0:
+            return zoom(a_i,a_ipast)
+        else:
+            a_ipast = a_i
+            a_i = (a_max + a_i)/deno    
+
+        phi_ipast = phi_i
+
+
+#do quadrati interpolation
+def quad_interpol(f,W,a_i,a_ipast,phipg,phip0):
+    safe_g = 1e-2
+    a = (a_ipast*phipg-phip0*a_i)(phipg-phip0)
+    a = max(a_ipast*(1+safe_g),min(a_i*(1+safe_g),a))
+
+    return a
+
+
+def zoom(a_ipast,a_i,phipg,phip0,phi0,grad,max_iter):
+
+    a_j = a_i
+    a_j = quad_interpol(a_i,a_ipast,a,phipg,phip0)
+    #
+    phi_a_j, grad_a_j = f(W-a_j*grad)
+
+    phipg_a_j = us_norm(grad_a_j)
+
+
+    if phi_a_j>phi0+m1*a_j*phip0 or (phi_j>=a_ipast):
+        a_i=a_j
+    else:
+        if (np.abs(phipg_a_j) <= -(m2*phip0)):
+            return a_j
+        elif (phipg_a_j*(a_ipast-a_i)>=0 ):
+            a_i=a_ipast
+        a_ipast=a_j
+
+
+
+
 
 def back_track( f, W, phi0 , grad , ass , m1 , tau,max_iter , min_lr ):
 
     #Black magic
-    phip0 = -(np.linalg.norm(
-        np.concatenate(
-            [grad[i].reshape(grad[i].shape[1]*grad[i].shape[0],1) for i in range(0,len(grad))])
-        )
-    )
+    print(grad.shape)
+    phip0 = us_norm(grad)
+
 
     while max_iter>0 and ass > min_lr:
         phia = f(W-ass*grad,only_fp=True)
@@ -60,7 +117,13 @@ def back_track( f, W, phi0 , grad , ass , m1 , tau,max_iter , min_lr ):
     return ass
 
 
-
+def us_norm(x):
+    x = -(np.linalg.norm(
+    np.concatenate(
+        [x[i].reshape(x[i].shape[1] * x[i].shape[0], 1) for i in range(0, len(x))])
+        )
+    )
+    return x
 
 
 
