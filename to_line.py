@@ -26,7 +26,7 @@ dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=
 
 optimizer = SimpleOptimizer( lr=clr)
 optimizer2 = LineSearchOptimizer(lr=10,eps=1e-8,ls="armj-wolfe")
-optimizer2 = LineSearchOptimizer(lr=10,eps=1e-8,ls="back_track")
+optimizer2 = LineSearchOptimizer(lr=10,eps=1e-8,ls="back_tracking")
 
 
 NN = NeuralNetwork()

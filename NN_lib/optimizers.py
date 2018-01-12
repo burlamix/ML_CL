@@ -97,8 +97,6 @@ def back_track( f, W, phi0 , grad , ass , m1 , tau,max_iter , min_lr ):
     while max_iter>0 and ass > min_lr:
         phia = f(W-ass*grad,only_fp=True)
         if phia <= phi0 + m1 * ass * phip0:
-            print('ass', ass)
-
             break
         ass = ass * tau
         max_iter -= 1
@@ -129,7 +127,7 @@ class LineSearchOptimizer:
     def __repr__(self):
         return str('ls'+str(self.lr))
 
-    def __init__(self, lr=0.1, eps=1e-16, ls=None, m1=0.0001, m2=0.9, max_iter=1000, r=0.9):
+    def __init__(self, lr=0.1, eps=1e-16, ls=None, m1=0.0001, m2=0.9, max_iter=1000, r=0.3):
         self.lr = lr
         self.eps = eps
         self.ls = ls
@@ -159,9 +157,6 @@ class LineSearchOptimizer:
             actual_lr = armj_w \
                 (f=f, W=W, phi0=loss, grad=grad, m1=self.m1, m2=self.m2,
                      max_iter=self.max_iter, mina=0, lr = self.lr, tau=self.r)
-        else:
-            actual_lr=self.lr
-
         return W-actual_lr*grad
 
 
