@@ -4,10 +4,11 @@ from NN_lib import loss_functions
 from NN_lib.NN import *
 import matplotlib.pyplot as plt
 from NN_lib import preproc
+from NN_lib import linesearches
 
 outs=2
 valr=(0.00,0.000)
-clr=0.01
+clr=0.1
 drop=0.0
 epochs=200
 inps=10
@@ -23,10 +24,10 @@ dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l
 dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
 
 
+amg = linesearches.armj_wolfe()
 
-optimizer = SimpleOptimizer( lr=clr)
-optimizer2 = LineSearchOptimizer(lr=10,eps=1e-8,ls="armj-wolfe")
-optimizer2 = LineSearchOptimizer(lr=10,eps=1e-8,ls="back_tracking")
+optimizer = SimpleOptimizer( lr=clr, ls=amg)
+
 
 
 NN = NeuralNetwork()
@@ -44,7 +45,7 @@ NN.addLayer(inputs=inps,neurons=50,activation="sigmoid", rlambda=valr,regulariza
 NN.addLayer(inputs=15,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
 NN.set_weights(weights)
 (loss, acc, val_loss, val_acc, history2)=\
-    NN.fit_ds( dataset,epochs, optimizer2  ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
+    NN.fit_ds( dataset,epochs, optimizer  ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
 
 
 #plt.plot(history['tr_loss'], label='loss',ls="-",color="red")

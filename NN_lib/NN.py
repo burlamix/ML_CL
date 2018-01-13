@@ -182,6 +182,7 @@ class NeuralNetwork:
             validation_y = val_set[1]
 
         history = {'tr_loss': [], 'val_loss': [], 'tr_acc': [], 'val_acc': []}
+        print(optimizer)
         optimizer.reset()
 
         for i in range(0, epochs):
