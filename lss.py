@@ -6,16 +6,14 @@ from NN_lib.linesearchs import *
 '''
 def householder_vector(x):
 	s = -np.sign(x[0]) * np.linalg.norm(x)
-	#print(s)
 	v = x
 	v[0] = v [0] - s
-	#print("v1",v)
 	v = v / np.linalg.norm(v)
-	#print("v2",v)
 	return v , s
 
 
-def QR_fact(a):
+def QR_fact(a1):
+	a = a1.copy()
 	shap = np.shape(a)
 	#print(shap)
 	q = np.eye(shap[0])
@@ -24,14 +22,26 @@ def QR_fact(a):
 		v , s = householder_vector(a[j:,j])
 		a[j,j]=s
 		a[j+1:,j]=0
-
-		a[j:,j+1:] = a[j:,j+1:] - 2* np.dot(np.transpose(v),a[j:,j+1:])
-		
-		q[:,j:] = q[:,j:] - q[:,j:]*v*2*np.transpose(v)
-	
+		a[j:,j+1:] = np.subtract(a[j:,j+1:],
+								 np.dot(v[:,np.newaxis],
+										2*np.dot(np.transpose(v),
+												 a[j:,j+1:])[np.newaxis,:]))
+		q[:,j:] = q[:,j:] - np.dot(q[:,j:],np.dot(v[:,np.newaxis],2*v[:,np.newaxis].transpose()))
 	r=a
 	return q,r
 
+def LLSQ(X,y):
+	#Could use the QR factorization directly, without explicitely
+	#calculating the pseudoinverse
+	return np.dot(mypinv(X), y)
+
+def mypinv(x):
+	q,r = QR_fact(x)
+	#Cut away the 0s
+	q = q[:,0:r.shape[1]]
+	r = r[0:r.shape[1], :]
+	#return np.dot(q,np.linalg.inv(r.transpose()))
+	return np.dot(np.linalg.inv(r), q.T)
 
 ''' esempio sulle slide, su mathlab torna -1e+10-0-0-0 e qui -1e10,-1e6,-1e6,-1e6 
 ma credo sia dovuto alle approssimazioni già il primo arrya x matlab lo considera 
@@ -45,12 +55,13 @@ print("r  ",r)
 '''
 
 
-a = np.array(([1,2,3],[4,5,6],[7,8,9]))
-b = np.array([1,2,3,4])
+a = np.array(([1,2,3],[4,5,6],[7,8,9])).astype('float32')
+a = np.random.randn(30,6)
+b = np.array([1,2,4]).astype('float32')
+b = np.random.randn(30,2)
 
-#print(householder_vector(b))
-
-print("my",QR_fact(a))
-
-print("np",np.linalg.qr(a))
+sol = np.linalg.lstsq(a,b)
+print("**")
+print('sol',sol[0])
+print(LLSQ(a,b))
 

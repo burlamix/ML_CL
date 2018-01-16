@@ -5,6 +5,7 @@ from NN_lib.NN import *
 import matplotlib.pyplot as plt
 from NN_lib import preproc
 from NN_lib import linesearches
+import lss
 
 outs=2
 valr=(0.00,0.000)
@@ -22,13 +23,18 @@ test_data_path = "data/ML-CUP17-TS.csv"
 
 dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=10, targets=2))
 dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
-
+np.random.seed(5)
 
 amg = linesearches.armj_wolfe()
 
 optimizer = SimpleOptimizer( lr=clr, ls=amg)
 
-
+#Try LLSQ on the cup dataset
+sol = np.linalg.lstsq(dataset.train[0],dataset.train[1])
+pred = np.dot(dataset.train[0],sol[0])
+pred1 = lss.LLSQ(dataset.train[0],dataset.train[1])
+print(loss_functions.mee(dataset.train[1],pred))
+exit(1)
 
 NN = NeuralNetwork()
 NN.addLayer(inputs=inps,neurons=15,activation="tanh", rlambda=valr,regularization="EN",
