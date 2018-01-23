@@ -26,14 +26,29 @@ def QR_fact(a1):
 								 np.dot(v[:,np.newaxis],
 										2*np.dot(np.transpose(v),
 												 a[j:,j+1:])[np.newaxis,:]))
-		q[:,j:] = q[:,j:] - np.dot(q[:,j:],np.dot(v[:,np.newaxis],2*v[:,np.newaxis].transpose()))
+		q[:,j:] = q[:,j:] - np.dot(q[:,j:],
+								   np.dot(v[:,np.newaxis],
+										  2*v[:,np.newaxis].transpose()))
 	r=a
 	return q,r
 
+#QR solver
 def LLSQ(X,y):
 	#Could use the QR factorization directly, without explicitely
 	#calculating the pseudoinverse
-	return np.dot(mypinv(X), y)
+	q, r = QR_fact(X)
+	# Cut away the 0s
+	q1 = q[:, 0:r.shape[1]]
+	#q2 = q[:, r.shape[1]:]
+	r = r[0:r.shape[1], :]
+	return np.dot(np.dot(np.linalg.inv(r),q1.T),y)
+	#return np.dot(mypinv(X), y)
+
+#Normal equations
+def LLSQ1(X,y):
+	#Could use the QR factorization directly, without explicitely
+	#calculating the pseudoinverse
+	return np.dot(np.dot(np.linalg.inv(np.dot(X.T,X)),X.T), y)
 
 def mypinv(x):
 	q,r = QR_fact(x)
@@ -57,11 +72,15 @@ print("r  ",r)
 
 a = np.array(([1,2,3],[4,5,6],[7,8,9])).astype('float32')
 a = np.random.randn(30,6)
-b = np.array([1,2,4]).astype('float32')
+b = np.array([2,4,6]).astype('float32')
 b = np.random.randn(30,2)
 
-sol = np.linalg.lstsq(a,b)
-print("**")
-print('sol',sol[0])
+#sol = np.linalg.lstsq(a,b)
+#print("**")
+#print('sol',sol[0])
 print(LLSQ(a,b))
-
+print(LLSQ1(a,b))
+print(LLSQ(a,b)-LLSQ1(a,b))
+#print('ll')
+#print(np.dot(a,sol[0]))
+#print(b)

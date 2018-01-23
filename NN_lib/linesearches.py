@@ -83,7 +83,7 @@ def armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100)
 
     return armj_wolfe_internal
 
-def back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=0):
+def back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100):
 
     def back_track_internal(f, W, curr_v, curr_grad):
         lr_in = lr

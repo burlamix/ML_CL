@@ -9,12 +9,12 @@ import lss
 
 outs=2
 valr=(0.00,0.000)
-clr=0.1
+clr=0.001
 drop=0.0
-epochs=200
+epochs=1
 inps=10
 
-np.random.seed(5)
+np.random.seed(25)
 dataset = preproc.Dataset()
 
 train_data_path = "data/ML-CUP17-TR.csv"
@@ -23,36 +23,48 @@ test_data_path = "data/ML-CUP17-TS.csv"
 
 dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=10, targets=2))
 dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
-np.random.seed(5)
+#dataset.train[0]= np.random.randn(11,10)
+#dataset.train[1]= np.random.randn(11,2)
+#j = dataset.train[0]
+#j = np.concatenate((np.ones((j.shape[0],1)),j),axis=1)
 
-amg = linesearches.armj_wolfe()
+#print(np.linalg.cond(np.eye((10))+np.dot(dataset.train[0].T,dataset.train[0])))
+amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=clr, min_lr=1e-11, scale_r=0.9, max_iter=100)
+#amg = linesearches.back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100)
 
-optimizer = SimpleOptimizer( lr=clr, ls=amg)
+optimizer = ConjugateGradient( lr=clr, ls=amg)
+#optimizer = SimpleOptimizer( lr=clr, ls=amg)
 
 #Try LLSQ on the cup dataset
-sol = np.linalg.lstsq(dataset.train[0],dataset.train[1])
-pred = np.dot(dataset.train[0],sol[0])
-pred1 = lss.LLSQ(dataset.train[0],dataset.train[1])
-print(loss_functions.mee(dataset.train[1],pred))
-exit(1)
 
-NN = NeuralNetwork()
-NN.addLayer(inputs=inps,neurons=15,activation="tanh", rlambda=valr,regularization="EN",
-            dropout=0.0,bias=0.0)
-NN.addLayer(inputs=15,dropout=0,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
-weights = NN.get_weights()
+
+#NN = NeuralNetwork()
+#NN.addLayer(inputs=inps,neurons=15,activation="tanh", rlambda=valr,regularization="EN",
+#            dropout=0.0,bias=0.0)
+#NN.addLayer(inputs=15,dropout=0,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
+#weights = NN.get_weights()
 #train our model
 #(loss, acc, val_loss, val_acc, history)=\
 #    NN.fit_ds( dataset,epochs, optimizer ,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
 
 NN = NeuralNetwork()
-NN.addLayer(inputs=inps,neurons=50,activation="sigmoid", rlambda=valr,regularization="EN",
+NN.addLayer(inputs=inps,neurons=25,activation="tanh", rlambda=valr,regularization="EN",
             dropout=0,bias=0.0)
-NN.addLayer(inputs=15,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
-NN.set_weights(weights)
+NN.addLayer(inputs=25,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
+#NN.set_weights(weights)
 (loss, acc, val_loss, val_acc, history2)=\
-    NN.fit_ds( dataset,epochs, optimizer  ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
+    NN.fit_ds( dataset,epochs, optimizer  ,val_split=0,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mee")
 
+w = NN.get_weights()
+j = dataset.train[0]
+j = np.concatenate((np.ones((j.shape[0],1)),j),axis=1)
+sol = np.linalg.lstsq(j,dataset.train[1])
+pred = np.dot(j,sol[0])
+pred1 = lss.LLSQ(dataset.train[0],dataset.train[1])
+print(loss_functions.mee(dataset.train[1],pred))
+print(loss_functions.mee(dataset.train[1],NN.predict(dataset.train[0])))
+pred = np.dot(j,NN.get_weights()[0])
+print(loss_functions.mee(dataset.train[1],pred))
 
 #plt.plot(history['tr_loss'], label='loss',ls="-",color="red")
 plt.plot(history2['tr_loss'], label='loss',ls="-",color="blue")

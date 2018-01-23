@@ -3,7 +3,7 @@ import types
 import sys
 import sklearn as sk
 
-
+from NN_lib.linesearches import dir_der,us_norm
 
 
 class SimpleOptimizer:
@@ -202,6 +202,55 @@ class RMSProp:
         self.R = (1-self.delta)*(self.R if self.R!=None else 1)+(self.delta)*np.array(grad)**2
         return W-self.lr*np.array(grad)/(self.R+1e-6)**(1/2)
 
+
+class ConjugateGradient:
+
+    def __str__(self):
+        return str('ConjugateGradient'+str(self.lr))
+
+    def __repr__(self):
+        return str('ConjugateGradient'+str(self.lr))
+
+    def __init__(self, lr=0.001, eps=0.9, ls=None):
+        self.lr = lr
+        self.eps = eps
+        self.ls = ls
+        self.p = None
+        self.last_g = None
+        self.reset()
+
+    def reset(self):
+        self.p = None
+        self.last_g = None
+    def pprint(self):
+        return "lr=" + str(self.lr)
+
+    def getLr(self):
+        return self.lr
+
+    def optimize(self,f,W):
+
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
+
+
+        loss, grad = f(W)
+        #if np.random.random()<0.01:self.p=None
+
+        if self.p == None:
+            self.p = -grad#/us_norm(grad)
+        else:
+            beta = (-us_norm(grad)/(-us_norm(self.last_g)))**2
+            #beta = dir_der(grad,grad)/dir_der(self.last_g,self.last_g)
+            #print(beta)
+            self.p = -grad + beta*self.p
+        self.last_g = grad
+        if self.ls!=None and 1==1:
+
+            actual_lr = self.ls(f, W+self.lr*self.p,f(W+self.lr*self.p,only_fp=True), -self.p)
+        else:
+            actual_lr = self.lr
+        return (W+actual_lr*self.p)
 
 optimizers = dict()
 
