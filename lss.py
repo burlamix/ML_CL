@@ -50,6 +50,14 @@ def LLSQ1(X,y):
 	#calculating the pseudoinverse
 	return np.dot(np.dot(np.linalg.inv(np.dot(X.T,X)),X.T), y)
 
+#Normal equations with regul
+def LLSQ1R(X,y):
+	#Could use the QR factorization directly, without explicitely
+	#calculating the pseudoinverse
+	reg = np.eye(X.shape[1])*3.8
+	reg[0][0]=0
+	return np.dot(np.dot(np.linalg.inv(np.dot(X.T,X)+reg),X.T), y)
+
 def mypinv(x):
 	q,r = QR_fact(x)
 	#Cut away the 0s
@@ -80,7 +88,9 @@ b = np.random.randn(30,2)
 #print('sol',sol[0])
 print(LLSQ(a,b))
 print(LLSQ1(a,b))
-print(LLSQ(a,b)-LLSQ1(a,b))
+print('reg')
+print(LLSQ1R(a,b))
+#print(LLSQ(a,b)-LLSQ1(a,b))
 #print('ll')
 #print(np.dot(a,sol[0]))
 #print(b)

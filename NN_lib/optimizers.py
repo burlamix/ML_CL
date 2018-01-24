@@ -252,6 +252,51 @@ class ConjugateGradient:
             actual_lr = self.lr
         return (W+actual_lr*self.p)
 
+class Adine:
+
+
+    def __str__(self):
+        return str('adine'+str(self.lr))
+
+    def __repr__(self):
+        return str('adine'+str(self.lr))
+
+    def __init__(self, lr=0.001, ms=0.9, mg=1.0001, e=1.0, ls = None):
+        self.lr = lr
+        self.ls = ls
+        self.ms = ms
+        self.mg = mg
+        self.e = e
+        self.reset()
+
+    def reset(self):
+        self.last_l = 0
+        self.v = None
+        self.t = 0
+        self.avgl = 0
+
+    def pprint(self):
+        return "lr=" + str(self.lr)+",m="+str(self.eps)
+
+    def getLr(self):
+        return self.lr
+
+    def optimize(self,f,W):
+
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
+        self.t+=1
+        loss = f(W,only_fp=True)
+        self.last_l = self.avgl
+        self.avgl = (self.avgl+loss)/2
+        if self.avgl>self.e*self.last_l:
+            m = self.ms
+        else:
+            m = self.mg
+        _, grad = f(W+m*(self.v if self.v!=None else 0))
+        self.v = (-self.lr * grad if (self.v == None) else (m*self.v-self.lr*grad))
+        return (W+self.v)
+
 optimizers = dict()
 
 optimizers["SGD"] = SimpleOptimizer()
@@ -259,3 +304,4 @@ optimizers["adam"] = Adam()
 optimizers["momentum"] = Momentum()
 optimizers["adamax"] = Adamax()
 optimizers["rmsprop"] = RMSProp()
+optimizers["adine"] = Adine()
