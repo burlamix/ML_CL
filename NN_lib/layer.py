@@ -46,10 +46,7 @@ class Layer:
         :return:
         '''
         x = np.concatenate((np.ones((x.shape[0],1)),x),axis=1)
-        print('x',x.shape)
-        print('W',self.W.shape)
         partial = np.dot(x, self.W.transpose())
-        print('partial',partial.shape)
         self.currentOutput = self.activation.f(partial)
         #If a dropout value has been specified, apply inverted dropout
         #https://pgaleone.eu/deep-learning/regularization/2017/01/10/anaysis-of-dropout/

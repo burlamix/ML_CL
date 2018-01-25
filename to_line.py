@@ -12,9 +12,9 @@ from keras import regularizers
 from keras import optimizers as optims
 outs=2
 valr=(0,0)
-clr=0.001
+clr=0.01
 drop=0.0
-epochs=500
+epochs=5000
 inps=10
 #13770039132
 np.random.seed(23185)
@@ -58,7 +58,7 @@ NN.addLayer(inputs=inps,neurons=25,activation="tanh", rlambda=valr,regularizatio
 NN.addLayer(inputs=25,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
 #NN.set_weights(weights)
 (loss, acc, val_loss, val_acc, history2)=\
-    NN.fit_ds( dataset,epochs, optimizer  ,val_split=0,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
+    NN.fit_ds( dataset,epochs, optimizer  ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
 
 model = Sequential()
 model.add(Dense(outs, activation= 'linear' ,use_bias=True,input_dim=10,

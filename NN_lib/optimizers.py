@@ -5,6 +5,14 @@ import sklearn as sk
 
 from NN_lib.linesearches import dir_der,us_norm
 
+def us_norm(x):
+    if (x[0].shape == ()):
+        return -np.linalg.norm(x)
+    else:
+        return -(np.linalg.norm(
+            np.concatenate(
+                [x[i].reshape(x[i].shape[1] * x[i].shape[0], 1) for i in range(0, len(x))])
+        ))
 
 class SimpleOptimizer:
     #SGD optimizer without momentum
@@ -84,7 +92,7 @@ class Momentum:
             v = -self.lr*(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
         else:
             loss, grad = f(W)
-            v = self.eps*(self.last_g if (self.last_g != None) else 0) - self.lr*(grad)
+            v = self.eps*(self.last_g if (not(self.last_g is None)) else 0) - self.lr*(grad)
         self.last_g = v
 
         return (W+v)
@@ -109,7 +117,6 @@ class Adam:
     def reset(self):
         self.m = [0]
         self.v = [0]
-        self.grad = 0
         self.t = 0
 
     def pprint(self):
@@ -121,7 +128,7 @@ class Adam:
 
         self.t+=1 #Update timestamp
         loss, grad = f(W) #Compute the gradient
-
+        #print('grad',us_norm(grad))
         #First and second moment estimation(biased by b1 and b2)
         self.m.append((self.b1*self.m[self.t-1]+(1-self.b1)*(grad)))
         self.v.append((self.b2*self.v[self.t-1]+(1-self.b2)*(np.power((grad),2))))
@@ -199,7 +206,7 @@ class RMSProp:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-        self.R = (1-self.delta)*(self.R if self.R!=None else 1)+(self.delta)*np.array(grad)**2
+        self.R = (self.delta)*(self.R if not (self.R is None) else 1)+(1-self.delta)*np.array(grad)**2
         return W-self.lr*np.array(grad)/(self.R+1e-6)**(1/2)
 
 
@@ -293,8 +300,8 @@ class Adine:
             m = self.ms
         else:
             m = self.mg
-        _, grad = f(W+m*(self.v if self.v!=None else 0))
-        self.v = (-self.lr * grad if (self.v == None) else (m*self.v-self.lr*grad))
+        _, grad = f(W+m*(self.v if not(self.v is None) else 0))
+        self.v = (-self.lr * grad if (self.v is None) else (m*self.v-self.lr*grad))
         return (W+self.v)
 
 optimizers = dict()
