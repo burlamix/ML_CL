@@ -5,16 +5,16 @@ from NN_lib.NN import *
 import matplotlib.pyplot as plt
 from NN_lib import preproc
 from NN_lib import linesearches
-import lss
+import llss
 from keras.models import Sequential
 from keras.layers import Dense
 from keras import regularizers
 from keras import optimizers as optims
 outs=2
-valr=(0,0)
+valr=(0,3.8)
 clr=0.01
 drop=0.0
-epochs=5000
+epochs=10
 inps=10
 #13770039132
 np.random.seed(23185)
@@ -32,12 +32,13 @@ dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=
 #j = np.concatenate((np.ones((j.shape[0],1)),j),axis=1)
 
 #print(np.linalg.cond(np.eye((10))+np.dot(dataset.train[0].T,dataset.train[0])))
-amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=clr, min_lr=1e-11, scale_r=0.9, max_iter=100)
+amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=clr, min_lr=1e-11, scale_r=0.99, max_iter=1000)
 #amg = linesearches.back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100)
 
 #optimizer = ConjugateGradient( lr=clr, ls=amg)
-optimizer = SimpleOptimizer( lr=clr, ls=None)
+optimizer = SimpleOptimizer( lr=clr, ls=amg)
 optimizer = Adine( lr=clr, ls=None)
+optimizer = SimpleOptimizer( lr=clr, ls=amg)
 #optimizer = Momentum( lr=clr)
 #optimizer = Adam(lr=0.01 )
 
@@ -53,12 +54,12 @@ optimizer = Adine( lr=clr, ls=None)
 #    NN.fit_ds( dataset,epochs, optimizer ,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
 
 NN = NeuralNetwork()
-NN.addLayer(inputs=inps,neurons=25,activation="tanh", rlambda=valr,regularization="EN",
-            dropout=0,bias=0.0)
-NN.addLayer(inputs=25,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
+#NN.addLayer(inputs=inps,neurons=25,activation="tanh", rlambda=valr,regularization="EN",
+#            dropout=0,bias=0.0)
+NN.addLayer(inputs=inps,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
 #NN.set_weights(weights)
 (loss, acc, val_loss, val_acc, history2)=\
-    NN.fit_ds( dataset,epochs, optimizer  ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
+    NN.fit_ds( dataset,epochs, optimizer  ,val_split=0,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
 
 model = Sequential()
 model.add(Dense(outs, activation= 'linear' ,use_bias=True,input_dim=10,
@@ -79,9 +80,9 @@ sol = np.linalg.lstsq(j,dataset.train[1])
 pred = np.dot(j,sol[0])
 
 #PRED WITH OUR SOLVER
-xsolv = lss.LLSQ1R(j,dataset.train[1])
+xsolv = llss.LLSQ1R(j,dataset.train[1],l=38)
 predus = np.dot(j,xsolv)
-xsolvqr = lss.LLSQ(j,dataset.train[1])
+xsolvqr = llss.LLSQ(j,dataset.train[1],l=38)
 predusqr = np.dot(j,xsolvqr)
 
 predusnet = np.dot(j,NN.get_weights()[0])
@@ -92,22 +93,21 @@ usres = loss_functions.mse(dataset.train[1],predus)
 usresqr = loss_functions.mse(dataset.train[1],predusqr)
 usnetres = loss_functions.mse(dataset.train[1],predusnet)
 
-print('nn',nnres)
 print('numpy',npres)
 print('us',usres)
 print('usqr',usresqr)
-print('usnet',usnetres)
-print('diff',npres-usres)
-print('diff',nnres-usres)
-print(NN.get_weights())
-print('------------------')
-print(xsolv)
+#print('usnet',usnetres)
+#print('diff',npres-usres)
+#print('diff',nnres-usres)
+#print(NN.get_weights())
+#print('------------------')
+#print(xsolv)
 #plt.plot(history['tr_loss'], label='loss',ls="-",color="red")
 plt.plot(history2['tr_loss'], label='loss',ls="-",color="blue")
 plt.plot(history2['val_loss'], label='vloss',ls="-",color="red")
 plt.axes().set_ylim([0,20])
 
-plt.show()
+#plt.show()
 '''
 #build and train keras model with our weights
 model = Sequential()
