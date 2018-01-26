@@ -29,12 +29,21 @@ def us_norm(x):
         ))
 
 def dir_der(grad, lastg):
+
+    if(len((grad.shape)) == 2 ):
+        a = grad.reshape(grad.shape[1] * grad.shape[0])
+        b = lastg.reshape(lastg.shape[1] * lastg.shape[0])
+        return np.sum(-a * b)
+ 
     if (grad[0].shape==()):
-        return grad.transpose()*lastg #Didn't even check this
-    a = np.concatenate(
-        [grad[i].reshape(grad[i].shape[1] * grad[i].shape[0], 1) for i in range(0, len(grad))])
-    b = np.concatenate(
-        [lastg[i].reshape(lastg[i].shape[1] * lastg[i].shape[0], 1) for i in range(0, len(lastg))])
+            return grad.transpose()*lastg #Didn't even check this
+    else:
+      
+        a = np.concatenate(
+            [grad[i].reshape(grad[i].shape[1] * grad[i].shape[0], 1) for i in range(0, len(grad))])
+        b = np.concatenate(
+            [lastg[i].reshape(lastg[i].shape[1] * lastg[i].shape[0], 1) for i in range(0, len(lastg))])
+
     return np.sum(-a * b)
 
 def armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100):
@@ -45,12 +54,14 @@ def armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100)
         max_iter_in = max_iter
         # phip0- directional derivative -> use norm of current gradient
         phip0 = dir_der(curr_grad, curr_grad)
+
         while max_iter_in > 0:
             # phia value of the function where we would go
             # phips_p gradient where we would go
             phia, phips_p = f(W - lr_in * curr_grad)
             phips = dir_der(curr_grad, phips_p)
             # test armijo strong wolfe condiction
+
             if phia <= curr_v + m1 * lr_in * phip0 and (np.abs(phips) <= -m2 * phip0):
                 return lr_in
             if phips >= 0:
