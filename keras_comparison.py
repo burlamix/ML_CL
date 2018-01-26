@@ -33,7 +33,7 @@ adamax1 = Adamax(lr=clr,b1=0.9,b2=0.999)
 m1 = Momentum(lr=clr,eps=0.9,nesterov=True)
 optimizer = SimpleOptimizer( lr=clr, ls=None)
 optimizer = Adam(lr=clr,b1=0.9,b2=0.999)
-optimizer = RMSProp(lr=clr,delta= 0.1)
+optimizer = RMSProp(lr=clr,delta= 0.9)
 
 
 NN = NeuralNetwork()

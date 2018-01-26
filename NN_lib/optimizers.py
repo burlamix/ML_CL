@@ -206,8 +206,8 @@ class RMSProp:
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
         loss, grad = f(W)
-        self.R = (self.delta)*(self.R if not (self.R is None) else 1)+(1-self.delta)*np.array(grad)**2
-        return W-self.lr*np.array(grad)/(self.R+1e-6)**(1/2)
+        self.R = (self.delta)*(self.R if not (self.R is None) else 0)+(1-self.delta)*np.array(grad)**2
+        return W-self.lr*np.array(grad)/((self.R)**(1/2)+1e-6)
 
 
 class ConjugateGradient:
