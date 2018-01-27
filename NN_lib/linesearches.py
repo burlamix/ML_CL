@@ -19,13 +19,15 @@ def bisection( f, W,grad,eps):
     return alpha
 
 #Prolly not needed..
-def us_norm(x):
-    if (x[0].shape == ()):
-        return -np.linalg.norm(x)
+def us_norm(grad):
+    if(len((grad.shape)) == 2 ):
+        return -np.linalg.norm(grad)
+    if (grad[0].shape == ()):
+        return -np.linalg.norm(grad)
     else:
         return -(np.linalg.norm(
             np.concatenate(
-                [x[i].reshape(x[i].shape[1] * x[i].shape[0], 1) for i in range(0, len(x))])
+                [grad[i].reshape(grad[i].shape[1] * grad[i].shape[0], 1) for i in range(0, len(grad))])
         ))
 
 def dir_der(grad, lastg):

@@ -5,14 +5,6 @@ import sklearn as sk
 
 from NN_lib.linesearches import dir_der,us_norm
 
-def us_norm(x):
-    if (x[0].shape == ()):
-        return -np.linalg.norm(x)
-    else:
-        return -(np.linalg.norm(
-            np.concatenate(
-                [x[i].reshape(x[i].shape[1] * x[i].shape[0], 1) for i in range(0, len(x))])
-        ))
 
 class SimpleOptimizer:
     #SGD optimizer without momentum
@@ -31,7 +23,9 @@ class SimpleOptimizer:
         pass
 
     def pprint(self):
-        return "sgd,lr="+str(self.lr)
+        ls="None"
+        if self.ls!=None: ls = self.ls.__name__
+        return "SGD{lr:"+str(self.lr)+",ls:"+ls+"}"
 
     def getLr(self):
         return self.lr
@@ -75,7 +69,9 @@ class Momentum:
         self.last_g = None
 
     def pprint(self):
-        return "lr=" + str(self.lr)+",m="+str(self.eps)
+        nesterov=""
+        if self.nesterov: nesterov="(nesterov)"
+        return "Momentum"+nesterov+"{lr:" + str(self.lr)+",m:"+str(self.eps)+"}"
 
     def getLr(self):
         return self.lr
@@ -88,8 +84,8 @@ class Momentum:
         if self.nesterov:
             #If nesterov, "look ahead" first
             loss, grad = \
-                (f(self.eps*self.last_g+W) if (self.last_g != None) else f(W))
-            v = -self.lr*(grad)+self.eps*(self.last_g if (self.last_g != None) else 0)
+                (f(self.eps*self.last_g+W) if (not(self.last_g is None)) else f(W))
+            v = -self.lr*(grad)+self.eps*(self.last_g if (not(self.last_g is None)) else 0)
         else:
             loss, grad = f(W)
             v = self.eps*(self.last_g if (not(self.last_g is None)) else 0) - self.lr*(grad)
@@ -107,20 +103,22 @@ class Adam:
     def __repr__(self):
         return str('adam'+str(self.lr))
 
-    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
+    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8,ls=None):
         self.lr = lr
         self.b1 = b1
         self.b2 = b2
         self.eps = eps
         self.reset()
+        self.ls = ls
 
     def reset(self):
         self.m = [0]
         self.v = [0]
         self.t = 0
+        self.ls=None
 
     def pprint(self):
-        return "adam:" + str(self.lr)
+        return "Adam{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
@@ -138,7 +136,14 @@ class Adam:
         vcap = self.v[self.t]/(np.subtract(1,np.power(self.b2,self.t)))
         for i in range(len(vcap)):
             vcap[i] = np.sqrt(vcap[i])
-        return np.subtract(W,self.lr*mcap/((vcap+self.eps)))
+
+        if self.ls!=None:
+            loss,grad = f(W-self.lr*mcap/((vcap+self.eps)))#00118553246015
+            actual_lr = self.ls(f, W-self.lr*mcap/((vcap+self.eps)),loss, grad)
+        else:
+            actual_lr = self.lr
+
+        return np.subtract(W,actual_lr*mcap/((vcap+self.eps)))
 
 
 class Adamax:
@@ -164,7 +169,7 @@ class Adamax:
         self.t = 0
 
     def pprint(self):
-        return "adamax:" + str(self.lr)
+        return "Adamax{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
@@ -200,7 +205,7 @@ class RMSProp:
         self.R = None
 
     def pprint(self):
-        return "rms:" + str(self.lr)
+        return "RMSprop{lr:" + str(self.lr)+",d:"+str(self.delta)+"}"
 
     def optimize(self, f, W):
         if not(isinstance(f, types.FunctionType)):
@@ -229,8 +234,12 @@ class ConjugateGradient:
     def reset(self):
         self.p = None
         self.last_g = None
+
     def pprint(self):
-        return "lr=" + str(self.lr)
+        ls="None"
+        if self.ls!=None: ls = self.ls.__name__
+        return "ConjugateGrad(Fletcher-Reeves){lr:" + str(self.lr)+\
+        ",eps:"+str(self.eps)+",ls:"+ls+"}"
 
     def getLr(self):
         return self.lr
@@ -244,7 +253,7 @@ class ConjugateGradient:
         loss, grad = f(W)
         #if np.random.random()<0.01:self.p=None
 
-        if self.p == None:
+        if self.p is None:
             self.p = -grad#/us_norm(grad)
         else:
             beta = (-us_norm(grad)/(-us_norm(self.last_g)))**2
@@ -252,9 +261,9 @@ class ConjugateGradient:
             #print(beta)
             self.p = -grad + beta*self.p
         self.last_g = grad
-        if self.ls!=None and 1==1:
-
-            actual_lr = self.ls(f, W+self.lr*self.p,f(W+self.lr*self.p,only_fp=True), -self.p)
+        if self.ls!=None:
+            loss,grad= f(W+self.lr*self.p)
+            actual_lr = self.ls(f, W+self.lr*self.p,loss, grad)
         else:
             actual_lr = self.lr
         return (W+actual_lr*self.p)
@@ -283,7 +292,7 @@ class Adine:
         self.avgl = 0
 
     def pprint(self):
-        return "lr=" + str(self.lr)+",m="+str(self.eps)
+        return "Adine{lr:" + str(self.lr)+",ms:"+str(self.ms)+",mg:"+str(self.mg)+",t:"+self.e+"}"
 
     def getLr(self):
         return self.lr
