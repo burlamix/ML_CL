@@ -229,6 +229,7 @@ class ConjugateGradient:
         self.ls = ls
         self.p = None
         self.last_g = None
+        self.t = 0
         self.reset()
 
     def reset(self):
@@ -248,24 +249,33 @@ class ConjugateGradient:
 
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
-
+        self.t+=1
 
         loss, grad = f(W)
+
         #if np.random.random()<0.01:self.p=None
 
         if self.p is None:
-            self.p = -grad#/us_norm(grad)
+            self.p = -grad#/(-us_norm(grad))
         else:
-            beta = (-us_norm(grad)/(-us_norm(self.last_g)))**2
+            beta = -us_norm(grad)#/(-us_norm(self.last_g)))
+            #beta = -grad/(-us_norm(grad))
             #beta = dir_der(grad,grad)/dir_der(self.last_g,self.last_g)
             #print(beta)
             self.p = -grad + beta*self.p
         self.last_g = grad
         if self.ls!=None:
             loss,grad= f(W+self.lr*self.p)
-            actual_lr = self.ls(f, W+self.lr*self.p,loss, grad)
+            if np.abs(us_norm(grad))>1e-9:
+                actual_lr = self.ls(f, W+self.lr*self.p,loss, grad)
+            else: actual_lr = self.lr
+            #print('actual',actual_lr)
         else:
             actual_lr = self.lr
+
+        f2 = f(W + actual_lr * (self.p),only_fp=True)
+        if (np.abs(f2)>np.abs(loss)):
+            self.p = -grad/(-us_norm(grad))
         return (W+actual_lr*self.p)
 
 class Adine:
