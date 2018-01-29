@@ -9,7 +9,7 @@ def bisection( f, W,grad,eps):
     while (max_iter>0):
         max_iter-=1
         alpha = np.average([a_minus,a_plus])
-        val, v = f(W-alpha*grad)
+        val, v = f(W+alpha*grad)
         if (np.abs(v)<=eps):
             break
         if (v>0):
@@ -17,6 +17,21 @@ def bisection( f, W,grad,eps):
         else:
             a_plus = alpha
     return alpha
+
+def us_norm2(grad1,grad2):
+    if(len((grad1.shape)) == 2 ):
+        a = grad1.reshape(grad1.shape[1] * grad1.shape[0])
+        b = grad2.reshape(grad2.shape[1] * grad2.shape[0])
+        return np.sum(a * b)
+    if (grad1[0].shape == ()):
+        return np.linalg.norm(grad1)
+    else:
+        a = np.concatenate(
+            [grad1[i].reshape(grad1[i].shape[1] * grad1[i].shape[0], 1) for i in range(0, len(grad1))])
+        b = np.concatenate(
+            [grad2[i].reshape(grad2[i].shape[1] * grad2[i].shape[0], 1) for i in range(0, len(grad2))])
+        return np.sum(a * b)
+
 
 #Prolly not needed..
 def us_norm(grad):
@@ -51,17 +66,17 @@ def dir_der(grad, lastg):
 def armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100):
     #Armijo-wolfe line search with strong wolfe condition
     #Credits to Antonio Frangioni
-    def armj_wolfe_internal(f, W, curr_v, curr_grad):
+    def armj_wolfe_internal(f, W, curr_v,curr_grad,phip0):
         lr_in = lr
         max_iter_in = max_iter
         # phip0- directional derivative -> use norm of current gradient
-        phip0 = dir_der(curr_grad, curr_grad)
+        #phip0 = dir_der(curr_grad, curr_grad)
 
         while max_iter_in > 0:
             # phia value of the function where we would go
             # phips_p gradient where we would go
-            phia, phips_p = f(W - lr_in * curr_grad)
-            phips = dir_der(curr_grad, phips_p)
+            phia, phips_p = f(W + lr_in * curr_grad)
+            phips = us_norm2(curr_grad, phips_p)
             # test armijo strong wolfe condiction
 
             if phia <= curr_v + m1 * lr_in * phip0 and (np.abs(phips) <= -m2 * phip0):
@@ -79,8 +94,8 @@ def armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100)
             a = (am * phips - lr_in * phipm) / (phips - phipm)
             temp = min([lr_in * (1 - sf), a])
             a = max([am * (1 + sf), temp])
-            phia, phipp = f(W - a * curr_grad)
-            phip = dir_der(curr_grad, phipp)
+            phia, phipp = f(W + a * curr_grad)
+            phip = us_norm2(curr_grad, phipp)
             if ((phia <= curr_v + m1 * a * phip0) and (np.abs(phip) <= -m2 * (phip0))):
                 return a
             if phip < 0:
@@ -89,7 +104,7 @@ def armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100)
             else:
                 lr_in = a
                 if lr_in < min_lr:
-                    return lr_in
+                    return min_lr
                 phips = phip
                 max_iter_in -= 1
         return a
@@ -98,17 +113,17 @@ def armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100)
 
 def back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100):
 
-    def back_track_internal(f, W, curr_v, curr_grad):
+    def back_track_internal(f, W, curr_v, dir,phip0):
         lr_in = lr
         maxiter_in = max_iter
 
-        if (curr_grad[0].shape == ()):
-            phip0 = -np.linalg.norm(curr_grad)
-        else:
-            phip0 = us_norm(curr_grad)
+        #if (curr_grad[0].shape == ()):
+        #    phip0 = -np.linalg.norm(curr_grad)
+        #else:
+        #    phip0 = us_norm(curr_grad)
 
         while maxiter_in > 0 and lr_in > min_lr:
-            phia = f(W - lr_in * curr_grad, only_fp=True)
+            phia = f(W + lr_in * dir, only_fp=True)
             if phia <= curr_v + m1 * lr_in * phip0:
                 return lr_in
             lr_in = lr_in * scale_r

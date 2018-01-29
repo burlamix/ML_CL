@@ -3,7 +3,7 @@ import types
 import sys
 import sklearn as sk
 
-from NN_lib.linesearches import dir_der,us_norm
+from NN_lib.linesearches import dir_der,us_norm,us_norm2
 
 
 class SimpleOptimizer:
@@ -37,7 +37,8 @@ class SimpleOptimizer:
         loss, grad = f(W)
 
         if self.ls!=None:
-            actual_lr = self.ls(f, W, loss, grad)
+            actual_lr = self.ls(f, W, loss, -grad, us_norm2(grad,grad))
+            print('ac',actual_lr)
         else:
             actual_lr = self.lr
 
@@ -252,30 +253,36 @@ class ConjugateGradient:
         self.t+=1
 
         loss, grad = f(W)
-
-        #if np.random.random()<0.01:self.p=None
+        if (np.mod(self.t,1)==5):self.p = None#/-us_norm(grad)
 
         if self.p is None:
             self.p = -grad#/(-us_norm(grad))
         else:
-            beta = -us_norm(grad)#/(-us_norm(self.last_g)))
+            #beta = -us_norm(grad)#/(-us_norm(self.last_g))
             #beta = -grad/(-us_norm(grad))
-            #beta = dir_der(grad,grad)/dir_der(self.last_g,self.last_g)
+            beta = us_norm2(grad,grad)/(us_norm2(self.last_g,self.last_g)+1e-7)
             #print(beta)
             self.p = -grad + beta*self.p
         self.last_g = grad
         if self.ls!=None:
-            loss,grad= f(W+self.lr*self.p)
-            if np.abs(us_norm(grad))>1e-9:
-                actual_lr = self.ls(f, W+self.lr*self.p,loss, grad)
-            else: actual_lr = self.lr
+            #loss,newgrad= f(W+self.lr*self.p)
+            if np.abs(us_norm(grad))>0:
+                #print('val before',loss)
+                dir_norm=us_norm2(-self.p,grad)
+                actual_lr = self.ls(f, W,loss, self.p, dir_norm)
+                print('actu',actual_lr)
+                #print('actual',actual_lr)
+            else:
+                actual_lr = self.lr
             #print('actual',actual_lr)
         else:
             actual_lr = self.lr
 
         f2 = f(W + actual_lr * (self.p),only_fp=True)
-        if (np.abs(f2)>np.abs(loss)):
-            self.p = -grad/(-us_norm(grad))
+        #if np.random.randn() > -0.5:
+        #    self.p = -grad/(-us_norm(grad))
+       # if (np.abs(f2)>np.abs(loss)):
+       #     self.p = -grad/(-us_norm(grad))
         return (W+actual_lr*self.p)
 
 class Adine:
@@ -302,7 +309,7 @@ class Adine:
         self.avgl = 0
 
     def pprint(self):
-        return "Adine{lr:" + str(self.lr)+",ms:"+str(self.ms)+",mg:"+str(self.mg)+",t:"+self.e+"}"
+        return "Adine{lr:" + str(self.lr)+",ms:"+str(self.ms)+",mg:"+str(self.mg)+",t:"+str(self.e)+"}"
 
     def getLr(self):
         return self.lr
@@ -323,6 +330,55 @@ class Adine:
         self.v = (-self.lr * grad if (self.v is None) else (m*self.v-self.lr*grad))
         return (W+self.v)
 
+class BFGS():
+    def __str__(self):
+        return str('BFGS'+str(self.lr))
+
+    def __repr__(self):
+        return str('BFGS'+str(self.lr))
+
+    def __init__(self, lr=0.001, eps=0.9, ls=None):
+        self.lr = lr
+        self.V = None
+        self.lastg = None
+        self.reset()
+
+    def reset(self):
+        self.V = None
+        self.lastg = None
+
+
+    def pprint(self): #if np.random.random()<0.01:self.p=None
+
+        return "BFGS(DFP){lr:" + str(self.lr)+"}"
+
+    def getLr(self):
+        return self.lr
+
+    def optimize(self,f,W):
+
+        if not(isinstance(f, types.FunctionType)):
+            sys.exit("Provided function is invalid")
+
+        loss, grad = f(W)
+        if self.V == None:
+            pk = -grad
+        else:
+            pk = dir_der(self.V, grad)
+        sk = self.lr * pk
+        if self.lastg == None:
+            yk = grad
+        else:
+            yk = grad - self.lastg
+
+        if self.V == None:
+            Ak = -us_norm(yk)/-us_norm(yk)
+            Bk = -us_norm(sk)/dir_der(-sk,yk)
+        else:
+            Ak = 1
+
+        return (W+self.lr*pk)
+
 optimizers = dict()
 
 optimizers["SGD"] = SimpleOptimizer()
@@ -331,3 +387,4 @@ optimizers["momentum"] = Momentum()
 optimizers["adamax"] = Adamax()
 optimizers["rmsprop"] = RMSProp()
 optimizers["adine"] = Adine()
+optimizers["BFGS"] = BFGS()
