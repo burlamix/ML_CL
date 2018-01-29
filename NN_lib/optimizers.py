@@ -1,7 +1,7 @@
 import numpy as np
 import types
 import sys
-import sklearn as sk
+#import sklearn as sk
 
 from NN_lib.linesearches import dir_der,us_norm,us_norm2
 

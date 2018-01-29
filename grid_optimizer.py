@@ -55,10 +55,10 @@ fgs = list()
 start = time.time()
 trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[5000], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[10000], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
-                                               cvfolds=1, val_set=None, verbose=2,
+                                               cvfolds=1, val_set=None, verbose=1,
                                                loss_fun=losses, val_loss_fun="mee",
                                                neurons=neurs, optimizers=opts,seed=i)
     fgs.append(fg)
@@ -66,9 +66,9 @@ end = time.time()
 print('time:', (end-start))
 fgmean = list() #List for holding means
 
-with open('grid_save.pkl', 'wb') as output:
-    pickle.dump(fgs, output, pickle.HIGHEST_PROTOCOL)
-    pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
+#with open('grid_save.pkl', 'wb') as output:
+    #pickle.dump(fgs, output, pickle.HIGHEST_PROTOCOL)
+    #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
 
 #Create initial configs
@@ -94,9 +94,9 @@ for fullgrid in fgs:
                 break
 
 for i in range(0,len(fgmean)):
-    fgmean[i]['val_acc']/=trials
+    #fgmean[i]['val_acc']/=trials
     fgmean[i]['val_loss']/=trials
-    fgmean[i]['tr_acc']/=trials
+    #fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
 
 pp = PdfPages("grid_plot.pdf")
