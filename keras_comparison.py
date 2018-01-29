@@ -14,7 +14,7 @@ outs=2
 valr =(0,0)
 clr=0.01
 drop=0.0
-epochs=50
+epochs=250
 inps=10
 #13770039132
 np.random.seed(23185)
@@ -28,12 +28,12 @@ dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l
 dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
 amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=clr, min_lr=1e-11, scale_r=0.9, max_iter=50)
 adam1 = Adam(lr=clr,b1=0.9,b2=0.999)
-adamax1 = Adamax(lr=clr,b1=0.9,b2=0.999)
-optimizer = RMSProp(lr=clr,delta= 0.9)
 optimizer = SimpleOptimizer( lr=clr, ls=amg)
 optimizer = Adine( lr=clr, ls=None)
-optimizer = Momentum(lr=clr,eps=0.9,nesterov=True)
 optimizer = Adam(lr=clr,b1=0.9,b2=0.999)
+optimizer = Momentum(lr=clr,eps=0.9,nesterov=False)
+optimizer = RMSProp(lr=clr,delta= 0.9)
+optimizer = Adamax(lr=clr,b1=0.9,b2=0.999)
 
 
 NN = NeuralNetwork()
@@ -61,9 +61,9 @@ model.add(Dense(25, activation= 'tanh' ,use_bias=True,input_dim=10,
 model.add(Dense(outs, activation= 'linear' ,use_bias=True,
     bias_initializer="zeros",kernel_regularizer=regularizers.l1_l2(valr[0],valr[1]),bias_regularizer=regularizers.l1_l2(valr[0],valr[1])))
 
+sgd = optims.SGD(lr=clr, momentum=0.9, decay=0.00,nesterov=False )
 sgd = optims.RMSprop(lr=clr, rho=0.9,epsilon=1e-6, decay=0.00 )
-sgd = optims.SGD(lr=clr, momentum=0.9, decay=0.00,nesterov=True )
-sgd = optims.Adam(lr=clr,epsilon=1e-8)
+sgd = optims.Adamax(lr=clr,epsilon=1e-8)
 
 
 model.compile(optimizer=sgd,
@@ -74,9 +74,10 @@ model.set_weights(currwg)
 history = model.fit(dataset.train[0], dataset.train[1],batch_size=dataset.train[0].shape[0],epochs=epochs,shuffle=True)
 
 print(history.history.keys())
-plt.plot(history.history['loss'], label='loss',ls="-",color="red")
-plt.plot(history2['tr_loss'], label='loss',ls="-",color="blue")
+plt.plot(history.history['loss'], label='keras',ls="--",color="red")
+plt.plot(history2['tr_loss'], label='us',ls="-.",color="blue")
 #plt.axes().set_ylim([0,20])
-
+plt.title(optimizer.pprint())
+plt.legend(loc='upper right',prop={'size':13})
 plt.show()
 

@@ -164,6 +164,8 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None, regulariza
     k = 0
     tot= len(all_comb)
     for params in all_comb:
+        np.random.seed(5)
+
         print(k,"/",tot)
         print(params)
         net = NN.NeuralNetwork()
