@@ -10,6 +10,8 @@ from NN_lib import preproc
 from NN_lib.optimizers import *
 import numpy as np
 import time
+import itertools
+
 np.random.seed(5)
 dataset = preproc.Dataset()
 
@@ -35,17 +37,35 @@ adamax3 = Adamax(lr=0.007,b1=0.9,b2=0.999)
 RMSP1 = RMSProp(lr=0.01)
 RMSP2 = RMSProp(lr=0.05)
 
+
+
 m1 = Momentum(lr=0.1,eps=0.9,nesterov=True)
 m2 = Momentum(lr=0.1,eps=0.9,nesterov=True)
 m3 = Momentum(lr=0.04,eps=0.9,nesterov=True)
 
+
+opt_list =[]
+
+opti = dict()
+
+opti["lr"] = [0.1,0.04,0.01,0.005,0.001,0.0003]
+opti["eps"] = [0.9,0.6,0.3,0]
+opti["nest"] = [True,False]
+
+labels, terms = zip(*opti.items())
+all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
+
+for param in all_comb:
+    print(param)
+    opt_list.append(Momentum(lr=param["lr"],eps=param["eps"],nesterov=param["nest"]))
+comb_of_param = len(all_comb)
 
 preprocessor = preproc.Preprocessor()
 
 
 preprocessor.shuffle(dataset)
 acts=[["tanh","linear"]]
-opts=[m1]
+opts=opt_list
 neurs=[[50,2]]
 batches = [dataset.train[0].shape[0]]
 losses = ["mee"]
@@ -55,9 +75,9 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 
 fgs = list()
 start = time.time()
-trials = 1
+trials = 8
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[10000], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[20000], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=1, val_set=None, verbose=1,
@@ -101,13 +121,13 @@ for i in range(0,len(fgmean)):
     #fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
 
-pp = PdfPages("grid_plot.pdf")
+pp = PdfPages(str(time.time())+".pdf")
 plt.figure()
 plt.axis("off")
 plt.text(0.5,0.5,"range 0-22",ha= "center",va="center", fontsize=40)
 pp.savefig()
-step1=1
-step2=1
+step1=2
+step2=3
 step = step1*step2
 i=0
 for att in range(0,len(opts),step):
