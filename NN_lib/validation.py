@@ -38,7 +38,7 @@ class grid_result:
                 net.addLayer(in_l, dataset.train[1].shape[1], activations[i], regularization=regularization[i],
                              rlambda=rlambda[i])
         #Re-train the best network on the whole dataset
-        net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
+        #net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
         self.NN = net
 
 
