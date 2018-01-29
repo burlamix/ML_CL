@@ -44,7 +44,7 @@ class grid_result:
 
 def grid_search(dataset, epochs, n_layers, neurons, activations=None, regularizations=None,
                 optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None,
-                val_split=0, rlambda=None, verbose=0, val_set=None, val_loss_fun=None):
+                val_split=0, rlambda=None, verbose=0, val_set=None, val_loss_fun=None, seed=1):
     '''
     Performs a grid search and returns the results on each configuration as well as an
     object containing the best one along with the re-trained network on the whole training+
@@ -164,7 +164,7 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None, regulariza
     k = 0
     tot= len(all_comb)
     for params in all_comb:
-        np.random.seed(5)
+        np.random.seed(seed)
 
         print(k,"/",tot)
         print(params)

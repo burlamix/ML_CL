@@ -7,7 +7,7 @@ import pickle
 from NN_lib import preproc
 from NN_lib.optimizers import *
 import numpy as np
-
+import time
 np.random.seed(5)
 dataset = preproc.Dataset()
 
@@ -52,17 +52,18 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 
 
 fgs = list()
-
+start = time.time()
 trials = 1
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[15], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[5000], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=1, val_set=None, verbose=2,
                                                loss_fun=losses, val_loss_fun="mee",
-                                               neurons=neurs, optimizers=opts)
+                                               neurons=neurs, optimizers=opts,seed=i)
     fgs.append(fg)
-
+end = time.time()
+print('time:', (end-start))
 fgmean = list() #List for holding means
 
 with open('grid_save.pkl', 'wb') as output:
@@ -101,31 +102,35 @@ for i in range(0,len(fgmean)):
 pp = PdfPages("grid_plot.pdf")
 plt.figure()
 plt.axis("off")
-plt.text(0.5,0.5,"range 0-22",ha= "center",va="center", fontsize=50)
+plt.text(0.5,0.5,"range 0-22",ha= "center",va="center", fontsize=40)
 pp.savefig()
+step1=1
+step2=1
+step = step1*step2
 i=0
-for att in opts:
-    f, (a) = plt.subplots(figsize=(30, 30), nrows=len(batches) * len(neurs) * len(acts),
-                          ncols=len(rlambdas) * len(losses),
+for att in range(0,len(opts),step):
+    f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
+                          ncols=step2*len(rlambdas) * len(losses),
                           sharex='col', sharey='row', squeeze=False)
     fgforplot=fgmean
     fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
-    temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+    temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
     temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
     j=0
     hist=False
     for row in a:
         for col in row:
-            col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}, "
-                          "last_f:"+str(temp[j]['tr_loss'][-1]),fontsize=10)
+            col.set_yticks(np.arange(0, 22, 0.5))
+            col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
+                          "last_f:"+str(temp[j]['tr_loss'][-1]),fontsize=20)
 
             if hist:
                 col.plot(temp[j]['history']['tr_loss'],label='tr err')
             else:
                 col.plot(temp[j]['tr_loss'], label='tr err')
             #col.legend(loc=3,prop={'size':10})
-            col.tick_params(labelsize=20)
-            plt.yticks(np.arange(0, 22 , 1.0))
+            col.tick_params(labelsize=13)
+            col.yaxis.grid()  # horizontal lines
             col.set_ylim([0,22])
             j+=1
             i+=1
@@ -137,33 +142,29 @@ plt.axis("off")
 plt.text(0.5,0.5,"range 0-5",ha= "center",va="center", fontsize=50)
 pp.savefig()
 i=0
-for att in opts:
-    f, (a) = plt.subplots(figsize=(30, 30), nrows=len(batches) * len(neurs) * len(acts),
-                          ncols=len(rlambdas) * len(losses),
+for att in range(0,len(opts),step):
+    f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
+                          ncols=step2*len(rlambdas) * len(losses),
                           sharex='col', sharey='row', squeeze=False)
     fgforplot=fgmean
     fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
-    temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+    temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
     temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
     j=0
     hist=False
     for row in a:
         for col in row:
-            col.set_title('tl:'+str(temp[j]['configuration']['loss_fun'])+
-                           ',rg:{'+str(temp[j]['configuration']['regularizations'])+','+
-                            str(temp[j]['configuration']['rlambda'])+'}'+
-                          '\nn:'+str(temp[j]['configuration']['neurons'])+
-                           ',bs:'+str(temp[j]['configuration']['batch_size'])+
-                          ',a1:' + temp[j]['configuration']['activations'][0]+
-                            ',a2:' + temp[j]['configuration']['activations'][1]+
-                          ',{'+temp[j]['configuration']['optimizers'].pprint()+"}",fontsize=10)
+            col.set_yticks(np.arange(0, 5, 0.1))
+            col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
+                          "last_f:"+str(temp[j]['tr_loss'][-1]),fontsize=20)
 
             if hist:
                 col.plot(temp[j]['history']['tr_loss'],label='tr err')
             else:
                 col.plot(temp[j]['tr_loss'], label='tr err')
             #col.legend(loc=3,prop={'size':10})
-            col.tick_params(labelsize=6)
+            col.tick_params(labelsize=13)
+            col.yaxis.grid()  # horizontal lines
             col.set_ylim([0,5])
             j+=1
             i+=1
@@ -175,39 +176,34 @@ plt.axis("off")
 plt.text(0.5,0.5,"range 0-1.2",ha= "center",va="center", fontsize=50)
 pp.savefig()
 i=0
-for att in opts:
-    f, (a) = plt.subplots(figsize=(30, 30), nrows=len(batches) * len(neurs) * len(acts),
-                          ncols=len(rlambdas) * len(losses),
+for att in range(0,len(opts),step):
+    f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
+                          ncols=step2*len(rlambdas) * len(losses),
                           sharex='col', sharey='row', squeeze=False)
     fgforplot=fgmean
     fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
-    temp = fgforplot[i: i + (len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+    temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
     temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
     j=0
     hist=False
     for row in a:
         for col in row:
-            col.set_title('tl:'+str(temp[j]['configuration']['loss_fun'])+
-                           ',rg:{'+str(temp[j]['configuration']['regularizations'])+','+
-                            str(temp[j]['configuration']['rlambda'])+'}'+
-                          '\nn:'+str(temp[j]['configuration']['neurons'])+
-                           ',bs:'+str(temp[j]['configuration']['batch_size'])+
-                          ',a1:' + temp[j]['configuration']['activations'][0]+
-                            ',a2:' + temp[j]['configuration']['activations'][1]+
-                          ',{'+temp[j]['configuration']['optimizers'].pprint()+"}",fontsize=10)
+            col.set_yticks(np.arange(0, 1.2, 0.03))
+            col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
+                          "last_f:"+str(temp[j]['tr_loss'][-1]),fontsize=20)
 
             if hist:
                 col.plot(temp[j]['history']['tr_loss'],label='tr err')
             else:
                 col.plot(temp[j]['tr_loss'], label='tr err')
             #col.legend(loc=3,prop={'size':10})
-            col.tick_params(labelsize=6)
+            col.tick_params(labelsize=13)
+            col.yaxis.grid()  # horizontal lines
             col.set_ylim([0,1.2])
             j+=1
             i+=1
 
     pp.savefig(f)
-
 f.clear()
 f.clf()
 plt.clf()
