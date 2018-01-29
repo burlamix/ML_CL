@@ -5,7 +5,7 @@ from NN_lib.NN import *
 import matplotlib.pyplot as plt
 from NN_lib import preproc
 from NN_lib import linesearches
-import lss
+import llss
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras import regularizers
@@ -14,7 +14,7 @@ outs=2
 valr =(0,0)
 clr=0.01
 drop=0.0
-epochs=100000
+epochs=50
 inps=10
 #13770039132
 np.random.seed(23185)
@@ -31,15 +31,15 @@ adam1 = Adam(lr=clr,b1=0.9,b2=0.999)
 adamax1 = Adamax(lr=clr,b1=0.9,b2=0.999)
 optimizer = RMSProp(lr=clr,delta= 0.9)
 optimizer = SimpleOptimizer( lr=clr, ls=amg)
-optimizer = Adam(lr=clr,b1=0.9,b2=0.999)
-optimizer = Momentum(lr=clr,eps=0.9,nesterov=True)
 optimizer = Adine( lr=clr, ls=None)
+optimizer = Momentum(lr=clr,eps=0.9,nesterov=True)
+optimizer = Adam(lr=clr,b1=0.9,b2=0.999)
 
 
 NN = NeuralNetwork()
-NN.addLayer(inputs=inps,neurons=200,activation="tanh", rlambda=valr,regularization="EN",
+NN.addLayer(inputs=inps,neurons=25,activation="tanh", rlambda=valr,regularization="EN",
             dropout=0.0,bias=0.0)
-NN.addLayer(inputs=200,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
+NN.addLayer(inputs=25,neurons=outs,activation="linear",rlambda=valr,regularization="EN",bias=0.0)
 
 #save the weights of our model to load into keras model 
 currwg = []
@@ -52,18 +52,18 @@ for l in NN.layers:
     currwg.append(np.ones(len(l.W))*l.W[i][0]) #Bias
 
 (loss, acc, val_loss, val_acc, history2)=\
-    NN.fit_ds( dataset,epochs, optimizer  ,val_split=30,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
+    NN.fit_ds( dataset,epochs, optimizer  ,val_split=0,batch_size=dataset.train[0].shape[0],verbose=2,loss_func="mse")
 
 model = Sequential()
 model.add(Dense(25, activation= 'tanh' ,use_bias=True,input_dim=10,
     bias_initializer="zeros",kernel_regularizer=regularizers.l1_l2(valr[0],valr[1]),bias_regularizer=regularizers.l1_l2(valr[0],valr[1])))
-model.add(Dropout(0.0))
+
 model.add(Dense(outs, activation= 'linear' ,use_bias=True,
     bias_initializer="zeros",kernel_regularizer=regularizers.l1_l2(valr[0],valr[1]),bias_regularizer=regularizers.l1_l2(valr[0],valr[1])))
 
-sgd = optims.Adam(lr=clr,epsilon=1e-8)
 sgd = optims.RMSprop(lr=clr, rho=0.9,epsilon=1e-6, decay=0.00 )
-sgd = optims.SGD(lr=clr, momentum=0.9, decay=0.00,nesterov=False )
+sgd = optims.SGD(lr=clr, momentum=0.9, decay=0.00,nesterov=True )
+sgd = optims.Adam(lr=clr,epsilon=1e-8)
 
 
 model.compile(optimizer=sgd,

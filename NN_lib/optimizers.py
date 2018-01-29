@@ -38,7 +38,6 @@ class SimpleOptimizer:
 
         if self.ls!=None:
             actual_lr = self.ls(f, W, loss, -grad, us_norm2(grad,grad))
-            print('ac',actual_lr)
         else:
             actual_lr = self.lr
 
@@ -270,7 +269,6 @@ class ConjugateGradient:
                 #print('val before',loss)
                 dir_norm=us_norm2(-self.p,grad)
                 actual_lr = self.ls(f, W,loss, self.p, dir_norm)
-                print('actu',actual_lr)
                 #print('actual',actual_lr)
             else:
                 actual_lr = self.lr

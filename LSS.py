@@ -32,7 +32,7 @@ def optimize_fun(fun,start,opt,epochs=100, min_f=None, min_r=None):
     x = [W[0][0]]
     y = [W[0][1]]
     z = [fun(np.array([[x[0], y[0]]]), only_fp=True)]
-    epochs_stop=0
+    epochs_stop=None
 
     for i in range(0, epochs):
         W = opt.optimize(fun, W)
@@ -40,8 +40,8 @@ def optimize_fun(fun,start,opt,epochs=100, min_f=None, min_r=None):
         y.append(W[0][1])
         newv = fun(W, only_fp=True)
 
-        if(newv<min_f+min_r and newv > min_f-min_r):
-            epochs_stop=i
+        if(epochs_stop==None and newv<min_f+min_r and newv > min_f-min_r):
+            epochs_stop=i+1
 
         z.append(newv)
         print('Function value:', newv)
@@ -61,7 +61,7 @@ def plot_contours(fun, xrange, yrange, contours=200):
     :return: The resulting plot handler (use it it @navigate_fun
     '''
     fig = plt.figure()
-    # ax = fig.gca(projection='3d')optimize_fun
+    #ax = fig.gca(projection='3d')
     ax = fig.gca()
     X, Y = np.meshgrid(xrange, yrange)
     zs = np.array([fun([[xrange, yrange]], only_fp=True)
@@ -73,7 +73,7 @@ def plot_contours(fun, xrange, yrange, contours=200):
     fig.colorbar(surf, shrink=0.5, aspect=5)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    # ax.set_zlabel('Z Label')
+    #ax.set_zlabel('Z Label')
    # ax.invert_xaxis()
     return ax
 
@@ -101,8 +101,9 @@ def navigate_fun(navs, plot):
             px = [navs[j]['x'][i], navs[j]['x'][i + 1]]
             py = [navs[j]['y'][i], navs[j]['y'][i + 1]]
             pz = [navs[j]['z'][i], navs[j]['z'][i + 1]]
+            es = "no" if navs[j]['epochs_stop']==None else str(navs[j]['epochs_stop'])
             ax = plot.plot(px, py, 'k', alpha=0.8, linewidth=1.5,
-                    c=cols[j],label=navs[j]['opt'].pprint())
+                    c=cols[j],label=navs[j]['opt'].pprint()+ ',ce:'+es)
             bbox_args = dict(boxstyle="round", fc="0.8")
             arrow_args = dict(arrowstyle="->")
             if 1==1:
@@ -111,13 +112,13 @@ def navigate_fun(navs, plot):
                         xytext=(px[1]-0.5, py[1]-0.5),  # theta, radius
                         #xycoords='polar',
                         #textcoords='polar',
-                        arrowprops=dict(facecolor='black', shrink=0.305),
+                        arrowprops=dict(facecolor=cols[j], shrink=0.305),
                         horizontalalignment='left',
                         verticalalignment='bottom',
                         clip_on=True)  # clip to the axes bounding box
                             )
             if (i==0): plt.legend()
-        plt.pause(1.001)
+        plt.pause(.001)
         for a in ann:a.remove()
         ann.clear()
 
@@ -136,22 +137,30 @@ lso = optimizers.Adam(lr=0.1)
 lso = optimizers.Momentum(lr=0.1,eps=0.6)
 lso = optimizers.SimpleOptimizer(lr=0.1,ls= None)
 
-fun = rosenbrock
+fun = matyas_fun
 a = np.arange(-10, 10, 0.1)
 b = np.arange(-10, 10, 0.1)
 plot = plot_contours(fun, xrange=a, yrange=b, contours=200)
 
+min_r=1e-4
 epochs=300
-lso = optimizers.ConjugateGradient(lr=0.076,ls=amg)
-o1 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=1e-3)
-lso = optimizers.SimpleOptimizer(lr=0.000076,ls=amg)
-input('..')
-print('====')
-o2 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=1e-3)
-lso = optimizers.ConjugateGradient(lr=0.0076,ls=None)
-#o3 = optimize_fun(fun,np.array([[-3, 5]]),opt=lso, epochs=epochs)
-lso = optimizers.SimpleOptimizer(lr=0.00076,ls=None)
-#o4 = optimize_fun(fun,np.array([[-3, 5]]),opt=lso, epochs=epochs)
-
-navigate_fun([o1,o2], plot=plot)
+lso = optimizers.SimpleOptimizer(lr=0.7,ls=amg)
+o1 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.SimpleOptimizer(lr=0.07,ls=None)
+o2 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.Momentum(lr=0.07, eps=0.9,ls=None)
+o3 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.ConjugateGradient(lr=0.07,ls=None)
+o4 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.Adam(lr=0.7,ls=None)
+o5 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.RMSProp(lr=0.7)
+o6 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.Adine(lr=0.07)
+o7 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.Adamax(lr=0.7)
+o8 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+lso = optimizers.SimpleOptimizer(lr=0.7,ls=bt)
+o9 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+navigate_fun([o1,o2,o3,o4,o5,o6,o7,o9], plot=plot)
 
