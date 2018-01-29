@@ -9,7 +9,7 @@ from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
 from matplotlib.mlab import bivariate_normal
 
-def optimize_fun(fun,start,opt,epochs=100):
+def optimize_fun(fun,start,opt,epochs=100, min_f=None, min_r=None):
     '''
     Optimizes the given function with the given parameters and returns the history
     of iterations.
@@ -22,6 +22,8 @@ def optimize_fun(fun,start,opt,epochs=100):
     :param start: Denoattes the starting point to begin optimizing the function from
     :param opt: An object denoting the optimizer to utilize for the optimization of f.
     :param epochs: The number of epochs to optimize f over.
+    :param min_f: minumun of the function.
+    :param min_r range within the minimun to stop at.
     :return: A dictionary of entries 'x', 'y', 'z', 'opt' denoting respectively
     the history of x coordinates, y coordinates, the corresponding function value
     over the iterations and the input optimizer object.
@@ -30,16 +32,21 @@ def optimize_fun(fun,start,opt,epochs=100):
     x = [W[0][0]]
     y = [W[0][1]]
     z = [fun(np.array([[x[0], y[0]]]), only_fp=True)]
+    epochs_stop=0
 
     for i in range(0, epochs):
         W = opt.optimize(fun, W)
         x.append(W[0][0])
         y.append(W[0][1])
         newv = fun(W, only_fp=True)
+
+        if(newv<min_f+min_r and newv > min_f-min_r):
+            epochs_stop=i
+
         z.append(newv)
         print('Function value:', newv)
 
-    return {'x':np.array(x),'y':np.array(y),'z':np.array(z),'opt':opt}
+    return {'x':np.array(x),'y':np.array(y),'z':np.array(z),'opt':opt,'epochs_stop':epochs_stop}
 
 
 def plot_contours(fun, xrange, yrange, contours=200):
@@ -136,11 +143,11 @@ plot = plot_contours(fun, xrange=a, yrange=b, contours=200)
 
 epochs=300
 lso = optimizers.ConjugateGradient(lr=0.076,ls=amg)
-o1 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs)
+o1 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=1e-3)
 lso = optimizers.SimpleOptimizer(lr=0.000076,ls=amg)
 input('..')
 print('====')
-o2 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs)
+o2 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=1e-3)
 lso = optimizers.ConjugateGradient(lr=0.0076,ls=None)
 #o3 = optimize_fun(fun,np.array([[-3, 5]]),opt=lso, epochs=epochs)
 lso = optimizers.SimpleOptimizer(lr=0.00076,ls=None)
