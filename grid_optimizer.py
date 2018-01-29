@@ -1,4 +1,6 @@
 
+import matplotlib
+matplotlib.use('Agg')
 from NN_lib import validation
 import matplotlib.pyplot as plt
 from NN_lib import regularizations
