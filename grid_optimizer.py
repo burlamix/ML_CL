@@ -37,6 +37,7 @@ adamax3 = Adamax(lr=0.007,b1=0.9,b2=0.999)
 RMSP1 = RMSProp(lr=0.01)
 RMSP2 = RMSProp(lr=0.05)
 
+cg = ConjugateGradient()
 
 
 m1 = Momentum(lr=0.1,eps=0.9,nesterov=True)
@@ -52,11 +53,17 @@ opti["lr"] = [0.1,0.04,0.01,0.005,0.001,0.0003]
 opti["eps"] = [0.9,0.6,0.3,0]
 opti["nest"] = [True,False]
 opt_list.append(Momentum(lr=param["lr"],eps=param["eps"],nesterov=param["nest"]))
-'''
 
+adam / adamax
 opti["lr"] = [0.4,0.03,0.007,0.0007,]
 opti["b1"] = [0.9,0.6,0.3,0]
 opti["b2"] = [0.999,0.9,0.8]
+opt_list.append(Adam(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
+
+'''
+
+opti["lr"] = [0.2,0.1,0.05,0.01,0.007,0.004,0.0008,0.0002]
+opti["delta"] = [0.9,0.8,0.6,0.5,0.3,0.1]
 
 
 labels, terms = zip(*opti.items())
@@ -64,7 +71,7 @@ all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     print(param)
-    opt_list.append(Adam(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
+    opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"]))
 comb_of_param = len(all_comb)
 
 preprocessor = preproc.Preprocessor()
@@ -84,7 +91,7 @@ fgs = list()
 start = time.time()
 trials = 8
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[2], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[20000], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=1, val_set=None, verbose=1,
