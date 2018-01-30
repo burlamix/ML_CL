@@ -5,6 +5,7 @@ from NN_lib import NN
 from NN_lib import regularizations
 from NN_lib import loss_functions
 from NN_lib import regularizations as  regs
+import multiprocessing.pool
 
 
 
@@ -84,7 +85,6 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None, regulariza
      -prediction: the prediction on the test set if the dataset contained such a set. Otherwise
      None.
     '''
-
     #If no validation selected, default to 3-fold
     if (cvfolds == None and val_split == 0 and val_set==None): cvfolds = 3
     #If val_split was selected, default folds to 1 and ignore val_set
@@ -282,3 +282,30 @@ def k_fold_validation(dataset, NN, epochs, optimizer, cvfolds=3, batch_size=32,
             r[k][z] = r[k][z] / cvfolds
 
     return np.average(val_loss), np.var(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), r
+
+
+def grid_thread(dataset, epochs, n_layers, neurons, activations=None, regularizations=None,
+                optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None,
+                val_split=0, rlambda=None, verbose=0, val_set=None, val_loss_fun=None, trials=1):
+    
+    def grid_call(seed):
+
+        fg,grid_res, pred = grid_search(dataset, epochs=epochs, batch_size=batch_size,
+                                                   n_layers=n_layers, val_split=val_split,activations=activations,
+                                                   regularizations=regularizations, rlambda=rlambda,
+                                                   cvfolds=cvfolds, val_set=val_set, verbose=verbose,
+                                                   loss_fun=loss_fun, val_loss_fun=val_loss_fun,
+                                                   neurons=neurons, optimizers=optimizers,seed=seed)
+    
+        return fg
+
+    fgs = list()
+    t_trial = list(range(0, trials))
+
+    pool = multiprocessing.pool.ThreadPool(processes=trials)
+
+    return_list = pool.map(grid_call, t_trial, chunksize=1)
+    
+    pool.close()
+
+    return return_list

@@ -60,18 +60,26 @@ opti["b1"] = [0.9,0.6,0.3,0]
 opti["b2"] = [0.999,0.9,0.8]
 opt_list.append(Adam(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
 
-'''
-
 opti["lr"] = [0.2,0.1,0.05,0.01,0.007,0.004,0.0008,0.0002]
 opti["delta"] = [0.9,0.8,0.6,0.5,0.3,0.1]
 
+
+'''
+
+opti["lr"] = [3.4,0.01,0.005,0.001]
+opti["ms"] = [0.95,0.7,0.55]
+opti["mg"] = [1.0001,1.1]
+opti["e"] = [1,2]
+
+
+#lr=0.001, ms=0.9, mg=1.0001, e=1.0,
 
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     print(param)
-    opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"]))
+    opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
 comb_of_param = len(all_comb)
 
 preprocessor = preproc.Preprocessor()
@@ -89,15 +97,26 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 
 fgs = list()
 start = time.time()
-trials = 8
+
+trials = 5
+
+'''
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[20000], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[5], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
-                                               cvfolds=1, val_set=None, verbose=1,
+                                               cvfolds=1, val_set=None, verbose=0,
                                                loss_fun=losses, val_loss_fun="mee",
                                                neurons=neurs, optimizers=opts,seed=i)
     fgs.append(fg)
+'''
+fgs = validation.grid_thread(dataset, epochs=[3], batch_size=batches,
+                                           n_layers=2, val_split=0,activations=acts,
+                                           regularizations=regs, rlambda=rlambdas,
+                                           cvfolds=1, val_set=None, verbose=1,
+                                           loss_fun=losses, val_loss_fun="mee",
+                                           neurons=neurs, optimizers=opts,trials=trials)
+
 end = time.time()
 print('time:', (end-start))
 fgmean = list() #List for holding means
@@ -108,7 +127,7 @@ fgmean = list() #List for holding means
 
 
 #Create initial configs
-for i in fg:
+for i in fgs[0]:
     fgmean.append({'configuration':i['configuration'], 'val_acc':[], 'val_loss':[],
                    'tr_loss':[], 'tr_acc':[]})
 
@@ -149,9 +168,9 @@ for att in range(0,len(opts),step):
                           ncols=step2*len(rlambdas) * len(losses),
                           sharex='col', sharey='row', squeeze=False)
     fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
+    fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
     temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
+    #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
     j=0
     hist=False
     for row in a:
@@ -183,9 +202,9 @@ for att in range(0,len(opts),step):
                           ncols=step2*len(rlambdas) * len(losses),
                           sharex='col', sharey='row', squeeze=False)
     fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
+    fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
     temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
+    #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
     j=0
     hist=False
     for row in a:
@@ -217,9 +236,9 @@ for att in range(0,len(opts),step):
                           ncols=step2*len(rlambdas) * len(losses),
                           sharex='col', sharey='row', squeeze=False)
     fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:k['configuration']['optimizers'].__str__())
+    fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
     temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
+    #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
     j=0
     hist=False
     for row in a:
