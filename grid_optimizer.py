@@ -102,7 +102,7 @@ trials = 5
 
 '''
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[5], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=1, val_set=None, verbose=0,
@@ -116,6 +116,8 @@ fgs = validation.grid_thread(dataset, epochs=[3], batch_size=batches,
                                            cvfolds=1, val_set=None, verbose=1,
                                            loss_fun=losses, val_loss_fun="mee",
                                            neurons=neurs, optimizers=opts,trials=trials)
+
+
 
 end = time.time()
 print('time:', (end-start))
@@ -136,7 +138,7 @@ for fullgrid in fgs:
     for i in fullgrid:
         for j in range(0,len(fgmean)):
             if i['configuration']==fgmean[j]['configuration']:
-                if fgmean[j]['val_acc']!=[]:
+                if fgmean[j]['tr_loss']!=[]:
                     fgmean[j]['val_acc']+=np.array(i['history']['val_acc'])
                     fgmean[j]['val_loss']+=np.array(i['history']['val_loss'])
                     fgmean[j]['tr_acc']+=np.array(i['history']['tr_acc'])

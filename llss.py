@@ -40,13 +40,20 @@ def LLSQ(X,y,l=0):
 	rank. Refer to the report for details on how the solution is obtained.
 	:param l: regularization term of L2.
 	'''
+	X = np.vstack((X,l*np.eye(11)))
 	q, r = QR_fact(X)
+	print(q.shape)
+	print(r.shape)
 	#Throw away the 0s
-	q1 = q[:, 0:r.shape[1]]
+	q1 = q[:-11, 0:r.shape[1]]
 	#q2 = q[:, r.shape[1]:]
 	r = r[0:r.shape[1], :]
-	rterm = np.linalg.inv(np.dot(r.T,r)+l*np.eye(r.shape[1]))
-	return np.dot(np.dot(rterm,np.dot(q1,r).T),y)
+	print(q1.shape)
+	print(r.shape)
+	rterm = np.linalg.inv(np.dot(r.T, r))
+	return np.dot(np.dot(np.linalg.inv(r),q1.T),y)
+	#rterm = np.linalg.inv(np.dot(r.T,r)+l*np.eye(r.shape[1]))
+	#return np.dot(np.dot(rterm,np.dot(q1,r).T),y)
 
 
 def LLSQ1R(X,y,l=0):
@@ -56,7 +63,7 @@ def LLSQ1R(X,y,l=0):
 	rank. Refer to the report for details on how the solution is obtained.
 	:param l: regularization term of L2.
 	'''
-	reg = np.eye(X.shape[1])*l
+	reg = np.eye(X.shape[1])*l**2
 	return np.dot(np.dot(np.linalg.inv(np.dot(X.T,X)+reg),X.T), y)
 
 
@@ -71,3 +78,4 @@ def mypinv(X):
 	q = q[:,0:r.shape[1]]
 	r = r[0:r.shape[1], :]
 	return np.dot(np.linalg.inv(r), q.T)
+

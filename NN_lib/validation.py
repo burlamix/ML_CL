@@ -305,7 +305,7 @@ def grid_thread(dataset, epochs, n_layers, neurons, activations=None, regulariza
     pool = multiprocessing.pool.ThreadPool(processes=trials)
 
     return_list = pool.map(grid_call, t_trial, chunksize=1)
-    
+
     pool.close()
 
     return return_list
