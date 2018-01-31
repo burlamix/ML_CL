@@ -50,8 +50,8 @@ def mee(target,prediction):
 
 def meedx(target,prediction):
     #Derivative of Mean Euclidean Error loss function
-    a= np.expand_dims((np.sqrt(np.sum((target-prediction+1e-6)**2,axis=1))),axis=1)
-    return -((target-prediction)/a)
+    a= np.expand_dims((np.sqrt(np.sum((target-prediction)**2,axis=1))),axis=1)
+    return -((target-prediction)/(a+1e-8))
 
 
 losses = dict()
