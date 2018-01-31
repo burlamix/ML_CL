@@ -6,7 +6,7 @@ from NN_lib import regularizations
 from NN_lib import loss_functions
 from NN_lib import regularizations as  regs
 import multiprocessing.pool
-
+import copy
 
 
 class grid_result:
@@ -295,7 +295,7 @@ def grid_thread(dataset, epochs, n_layers, neurons, activations=None, regulariza
                                                    regularizations=regularizations, rlambda=rlambda,
                                                    cvfolds=cvfolds, val_set=val_set, verbose=verbose,
                                                    loss_fun=loss_fun, val_loss_fun=val_loss_fun,
-                                                   neurons=neurons, optimizers=optimizers,seed=seed)
+                                                   neurons=neurons, optimizers=copy.deepcopy(optimizers),seed=seed)
     
         return fg
 

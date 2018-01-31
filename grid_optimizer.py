@@ -67,13 +67,18 @@ opti["lr"] = [0.2,0.1,0.05,0.01,0.007,0.004,0.0008,0.0002]
 opti["delta"] = [0.9,0.8,0.6,0.5,0.3,0.1]
 opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"))
 
-
-'''
+adine
 
 opti["lr"] = [0.1,0.01,0.002,0.0005]
 opti["ms"] = [0.95,0.7,0.55]
 opti["mg"] = [1.0001,1.1]
 opti["e"] = [1,1.4]
+opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
+
+'''
+opti["lr"] = [0.4,0.03,0.007,0.0007]
+opti["b1"] = [0.9,0.6,0.3,0]
+opti["b2"] = [0.999,0.9,0.8]
 
 
 #lr=0.001, ms=0.9, mg=1.0001, e=1.0,
@@ -83,7 +88,7 @@ all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     print(param)
-    opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
+    opt_list.append(Adam(lr=param["lr"], b1=param["b1"], b2=param["b2"]))
 comb_of_param = len(all_comb)
 
 preprocessor = preproc.Preprocessor()
@@ -102,7 +107,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 10
+trials = 13
 
 '''
 for i in range(0,trials):
@@ -158,7 +163,7 @@ for i in range(0,len(fgmean)):
     #fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
 
-with open('adine.pkl', 'wb') as output:
+with open('adam.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
