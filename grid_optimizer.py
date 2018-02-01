@@ -1,4 +1,3 @@
-
 import matplotlib
 matplotlib.use('Agg')
 from NN_lib import validation
@@ -22,31 +21,11 @@ test_data_path = "data/ML-CUP17-TS.csv"
 dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=10, targets=2))
 dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
 
-dataset.test[0]=dataset.train[0][800:]
-dataset.train[0]=dataset.train[0][0:800]
-dataset.test[1]=dataset.train[1][800:]
-dataset.train[1]=dataset.train[1][0:800]
+preprocessor = preproc.Preprocessor()
+preprocessor.shuffle(dataset)
 
-
-
-adam1 = Adam(lr=0.03,b1=0.9,b2=0.999)
-adam2 = Adam(lr=0.4,b1=0.9,b2=0.999)
-adam3 = Adam(lr=0.007,b1=0.9,b2=0.999)
-
-adamax1 = Adamax(lr=0.016,b1=0.9,b2=0.999)
-adamax2 = Adamax(lr=0.2,b1=0.9,b2=0.999)
-adamax3 = Adamax(lr=0.007,b1=0.9,b2=0.999)
-
-RMSP1 = RMSProp(lr=0.01)
-RMSP2 = RMSProp(lr=0.05)
-
-cg = ConjugateGradient()
-
-
-m1 = Momentum(lr=0.1,eps=0.9,nesterov=True)
-m2 = Momentum(lr=0.1,eps=0.9,nesterov=True)
-m3 = Momentum(lr=0.04,eps=0.9,nesterov=True)
-
+(dataset.train[0], dataset.test[0]), (dataset.train[1], dataset.test[1]) = \
+    dataset.split_train_percent(75)
 
 opt_list =[]
 
@@ -85,7 +64,6 @@ opti["b1"] = [0.9,0.6,0.3,0]
 opti["b2"] = [0.999,0.9,0.8]
 
 
-
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
@@ -94,10 +72,6 @@ for param in all_comb:
     opt_list.append(Adam(lr=param["lr"], b1=param["b1"], b2=param["b2"]))
 comb_of_param = len(all_comb)
 
-preprocessor = preproc.Preprocessor()
-
-
-preprocessor.shuffle(dataset)
 acts=[["tanh","linear"]]
 opts=opt_list
 neurs=[[50,2]]
@@ -110,7 +84,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 1
+trials = 5
 
 '''
 for i in range(0,trials):
@@ -123,10 +97,10 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[20], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[30000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
-                                           cvfolds=1, val_set=None, verbose=2,
+                                           cvfolds=1, val_set=None, verbose=1,
                                            loss_fun=losses, val_loss_fun="mee",
                                            neurons=neurs, optimizers=opts,trials=trials)
 
@@ -168,6 +142,7 @@ for i in range(0,len(fgmean)):
     fgmean[i]['val_loss']/=trials
     #fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
+    fgmean[i]['prediction']/=trials
 
 with open('adam.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
@@ -196,7 +171,7 @@ for att in range(0,len(opts),step):
         for col in row:
             col.set_yticks(np.arange(0, 22, 0.5))
             col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
-                          "last_f:"+str(temp[j]['tr_loss'][-1]),fontsize=20)
+                          "last_f:"+str(temp[j]['tr_loss'][-1])+",gen_err:"+str(temp[j]['prediction'][0]),fontsize=20)
 
             if hist:
                 col.plot(temp[j]['history']['tr_loss'],label='tr err')
@@ -213,7 +188,7 @@ for att in range(0,len(opts),step):
 
 plt.figure()
 plt.axis("off")
-plt.text(0.5,0.5,"range 0-3",ha= "center",va="center", fontsize=50)
+plt.text(0.5,0.5,"range 0-5",ha= "center",va="center", fontsize=50)
 pp.savefig()
 i=0
 for att in range(0,len(opts),step):
@@ -228,9 +203,10 @@ for att in range(0,len(opts),step):
     hist=False
     for row in a:
         for col in row:
-            col.set_yticks(np.arange(0, 3, 0.07))
-            col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
-                          "last_f:"+str(temp[j]['tr_loss'][-1]),fontsize=20)
+            col.set_yticks(np.arange(0, 5, 0.15))
+            col.set_title('{' + temp[j]['configuration']['optimizers'].pprint() + "}\n "
+                                                                                  "last_f:" + str(
+                temp[j]['tr_loss'][-1]) + ",gen_err:" + str(temp[j]['prediction'][0]), fontsize=20)
 
             if hist:
                 col.plot(temp[j]['history']['tr_loss'],label='tr err')
@@ -239,7 +215,7 @@ for att in range(0,len(opts),step):
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=13)
             col.yaxis.grid()  # horizontal lines
-            col.set_ylim([0,3])
+            col.set_ylim([0,5])
             j+=1
             i+=1
 
@@ -247,7 +223,7 @@ for att in range(0,len(opts),step):
 
 plt.figure()
 plt.axis("off")
-plt.text(0.5,0.5,"range 0-0.3",ha= "center",va="center", fontsize=50)
+plt.text(0.5,0.5,"range 0-1.2",ha= "center",va="center", fontsize=50)
 pp.savefig()
 i=0
 for att in range(0,len(opts),step):
@@ -262,9 +238,10 @@ for att in range(0,len(opts),step):
     hist=False
     for row in a:
         for col in row:
-            col.set_yticks(np.arange(0, 0.3, 0.0075))
-            col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
-                          "last_f:"+str(temp[j]['tr_loss'][-1]),fontsize=20)
+            col.set_yticks(np.arange(0, 1.2, 0.03))
+            col.set_title('{' + temp[j]['configuration']['optimizers'].pprint() + "}\n "
+                                                                                  "last_f:" + str(
+                temp[j]['tr_loss'][-1]) + ",gen_err:" + str(temp[j]['prediction'][0]), fontsize=20)
 
             if hist:
                 col.plot(temp[j]['history']['tr_loss'],label='tr err')
@@ -273,7 +250,7 @@ for att in range(0,len(opts),step):
             #col.legend(loc=3,prop={'size':10})
             col.tick_params(labelsize=13)
             col.yaxis.grid()  # horizontal lines
-            col.set_ylim([0,0.3])
+            col.set_ylim([0,1.2])
             j+=1
             i+=1
 
