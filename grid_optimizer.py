@@ -56,7 +56,7 @@ opti["nest"] = [True,False]
 opt_list.append(Momentum(lr=param["lr"],eps=param["eps"],nesterov=param["nest"]))
 
 adam / adamax
-opti["lr"] = [0.4,0.03,0.007,0.0007,]
+opti["lr"] = [0.4,0.03,0.007,0.0007]
 opti["b1"] = [0.9,0.6,0.3,0]
 opti["b2"] = [0.999,0.9,0.8]
 opt_list.append(Adam(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
@@ -77,10 +77,9 @@ opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"])
 
 '''
 
-opti["lr"] = [0.1,0.01,0.002,0.0005]
-opti["ms"] = [0.95,0.7,0.55]
-opti["mg"] = [1.0001,1.1]
-opti["e"] = [1,1.4]
+opti["lr"] = [0.4,0.03,0.007,0.0007]
+opti["b1"] = [0.9,0.6,0.3,0]
+opti["b2"] = [0.999,0.9,0.8]
 
 #lr=0.001, ms=0.9, mg=1.0001, e=1.0,
 
@@ -89,7 +88,7 @@ all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     print(param)
-    opt_list.append(Adine(lr=param["lr"], mg=param["mg"], ms=param["ms"], e=param["e"]))
+    opt_list.append(Adam(lr=param["lr"], b1=param["b1"], b2=param["b2"]))
 comb_of_param = len(all_comb)
 
 preprocessor = preproc.Preprocessor()
@@ -120,10 +119,11 @@ for i in range(0,trials):
                                                neurons=neurs, optimizers=opts,seed=i)
     fgs.append(fg)
 '''
+
 fgs = validation.grid_thread(dataset, epochs=[30000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
-                                           cvfolds=1, val_set=None, verbose=1,
+                                           cvfolds=1, val_set=None, verbose=2,
                                            loss_fun=losses, val_loss_fun="mee",
                                            neurons=neurs, optimizers=opts,trials=trials)
 

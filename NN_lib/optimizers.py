@@ -112,8 +112,8 @@ class Adam:
         self.ls = ls
 
     def reset(self):
-        self.m = [0]
-        self.v = [0]
+        self.m = 0
+        self.v = 0
         self.t = 0
         self.ls=None
 
@@ -128,12 +128,13 @@ class Adam:
         loss, grad = f(W) #Compute the gradient
         #print('grad',us_norm(grad))
         #First and second moment estimation(biased by b1 and b2)
-        self.m.append((self.b1*self.m[self.t-1]+(1-self.b1)*(grad)))
-        self.v.append((self.b2*self.v[self.t-1]+(1-self.b2)*(np.power((grad),2))))
+        self.m = ((self.b1*self.m+(1-self.b1)*(grad)))
+        self.v = ((self.b2*self.v+(1-self.b2)*(np.power((grad),2))))
 
         #Correction on the estimations as to avoid 0-bias due to initialization
-        mcap = self.m[self.t]/(np.subtract(1,np.power(self.b1,self.t)))
-        vcap = self.v[self.t]/(np.subtract(1,np.power(self.b2,self.t)))
+        mcap = self.m/(np.subtract(1,np.power(self.b1,self.t)))
+        vcap = self.v/(np.subtract(1,np.power(self.b2,self.t)))
+
         for i in range(len(vcap)):
             vcap[i] = np.sqrt(vcap[i])
 
