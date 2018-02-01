@@ -107,7 +107,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 13
+trials = 2
 
 '''
 for i in range(0,trials):
@@ -120,7 +120,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[30000], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[3], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=2,
@@ -156,7 +156,7 @@ for fullgrid in fgs:
                     fgmean[j]['val_loss']=np.array(i['history']['val_loss'])
                     fgmean[j]['tr_acc']=np.array(i['history']['tr_acc'])
                     fgmean[j]['tr_loss']=np.array(i['history']['tr_loss'])
-                break
+                #break
 
 for i in range(0,len(fgmean)):
     #fgmean[i]['val_acc']/=trials

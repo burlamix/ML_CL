@@ -15,6 +15,10 @@ class SimpleOptimizer:
     def __repr__(self):
         return str('sgd'+str(self.lr))
 
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
+                 and self.ls.__eq__(other.ls)
+
     def __init__(self, lr=0.1,ls=None):
         self.ls = ls
         self.lr = lr
@@ -57,6 +61,11 @@ class Momentum:
 
     def __repr__(self):
         return str('momentum'+str(self.lr))
+
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
+               and self.eps==other.eps and self.nesterov==other.nesterov and\
+                 self.ls.__eq__(other.ls)
 
     def __init__(self, lr=0.001, eps=0.9, nesterov=False, ls=None):
         self.lr = lr
@@ -102,6 +111,11 @@ class Adam:
 
     def __repr__(self):
         return str('adam'+str(self.lr))
+
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr and self.b1==other.b1 \
+               and self.b2==other.b2 and\
+                self.eps==other.eps and self.ls.__eq__(other.ls)
 
     def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8,ls=None):
         self.lr = lr
@@ -156,6 +170,12 @@ class Adamax:
     def __repr__(self):
         return str('adamax'+str(self.lr))
 
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr and self.b1==other.b1 \
+               and self.b2==other.b2 and\
+                self.eps==other.eps and self.ls.__eq__(other.ls)
+
+
     def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
         self.lr = lr
         self.b1 = b1
@@ -197,9 +217,15 @@ class RMSProp:
     def __repr__(self):
         return str('rmsprop'+str(self.lr))
 
-    def __init__(self, lr=0.001, delta=0.9):
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
+               and self.delta==other.delta and\
+                 self.ls.__eq__(other.ls)
+
+    def __init__(self, lr=0.001, delta=0.9, ls=None):
         self.lr = lr
         self.delta = delta
+        self.ls = None
         self.reset()
 
     def reset(self):
@@ -223,6 +249,11 @@ class ConjugateGradient:
 
     def __repr__(self):
         return str('ConjugateGradient'+str(self.lr))
+
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
+               and self.eps==other.eps and\
+                 self.ls.__eq__(other.ls)
 
     def __init__(self, lr=0.001, eps=0.9, ls=None):
         self.lr = lr
@@ -292,6 +323,12 @@ class Adine:
 
     def __repr__(self):
         return str('adine'+str(self.lr))
+
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
+               and self.ms==other.ms and self.mg==other.mg and \
+                    self.e == other.e and\
+                        self.ls.__eq__(other.ls)
 
     def __init__(self, lr=0.001, ms=0.9, mg=1.0001, e=1.0, ls = None):
         self.lr = lr
