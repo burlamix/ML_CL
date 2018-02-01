@@ -196,7 +196,9 @@ def grid_search(dataset, epochs, n_layers, neurons, activations=None, regulariza
         if (validating):
             full_grid.append({'configuration': params, 'val_loss': result_grid[k], 'in-fold var':var,'history': history})
         else:  # If no validation was done only put config and other stuff(to add..)
-            full_grid.append({'configuration': params, 'history': history})
+            predd = net.evaluate(dataset.test[0],dataset.test[1])
+            print(predd)
+            full_grid.append({'configuration': params, 'history': history, 'prediction': predd})
         k = k + 1
 
     #Fetch best configuration based on validation loss, or training if no validation was done

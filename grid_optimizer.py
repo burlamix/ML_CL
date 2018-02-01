@@ -22,7 +22,10 @@ test_data_path = "data/ML-CUP17-TS.csv"
 dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=10, targets=2))
 dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
 
-
+dataset.test[0]=dataset.train[0][800:]
+dataset.train[0]=dataset.train[0][0:800]
+dataset.test[1]=dataset.train[1][800:]
+dataset.train[1]=dataset.train[1][0:800]
 
 
 
@@ -81,7 +84,7 @@ opti["lr"] = [0.4,0.03,0.007,0.0007]
 opti["b1"] = [0.9,0.6,0.3,0]
 opti["b2"] = [0.999,0.9,0.8]
 
-#lr=0.001, ms=0.9, mg=1.0001, e=1.0,
+
 
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
@@ -107,7 +110,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 2
+trials = 1
 
 '''
 for i in range(0,trials):
@@ -120,7 +123,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[3], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[20], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=2,
@@ -139,7 +142,7 @@ fgmean = list() #List for holding means
 #Create initial configs
 for i in fgs[0]:
     fgmean.append({'configuration':i['configuration'], 'val_acc':[], 'val_loss':[],
-                   'tr_loss':[], 'tr_acc':[]})
+                   'tr_loss':[], 'tr_acc':[], 'prediction':0})
 
 
 for fullgrid in fgs:
@@ -151,11 +154,13 @@ for fullgrid in fgs:
                     fgmean[j]['val_loss']+=np.array(i['history']['val_loss'])
                     fgmean[j]['tr_acc']+=np.array(i['history']['tr_acc'])
                     fgmean[j]['tr_loss']+=np.array(i['history']['tr_loss'])
+                    fgmean[j]['prediction']+=np.array(i['prediction'])
                 else:
                     fgmean[j]['val_acc']=np.array(i['history']['val_acc'])
                     fgmean[j]['val_loss']=np.array(i['history']['val_loss'])
                     fgmean[j]['tr_acc']=np.array(i['history']['tr_acc'])
                     fgmean[j]['tr_loss']=np.array(i['history']['tr_loss'])
+                    fgmean[j]['prediction']=np.array(i['prediction'])
                 #break
 
 for i in range(0,len(fgmean)):
@@ -164,7 +169,7 @@ for i in range(0,len(fgmean)):
     #fgmean[i]['tr_acc']/=trials
     fgmean[i]['tr_loss']/=trials
 
-with open('adine.pkl', 'wb') as output:
+with open('adam.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
