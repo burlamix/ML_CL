@@ -53,23 +53,23 @@ adine
 
 opti["lr"] = [0.1,0.01,0.002,0.0005]
 opti["ms"] = [0.95,0.7,0.55]
-opti["mg"] = [1.0001,1.1]
-opti["e"] = [1,1.4]
+opti["mg"] = [1.0001,1.002]
+opti["e"] = [1,1.1]
 opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
 
 '''
 
-opti["lr"] = [0.4,0.03,0.007,0.0007]
-opti["b1"] = [0.9,0.6,0.3,0]
-opti["b2"] = [0.999,0.9,0.8]
-
+opti["lr"] = [0.1, 0.01, 0.002, 0.0005]
+opti["ms"] = [0.95, 0.7, 0.55]
+opti["mg"] = [1.0001, 1.002]
+opti["e"] = [1, 1.1]
 
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     print(param)
-    opt_list.append(Adam(lr=param["lr"], b1=param["b1"], b2=param["b2"]))
+    opt_list.append(Adine(lr=param["lr"], mg=param["mg"], ms=param["ms"], e=param["e"]))
 comb_of_param = len(all_comb)
 
 acts=[["tanh","linear"]]
@@ -144,7 +144,7 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_loss']/=trials
     fgmean[i]['prediction']/=trials
 
-with open('adam.pkl', 'wb') as output:
+with open('adine.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
