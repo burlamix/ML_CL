@@ -52,10 +52,10 @@ opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"]))
 
 adine
 
-opti["lr"] = [0.1,0.01,0.002,0.0005]
+opti["lr"] = [0.01,0.002,0.0005,0.00005]
 opti["ms"] = [0.95,0.7,0.55]
 opti["mg"] = [1.0001,1.002]
-opti["e"] = [1,1.1]
+opti["e"] = [1,0.95]
 opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
 
 conjgrad 
@@ -63,26 +63,27 @@ conjgrad
 amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=200)
 bt = linesearches.back_track(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
 opti["lr"] = [0.1]
-opti["beta_f"] = ["FR","PR"]
-opti["restart"] = [-1]
+opti["beta_f"] = ["FR"]
+opti["restart"] = [10]
 opti["ls"] = [amg]
-
+opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
+                            ls=param["ls"],restart=param["restart"]))
 '''
 
 amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=180)
 bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
-opti["lr"] = [0.1]
-opti["beta_f"] = ["FR"]
-opti["restart"] = [10]
-opti["ls"] = [amg]
+opti["lr"] = [0.01,0.002,0.0005,0.00005]
+opti["ms"] = [0.95,0.7,0.55]
+opti["mg"] = [1.0001,1.002]
+opti["e"] = [1,0.95]
 
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
+    opt_list.append(Adine(lr=param["lr"], mg=param["mg"], ms=param["ms"], e=param["e"]))
     print(param)
-    opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
-                            ls=param["ls"],restart=param["restart"]))
+
 comb_of_param = len(all_comb)
 
 acts=[["tanh","linear"]]
@@ -110,7 +111,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[5000], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[30000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=2,
@@ -157,7 +158,7 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_loss']/=trials
     fgmean[i]['prediction']/=trials
 
-with open('conjgrad.pkl', 'wb') as output:
+with open('adine2.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
@@ -166,8 +167,8 @@ plt.figure()
 plt.axis("off")
 plt.text(0.5,0.5,"range 0-22",ha= "center",va="center", fontsize=40)
 pp.savefig()
-step1=1 #2
-step2=1 #3
+step1=2 #2
+step2=3 #3
 step = step1*step2
 i=0
 for att in range(0,len(opts),step):
