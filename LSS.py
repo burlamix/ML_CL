@@ -1,7 +1,7 @@
 from NN_lib import optimizers
 import numpy as np
 from NN_lib import linesearches
-from test_functions import rosenbrock, matyas_fun, himmelblau, quadratic
+from test_functions import rosenbrock, matyas_fun, himmelblau, simple_fun
 import pylab
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -61,20 +61,19 @@ def plot_contours(fun, xrange, yrange, contours=200):
     :return: The resulting plot handler (use it it @navigate_fun
     '''
     fig = plt.figure()
-    #ax = fig.gca(projection='3d')
+    #ax = fig.gca(projection='3d') #Uncomment for 3d plot
     ax = fig.gca()
     X, Y = np.meshgrid(xrange, yrange)
     zs = np.array([fun([[xrange, yrange]], only_fp=True)
                    for xrange, yrange in zip(np.ravel(X), np.ravel(Y))])
     Z = zs.reshape(X.shape)
-    # surf=ax.plot_surface(Y,X,Z, cmap=cm.jet,cstride=1,rstride=1,alpha=0.3)
+    # surf=ax.plot_surface(Y,X,Z, cmap=cm.jet,cstride=1,rstride=1,alpha=0.3) #
     # surf = ax.contour(X, Y, Z, 10, lw=3, cmap="autumn_r", linestyles="solid", offset=-1)
     surf = ax.contour(X, Y, Z, contours, lw=3, colors="k", linestyles="solid")
-    fig.colorbar(surf, shrink=0.5, aspect=5)
+    #fig.colorbar(surf, shrink=0.5, aspect=5) #Uncomment for colorbar - useless for contours
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    #ax.set_zlabel('Z Label')
-   # ax.invert_xaxis()
+    #ax.set_zlabel('Z Label') #Uncomment for 3d plot
     return ax
 
 
@@ -102,12 +101,11 @@ def navigate_fun(navs, plot):
             py = [navs[j]['y'][i], navs[j]['y'][i + 1]]
             pz = [navs[j]['z'][i], navs[j]['z'][i + 1]]
             es = "no" if navs[j]['epochs_stop']==None else str(navs[j]['epochs_stop'])
-            ax = plot.plot(px, py, 'k', alpha=0.8, linewidth=1.5,
+            plot.plot(px, py, 'k', alpha=0.8, linewidth=1.5,
                     c=cols[j],label=navs[j]['opt'].pprint()+ ',ce:'+es)
             bbox_args = dict(boxstyle="round", fc="0.8")
             arrow_args = dict(arrowstyle="->")
-            if 1==1:
-                ann.append( plot.annotate(str(pz[1]),
+            ann.append( plot.annotate(str(pz[1]),
                         xy=(px[1], py[1]),  # theta, radius
                         xytext=(px[1]-0.5, py[1]-0.5),  # theta, radius
                         #xycoords='polar',
@@ -117,50 +115,48 @@ def navigate_fun(navs, plot):
                         verticalalignment='bottom',
                         clip_on=True)  # clip to the axes bounding box
                             )
-            if (i==0): plt.legend()
+            if (i==0):
+                plt.legend(bbox_to_anchor=(1,0), loc="lower right",prop={'size': 10.5})
+
         plt.pause(.001)
         for a in ann:a.remove()
         ann.clear()
 
-    plt.pause(2**31)
     #input("..")
+    plt.pause(2**31) #Might be problematic on some systems --
+    # substitute with the commented line above in that case
 
-
+#Define some line searches
 amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=0.076,min_lr=1e-11, scale_r=0.95, max_iter=100)
 bt = linesearches.back_track(lr=2.1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
 
-lso = optimizers.RMSProp(lr=0.0001)
-lso = optimizers.Momentum(lr=0.00001)
-lso = optimizers.Adine(lr=0.01, ms=0.9, mg=1.0001, e=1.0, ls = None)
-lso = optimizers.Momentum(lr=0.01,eps=0.6)
-lso = optimizers.Adam(lr=0.1)
-lso = optimizers.Momentum(lr=0.1,eps=0.6)
-lso = optimizers.SimpleOptimizer(lr=0.1,ls= None)
 
-fun = himmelblau
-a = np.arange(-10, 10, 0.1)
-b = np.arange(-10, 10, 0.1)
-plot = plot_contours(fun, xrange=a, yrange=b, contours=200)
+fun = himmelblau #Available functions = {matyas_fun, rosenbrock, himmelblau, simple_fun}
+x = np.arange(-10, 10, 0.1) #x-range for the plot
+y = np.arange(-10, 10, 0.1) #y-range for the plot
+plot = plot_contours(fun, xrange=x, yrange=y, contours=200)
 
-min_r=1e-4
-epochs=50
-lso = optimizers.ConjugateGradient(lr=0.7,ls=None,restart=2)
-o1 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.ConjugateGradient(lr=0.7,ls=amg,restart=-1,beta_f="PR")
-o2 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.Momentum(lr=0.07, eps=0.9,ls=None)
-#o3 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.ConjugateGradient(lr=0.07,ls=None)
-#o4 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.Adam(lr=0.7,ls=None)
-#o5 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.RMSProp(lr=0.7)
-#o6 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.Adine(lr=0.07)
-#o7 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.Adamax(lr=0.7)
-#o8 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.SimpleOptimizer(lr=0.7,ls=bt)
-#o9 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-navigate_fun([o1,o2], plot=plot)
+min_r=1e-4 #Range within the optimum to stop at
+iterations=50 #Maximum number of iterations
 
+#See optimizers for a comprehensive list of the available optimzers
+opts = list()
+start = np.array([[-8, 2]])
+step = 0.0007
+opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=2), start))
+opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
+opts.append((optimizers.Momentum(lr=step, eps=0.9,ls=None), start))
+opts.append((optimizers.ConjugateGradient(lr=step,ls=None), start))
+opts.append((optimizers.Adam(lr=step,ls=None), start))
+opts.append((optimizers.RMSProp(lr=step), start))
+opts.append((optimizers.Adine(lr=step), start))
+opts.append((optimizers.Adamax(lr=step), start))
+opts.append((optimizers.SimpleOptimizer(lr=step,ls=bt), start))
+
+
+res = [optimize_fun(
+    fun, start=o[1], opt=o[0], epochs=iterations, min_f=0, min_r=min_r) for o in opts[0:]]
+
+
+
+navigate_fun(res[0:], plot=plot)
