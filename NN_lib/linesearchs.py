@@ -102,3 +102,5 @@ def back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=0):
             maxiter_in -= 1
         return lr_in
     return back_track_internal
+
+

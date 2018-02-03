@@ -130,3 +130,88 @@ def back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100):
             maxiter_in -= 1
         return lr_in
     return back_track_internal
+
+class BackTracking():
+    def pprint(self):
+        return "BT{lr:" + str(self.lr) + ",m1:" + str(self.m1) + ",m2:" +\
+            ",r:" + str(self.scale_r) + ",i:" + str(self.max_iter)
+
+    def __init__(self,lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100):
+        self.lr = lr
+        self.m1 = m1
+        self.scale_r = scale_r
+        self.min_lr = min_lr
+        self.max_iter = max_iter
+
+    def search(self, f, W, curr_v, dir,phip0):
+        lr_in = self.lr
+        maxiter_in = self.max_iter
+
+        while maxiter_in > 0 and lr_in > self.min_lr:
+            phia = f(W + lr_in * dir, only_fp=True)
+            if phia <= curr_v + self.m1 * lr_in * phip0:
+                return lr_in
+            lr_in = lr_in * self.scale_r
+            maxiter_in -= 1
+        return lr_in
+
+
+class ArmijoWolfe():
+    #Armijo-wolfe line search with strong wolfe condition
+    #Credits to Antonio Frangioni
+
+    def pprint(self):
+        return "AW{lr:"+str(self.lr)+",m1:"+str(self.m1)+",m2:"+str(self.m2)+ \
+               ",r:" + str(self.scale_r) + ",i:"+str(self.max_iter)
+
+    def __init__(self, m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100):
+        self.lr = lr
+        self.m1 = m1
+        self.m2 = m2
+        self.scale_r = scale_r
+        self.min_lr = min_lr
+        self.max_iter = max_iter
+
+    def search(self, f, W, curr_v, curr_grad, phip0):
+        lr_in = self.lr
+        max_iter_in = self.max_iter
+        # phip0- directional derivative -> use norm of current gradient
+        # phip0 = dir_der(curr_grad, curr_grad)
+
+        while max_iter_in > 0:
+            # phia value of the function where we would go
+            # phips_p gradient where we would go
+            phia, phips_p = f(W + lr_in * curr_grad)
+            phips = us_norm2(curr_grad, phips_p)
+            # test armijo strong wolfe condiction
+
+            if phia <= curr_v + self.m1 * lr_in * phip0 and \
+                    (np.abs(phips) <= -self.m2 * phip0):
+                return lr_in
+            if phips >= 0:
+                break
+            else:
+                lr_in = lr_in / self.scale_r
+                max_iter_in -= 1
+        am = 0
+        a = lr_in
+        sf = 1e-3
+        phipm = phip0
+        while (max_iter_in > 0) and ((lr_in - am) > self.min_lr and phips > 1e-12):
+            a = (am * phips - lr_in * phipm) / (phips - phipm)
+            temp = min([lr_in * (1 - sf), a])
+            a = max([am * (1 + sf), temp])
+            phia, phipp = f(W + a * curr_grad)
+            phip = us_norm2(curr_grad, phipp)
+            if ((phia <= curr_v + self.m1 * a * phip0) and (np.abs(phip) <= -self.m2 * (phip0))):
+                return a
+            if phip < 0:
+                am = a
+                phipm = phip
+            else:
+                lr_in = a
+                if lr_in < self.min_lr:
+                    return self.min_lr
+                phips = phip
+                max_iter_in -= 1
+        return a

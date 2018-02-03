@@ -127,8 +127,8 @@ def navigate_fun(navs, plot):
     # substitute with the commented line above in that case
 
 #Define some line searches
-amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=0.076,min_lr=1e-11, scale_r=0.95, max_iter=100)
-bt = linesearches.back_track(lr=2.1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.076,min_lr=1e-11, scale_r=0.95, max_iter=100)
+bt = linesearches.BackTracking(lr=2.1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=100)
 
 
 fun = himmelblau #Available functions = {matyas_fun, rosenbrock, himmelblau, simple_fun}
@@ -143,7 +143,7 @@ iterations=50 #Maximum number of iterations
 opts = list()
 start = np.array([[-8, 2]])
 step = 0.0007
-opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=2), start))
+opts.append((optimizers.ConjugateGradient(lr=step,ls=bt,restart=2), start))
 opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
 opts.append((optimizers.Momentum(lr=step, eps=0.9,ls=None), start))
 opts.append((optimizers.ConjugateGradient(lr=step,ls=None), start))
@@ -155,7 +155,7 @@ opts.append((optimizers.SimpleOptimizer(lr=step,ls=bt), start))
 
 
 res = [optimize_fun(
-    fun, start=o[1], opt=o[0], epochs=iterations, min_f=0, min_r=min_r) for o in opts[0:]]
+    fun, start=o[1], opt=o[0], epochs=iterations, min_f=0, min_r=min_r) for o in opts[0:2]]
 
 
 

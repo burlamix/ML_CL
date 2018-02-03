@@ -69,8 +69,8 @@ opti["ls"] = [amg]
 
 '''
 
-amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=200)
-bt = linesearches.back_track(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=200)
+bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
 opti["lr"] = [0.1]
 opti["beta_f"] = ["PR"]
 opti["restart"] = [-1]
@@ -110,7 +110,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[10000], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[5000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=1,
@@ -166,8 +166,8 @@ plt.figure()
 plt.axis("off")
 plt.text(0.5,0.5,"range 0-22",ha= "center",va="center", fontsize=40)
 pp.savefig()
-step1=2
-step2=3
+step1=1 #2
+step2=1 #3
 step = step1*step2
 i=0
 for att in range(0,len(opts),step):

@@ -28,7 +28,7 @@ class SimpleOptimizer:
 
     def pprint(self):
         ls="None"
-        if self.ls!=None: ls = self.ls.__name__
+        if self.ls!=None: ls = self.ls.pprint()
         return "SGD{lr:"+str(self.lr)+",ls:"+ls+"}"
 
     def getLr(self):
@@ -41,7 +41,7 @@ class SimpleOptimizer:
         loss, grad = f(W)
 
         if self.ls!=None:
-            actual_lr = self.ls(f, W, loss, -grad, us_norm2(grad,grad))
+            actual_lr = self.ls.search(f, W, loss, -grad, us_norm2(grad,grad))
         else:
             actual_lr = self.lr
 
@@ -154,7 +154,7 @@ class Adam:
 
         if self.ls!=None:
             loss,grad = f(W-self.lr*mcap/((vcap+self.eps)))#00118553246015
-            actual_lr = self.ls(f, W-self.lr*mcap/((vcap+self.eps)),loss, grad)
+            actual_lr = self.ls.search(f, W-self.lr*mcap/((vcap+self.eps)),loss, grad)
         else:
             actual_lr = self.lr
 
@@ -272,7 +272,7 @@ class ConjugateGradient:
     def pprint(self):
         ls="None"
         if self.ls!=None:
-            ls = self.ls.__name__
+            ls = self.ls.pprint()
             lrn = ""
         else:
             lrn = "lr:"+str(self.lr)+","
@@ -308,7 +308,7 @@ class ConjugateGradient:
             if np.abs(us_norm(grad))>0:
                 #print('val before',loss)
                 dir_norm=us_norm2(-self.p,grad)
-                actual_lr = self.ls(f, W,loss, self.p, dir_norm)
+                actual_lr = self.ls.search(f, W,loss, self.p, dir_norm)
                 #print('actual',actual_lr)
             else:
                 actual_lr = self.lr
@@ -316,11 +316,6 @@ class ConjugateGradient:
         else:
             actual_lr = self.lr
 
-        f2 = f(W + actual_lr * (self.p),only_fp=True)
-        #if np.random.randn() > -0.5:
-        #    self.p = -grad/(-us_norm(grad))
-       # if (np.abs(f2)>np.abs(loss)):
-       #     self.p = -grad/(-us_norm(grad))
         return (W+actual_lr*self.p)
 
 class Adine:
