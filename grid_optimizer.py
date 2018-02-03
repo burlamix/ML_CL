@@ -47,7 +47,7 @@ opt_list.append(Adam(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
 RMSProp
 opti["lr"] = [0.2,0.1,0.05,0.01,0.007,0.004,0.0008,0.0002]
 opti["delta"] = [0.9,0.8,0.6,0.5,0.3,0.1]
-opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"))
+opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"]))
 
 adine
 
@@ -59,17 +59,15 @@ opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"])
 
 '''
 
-opti["lr"] = [0.1, 0.01, 0.002, 0.0005]
-opti["ms"] = [0.95, 0.7, 0.55]
-opti["mg"] = [1.0001, 1.002]
-opti["e"] = [1, 1.1]
+opti["lr"] = [0.2,0.1,0.05,0.01,0.007,0.004,0.0008,0.0002]
+opti["delta"] = [0.9,0.8,0.6,0.5,0.3,0.1]
 
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     print(param)
-    opt_list.append(Adine(lr=param["lr"], mg=param["mg"], ms=param["ms"], e=param["e"]))
+    opt_list.append(RMSProp(lr=param["lr"], delta=param["delta"]))
 comb_of_param = len(all_comb)
 
 acts=[["tanh","linear"]]
@@ -144,7 +142,7 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_loss']/=trials
     fgmean[i]['prediction']/=trials
 
-with open('adine.pkl', 'wb') as output:
+with open('RMSprop.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
