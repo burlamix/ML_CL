@@ -7,8 +7,7 @@ from NN_lib.linesearches import dir_der,us_norm,us_norm2
 
 
 class SimpleOptimizer:
-    #SGD optimizer without momentum
-    #TODO: merge with momentum optimizer
+
     def __str__(self):
         return str('sgd'+str(self.lr))
 
@@ -31,12 +30,9 @@ class SimpleOptimizer:
         if self.ls!=None: ls = self.ls.pprint()
         return "SGD{lr:"+str(self.lr)+",ls:"+ls+"}"
 
-    def getLr(self):
-        return self.lr
-
     def optimize(self, f, W):
-        if not(isinstance(f, types.FunctionType)):
-            sys.exit("Provided function is invalid")
+        #if not(isinstance(f, types.FunctionType)):
+        #    sys.exit("Provided function is invalid")
 
         loss, grad = f(W)
 
@@ -54,13 +50,12 @@ class Momentum:
     Refer to: https://www.sciencedirect.com/science/article/pii/0041555364901375
     and 'A method of solving a convex programming problem with convergence rate O (1/k2)'
     for a more in-depth description
-    TODO: merge with SimpleOptimizer
     '''
     def __str__(self):
         return str('momentum'+str(self.lr))
 
     def __repr__(self):
-        return str('momentum'+str(self.lr))
+        return self.__str__()
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
@@ -82,13 +77,10 @@ class Momentum:
         if self.nesterov: nesterov="(nesterov)"
         return "Momentum"+nesterov+"{lr:" + str(self.lr)+",m:"+str(self.eps)+"}"
 
-    def getLr(self):
-        return self.lr
-
     def optimize(self,f,W):
 
-        if not(isinstance(f, types.FunctionType)):
-            sys.exit("Provided function is invalid")
+        #if not(isinstance(f, types.FunctionType)):
+        #    sys.exit("Provided function is invalid")
 
         if self.nesterov:
             #If nesterov, "look ahead" first
@@ -110,7 +102,7 @@ class Adam:
         return str('adam'+str(self.lr))
 
     def __repr__(self):
-        return str('adam'+str(self.lr))
+        return self.__str__()
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr and self.b1==other.b1 \
@@ -135,8 +127,8 @@ class Adam:
         return "Adam{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
-        if not(isinstance(f, types.FunctionType)):
-            sys.exit("Provided function is invalid")
+        #if not(isinstance(f, types.FunctionType)):
+        #    sys.exit("Provided function is invalid")
 
         self.t+=1 #Update timestamp
         loss, grad = f(W) #Compute the gradient
@@ -168,7 +160,7 @@ class Adamax:
         return str('adamax'+str(self.lr))
 
     def __repr__(self):
-        return str('adamax'+str(self.lr))
+        return self.__str__()
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr and self.b1==other.b1 \
@@ -193,8 +185,8 @@ class Adamax:
         return "Adamax{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
-        if not(isinstance(f, types.FunctionType)):
-            sys.exit("Provided function is invalid")
+        #if not(isinstance(f, types.FunctionType)):
+        #    sys.exit("Provided function is invalid")
 
         self.t+=1 #Update timestamp
         loss, grad = f(W) #Compute the gradient
@@ -215,7 +207,7 @@ class RMSProp:
         return str('rmsprop'+str(self.lr))
 
     def __repr__(self):
-        return str('rmsprop'+str(self.lr))
+        return self.__str__()
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
@@ -235,8 +227,8 @@ class RMSProp:
         return "RMSprop{lr:" + str(self.lr)+",d:"+str(self.delta)+"}"
 
     def optimize(self, f, W):
-        if not(isinstance(f, types.FunctionType)):
-            sys.exit("Provided function is invalid")
+        #if not(isinstance(f, types.FunctionType)):
+        #    sys.exit("Provided function is invalid")
         loss, grad = f(W)
         self.R = (self.delta)*(self.R if not (self.R is None) else 0)+(1-self.delta)*np.array(grad)**2
         return W-self.lr*np.array(grad)/((self.R)**(1/2)+1e-6)
@@ -248,7 +240,7 @@ class ConjugateGradient:
         return str('ConjugateGradient'+str(self.lr))
 
     def __repr__(self):
-        return str('ConjugateGradient'+str(self.lr))
+        return self.__str__()
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
@@ -283,8 +275,8 @@ class ConjugateGradient:
 
     def optimize(self,f,W):
 
-        if not(isinstance(f, types.FunctionType)):
-            sys.exit("Provided function is invalid")
+        #if not(isinstance(f, types.FunctionType)):
+        #    sys.exit("Provided function is invalid")
 
         if self.restart>0:
             if (np.mod(self.t,self.restart)==0):self.p = None
@@ -319,7 +311,7 @@ class Adine:
         return str('adine'+str(self.lr))
 
     def __repr__(self):
-        return str('adine'+str(self.lr))
+        return self.__str__()
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
@@ -349,8 +341,8 @@ class Adine:
 
     def optimize(self,f,W):
 
-        if not(isinstance(f, types.FunctionType)):
-            sys.exit("Provided function is invalid")
+        #if not(isinstance(f, types.FunctionType)):
+        #    sys.exit("Provided function is invalid")
         self.t+=1
         loss = f(W,only_fp=True)
         self.last_l = self.avgl

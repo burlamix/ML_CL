@@ -72,10 +72,10 @@ opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
 
 amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=180)
 bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
-opti["lr"] = [0.01,0.002,0.0005,0.00005]
-opti["ms"] = [0.95,0.7,0.55]
-opti["mg"] = [1.0001,1.002]
-opti["e"] = [1,0.95]
+opti["lr"] = [0.01]#,0.002,0.0005,0.00005]
+opti["ms"] = [0.95]#,0.7,0.55]
+opti["mg"] = [1.0001]#,1.002]
+opti["e"] = [1]#,0.95]
 
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
@@ -98,7 +98,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 5
+trials = 1
 
 '''
 for i in range(0,trials):
@@ -111,10 +111,10 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[30000], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[500], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
-                                           cvfolds=1, val_set=None, verbose=2,
+                                           cvfolds=1, val_set=None, verbose=1,
                                            loss_fun=losses, val_loss_fun="mee",
                                            neurons=neurs, optimizers=opts,trials=trials)
 
