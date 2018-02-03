@@ -28,7 +28,7 @@ def quadratic(W, only_fp=False):
     else:
         return r, np.array([[2*(W[0][1] + W[0][0]),2*(W[0][1] + W[0][0])]])
 
-def Himmelblau(W, only_fp=False):
+def himmelblau(W, only_fp=False):
     r = ((W[0][0]**2 + W[0][1]-11) ** 2)+((W[0][0] + (W[0][1]**2)-7) ** 2)
 
     if only_fp:

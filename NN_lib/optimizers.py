@@ -252,16 +252,17 @@ class ConjugateGradient:
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
-               and self.eps==other.eps and\
+               and self.beta_f==other.beta_f and self.restart==other.restart and\
                  self.ls.__eq__(other.ls)
 
-    def __init__(self, lr=0.001, eps=0.9, ls=None):
+    def __init__(self, lr=0.001, beta_f="FR", restart=-1,ls=None):
         self.lr = lr
-        self.eps = eps
         self.ls = ls
         self.p = None
         self.last_g = None
         self.t = 0
+        self.beta_f = beta_f
+        self.restart = restart
         self.reset()
 
     def reset(self):
@@ -270,9 +271,12 @@ class ConjugateGradient:
 
     def pprint(self):
         ls="None"
-        if self.ls!=None: ls = self.ls.__name__
-        return "ConjugateGrad(Fletcher-Reeves){lr:" + str(self.lr)+\
-        ",eps:"+str(self.eps)+",ls:"+ls+"}"
+        if self.ls!=None:
+            ls = self.ls.__name__
+            lrn = ""
+        else:
+            lrn = "lr:"+str(self.lr)+","
+        return "ConjugateGrad("+self.beta_f+"){"+lrn+"restart:"+str(self.restart)+",ls:"+ls+"}"
 
     def getLr(self):
         return self.lr
@@ -281,17 +285,21 @@ class ConjugateGradient:
 
         if not(isinstance(f, types.FunctionType)):
             sys.exit("Provided function is invalid")
+
+        if self.restart>0:
+            if (np.mod(self.t,self.restart)==0):self.p = None
+
         self.t+=1
 
         loss, grad = f(W)
-        if (np.mod(self.t,1)==5):self.p = None#/-us_norm(grad)
 
         if self.p is None:
-            self.p = -grad#/(-us_norm(grad))
+            self.p = -grad
         else:
-            #beta = -us_norm(grad)#/(-us_norm(self.last_g))
-            #beta = -grad/(-us_norm(grad))
             beta = us_norm2(grad,grad)/(us_norm2(self.last_g,self.last_g)+1e-7)
+            if self.beta_f == "PR":
+                beta = max(
+                    0,us_norm2(grad,(grad-self.last_g))/(us_norm2(self.last_g,self.last_g)+1e-7))
             #print(beta)
             self.p = -grad + beta*self.p
         self.last_g = grad

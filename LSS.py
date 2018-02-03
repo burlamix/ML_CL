@@ -1,7 +1,7 @@
 from NN_lib import optimizers
 import numpy as np
 from NN_lib import linesearches
-from test_functions import rosenbrock, matyas_fun, Himmelblau, quadratic
+from test_functions import rosenbrock, matyas_fun, himmelblau, quadratic
 import pylab
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -137,30 +137,30 @@ lso = optimizers.Adam(lr=0.1)
 lso = optimizers.Momentum(lr=0.1,eps=0.6)
 lso = optimizers.SimpleOptimizer(lr=0.1,ls= None)
 
-fun = matyas_fun
+fun = himmelblau
 a = np.arange(-10, 10, 0.1)
 b = np.arange(-10, 10, 0.1)
 plot = plot_contours(fun, xrange=a, yrange=b, contours=200)
 
 min_r=1e-4
-epochs=300
-lso = optimizers.SimpleOptimizer(lr=0.7,ls=amg)
+epochs=50
+lso = optimizers.ConjugateGradient(lr=0.7,ls=None,restart=2)
 o1 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-lso = optimizers.SimpleOptimizer(lr=0.07,ls=None)
+lso = optimizers.ConjugateGradient(lr=0.7,ls=amg,restart=-1,beta_f="PR")
 o2 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
 lso = optimizers.Momentum(lr=0.07, eps=0.9,ls=None)
-o3 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+#o3 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
 lso = optimizers.ConjugateGradient(lr=0.07,ls=None)
-o4 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+#o4 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
 lso = optimizers.Adam(lr=0.7,ls=None)
-o5 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+#o5 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
 lso = optimizers.RMSProp(lr=0.7)
-o6 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+#o6 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
 lso = optimizers.Adine(lr=0.07)
-o7 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+#o7 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
 lso = optimizers.Adamax(lr=0.7)
-o8 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+#o8 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
 lso = optimizers.SimpleOptimizer(lr=0.7,ls=bt)
-o9 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
-navigate_fun([o1,o2,o3,o4,o5,o6,o7,o9], plot=plot)
+#o9 = optimize_fun(fun,np.array([[-8, 2]]),opt=lso, epochs=epochs,min_f=0,min_r=min_r)
+navigate_fun([o1,o2], plot=plot)
 

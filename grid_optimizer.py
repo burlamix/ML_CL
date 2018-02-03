@@ -6,6 +6,7 @@ from NN_lib import regularizations
 from matplotlib.backends.backend_pdf import PdfPages
 import pickle
 from NN_lib import preproc
+from NN_lib import linesearches
 from NN_lib.optimizers import *
 import numpy as np
 import time
@@ -57,17 +58,31 @@ opti["mg"] = [1.0001,1.002]
 opti["e"] = [1,1.1]
 opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
 
+conjgrad 
+
+amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=200)
+bt = linesearches.back_track(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
+opti["lr"] = [0.1]
+opti["beta_f"] = ["FR","PR"]
+opti["restart"] = [-1]
+opti["ls"] = [amg]
+
 '''
 
-opti["lr"] = [0.2,0.1,0.05,0.01,0.007,0.004,0.0008,0.0002]
-opti["delta"] = [0.9,0.8,0.6,0.5,0.3,0.1]
+amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=200)
+bt = linesearches.back_track(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
+opti["lr"] = [0.1]
+opti["beta_f"] = ["PR"]
+opti["restart"] = [-1]
+opti["ls"] = [amg]
 
 labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     print(param)
-    opt_list.append(RMSProp(lr=param["lr"], delta=param["delta"]))
+    opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
+                            ls=param["ls"],restart=param["restart"]))
 comb_of_param = len(all_comb)
 
 acts=[["tanh","linear"]]
@@ -95,7 +110,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[30000], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[10000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=1,
@@ -142,7 +157,7 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_loss']/=trials
     fgmean[i]['prediction']/=trials
 
-with open('RMSprop.pkl', 'wb') as output:
+with open('conjgrad.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
