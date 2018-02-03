@@ -304,18 +304,12 @@ class ConjugateGradient:
             self.p = -grad + beta*self.p
         self.last_g = grad
         if self.ls!=None:
-            #loss,newgrad= f(W+self.lr*self.p)
-            if np.abs(us_norm(grad))>0:
-                #print('val before',loss)
-                dir_norm=us_norm2(-self.p,grad)
-                actual_lr = self.ls.search(f, W,loss, self.p, dir_norm)
-                #print('actual',actual_lr)
-            else:
-                actual_lr = self.lr
+            dir_norm=us_norm2(-self.p,grad)
+            actual_lr = self.ls.search(f, W,loss, self.p, dir_norm)
+            #print('actual',actual_lr)
             #print('actual',actual_lr)
         else:
             actual_lr = self.lr
-
         return (W+actual_lr*self.p)
 
 class Adine:

@@ -25,7 +25,7 @@ def conv_rate(x, eps=10):
     '''
     return 100-np.argmax(x<=np.min(x)*(1+eps/100))*100/(len(x)-1)
 
-with open('adam.pkl', 'rb') as handle:
+with open('conjgrad.pkl', 'rb') as handle:
     b = pickle.load(handle)
 
 print(b[0]['tr_loss'])

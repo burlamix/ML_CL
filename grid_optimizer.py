@@ -69,11 +69,11 @@ opti["ls"] = [amg]
 
 '''
 
-amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=200)
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=180)
 bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
 opti["lr"] = [0.1]
-opti["beta_f"] = ["PR"]
-opti["restart"] = [-1]
+opti["beta_f"] = ["FR"]
+opti["restart"] = [10]
 opti["ls"] = [amg]
 
 labels, terms = zip(*opti.items())
@@ -113,7 +113,7 @@ for i in range(0,trials):
 fgs = validation.grid_thread(dataset, epochs=[5000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
-                                           cvfolds=1, val_set=None, verbose=1,
+                                           cvfolds=1, val_set=None, verbose=2,
                                            loss_fun=losses, val_loss_fun="mee",
                                            neurons=neurs, optimizers=opts,trials=trials)
 
