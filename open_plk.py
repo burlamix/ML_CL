@@ -25,12 +25,15 @@ def conv_rate(x, eps=10):
     '''
     return 100-np.argmax(x<=np.min(x)*(1+eps/100))*100/(len(x)-1)
 
-with open('conjgrad.pkl', 'rb') as handle:
+with open('adine2.pkl', 'rb') as handle:
     b = pickle.load(handle)
 
-print(b[0]['tr_loss'])
+ind = 15
+for i in range(0,len(b)):
+#print(b[ind]['tr_loss'])
+    unst = unstability(b[i]['tr_loss'])
+    cv=conv_rate(b[i]['tr_loss'],eps=5)
+    print(b[i]['configuration']['optimizers'].pprint(),unst,cv)
 
-unstability(b[0]['tr_loss'])
-cv=conv_rate(b[0]['tr_loss'],eps=100)
-
+print(unst)
 print(cv)
