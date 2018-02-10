@@ -12,25 +12,17 @@ import numpy as np
 import time
 import itertools
 
+
 np.random.seed(5)
 time_name = str(time.time())
 
 dataset = preproc.Dataset()
-
-train_data_path = "data/ML-CUP17-TR.csv"
-test_data_path = "data/ML-CUP17-TS.csv"
-
-
-dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=10, targets=2))
-dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
-
+train_data_path = "data/myTrain.csv"
+test_data_path = "data/myTest.csv"
+dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=0, targets=2))
+dataset.init_test(preproc.load_data(path=test_data_path, target=True, header_l=0, targets=2))
 preprocessor = preproc.Preprocessor()
 preprocessor.shuffle(dataset)
-
-(dataset.train[0], dataset.test[0]), (dataset.train[1], dataset.test[1]) = \
-    dataset.split_train_percent(75)
-
-print(len(dataset.train[0]))
 
 opt_list =[]
 
@@ -107,7 +99,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 10
+trials = 2
 
 '''
 for i in range(0,trials):
@@ -172,115 +164,60 @@ with open(time_name+'.pkl', 'wb') as output:
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
 pp = PdfPages(time_name +".pdf")
-plt.figure()
-plt.axis("off")
-plt.text(0.5,0.5,"range 0-22",ha= "center",va="center", fontsize=40)
-pp.savefig()
+
 step1=2 #2
 step2=3 #3
 step = step1*step2
-i=0
-for att in range(0,len(opts),step):
-    f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
-                          ncols=step2*len(rlambdas) * len(losses),
-                          sharex='col', sharey='row', squeeze=False)
-    fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
-    temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
-    j=0
-    hist=False
-    for row in a:
-        for col in row:
-            col.set_yticks(np.arange(0, 22, 0.5))
-            col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
-                          "last_f:"+str(temp[j]['tr_loss'][-1])+",gen_err:"+str(temp[j]['prediction'][0]),fontsize=20)
 
-            if hist:
-                col.plot(temp[j]['history']['tr_loss'],label='tr err')
-            else:
-                col.plot(temp[j]['tr_loss'], label='tr err')
-            #col.legend(loc=3,prop={'size':10})
-            col.tick_params(labelsize=13)
-            col.yaxis.grid()  # horizontal lines
-            col.set_ylim([0,22])
-            j+=1
-            i+=1
+def plotting(pdf,range_from,range_to):
+    plt.figure()
+    plt.axis("off")
+    plt.text(0.5,0.5,"range"+str(range_from)+"-"+str(range_to),ha= "center",va="center", fontsize=40)
+    pp.savefig()
 
-    pp.savefig(f)
 
-plt.figure()
-plt.axis("off")
-plt.text(0.5,0.5,"range 0-5",ha= "center",va="center", fontsize=50)
-pp.savefig()
-i=0
-for att in range(0,len(opts),step):
-    f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
-                          ncols=step2*len(rlambdas) * len(losses),
-                          sharex='col', sharey='row', squeeze=False)
-    fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
-    temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
-    j=0
-    hist=False
-    for row in a:
-        for col in row:
-            col.set_yticks(np.arange(0, 5, 0.15))
-            col.set_title('{' + temp[j]['configuration']['optimizers'].pprint() + "}\n "
-                                                                                  "last_f:" + str(
-                temp[j]['tr_loss'][-1]) + ",gen_err:" + str(temp[j]['prediction'][0]), fontsize=20)
+    i=0
+    for att in range(0,len(opts),step):
+        f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
+                              ncols=step2*len(rlambdas) * len(losses),
+                              sharex='col', sharey='row', squeeze=False)
+        fgforplot=fgmean
+        fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
+        temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+        #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
+        j=0
+        hist=False
+        for row in a:
+            for col in row:
+                col.set_yticks(np.arange(range_from, range_to, (range_to-range_from)/40))#here the number of line 
+                col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
+                              "last_f:"+str(temp[j]['tr_loss'][-1])+",gen_err:"+str(temp[j]['prediction'][0]),fontsize=20)
 
-            if hist:
-                col.plot(temp[j]['history']['tr_loss'],label='tr err')
-            else:
-                col.plot(temp[j]['tr_loss'], label='tr err')
-            #col.legend(loc=3,prop={'size':10})
-            col.tick_params(labelsize=13)
-            col.yaxis.grid()  # horizontal lines
-            col.set_ylim([0,5])
-            j+=1
-            i+=1
+                if hist:
+                    col.plot(temp[j]['history']['tr_loss'],label='tr err')
+                else:
+                    col.plot(temp[j]['tr_loss'], label='tr err')
+                #col.legend(loc=3,prop={'size':10})
+                col.tick_params(labelsize=13)
+                col.yaxis.grid()  # horizontal lines
+                col.set_ylim([range_from,range_to])
+                j+=1
+                i+=1
 
-    pp.savefig(f)
+        pp.savefig(f)
 
-plt.figure()
-plt.axis("off")
-plt.text(0.5,0.5,"range 0-1.2",ha= "center",va="center", fontsize=50)
-pp.savefig()
-i=0
-for att in range(0,len(opts),step):
-    f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
-                          ncols=step2*len(rlambdas) * len(losses),
-                          sharex='col', sharey='row', squeeze=False)
-    fgforplot=fgmean
-    fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
-    temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-    #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
-    j=0
-    hist=False
-    for row in a:
-        for col in row:
-            col.set_yticks(np.arange(0, 1.2, 0.03))
-            col.set_title('{' + temp[j]['configuration']['optimizers'].pprint() + "}\n "
-                                                                                  "last_f:" + str(
-                temp[j]['tr_loss'][-1]) + ",gen_err:" + str(temp[j]['prediction'][0]), fontsize=20)
 
-            if hist:
-                col.plot(temp[j]['history']['tr_loss'],label='tr err')
-            else:
-                col.plot(temp[j]['tr_loss'], label='tr err')
-            #col.legend(loc=3,prop={'size':10})
-            col.tick_params(labelsize=13)
-            col.yaxis.grid()  # horizontal lines
-            col.set_ylim([0,1.2])
-            j+=1
-            i+=1
+plotting(pp,0,22)
 
-    pp.savefig(f)
-f.clear()
-f.clf()
+plotting(pp,0,5)
+
+plotting(pp,0,1.2)
+
+
 plt.clf()
 plt.cla()
 plt.close()
 pp.close()
+
+
+

@@ -26,9 +26,13 @@ class SimpleOptimizer:
         pass
 
     def pprint(self):
-        ls="None"
-        if self.ls!=None: ls = self.ls.pprint()
-        return "SGD{lr:"+str(self.lr)+",ls:"+ls+"}"
+        ls = "None"
+        if self.ls!=None:
+            ls = self.ls.pprint()
+            lrn = ""
+        else:
+            lrn = "lr:"+str(self.lr)+","
+        return "SGD{"+lrn+"ls:"+ls+"}"
 
     def optimize(self, f, W):
         #if not(isinstance(f, types.FunctionType)):
