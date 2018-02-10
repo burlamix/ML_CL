@@ -13,6 +13,8 @@ import time
 import itertools
 
 np.random.seed(5)
+time_name = str(time.time())
+
 dataset = preproc.Dataset()
 
 train_data_path = "data/ML-CUP17-TR.csv"
@@ -29,29 +31,32 @@ preprocessor.shuffle(dataset)
     dataset.split_train_percent(75)
 
 print(len(dataset.train[0]))
-exit(1)
 
 opt_list =[]
 
 opti = dict()
 '''
 mome
+
 opti["lr"] = [0.1,0.04,0.01,0.005,0.001,0.0003]
 opti["eps"] = [0.9,0.6,0.3,0]
 opti["nest"] = [True,False]
-opt_list.append(Momentum(lr=param["lr"],eps=param["eps"],nesterov=param["nest"]))
+    opt_list.append(Momentum(lr=param["lr"],eps=param["eps"],nesterov=param["nest"]))
 
 adam / adamax
+
 opti["lr"] = [0.4,0.03,0.007,0.0007]
 opti["b1"] = [0.9,0.6,0.3,0]
 opti["b2"] = [0.999,0.9,0.8]
-opt_list.append(Adam(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
+    opt_list.append(Adam(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
+    opt_list.append(Adamax(lr=param["lr"],b1=param["b1"],b2=param["b2"]))
 
 
 RMSProp
+
 opti["lr"] = [0.2,0.1,0.05,0.01,0.007,0.004,0.0008,0.0002]
 opti["delta"] = [0.9,0.8,0.6,0.5,0.3,0.1]
-opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"]))
+    opt_list.append(RMSProp(lr=param["lr"],delta=param["delta"]))
 
 adine
 
@@ -59,7 +64,7 @@ opti["lr"] = [0.01,0.002,0.0005,0.00005]
 opti["ms"] = [0.95,0.7,0.55]
 opti["mg"] = [1.0001,1.002]
 opti["e"] = [1,0.95]
-opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
+    opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
 
 conjgrad 
 
@@ -69,12 +74,13 @@ opti["lr"] = [0.1]
 opti["beta_f"] = ["FR"]
 opti["restart"] = [10]
 opti["ls"] = [amg]
-opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
+    opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
                             ls=param["ls"],restart=param["restart"]))
 '''
 
 amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.001,min_lr=1e-11, scale_r=0.95, max_iter=180)
 bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
+
 opti["lr"] = [0.01,0.002,0.0005,0.00005]
 opti["ms"] = [0.95,0.7,0.55]
 opti["mg"] = [1.0001,1.002]
@@ -84,7 +90,7 @@ labels, terms = zip(*opti.items())
 all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
-    opt_list.append(Adine(lr=param["lr"], mg=param["mg"], ms=param["ms"], e=param["e"]))
+    opt_list.append(Adine(lr=param["lr"],mg=param["mg"],ms=param["ms"],e=param["e"]))
     print(param)
 
 comb_of_param = len(all_comb)
@@ -93,7 +99,7 @@ acts=[["tanh","linear"]]
 opts=opt_list
 neurs=[[50,2]]
 batches = [dataset.train[0].shape[0]]
-losses = ["mee"]
+losses = ["mse"]
 regs = [[regularizations.reguls["EN"],regularizations.reguls["EN"]]]
 rlambdas = [[(0.0001,0),(0.0001,0)]]
 
@@ -101,7 +107,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 2
+trials = 10
 
 '''
 for i in range(0,trials):
@@ -114,11 +120,11 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[100000], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[2], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=1,
-                                           loss_fun=losses, val_loss_fun="mee",
+                                           loss_fun=losses, val_loss_fun="mse",
                                            neurons=neurs, optimizers=opts,trials=trials)
 
 
@@ -161,11 +167,11 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_loss']/=trials
     fgmean[i]['prediction']/=trials
 
-with open('adine3.pkl', 'wb') as output:
+with open(time_name+'.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
-pp = PdfPages(str(time.time())+".pdf")
+pp = PdfPages(time_name +".pdf")
 plt.figure()
 plt.axis("off")
 plt.text(0.5,0.5,"range 0-22",ha= "center",va="center", fontsize=40)

@@ -168,11 +168,13 @@ class Adamax:
                 self.eps==other.eps and self.ls.__eq__(other.ls)
 
 
-    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
+    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8,ls=None):
         self.lr = lr
         self.b1 = b1
         self.b2 = b2
         self.eps = eps
+        self.ls=ls
+
         self.reset()
 
     def reset(self):
@@ -180,6 +182,7 @@ class Adamax:
         self.v = None
         self.grad = 0
         self.t = 0
+        self.ls=None
 
     def pprint(self):
         return "Adamax{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
