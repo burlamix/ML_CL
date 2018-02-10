@@ -243,7 +243,7 @@ class NeuralNetwork:
         :return:
         '''
         if loss_fun == None: loss_fun = self.loss_func
-        #loss_fun = loss_functions.validate_loss(loss_fun)
+        loss_fun = loss_functions.validate_loss(loss_fun)
 
         #Predicted output
         real = self.FP(x_in)

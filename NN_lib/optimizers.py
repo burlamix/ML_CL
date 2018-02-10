@@ -176,8 +176,8 @@ class Adamax:
         self.reset()
 
     def reset(self):
-        self.m = [0]
-        self.v = []
+        self.m = 0
+        self.v = None
         self.grad = 0
         self.t = 0
 
@@ -192,12 +192,14 @@ class Adamax:
         loss, grad = f(W) #Compute the gradient
 
         #First and second moment estimation(biased by b1 and b2)
-        self.m.append(self.b1*self.m[self.t-1]+(1-self.b1)*(grad))
+        self.m = (self.b1*self.m+(1-self.b1)*(grad))
 
-        k = self.b2*(self.v[-1] if self.v!=[] else np.zeros_like(grad))
-        o = np.array([np.maximum(k[e],np.abs(grad[e])) for e in range(0,len(grad))])
-        self.v.append(o)
-        return W-(self.lr/(1-self.b1**self.t))*self.m[-1]/(np.array(self.v[-1])+self.eps)
+        k = self.b2*(self.v if self.v is not None else np.zeros_like(grad))
+        o = np.empty_like(grad)
+        for e in range(0,len(o)):
+            o[e] = np.maximum(k[e],np.abs(grad[e]))
+        self.v = o
+        return W-(self.lr/(1-self.b1**self.t))*self.m/(np.array(self.v)+self.eps)
 
 class RMSProp:
     #RMSprop optimizer. It uses a running average of the past gradients.

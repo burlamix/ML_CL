@@ -1,6 +1,6 @@
 import pickle
 import numpy as np
-
+from matplotlib import pyplot as plt
 
 def unstability(x):
     '''
@@ -29,11 +29,24 @@ with open('adine2.pkl', 'rb') as handle:
     b = pickle.load(handle)
 
 ind = 15
+cvs=[]
+unsts=[]
+ll = []
 for i in range(0,len(b)):
 #print(b[ind]['tr_loss'])
     unst = unstability(b[i]['tr_loss'])
-    cv=conv_rate(b[i]['tr_loss'],eps=5)
+    cv=conv_rate(b[i]['tr_loss'],eps=25)
+    cvs.append(cv)
+    ll.append(b[i]['tr_loss'][-1])
+    unsts.append(unst)
     print(b[i]['configuration']['optimizers'].pprint(),unst,cv)
 
-print(unst)
-print(cv)
+for i in range(0,len(cvs)):
+    if ll[i]>1.5: pass
+    else:
+        plt.scatter(ll[i],cvs[i])
+        plt.annotate(b[i]['configuration']['optimizers'].pprint()[6:-1],(ll[i],cvs[i]),alpha=0.5)
+plt.ylabel("cvs")
+plt.xlabel("ll")
+
+plt.show()

@@ -32,8 +32,8 @@ dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=
 #j = np.concatenate((np.ones((j.shape[0],1)),j),axis=1)
 
 #print(np.linalg.cond(np.eye((10))+np.dot(dataset.train[0].T,dataset.train[0])))
-amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=clr, min_lr=1e-11, scale_r=0.99, max_iter=1000)
-amg = linesearches.armj_wolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100)
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=clr, min_lr=1e-11, scale_r=0.99, max_iter=1000)
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.1, min_lr=1e-11, scale_r=0.9, max_iter=100)
 
 #amg = linesearches.back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100)
 

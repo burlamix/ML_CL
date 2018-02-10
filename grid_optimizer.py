@@ -28,6 +28,8 @@ preprocessor.shuffle(dataset)
 (dataset.train[0], dataset.test[0]), (dataset.train[1], dataset.test[1]) = \
     dataset.split_train_percent(75)
 
+print(len(dataset.train[0]))
+exit(1)
 
 opt_list =[]
 

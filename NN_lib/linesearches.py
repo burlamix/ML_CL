@@ -213,13 +213,18 @@ class ArmijoWolfe():
         a = lr_in
         sf = 1e-3
         phipm = phip0
+        #input('..')
         while (max_iter_in > 0) and ((lr_in - am) > self.min_lr and phips > 1e-12):
             a = (am * phips - lr_in * phipm) / (phips - phipm)
             temp = min([lr_in * (1 - sf), a])
             a = max([am * (1 + sf), temp])
+            #print('1:',am * (1 + sf))
+            #print('temp:',temp)
+            #print('a:',a)
+            #print('**')
             phia, phipp = f(W + a * curr_grad)
             phip = us_norm2(curr_grad, phipp)
-            if ((phia <= curr_v + self.m1 * a * phip0) and (np.abs(phip) <= -self.m2 * (phip0))):
+            if ((phia <= curr_v + self.m1 * a * phip0) and (np.abs(phip) <= np.abs(self.m2 * (phip0)))):
                 return a
             if phip < 0:
                 am = a
@@ -229,5 +234,5 @@ class ArmijoWolfe():
                 if lr_in < self.min_lr:
                     return self.min_lr
                 phips = phip
-                max_iter_in -= 1
+            max_iter_in -= 1
         return a

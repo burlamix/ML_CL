@@ -1,5 +1,4 @@
 import numpy as np 
-from NN_lib.linesearchs import *
 
 def householder_vector(x):
 	s = -np.sign(x[0]) * np.linalg.norm(x)
@@ -33,7 +32,7 @@ def QR_fact(X):
 	return q,r
 
 
-def LLSQ(X,y,l=0):
+def QR_solver(X,y,l=0):
 	'''
 	Linear least squares solver via QR decomposition. It solves a problem of
 	the form min( || Ax-y+r||x|| || ). It is assumed that A is of full column
@@ -42,21 +41,17 @@ def LLSQ(X,y,l=0):
 	'''
 	X = np.vstack((X,l*np.eye(11)))
 	q, r = QR_fact(X)
-	print(q.shape)
-	print(r.shape)
+
 	#Throw away the 0s
 	q1 = q[:-11, 0:r.shape[1]]
 	#q2 = q[:, r.shape[1]:]
 	r = r[0:r.shape[1], :]
-	print(q1.shape)
-	print(r.shape)
-	rterm = np.linalg.inv(np.dot(r.T, r))
 	return np.dot(np.dot(np.linalg.inv(r),q1.T),y)
 	#rterm = np.linalg.inv(np.dot(r.T,r)+l*np.eye(r.shape[1]))
 	#return np.dot(np.dot(rterm,np.dot(q1,r).T),y)
 
 
-def LLSQ1R(X,y,l=0):
+def norm_eqs(X,y,l=0):
 	'''
 	Linear least squares solver via normal equations. It solves a problem of
 	the form min( || Ax-y+r||x|| || ). It is assumed that A is of full column
