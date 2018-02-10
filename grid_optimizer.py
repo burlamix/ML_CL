@@ -99,7 +99,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 2
+trials = 5
 
 '''
 for i in range(0,trials):
@@ -112,7 +112,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[2], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[30000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=1,
@@ -207,7 +207,7 @@ def plotting(pdf,range_from,range_to):
         pp.savefig(f)
 
 
-plotting(pp,0,22)
+plotting(pp,0,220)
 
 plotting(pp,0,5)
 
