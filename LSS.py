@@ -127,25 +127,38 @@ def navigate_fun(navs, plot):
     # substitute with the commented line above in that case
 
 #Define some line searches
-amg = linesearches.ArmijoWolfe(m1=1e-3, m2=0.9, lr=0.0001,min_lr=1e-6, scale_r=0.95, max_iter=10000)
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.0001,min_lr=1e-9, scale_r=0.9, max_iter=10000)
 bt = linesearches.BackTracking(lr=2.1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=100)
 
 
-fun = matyas_fun #Available functions = {matyas_fun, rosenbrock, himmelblau, simple_fun}
+fun = himmelblau #Available functions = {matyas_fun, rosenbrock, himmelblau, simple_fun}
 x = np.arange(-10, 10, 0.1) #x-range for the plot
 y = np.arange(-10, 10, 0.1) #y-range for the plot
 plot = plot_contours(fun, xrange=x, yrange=y, contours=200)
 
-min_r=1e-4 #Range within the optimum to stop at
-iterations=50 #Maximum number of iterations
+min_r=1e-5   #Range within the optimum to stop at
+iterations=1000 #Maximum number of iterations
 
 #See optimizers for a comprehensive list of the available optimzers
 opts = list()
-start = np.array([[5, 3]])
-step = 0.007
-opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
+start = np.array([[-7, 8]])
+step = 0.003
+opts.append((optimizers.Adam(lr=step*50,b1=0.5,b2=0.5,ls=None), start))
+opts.append((optimizers.Adam(lr=step*50,b1=0.9,b2=0.999,ls=None), start))
+
+opts.append((optimizers.SimpleOptimizer(lr=step,ls=amg), start))
 opts.append((optimizers.Momentum(lr=step, eps=0.9,ls=None), start))
-opts.append((optimizers.SimpleOptimizer(lr=step,ls=None), start))
+opts.append((optimizers.Momentum(lr=step, eps=0.5,ls=None), start))
+opts.append((optimizers.Momentum(lr=step, eps=0.0,ls=None), start))
+opts.append((optimizers.Adine(lr=step,ms=0.9), start))
+opts.append((optimizers.Adine(lr=step,ms=0.5), start))
+opts.append((optimizers.Adine(lr=step,ms=0.0), start))
+opts.append((optimizers.Adam(lr=step*50,b1=0.5,b2=0.5,ls=None), start))
+opts.append((optimizers.RMSProp(lr=step*20), start))
+opts.append((optimizers.Adamax(lr=step*50), start))
+opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=2,beta_f="FR"), start))
+
+opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
 opts.append((optimizers.ConjugateGradient(lr=step,ls=bt,restart=2), start))
 opts.append((optimizers.ConjugateGradient(lr=step,ls=None), start))
 opts.append((optimizers.Adam(lr=step,ls=None), start))
@@ -155,8 +168,8 @@ opts.append((optimizers.Adamax(lr=step), start))
 
 
 res = [optimize_fun(
-    fun, start=o[1], opt=o[0], epochs=iterations, min_f=0, min_r=min_r) for o in opts[0:3]]
+    fun, start=o[1], opt=o[0], epochs=iterations, min_f=0, min_r=min_r) for o in opts[0:2]]
 
 
 
-navigate_fun(res[0:3], plot=plot)
+navigate_fun(res[0:2], plot=plot)
