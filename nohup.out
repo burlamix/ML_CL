@@ -1,0 +1,1015 @@
+{'mg': 1.0001, 'e': 1, 'ms': 0.95, 'lr': 0.01}
+{'mg': 1.0001, 'e': 1, 'ms': 0.95, 'lr': 0.002}
+{'mg': 1.0001, 'e': 1, 'ms': 0.95, 'lr': 0.0005}
+{'mg': 1.0001, 'e': 1, 'ms': 0.95, 'lr': 5e-05}
+{'mg': 1.0001, 'e': 1, 'ms': 0.7, 'lr': 0.01}
+{'mg': 1.0001, 'e': 1, 'ms': 0.7, 'lr': 0.002}
+{'mg': 1.0001, 'e': 1, 'ms': 0.7, 'lr': 0.0005}
+{'mg': 1.0001, 'e': 1, 'ms': 0.7, 'lr': 5e-05}
+{'mg': 1.0001, 'e': 1, 'ms': 0.55, 'lr': 0.01}
+{'mg': 1.0001, 'e': 1, 'ms': 0.55, 'lr': 0.002}
+{'mg': 1.0001, 'e': 1, 'ms': 0.55, 'lr': 0.0005}
+{'mg': 1.0001, 'e': 1, 'ms': 0.55, 'lr': 5e-05}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.95, 'lr': 0.01}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.95, 'lr': 0.002}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.95, 'lr': 0.0005}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.95, 'lr': 5e-05}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.7, 'lr': 0.01}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.7, 'lr': 0.002}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.7, 'lr': 0.0005}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.7, 'lr': 5e-05}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.55, 'lr': 0.01}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.55, 'lr': 0.002}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.55, 'lr': 0.0005}
+{'mg': 1.0001, 'e': 0.95, 'ms': 0.55, 'lr': 5e-05}
+{'mg': 1.002, 'e': 1, 'ms': 0.95, 'lr': 0.01}
+{'mg': 1.002, 'e': 1, 'ms': 0.95, 'lr': 0.002}
+{'mg': 1.002, 'e': 1, 'ms': 0.95, 'lr': 0.0005}
+{'mg': 1.002, 'e': 1, 'ms': 0.95, 'lr': 5e-05}
+{'mg': 1.002, 'e': 1, 'ms': 0.7, 'lr': 0.01}
+{'mg': 1.002, 'e': 1, 'ms': 0.7, 'lr': 0.002}
+{'mg': 1.002, 'e': 1, 'ms': 0.7, 'lr': 0.0005}
+{'mg': 1.002, 'e': 1, 'ms': 0.7, 'lr': 5e-05}
+{'mg': 1.002, 'e': 1, 'ms': 0.55, 'lr': 0.01}
+{'mg': 1.002, 'e': 1, 'ms': 0.55, 'lr': 0.002}
+{'mg': 1.002, 'e': 1, 'ms': 0.55, 'lr': 0.0005}
+{'mg': 1.002, 'e': 1, 'ms': 0.55, 'lr': 5e-05}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.95, 'lr': 0.01}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.95, 'lr': 0.002}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.95, 'lr': 0.0005}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.95, 'lr': 5e-05}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.7, 'lr': 0.01}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.7, 'lr': 0.002}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.7, 'lr': 0.0005}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.7, 'lr': 5e-05}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.55, 'lr': 0.01}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.55, 'lr': 0.002}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.55, 'lr': 0.0005}
+{'mg': 1.002, 'e': 0.95, 'ms': 0.55, 'lr': 5e-05}
+0 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+0 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+0 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+0 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+0 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(5.5128275318524604, 0)
+1 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(5.8345863198427033, 0)
+1 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(6.2007447843567789, 0)
+1 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(4.5341874887801197, 0)
+1 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(5.2972159463479196, 0)
+1 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.7644962641818047, 0)
+2 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(4.2223701479598432, 0)
+2 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(4.4727715120708966, 0)
+2 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(4.2204477553237165, 0)
+2 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.2297087172526981, 0)
+2 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(2.8266516792133598, 0)
+3 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.3350580563499608, 0)
+3 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.8372142411719956, 0)
+3 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.1136666270193931, 0)
+3 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.2261016977258716, 0)
+3 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.3221303771234658, 0)
+4 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.3950733404026572, 0)
+4 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.6539262315098022, 0)
+4 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.4609179905923346, 0)
+4 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(3.3971980065705853, 0)
+4 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(3.9706431934215161, 0)
+5 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.6185014619178557, 0)
+5 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(6.4605771967480807, 0)
+5 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.1898879454997138, 0)
+5 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(4.206940839340608, 0)
+5 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.185365935938258, 0)
+6 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.2820939567491663, 0)
+6 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(4.1349506573684147, 0)
+6 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.6185709224985487, 0)
+6 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(4.6950777792250351, 0)
+6 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.7623037368675027, 0)
+7 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.0017229012930211, 0)
+7 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.1408998496633487, 0)
+7 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.3534608538982327, 0)
+7 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.2030678700635682, 0)
+7 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.5293041515816599, 0)
+8 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2058126723695919, 0)
+8 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.4847890593254318, 0)
+8 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.3401668283212498, 0)
+8 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.5778629687044545, 0)
+8 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(4.1375554131455008, 0)
+9 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.5840388671237573, 0)
+9 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(4.1748468168678166, 0)
+9 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(4.9025789183308941, 0)
+9 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.5394222318839792, 0)
+9 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.5426725396239944, 0)
+10 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.8535343064277976, 0)
+10 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.903655639196395, 0)
+10 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(2.871595225860363, 0)
+10 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.7510708910033919, 0)
+10 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(2.9475768444935895, 0)
+11 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(4.1527964956456804, 0)
+11 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.9729066981546688, 0)
+11 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.9637219863105657, 0)
+11 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.57934405087589, 0)
+11 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.2183106527205902, 0)
+12 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.7952138195004332, 0)
+12 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.33485102571735, 0)
+12 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.3784799420382265, 0)
+12 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2304304886056396, 0)
+12 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.6730596563432667, 0)
+13 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.8023777639863674, 0)
+13 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.3589821402458582, 0)
+13 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.8621059427872928, 0)
+13 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.9144402569635504, 0)
+13 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.9134423925287545, 0)
+14 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.7407162047118105, 0)
+14 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.9069660143896481, 0)
+14 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.7417478899016667, 0)
+14 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.7531211734798331, 0)
+14 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3349490453586661, 0)
+15 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.3415727560031268, 0)
+15 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.3536634020328411, 0)
+15 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.3381747701851543, 0)
+15 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.3443346595073349, 0)
+15 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5805598379735799, 0)
+16 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.5878544813070525, 0)
+16 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.5896458346825548, 0)
+16 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.6007050189273309, 0)
+16 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.5761127654415674, 0)
+16 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.86398767541223, 0)
+17 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.7219025098340577, 0)
+17 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.8754394183781227, 0)
+17 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.8925494502987066, 0)
+17 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.5160083514845322, 0)
+17 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.3219771999653092, 0)
+18 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.2671126011896858, 0)
+18 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.2612000077054826, 0)
+18 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3351250922180327, 0)
+18 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3191059196155583, 0)
+18 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.4594987151327563, 0)
+19 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4681852809199039, 0)
+19 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4665684878911769, 0)
+19 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4816484439014861, 0)
+19 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4529605246044048, 0)
+19 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.1469274961730385, 0)
+20 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2054035002972077, 0)
+20 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.1329987555912524, 0)
+20 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2252016987999692, 0)
+20 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.1605400971535573, 0)
+20 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.5523513363737311, 0)
+21 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.6486027829056571, 0)
+21 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.4947746481543127, 0)
+21 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.5309999223812425, 0)
+21 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.4413122341934748, 0)
+21 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.3198922817479712, 0)
+22 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3015533872175917, 0)
+22 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3255627191760246, 0)
+22 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3249596016168315, 0)
+22 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3399738915045027, 0)
+22 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.5468849011379924, 0)
+23 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5541559468284221, 0)
+23 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5586152187341469, 0)
+23 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5834719145453195, 0)
+23 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5567601184521878, 0)
+23 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.3758902383093479, 0)
+24 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.4067972910103181, 0)
+24 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.3243694061188562, 0)
+24 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.4035466275056003, 0)
+24 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.3687585546195034, 0)
+24 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(4.3074254987911758, 0)
+25 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(5.0404102405095372, 0)
+25 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(4.2982198094597717, 0)
+25 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.8843485451856008, 0)
+25 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(4.183280501351696, 0)
+25 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.1996773465054225, 0)
+26 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.9286950588932568, 0)
+26 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(4.4855354188096559, 0)
+26 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(4.0178061899770308, 0)
+26 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.5710293530103052, 0)
+26 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.1146265628735677, 0)
+27 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.142990474908212, 0)
+27 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.7731970354526951, 0)
+27 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.6831179080913077, 0)
+27 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.0268862402643308, 0)
+27 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.1224375077425641, 0)
+28 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2801029851075576, 0)
+28 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.3070731017594857, 0)
+28 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.4409902085389512, 0)
+28 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2962146536499413, 0)
+28 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(4.5974506440924543, 0)
+29 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(5.3409701908738407, 0)
+29 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.6355426392490684, 0)
+29 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.1614820596300812, 0)
+29 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.8827775046444679, 0)
+29 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.5431720297121014, 0)
+30 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.8138272103769157, 0)
+30 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.8764210019296534, 0)
+30 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.1761491612348798, 0)
+30 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.9501830711041626, 0)
+30 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.0234182526547531, 0)
+31 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.8024346921546379, 0)
+31 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.0612686907474003, 0)
+31 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.7990838638790878, 0)
+31 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.6886980377530669, 0)
+31 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.9609553765881149, 0)
+32 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.5360295229401362, 0)
+32 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2073530524002796, 0)
+32 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2753534574329191, 0)
+32 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.4610353111516043, 0)
+32 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(3.418478439746703, 0)
+33 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.9748290756681319, 0)
+33 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.7297153008121882, 0)
+33 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.558131648563144, 0)
+33 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.4010031203838667, 0)
+33 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.9837676157652426, 0)
+34 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(2.8052939276923419, 0)
+34 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.5168739949959416, 0)
+34 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.546532031431211, 0)
+34 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.4912737292775509, 0)
+34 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(3.2405333194434345, 0)
+35 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.1675009426151304, 0)
+35 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.9070608858169522, 0)
+35 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(3.6316547274410316, 0)
+35 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.3250927986897767, 0)
+35 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.9978703216669556, 0)
+36 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.0361490258477666, 0)
+36 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.1415576141299808, 0)
+36 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.9262325068609325, 0)
+36 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.7381579942278562, 0)
+36 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(3.219817651254814, 0)
+37 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.8816247018551446, 0)
+37 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.5648225175488273, 0)
+37 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(3.4542271913719351, 0)
+37 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(2.995872764431085, 0)
+37 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.9600411243340996, 0)
+38 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.5632762270199838, 0)
+38 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.9494172704372632, 0)
+38 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.7168049586574863, 0)
+38 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.5826820752159017, 0)
+38 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3149883264235265, 0)
+39 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.3329360438080349, 0)
+39 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.3553811233582265, 0)
+39 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.358648658950623, 0)
+39 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.3605208556190007, 0)
+39 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5805598379735804, 0)
+40 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.5896458346825548, 0)
+40 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.587854481307053, 0)
+40 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.6007050189273302, 0)
+40 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.5761127654415683, 0)
+40 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.9056237611232345, 0)
+41 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.7254223469007877, 0)
+41 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.7883135468904747, 0)
+41 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.9009627810346605, 0)
+41 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}/usr/lib/python3/dist-packages/matplotlib/pyplot.py:412: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_num_figures`).
+  max_open_warning, RuntimeWarning)
+
+adine0.002
+(1.5297842766707486, 0)
+41 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.2939114573836559, 0)
+42 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.2809424236673466, 0)
+42 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3105866076945605, 0)
+42 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.2807289427408795, 0)
+42 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3174311412880981, 0)
+42 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.4594987151327545, 0)
+43 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4665684878911762, 0)
+43 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4816484439014863, 0)
+43 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4681852809199041, 0)
+43 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.4529605246044039, 0)
+43 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.146927496173038, 0)
+44 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2054035002972072, 0)
+44 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.2252016987999688, 0)
+44 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.1329987555912528, 0)
+44 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(2.1605400971535564, 0)
+44 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.01, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.01
+(1.5682253727383872, 0)
+45 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.488819721206716, 0)
+45 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.5725259763233894, 0)
+45 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.5093090138539931, 0)
+45 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.3257640061772249, 0)
+45 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.002, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.002
+(1.3202176854329457, 0)
+46 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3057139580536654, 0)
+46 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3295830976886953, 0)
+46 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3273746455957631, 0)
+46 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.3393086870969155, 0)
+46 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine0.0005, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine0.0005
+(1.5468849011379928, 0)
+47 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5541559468284223, 0)
+47 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5834719145453187, 0)
+47 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5586152187341478, 0)
+47 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(1.5567601184521873, 0)
+47 / 48
+{'neurons': [50, 2], 'epochs': 30000, 'activations': ['tanh', 'linear'], 'loss_fun': 'mse', 'rlambda': [(0.0001, 0), (0.0001, 0)], 'optimizers': adine5e-05, 'batch_size': 762, 'regularizations': [EN, EN], 'val_loss_fun': mse}
+adine5e-05
+(2.3758902383093479, 0)
+(2.4067972910103186, 0)
+(2.4035466275056008, 0)
+(2.3243694061188562, 0)
+(2.3687585546195042, 0)
+time: 14334.36297750473
+Traceback (most recent call last):
+  File "grid_optimizer.py", line 3, in <module>
+    from NN_lib import validation
+ImportError: No module named NN_lib
