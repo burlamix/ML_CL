@@ -2,7 +2,7 @@
 
 
 ##Structure of the library
-The core of the structure is inside of NN, here it's possible to add layers as you want, each layers with different attributes, 
+The core of the structure is inside of NN. With *addLayer* it's possible to add new layers at the end of the neural network as you want, each layers with different attributes. 
 
 ##The core file of our project are inside de NN_lib folder
 
