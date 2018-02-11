@@ -134,14 +134,14 @@ def back_track(lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100):
 class BackTracking():
 
     def __eq__(self, other):
-        if (other is None and self is not None): return False
-        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
+        if (other is None): return False
+        return self.lr==other.lr \
                and self.m1==other.m1 and self.scale_r==other.scale_r and \
                     self.max_iter == other.max_iter and\
                         self.min_lr.__eq__(other.min_lr)
 
     def pprint(self):
-        return "BT{lr:" + str(self.lr) + ",m1:" + str(self.m1) + ",m2:" +\
+        return "BT{lr:" + str(self.lr) + ",m1:" + str(self.m1) +\
             ",r:" + str(self.scale_r) + ",i:" + str(self.max_iter)
 
     def __init__(self,lr=1, m1=1e-4, scale_r=0.1, min_lr=1e-11, max_iter=100):

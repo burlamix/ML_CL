@@ -71,13 +71,13 @@ opti["ls"] = [amg]
 '''
 
 amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.0001,min_lr=1e-7, scale_r=0.95, max_iter=1000)
-bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=200)
+bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=1000)
 
 
 opti["lr"] = [0.1]
 opti["beta_f"] = ["PR"]
 opti["restart"] = [-1]
-opti["ls"] = [amg]
+opti["ls"] = [amg,bt]
 
 
 labels, terms = zip(*opti.items())
@@ -102,7 +102,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 5
+trials = 2
 
 '''
 for i in range(0,trials):
@@ -115,7 +115,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[100], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[20000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=1,
@@ -169,7 +169,7 @@ with open("conjgrad"+time_name+'.pkl', 'wb') as output:
 pp = PdfPages(time_name +".pdf")
 
 step1=1 #2
-step2=1 #3
+step2=2 #3
 step = step1*step2
 
 def plotting(pdf,range_from,range_to):
