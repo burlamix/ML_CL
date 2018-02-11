@@ -25,13 +25,14 @@ def conv_rate(x, eps=10):
     '''
     return 100-np.argmax(x<=np.min(x)*(1+eps/100))*100/(len(x)-1)
 
-with open('adine2.pkl', 'rb') as handle:
+with open('adine1518283445.6559472.pkl', 'rb') as handle:
     b = pickle.load(handle)
 
 ind = 15
 cvs=[]
 unsts=[]
 ll = []
+data = []
 for i in range(0,len(b)):
 #print(b[ind]['tr_loss'])
     unst = unstability(b[i]['tr_loss'])
@@ -39,8 +40,15 @@ for i in range(0,len(b)):
     cvs.append(cv)
     ll.append(b[i]['tr_loss'][-1])
     unsts.append(unst)
+    data.append(  [b[i]['configuration']['optimizers'].pprint(), 
+                        b[i]['tr_loss'][-1],    
+                            unstability(b[i]['tr_loss']),   
+                                conv_rate(b[i]['tr_loss'],eps=25)])
+
     print(b[i]['configuration']['optimizers'].pprint(),unst,cv)
 
+"for graph"
+'''
 for i in range(0,len(cvs)):
     if ll[i]>1.5: pass
     else:
@@ -48,5 +56,15 @@ for i in range(0,len(cvs)):
         plt.annotate(b[i]['configuration']['optimizers'].pprint()[6:-1],(ll[i],cvs[i]),alpha=0.5)
 plt.ylabel("cvs")
 plt.xlabel("ll")
+plt.show()  
+'''
 
+"for table"
+columns = ('Param', 'final loss', 'unstability', 'conv_rate')
+the_table = plt.table(cellText=data,
+                      colLabels=columns, loc="upper center")
+the_table.auto_set_font_size(False)
+the_table.set_fontsize(7)
+the_table.scale(1, 1)  # may help
+plt.axis("off")
 plt.show()
