@@ -48,12 +48,12 @@ for i in range(0,len(b)):
     print(b[i]['configuration']['optimizers'].pprint(),unst,cv)
 
 "for graph"
-'''
+
 for i in range(0,len(cvs)):
     if ll[i]>1.5: pass
     else:
         plt.scatter(ll[i],cvs[i])
-        plt.annotate(b[i]['configuration']['optimizers'].pprint()[6:-1],(ll[i],cvs[i]),alpha=0.5)
+        plt.annotate(b[i]['configuration']['optimizers'].pprint()[6:-1],(ll[i],cvs[i]),alpha=0.5,size=5)
 plt.ylabel("cvs")
 plt.xlabel("ll")
 plt.show()  
@@ -68,3 +68,4 @@ the_table.set_fontsize(7)
 the_table.scale(1, 1)  # may help
 plt.axis("off")
 plt.show()
+'''
