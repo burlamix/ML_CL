@@ -1,14 +1,12 @@
-import sys
-import os
-sys.path.append(os.getcwd()+"/NN_lib")
 from keras.datasets import mnist
 from keras.utils import np_utils
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import SGD
-import NN 
-import optimizers 
+from NN_lib.NN import *
+from NN_lib.optimizers import *
+from NN_lib import preproc
 
 (x_train,y_train) ,(x_test, y_test) = mnist.load_data()
 
@@ -17,7 +15,7 @@ y_train = np_utils.to_categorical(y_train,10).astype('float32')
 x_test = x_test.reshape(x_test.shape[0],784)
 y_test = np_utils.to_categorical(y_test,10).astype('float32')
 
-dataset = Dataset()
+dataset = preproc.Dataset()
 dataset.init_train((x_train,y_train))
 dataset.init_test((x_test,y_test))
 
@@ -25,9 +23,9 @@ NN = NeuralNetwork()
 NN.addLayer(784,10,activation="linear")
 NN.addLayer(10,10,activation="softmax")
 
-opt = SimpleOptimizer(lr=0.9)
+opt = SimpleOptimizer(lr=0.01)
 
-pr = Preprocessor()
+pr = preproc.Preprocessor()
 pr.shuffle(dataset)
 NN.fit_ds(dataset, 100, optimizer=opt,batch_size=32,loss_func='mse', verbose=2)
 
@@ -45,7 +43,7 @@ model.add(Dense(10, activation= 'softmax',kernel_initializer=ini2 ,use_bias=Fals
 
 
 #sgd = SGD(lr=0.5, decay=0, momentum=0.0, nesterov=False)
-sgd = SGD(lr=0.1, momentum=0.0, decay=0.00 )
+sgd = SGD(lr=0.01, momentum=0.0, decay=0.00 )
 
 model.compile(optimizer= sgd ,
               loss= 'mean_squared_error' ,

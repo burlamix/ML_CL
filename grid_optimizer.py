@@ -30,7 +30,7 @@ opti = dict()
 '''
 mome
 
-opti["lr"] = [0.1,0.04,0.01,0.005,0.001,0.0003]
+opti["lr"] = [0.04,0.01,0.005,0.001,0.0003,0.00005]
 opti["eps"] = [0.9,0.6,0.3,0]
 opti["nest"] = [True,False]
     opt_list.append(Momentum(lr=param["lr"],eps=param["eps"],nesterov=param["nest"]))
@@ -70,14 +70,13 @@ opti["ls"] = [amg]
                             ls=param["ls"],restart=param["restart"]))
 '''
 
-amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.0001,min_lr=1e-7, scale_r=0.95, max_iter=1000)
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.4, lr=0.0001,min_lr=1e-7, scale_r=0.95, max_iter=1000)
 bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=1000)
 
-
 opti["lr"] = [0.1]
-opti["beta_f"] = ["PR"]
-opti["restart"] = [-1]
-opti["ls"] = [amg,bt]
+opti["beta_f"] = ["FR","PR"]
+opti["restart"] = [-1,11]
+opti["ls"] = [amg]
 
 
 labels, terms = zip(*opti.items())
@@ -85,7 +84,7 @@ all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
 
 for param in all_comb:
     opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
-                            ls=param["ls"],restart=param["restart"]))
+                                      ls=param["ls"], restart=param["restart"]))
     print(param)
 
 comb_of_param = len(all_comb)
@@ -102,7 +101,7 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 fgs = list()
 start = time.time()
 
-trials = 2
+trials = 5
 
 '''
 for i in range(0,trials):
@@ -115,7 +114,7 @@ for i in range(0,trials):
     fgs.append(fg)
 '''
 
-fgs = validation.grid_thread(dataset, epochs=[20000], batch_size=batches,
+fgs = validation.grid_thread(dataset, epochs=[50000], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
                                            cvfolds=1, val_set=None, verbose=1,
@@ -162,13 +161,13 @@ for i in range(0,len(fgmean)):
     fgmean[i]['tr_loss']/=trials
     fgmean[i]['prediction']/=trials
 
-with open("conjgrad"+time_name+'.pkl', 'wb') as output:
+with open("conjgrad2"+time_name+'.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
     #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
 pp = PdfPages(time_name +".pdf")
 
-step1=1 #2
+step1=2 #2
 step2=2 #3
 step = step1*step2
 

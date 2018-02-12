@@ -1,10 +1,9 @@
-
 from NN_lib import validation
 import matplotlib.pyplot as plt
 from NN_lib import regularizations
 from matplotlib.backends.backend_pdf import PdfPages
 import pickle
-import preproc
+from NN_lib import preproc
 from NN_lib.optimizers import *
 import numpy as np
 

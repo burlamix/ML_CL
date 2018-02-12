@@ -11,7 +11,7 @@ def unstability(x):
     :return: The value of the unstability
     '''
     return \
-        np.sum(0 if x[i]<=x[i-1] else np.abs(x[i-1]-x[i])/x[i-1] for i in range(1,len(x)))
+        np.sum(0 if x[i]<=x[i-1] else np.abs(x[i-1]-x[i])/x[i-1] for i in range(1,len(x)))*1e5/(len(x))
 
 def conv_rate(x, eps=10):
     '''
@@ -58,7 +58,7 @@ plt.ylabel("cvs")
 plt.xlabel("ll")
 plt.show()  
 '''
-
+    
 "for table"
 columns = ('Param', 'final loss', 'unstability', 'conv_rate')
 the_table = plt.table(cellText=data,
