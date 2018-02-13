@@ -79,7 +79,7 @@ class Momentum:
     def pprint(self):
         nesterov=""
         if self.nesterov: nesterov="(nesterov)"
-        return "Momentum"+nesterov+"{lr:" + str(self.lr)+",m:"+str(self.eps)+"}"
+        return "Momentum"#+nesterov+"{lr:" + str(self.lr)+",m:"+str(self.eps)+"}"
 
     def optimize(self,f,W):
 
@@ -128,7 +128,7 @@ class Adam:
         self.ls=None
 
     def pprint(self):
-        return "Adam{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
+        return "Adam"#{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
         #if not(isinstance(f, types.FunctionType)):
@@ -189,7 +189,7 @@ class Adamax:
         self.ls=None
 
     def pprint(self):
-        return "Adamax{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
+        return "Adamax"#{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
         #if not(isinstance(f, types.FunctionType)):
@@ -233,7 +233,7 @@ class RMSProp:
         self.R = None
 
     def pprint(self):
-        return "RMSprop{lr:" + str(self.lr)+",d:"+str(self.delta)+"}"
+        return "RMSprop"#{lr:" + str(self.lr)+",d:"+str(self.delta)+"}"
 
     def optimize(self, f, W):
         #if not(isinstance(f, types.FunctionType)):
@@ -277,7 +277,7 @@ class ConjugateGradient:
             lrn = ""
         else:
             lrn = "lr:"+str(self.lr)+","
-        return "ConjugateGrad("+self.beta_f+"){"+lrn+"restart:"+str(self.restart)+",ls:"+ls+"}"
+        return "ConjugateGrad"#("+self.beta_f+"){"+lrn+"restart:"+str(self.restart)+",ls:"+ls+"}"
 
     def getLr(self):
         return self.lr
@@ -343,7 +343,7 @@ class Adine:
         self.avgl = 0
 
     def pprint(self):
-        return "Adine{lr:" + str(self.lr)+",ms:"+str(self.ms)+",mg:"+str(self.mg)+",t:"+str(self.e)+"}"
+        return "Adine"#{lr:" + str(self.lr)+",ms:"+str(self.ms)+",mg:"+str(self.mg)+",t:"+str(self.e)+"}"
 
     def getLr(self):
         return self.lr
@@ -363,6 +363,21 @@ class Adine:
         _, grad = f(W+m*(self.v if not(self.v is None) else 0))
         self.v = (-self.lr * grad if (self.v is None) else (m*self.v-self.lr*grad))
         return (W+self.v)
+
+
+
+
+        if self.nesterov:
+            #If nesterov, "look ahead" first
+            loss, grad = \
+                (f(self.eps*self.last_g+W) if (not(self.last_g is None)) else f(W))
+            v = -self.lr*(grad)+self.eps*(self.last_g if (not(self.last_g is None)) else 0)
+        else:
+            loss, grad = f(W)
+            v = self.eps*(self.last_g if (not(self.last_g is None)) else 0) - self.lr*(grad)
+        self.last_g = v
+
+        return (W+v)
 
 class BFGS():
     def __str__(self):
