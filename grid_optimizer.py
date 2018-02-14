@@ -16,7 +16,8 @@ import itertools
 TRIALS = 5
 #number of epochs
 EPOCHS =3
-
+# verbosity of the program 1 show only the final loss, 2 will show loss of each trainigs
+VERBAVOLANT = 1
 
 def plotting(pdf,to_plot,range_from,range_to):
     '''
@@ -81,6 +82,8 @@ opt_list =[]
 
 opti = dict()
 
+amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.4, lr=0.0001,min_lr=1e-7, scale_r=0.95, max_iter=1000)
+bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=1000)
 
 '''
 mome
@@ -125,8 +128,6 @@ opti["ls"] = [amg]
                             ls=param["ls"],restart=param["restart"]))
 '''
 
-amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.4, lr=0.0001,min_lr=1e-7, scale_r=0.95, max_iter=1000)
-bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=1000)
 
 opti["lr"] = [0.1]
 opti["beta_f"] = ["FR","PR"]
@@ -142,7 +143,6 @@ for param in all_comb:
                                       ls=param["ls"], restart=param["restart"]))
     print(param)
 
-comb_of_param = len(all_comb)
 
 acts=[["tanh","linear"]]
 opts=opt_list
@@ -160,7 +160,7 @@ start = time.time()
 fgs = validation.grid_thread(dataset, epochs=[EPOCHS], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
-                                           cvfolds=1, val_set=None, verbose=1,
+                                           cvfolds=1, val_set=None, verbose=VERBAVOLANT,
                                            loss_fun=losses, val_loss_fun="mse",
                                            neurons=neurs, optimizers=opts,trials=TRIALS)
 

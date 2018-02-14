@@ -62,7 +62,7 @@ numpy_loss = loss_functions.mse(dataset.train[1],numpy_pred) #Calculate the loss
 normeqs_sol, _, normeqs_loss = normeqs_solve(biasedX, dataset.train[1])
 qr_sol, _, qr_loss = QR_solve(biasedX, dataset.train[1])
 
-print('Neural network error:',loss)
+print('\nNeural network error:',loss)
 print('Numpy linear least squares solver error:',numpy_loss)
 print('Normal equations error:',normeqs_loss)
 print('QR solver error:',qr_loss)
