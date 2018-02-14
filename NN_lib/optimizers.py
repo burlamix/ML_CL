@@ -1,31 +1,26 @@
 import numpy as np
 import types
 import sys
-#import sklearn as sk
-
-from NN_lib.linesearches import dir_der,us_norm,us_norm2
+from NN_lib.linesearches import dir_der
 
 
-class SimpleOptimizer:
-
+class SGD:
+    '''
+    Basic gradient descent without momentum or any other fancy addition.
+    Only a line searcher may be handed.
+    '''
     def __str__(self):
         return str('sgd'+str(self.lr))
 
     def __repr__(self):
-        return str('sgd'+str(self.lr))
+        return self.__str__()
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
                  and self.ls.__eq__(other.ls)
 
-    def __init__(self, lr=0.1,ls=None):
-        self.ls = ls
-        self.lr = lr
-
-    def reset(self):
-        pass
-
     def pprint(self):
+        '''Pretty printing'''
         ls = "None"
         if self.ls!=None:
             ls = self.ls.pprint()
@@ -34,26 +29,35 @@ class SimpleOptimizer:
             lrn = "lr:"+str(self.lr)+","
         return "SGD{"+lrn+"ls:"+ls+"}"
 
+    def __init__(self, lr=0.1,ls=None):
+        '''
+        :param lr: Determines the step size to use when moving in the gradient' direction.
+        Note that if a line search is specified then this parameter is simply ignored.
+        :param ls: Line search object. Refer to linesearches.py
+        '''
+        self.ls = ls
+        self.lr = lr
+
+    def reset(self):
+        #Resets the state of the optimizer. SGD does not even have one though.
+        pass
+
+
     def optimize(self, f, W):
-        #if not(isinstance(f, types.FunctionType)):
-        #    sys.exit("Provided function is invalid")
-
         loss, grad = f(W)
-
         if self.ls!=None:
-            actual_lr = self.ls.search(f, W, loss, -grad, us_norm2(grad,grad))
+            actual_lr = self.ls.search(f, W, loss, -grad, dir_der(grad,grad))
         else:
             actual_lr = self.lr
-
         return W-actual_lr*grad
 
 
 class Momentum:
     '''
-    SGD optimizer with momentum
-    Refer to: https://www.sciencedirect.com/science/article/pii/0041555364901375
-    and 'A method of solving a convex programming problem with convergence rate O (1/k2)'
-    for a more in-depth description
+    SGD optimizer with momentum.
+    Refer to https://www.sciencedirect.com/science/article/pii/0041555364901375.
+    or 'A method of solving a convex programming problem with convergence rate O (1/k2)'
+    for a more in-depth description.
     '''
     def __str__(self):
         return str('momentum'+str(self.lr))
@@ -63,28 +67,33 @@ class Momentum:
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
-               and self.eps==other.eps and self.nesterov==other.nesterov and\
-                 self.ls.__eq__(other.ls)
+               and self.eps==other.eps and self.nesterov==other.nesterov
 
-    def __init__(self, lr=0.001, eps=0.9, nesterov=False, ls=None):
+    def pprint(self):
+        '''Pretty printing'''
+        nesterov=""
+        if self.nesterov: nesterov="(nesterov)"
+        return "Momentum"+nesterov+"{lr:" + str(self.lr)+",m:"+str(self.eps)+"}"
+
+
+    def __init__(self, lr=0.001, eps=0.9, nesterov=False):
+        '''
+        :param lr: Determines the step size to move by.
+        :param eps: Momentum parameter, the higher it is, the higher the weight given to
+        past directions
+        :param nesterov: Set to True for nesterov's version. That is effectively looking
+        ahead first, by changing the point in which the gradient is computed.
+        '''
         self.lr = lr
-        self.nesterov = nesterov
         self.eps = eps
-        self.ls = ls
+        self.nesterov = nesterov
         self.reset()
 
     def reset(self):
+        #Reset for SGD with momentum => forget the past directions
         self.last_g = None
 
-    def pprint(self):
-        nesterov=""
-        if self.nesterov: nesterov="(nesterov)"
-        return "Momentum"#+nesterov+"{lr:" + str(self.lr)+",m:"+str(self.eps)+"}"
-
     def optimize(self,f,W):
-
-        #if not(isinstance(f, types.FunctionType)):
-        #    sys.exit("Provided function is invalid")
 
         if self.nesterov:
             #If nesterov, "look ahead" first
@@ -98,10 +107,72 @@ class Momentum:
 
         return (W+v)
 
+class Adine:
+    '''
+    An adapative momentum gradient descent method. Characterized by two momentum terms to
+    switch between adaptively.
+    Refer to https://arxiv.org/pdf/1712.07424.pdf for an in-depth description.
+    '''
+    def __str__(self):
+        return str('adine'+str(self.lr))
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __eq__(self, other):
+        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
+               and self.ms==other.ms and self.mg==other.mg and \
+                    self.e == other.e
+
+    def pprint(self):
+        '''Pretty printing'''
+        return "Adine{lr:" + str(self.lr)+",ms:"+str(self.ms)+",mg:"+str(self.mg)+",t:"+str(self.e)+"}"
+
+    def __init__(self, lr=0.001, ms=0.9, mg=1.0001, e=1.0):
+        '''
+        :param lr: The step size to move by.
+        :param ms: The standard momentum term.
+        :param mg: The greater momentum term.
+        :param e: Tollerance parameter determining when to switch between the
+        standard and greater momentum terms.
+        '''
+        self.lr = lr
+        self.ms = ms
+        self.mg = mg
+        self.e = e
+        self.reset()
+
+    def reset(self):
+        #Reset for adine => forget the weighted-sum loss and past direction.
+        self.last_l = 0
+        self.v = None
+        self.t = 0
+        self.avgl = 0
+
+    def optimize(self,f,W):
+
+        self.t+=1
+        loss = f(W,only_fp=True) #Compute the current value of the function
+        self.last_l = self.avgl
+        self.avgl = (self.avgl+loss)/2 #Keep a weighted avg of the function' value progression
+
+        if self.avgl>self.e*self.last_l: #If we are going too far in what looks like a bad
+            #direction then slow down
+            m = self.ms
+        else:
+            m = self.mg
+        _, grad = f(W+m*(self.v if not(self.v is None) else 0))
+        self.v = (-self.lr * grad if (self.v is None) else (m*self.v-self.lr*grad))
+
+        return (W+self.v)
+
 class Adam:
-    #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
-    #A gradient based method, enriched with the first and second moment
-    #information of past gradients.
+    '''
+    Implementation based on https://arxiv.org/pdf/1412.6980.pdf
+    A gradient based method, enriched with the first and second moment
+    information of past gradients.
+    '''
+
     def __str__(self):
         return str('adam'+str(self.lr))
 
@@ -111,32 +182,36 @@ class Adam:
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr and self.b1==other.b1 \
                and self.b2==other.b2 and\
-                self.eps==other.eps and self.ls.__eq__(other.ls)
+                self.eps==other.eps
 
-    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8,ls=None):
+    def pprint(self):
+        '''Pretty printing'''
+        return "Adam{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
+
+    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
+        '''
+        :param lr: The step size to move by.
+        :param b1: Decay rate of the moving average of the gradient.
+        :param b2: Decay rate of the moving average of the squared gradient.
+        :param eps: Gotta avoid those numerical issues.
+        '''
         self.lr = lr
         self.b1 = b1
         self.b2 = b2
         self.eps = eps
         self.reset()
-        self.ls = ls
 
     def reset(self):
+        #Reset for adam => forget first moment and second moment moving averages.
         self.m = 0
         self.v = 0
         self.t = 0
-        self.ls=None
-
-    def pprint(self):
-        return "Adam"#{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
-        #if not(isinstance(f, types.FunctionType)):
-        #    sys.exit("Provided function is invalid")
 
         self.t+=1 #Update timestamp
         loss, grad = f(W) #Compute the gradient
-        #print('grad',us_norm(grad))
+
         #First and second moment estimation(biased by b1 and b2)
         self.m = ((self.b1*self.m+(1-self.b1)*(grad)))
         self.v = ((self.b2*self.v+(1-self.b2)*(np.power((grad),2))))
@@ -148,18 +223,14 @@ class Adam:
         for i in range(len(vcap)):
             vcap[i] = np.sqrt(vcap[i])
 
-        if self.ls!=None:
-            loss,grad = f(W-self.lr*mcap/((vcap+self.eps)))#00118553246015
-            actual_lr = self.ls.search(f, W-self.lr*mcap/((vcap+self.eps)),loss, grad)
-        else:
-            actual_lr = self.lr
-
-        return np.subtract(W,actual_lr*mcap/((vcap+self.eps)))
+        return np.subtract(W,self.lr*mcap/((vcap+self.eps)))
 
 
 class Adamax:
-    #Implementation based on https://arxiv.org/pdf/1412.6980.pdf
-    #Similar to adam but using the infinity norm
+    '''
+    Implementation based on https://arxiv.org/pdf/1412.6980.pdf
+    Similar to adam but using the infinity norm.
+    '''
     def __str__(self):
         return str('adamax'+str(self.lr))
 
@@ -169,31 +240,32 @@ class Adamax:
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr and self.b1==other.b1 \
                and self.b2==other.b2 and\
-                self.eps==other.eps and self.ls.__eq__(other.ls)
+                self.eps==other.eps
 
+    def pprint(self):
+        '''Pretty printing'''
+        return "Adamax{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
-    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8,ls=None):
+    def __init__(self, lr=0.001, b1=0.9, b2=0.999, eps=1e-8):
+        '''
+        :param lr: The step size to move by.
+        :param b1: Decay rate of the moving average of the gradient.
+        :param b2: Decay rate of the moving average of the squared gradient.
+        :param eps: Gotta avoid those numerical issues.
+        '''
         self.lr = lr
         self.b1 = b1
         self.b2 = b2
         self.eps = eps
-        self.ls=ls
-
         self.reset()
 
     def reset(self):
+        #Reset for adamax=> forget first moment and second moment moving averages.
         self.m = 0
         self.v = None
-        self.grad = 0
         self.t = 0
-        self.ls=None
-
-    def pprint(self):
-        return "Adamax"#{lr:" + str(self.lr)+",b1:"+str(self.b1)+",b2:"+str(self.b2)+"}"
 
     def optimize(self, f, W):
-        #if not(isinstance(f, types.FunctionType)):
-        #    sys.exit("Provided function is invalid")
 
         self.t+=1 #Update timestamp
         loss, grad = f(W) #Compute the gradient
@@ -203,8 +275,11 @@ class Adamax:
 
         k = self.b2*(self.v if self.v is not None else np.zeros_like(grad))
         o = np.empty_like(grad)
+
+        #Infinity norm here
         for e in range(0,len(o)):
             o[e] = np.maximum(k[e],np.abs(grad[e]))
+
         self.v = o
         return W-(self.lr/(1-self.b1**self.t))*self.m/(np.array(self.v)+self.eps)
 
@@ -212,6 +287,7 @@ class RMSProp:
     #RMSprop optimizer. It uses a running average of the past gradients.
     #Refer to https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf
     #for a more in-depth description.
+
     def __str__(self):
         return str('rmsprop'+str(self.lr))
 
@@ -220,31 +296,36 @@ class RMSProp:
 
     def __eq__(self, other):
         return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
-               and self.delta==other.delta and\
-                 self.ls.__eq__(other.ls)
+               and self.delta==other.delta
 
-    def __init__(self, lr=0.001, delta=0.9, ls=None):
+    def pprint(self):
+        '''Pretty printing'''
+        return "RMSprop{lr:" + str(self.lr)+",d:"+str(self.delta)+"}"
+
+    def __init__(self, lr=0.001, delta=0.9):
+        '''
+        :param lr: The step size to move by.
+        :param delta: Parameter controlling the weight of the past gradients running average
+        '''
         self.lr = lr
         self.delta = delta
-        self.ls = None
         self.reset()
 
     def reset(self):
+        #Reset for RMSprop => forget the past gradients
         self.R = None
 
-    def pprint(self):
-        return "RMSprop"#{lr:" + str(self.lr)+",d:"+str(self.delta)+"}"
-
     def optimize(self, f, W):
-        #if not(isinstance(f, types.FunctionType)):
-        #    sys.exit("Provided function is invalid")
         loss, grad = f(W)
         self.R = (self.delta)*(self.R if not (self.R is None) else 0)+(1-self.delta)*np.array(grad)**2
         return W-self.lr*np.array(grad)/((self.R)**(1/2)+1e-6)
 
 
 class ConjugateGradient:
-
+    '''
+    Implementation of non-linear conjugate gradient methods.
+    Fletcher-Reeves and Polak-Ribière variants are implemented as of now.
+    '''
     def __str__(self):
         return str('ConjugateGradient'+str(self.lr))
 
@@ -256,37 +337,45 @@ class ConjugateGradient:
                and self.beta_f==other.beta_f and self.restart==other.restart and\
                  self.ls.__eq__(other.ls)
 
-    def __init__(self, lr=0.001, beta_f="FR", restart=-1,ls=None):
-        self.lr = lr
-        self.ls = ls
-        self.p = None
-        self.last_g = None
-        self.t = 0
-        self.beta_f = beta_f
-        self.restart = restart
-        self.reset()
-
-    def reset(self):
-        self.p = None
-        self.last_g = None
-
     def pprint(self):
+        '''Pretty printing'''
         ls="None"
         if self.ls!=None:
             ls = self.ls.pprint()
             lrn = ""
         else:
             lrn = "lr:"+str(self.lr)+","
-        return "ConjugateGrad"#("+self.beta_f+"){"+lrn+"restart:"+str(self.restart)+",ls:"+ls+"}"
+        return "ConjugateGrad("+self.beta_f+"){"+lrn+"restart:"+str(self.restart)+",ls:"+ls+"}"
 
-    def getLr(self):
-        return self.lr
+
+    def __init__(self, lr=0.001, beta_f="FR", restart=-1,ls=None):
+        '''
+        :param lr: The step size of move by. Note that if a line search
+        is specified then this parameter is simply ignored.
+        :param beta_f: Specifies the version of conjugate gradient to be used.
+        Possible values are "FR" for Fletcher-Reeves and "PR" for
+        Polak-Ribière.
+        :param restart: Specifies the number of iterations to restart after. A value
+        of -1 indicates no restarts.
+        :param ls: Line search object.
+        '''
+        self.lr = lr
+        self.beta_f = beta_f
+        self.restart = restart
+        self.ls = ls
+        self.p = None #Initial conjugate direction
+        self.last_g = None #Gradient of last iteration
+        self.reset()
+
+    def reset(self):
+        #Reset for Conjugate gradient => forget the past gradient and direction.
+        self.p = None
+        self.last_g = None
+        self.t = 0
 
     def optimize(self,f,W):
 
-        #if not(isinstance(f, types.FunctionType)):
-        #    sys.exit("Provided function is invalid")
-
+        #If it's time to restart then forget current the direction.
         if self.restart>0:
             if (np.mod(self.t,self.restart)==0):self.p = None
 
@@ -295,90 +384,31 @@ class ConjugateGradient:
         loss, grad = f(W)
 
         if self.p is None:
+            #First iteration, and after every restart, we just take the gradient as direction.
             self.p = -grad
         else:
-            beta = us_norm2(grad,grad)/(us_norm2(self.last_g,self.last_g)+1e-7)
+
+            #Compute beta according to the variant we are using.
+            if self.beta_f == "FR":
+                beta = dir_der(grad,grad)/(dir_der(self.last_g,self.last_g)+1e-7)
             if self.beta_f == "PR":
                 beta = max(
-                    0,us_norm2(grad,(grad-self.last_g))/(us_norm2(self.last_g,self.last_g)+1e-7))
-            #print(beta)
+                    0,dir_der(grad,(grad-self.last_g))/(dir_der(self.last_g,self.last_g)+1e-7))
             self.p = -grad + beta*self.p
+
         self.last_g = grad
+
         if self.ls!=None:
-            dir_norm=us_norm2(-self.p,grad)
+            #Perform a line search
+            dir_norm=dir_der(-self.p,grad)
             actual_lr = self.ls.search(f, W,loss, self.p, dir_norm)
-            #print('actual',actual_lr)
-            #print('actual',actual_lr)
         else:
             actual_lr = self.lr
+
         return (W+actual_lr*self.p)
 
-class Adine:
 
-
-    def __str__(self):
-        return str('adine'+str(self.lr))
-
-    def __repr__(self):
-        return self.__str__()
-
-    def __eq__(self, other):
-        return self.__str__().__eq__(other.__str__()) and self.lr==other.lr \
-               and self.ms==other.ms and self.mg==other.mg and \
-                    self.e == other.e and\
-                        self.ls.__eq__(other.ls)
-
-    def __init__(self, lr=0.001, ms=0.9, mg=1.0001, e=1.0, ls = None):
-        self.lr = lr
-        self.ls = ls
-        self.ms = ms
-        self.mg = mg
-        self.e = e
-        self.reset()
-
-    def reset(self):
-        self.last_l = 0
-        self.v = None
-        self.t = 0
-        self.avgl = 0
-
-    def pprint(self):
-        return "Adine"#{lr:" + str(self.lr)+",ms:"+str(self.ms)+",mg:"+str(self.mg)+",t:"+str(self.e)+"}"
-
-    def getLr(self):
-        return self.lr
-
-    def optimize(self,f,W):
-
-        #if not(isinstance(f, types.FunctionType)):
-        #    sys.exit("Provided function is invalid")
-        self.t+=1
-        loss = f(W,only_fp=True)
-        self.last_l = self.avgl
-        self.avgl = (self.avgl+loss)/2
-        if self.avgl>self.e*self.last_l:
-            m = self.ms
-        else:
-            m = self.mg
-        _, grad = f(W+m*(self.v if not(self.v is None) else 0))
-        self.v = (-self.lr * grad if (self.v is None) else (m*self.v-self.lr*grad))
-        return (W+self.v)
-
-
-
-
-        if self.nesterov:
-            #If nesterov, "look ahead" first
-            loss, grad = \
-                (f(self.eps*self.last_g+W) if (not(self.last_g is None)) else f(W))
-            v = -self.lr*(grad)+self.eps*(self.last_g if (not(self.last_g is None)) else 0)
-        else:
-            loss, grad = f(W)
-            v = self.eps*(self.last_g if (not(self.last_g is None)) else 0) - self.lr*(grad)
-        self.last_g = v
-
-        return (W+v)
-
+'''
 class BFGS():
     def __str__(self):
         return str('BFGS'+str(self.lr))
@@ -427,13 +457,13 @@ class BFGS():
             Ak = 1
 
         return (W+self.lr*pk)
+'''
 
 optimizers = dict()
-
-optimizers["SGD"] = SimpleOptimizer()
+optimizers["SGD"] = SGD()
 optimizers["adam"] = Adam()
 optimizers["momentum"] = Momentum()
 optimizers["adamax"] = Adamax()
 optimizers["rmsprop"] = RMSProp()
 optimizers["adine"] = Adine()
-optimizers["BFGS"] = BFGS()
+#optimizers["BFGS"] = BFGS()

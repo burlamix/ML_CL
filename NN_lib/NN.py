@@ -182,7 +182,6 @@ class NeuralNetwork:
             validation_y = val_set[1]
 
         history = {'tr_loss': [], 'val_loss': [], 'tr_acc': [], 'val_acc': []}
-        print(optimizer)
         optimizer.reset()
 
         for i in range(0, epochs):
@@ -191,7 +190,7 @@ class NeuralNetwork:
             x_in = x_in[perm]
             y_out = y_out[perm]
             loss, acc = self.evaluate(x_in, y_out)
-            '''
+
             #Handle input chunks, that is mini-batches.
             for chunk in range(0, len(x_in), batch_size):
                 cap = min([len(x_in), chunk + batch_size])
@@ -200,7 +199,7 @@ class NeuralNetwork:
 
                 #Update the weights with the ones returned by the optimizer
                 self.set_weights(update)
-            '''
+
             update = optimizer.optimize(self.f(x_in, y_out), self.get_weights())
             self.set_weights(update)
 
@@ -253,21 +252,20 @@ class NeuralNetwork:
         correct = 0
         errors = 0
 
-        #if (self.eval_method=='one--hot'):
-        #    for i in range(0, real.shape[0]):
-        #        if np.argmax(y_out[i]) == np.argmax(real[i]):
-        #            correct += 1
-        #        else:
-        #            errors += 1
-       # elif (self.eval_method=='binary'):
-        #    for i in range(0, real.shape[0]):
-        #        if ((real[i][0] > 0 and y_out[i][0] == 1) or
-        #                (real[i][0] <= 0 and y_out[i][0] == -1)):
-        #            correct = correct + 1
-        #        else:
-        #            errors = errors + 1
-        #accuracy = correct / real.shape[0]
-        accuracy =0
+        if (self.eval_method=='one--hot'):
+            for i in range(0, real.shape[0]):
+                if np.argmax(y_out[i]) == np.argmax(real[i]):
+                    correct += 1
+                else:
+                    errors += 1
+        elif (self.eval_method=='binary'):
+            for i in range(0, real.shape[0]):
+                if ((real[i][0] > 0 and y_out[i][0] == 1) or
+                        (real[i][0] <= 0 and y_out[i][0] == -1)):
+                    correct = correct + 1
+                else:
+                    errors = errors + 1
+        accuracy = correct / real.shape[0]
         return val_loss_func, accuracy
 
 

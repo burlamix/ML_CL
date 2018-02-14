@@ -1,6 +1,6 @@
 
 import keras.optimizers as optims
-from NN_lib.optimizers import Momentum
+from NN_lib.optimizers import *
 import matplotlib.pyplot as plt
 from keras import regularizers
 from keras.layers import Dense
@@ -9,12 +9,13 @@ from keras import *
 from keras.models import Sequential
 from NN_lib import preproc
 from NN_lib.NN import *
-
+import numpy as np
+np.random.seed(5)
 outs=1
 valr=(0.0,0.0)
 clr=0.04
 drop=0.0
-epochs=10
+epochs=1000
 inps=17
 
 x_train,y_train = preproc.load_monk("MONK_data/monks-2.train")
@@ -27,7 +28,6 @@ dataset.init_test([x_test,y_test])
 
 
 optimizer = Momentum( lr=clr, eps=0.9 ,nesterov=False)
-
 
 NN = NeuralNetwork()
 NN.addLayer(inputs=inps,neurons=2,activation="tanh", rlambda=valr,regularization="EN",

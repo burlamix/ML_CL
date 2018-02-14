@@ -52,9 +52,9 @@ rlambdas = [[(0.0001,0.0001),(0.000,0.0001)],[(0.0006,0.0004),(0.0006,0.0004)],
 
 fgs = list()
 
-trials = 100
+trials = 2
 for i in range(0,trials):
-    fg,grid_res, pred = validation.grid_search(dataset, epochs=[3000], batch_size=batches,
+    fg,grid_res, pred = validation.grid_search(dataset, epochs=[30], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
                                                regularizations=regs, rlambda=rlambdas,
                                                cvfolds=3, val_set=None, verbose=1,
