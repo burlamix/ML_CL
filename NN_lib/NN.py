@@ -200,9 +200,6 @@ class NeuralNetwork:
                 #Update the weights with the ones returned by the optimizer
                 self.set_weights(update)
 
-            update = optimizer.optimize(self.f(x_in, y_out), self.get_weights())
-            self.set_weights(update)
-
             val_loss = None
             val_acc = None
             #Update the history object

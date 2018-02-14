@@ -1,5 +1,6 @@
 import numpy as np 
 
+
 def householder_vector(x):
 	s = -np.sign(x[0]) * np.linalg.norm(x)
 	v = x
@@ -10,8 +11,7 @@ def householder_vector(x):
 
 def QR_fact(X):
 	''''
-	QR factorization via householder reflectors. Refer to
-	{cite} for original implementation in matlab.
+	QR factorization via householder reflectors.
 	'''
 	a = X.copy()
 	shap = np.shape(a)
@@ -44,11 +44,8 @@ def QR_solver(X,y,l=0):
 
 	#Throw away the 0s
 	q1 = q[:-11, 0:r.shape[1]]
-	#q2 = q[:, r.shape[1]:]
 	r = r[0:r.shape[1], :]
 	return np.dot(np.dot(np.linalg.inv(r),q1.T),y)
-	#rterm = np.linalg.inv(np.dot(r.T,r)+l*np.eye(r.shape[1]))
-	#return np.dot(np.dot(rterm,np.dot(q1,r).T),y)
 
 
 def norm_eqs(X,y,l=0):
@@ -64,7 +61,7 @@ def norm_eqs(X,y,l=0):
 
 def mypinv(X):
 	'''
-	Calculates the pseudoinverse of the input matrix X via the QR
+	Computes the pseudoinverse of the input matrix X via the QR
 	decomposition. Refer to the report for details on how the solution
 	is obtained.
 	'''

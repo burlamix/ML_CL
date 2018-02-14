@@ -23,7 +23,7 @@ NN = NeuralNetwork()
 NN.addLayer(784,10,activation="linear")
 NN.addLayer(10,10,activation="softmax")
 
-opt = SimpleOptimizer(lr=0.01)
+opt = SGD(lr=0.01)
 
 pr = preproc.Preprocessor()
 pr.shuffle(dataset)

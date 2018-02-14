@@ -1,6 +1,5 @@
 import pickle
 import numpy as np
-
 from scipy.stats import spearmanr
 from conv_measures import unstability, conv_speed
 

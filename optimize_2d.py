@@ -143,33 +143,29 @@ iterations=1000 #Maximum number of iterations
 opts = list()
 start = np.array([[-7, 8]])
 step = 0.003
-opts.append((optimizers.Adam(lr=step*50,b1=0.5,b2=0.5,ls=None), start))
-opts.append((optimizers.Adam(lr=step*50,b1=0.9,b2=0.999,ls=None), start))
 
-opts.append((optimizers.SimpleOptimizer(lr=step,ls=amg), start))
-opts.append((optimizers.Momentum(lr=step, eps=0.9,ls=None), start))
-opts.append((optimizers.Momentum(lr=step, eps=0.5,ls=None), start))
-opts.append((optimizers.Momentum(lr=step, eps=0.0,ls=None), start))
-opts.append((optimizers.Adine(lr=step,ms=0.9), start))
-opts.append((optimizers.Adine(lr=step,ms=0.5), start))
-opts.append((optimizers.Adine(lr=step,ms=0.0), start))
-opts.append((optimizers.Adam(lr=step*50,b1=0.5,b2=0.5,ls=None), start))
-opts.append((optimizers.RMSProp(lr=step*20), start))
-opts.append((optimizers.Adamax(lr=step*50), start))
-opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=2,beta_f="FR"), start))
-
-opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
-opts.append((optimizers.ConjugateGradient(lr=step,ls=bt,restart=2), start))
-opts.append((optimizers.ConjugateGradient(lr=step,ls=None), start))
-opts.append((optimizers.Adam(lr=step,ls=None), start))
-opts.append((optimizers.RMSProp(lr=step), start))
-opts.append((optimizers.Adine(lr=step), start))
-opts.append((optimizers.Adamax(lr=step), start))
+#Just append the optimizers to the list to plot their behaviour
+opts.append((optimizers.Momentum(lr=step, eps=0.9), start))
+opts.append((optimizers.Momentum(lr=step, eps=0.5), start))
+#opts.append((optimizers.Momentum(lr=step, eps=0.0), start))
+#opts.append((optimizers.Adine(lr=step,ms=0.9), start))
+#opts.append((optimizers.Adine(lr=step,ms=0.5), start))
+#opts.append((optimizers.Adine(lr=step,ms=0.0), start))
+#opts.append((optimizers.Adam(lr=step*50,b1=0.5,b2=0.5), start))
+#opts.append((optimizers.RMSProp(lr=step*20), start))
+#opts.append((optimizers.Adamax(lr=step*50), start))
+#opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=2,beta_f="FR"), start))
+#opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
+#opts.append((optimizers.ConjugateGradient(lr=step,ls=bt,restart=2), start))
+#opts.append((optimizers.ConjugateGradient(lr=step,ls=None), start))
+#opts.append((optimizers.Adam(lr=step), start))
+#opts.append((optimizers.RMSProp(lr=step), start))
+#opts.append((optimizers.Adine(lr=step), start))
+#opts.append((optimizers.Adamax(lr=step), start))
 
 
 res = [optimize_fun(
-    fun, start=o[1], opt=o[0], epochs=iterations, min_f=0, min_r=min_r) for o in opts[0:2]]
+    fun, start=o[1], opt=o[0], epochs=iterations, min_f=0, min_r=min_r) for o in opts[0:]]
 
 
-
-navigate_fun(res[0:2], plot=plot)
+navigate_fun(res[0:], plot=plot)

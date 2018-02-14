@@ -65,12 +65,13 @@ model.compile(optimizer=optimizer_keras,
 #Load the initial weights of our model (i.e. before training) into keras
 model.set_weights(currwg)
 
-#Train keras' model
+#Train keras;
 history = model.fit(x, y,batch_size=x.shape[0],epochs=epochs,shuffle=True)
 
-#Plot the value of the loss function over the iterations
+print(history.history.keys())
 plt.plot(history.history['loss'], label='keras',ls="--",color="red")
 plt.plot(history2['tr_loss'], label='us',ls="-.",color="blue")
+#plt.axes().set_ylim([0,20])
 plt.title(optimizer.pprint())
 plt.legend(loc='upper right',prop={'size':13})
 plt.show()

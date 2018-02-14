@@ -12,78 +12,32 @@ import numpy as np
 import time
 import itertools
 
-#number of trials to do
-TRIALS = 5
-#number of epochs
-EPOCHS =3
-# verbosity of the program 1 show only the final loss, 2 will show loss of each trainigs
+#number of trials
+TRIALS = 3
+#number of iterations
+EPOCHS = 100
+# verbosity of the program 1 show only the final value, 2 will show the value at each step
 VERBAVOLANT = 1
 
-def plotting(pdf,to_plot,range_from,range_to):
-    '''
-    Function to save and plot the file to_plot in the pdf file chose, with custome x axes range.
-
-    :param pdf: the pdf file where save the plot
-    :param to_plot: list containing the data to plot 
-    :param range_from: range for x axes
-    :param range_to: range for x axes
-    :return: The value of the unstability
-    '''
-    plt.figure()
-    plt.axis("off")
-    plt.text(0.5,0.5,"range"+str(range_from)+"-"+str(range_to),ha= "center",va="center", fontsize=40)
-    pdf.savefig()
-
-
-    i=0
-    for att in range(0,len(opts),step):
-        f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
-                              ncols=step2*len(rlambdas) * len(losses),
-                              sharex='col', sharey='row', squeeze=False)
-        fgforplot=to_plot
-        fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
-        temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
-        #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
-        j=0
-        hist=False
-        for row in a:
-            for col in row:
-                col.set_yticks(np.arange(range_from, range_to, (range_to-range_from)/40))#here the number of line 
-                col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
-                              "last_f:"+str(temp[j]['tr_loss'][-1])+",gen_err:"+str(temp[j]['prediction'][0]),fontsize=20)
-
-                if hist:
-                    col.plot(temp[j]['history']['tr_loss'],label='tr err')
-                else:
-                    col.plot(temp[j]['tr_loss'], label='tr err')
-                #col.legend(loc=3,prop={'size':10})
-                col.tick_params(labelsize=13)
-                col.yaxis.grid()  # horizontal lines
-                col.set_ylim([range_from,range_to])
-                j+=1
-                i+=1
-
-        pdf.savefig(f)
-
-np.random.seed(5)
-time_name = str(time.time())
-
-dataset = preproc.Dataset()
-
-#dataset used
-train_data_path = "data/myTrain.csv"
-test_data_path = "data/myTest.csv"
-dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=0, targets=2))
-dataset.init_test(preproc.load_data(path=test_data_path, target=True, header_l=0, targets=2))
-preprocessor = preproc.Preprocessor()
-preprocessor.shuffle(dataset)
-
-opt_list =[]
-
+#Number of plots to display per pdf page.
+step1=2
+step2=3
 opti = dict()
-
 amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.4, lr=0.0001,min_lr=1e-7, scale_r=0.95, max_iter=1000)
 bt = linesearches.BackTracking(lr=1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=1000)
+
+opti["lr"] = [0.04,0.01,0.005,0.001,0.0003,0.00005]
+opti["eps"] = [0.9,0.6,0.3,0]
+opti["nest"] = [True,False]
+
+
+opt_list =[]
+#Create a dictionary with all the combinations of parameters
+labels, terms = zip(*opti.items())
+all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
+for param in all_comb:
+    opt_list.append(Momentum(lr=param["lr"],eps=param["eps"],nesterov=param["nest"]))
+    print(param)
 
 '''
 mome
@@ -129,19 +83,64 @@ opti["ls"] = [amg]
 '''
 
 
-opti["lr"] = [0.1]
-opti["beta_f"] = ["FR","PR"]
-opti["restart"] = [-1,11]
-opti["ls"] = [amg]
+
+def plotting(pdf,to_plot,range_from,range_to):
+    '''
+    Function to save and plot the file to_plot in the chosen pdf file, with custom x axes range.
+
+    :param pdf: the pdf file to save the plot in
+    :param to_plot: list containing the data to plot
+    :param range_from: range for x axis
+    :param range_to: range for x axis
+    '''
+    plt.figure()
+    plt.axis("off")
+    plt.text(0.5,0.5,"range"+str(range_from)+"-"+str(range_to),ha= "center",va="center", fontsize=40)
+    pdf.savefig()
 
 
-#making dictionarly with alla combination of parameters
-labels, terms = zip(*opti.items())
-all_comb = [dict(zip(labels, term)) for term in itertools.product(*terms)]
-for param in all_comb:
-    opt_list.append(ConjugateGradient(lr=param["lr"], beta_f=param["beta_f"],
-                                      ls=param["ls"], restart=param["restart"]))
-    print(param)
+    i=0
+    for att in range(0,len(opts),step):
+        f, (a) = plt.subplots(figsize=(30, 30), nrows=step1*len(batches) * len(neurs) * len(acts),
+                              ncols=step2*len(rlambdas) * len(losses),
+                              sharex='col', sharey='row', squeeze=False)
+        fgforplot=to_plot
+        fgforplot=sorted(fgforplot,key=lambda k:k['tr_loss'][-1])
+        temp = fgforplot[i: i + (step*len(batches)*len(neurs)*len(acts)*len(rlambdas)*len(losses))]
+        #temp = sorted(temp, key=lambda k:k['tr_loss'][-1])
+        j=0
+        hist=False
+        for row in a:
+            for col in row:
+                col.set_yticks(np.arange(range_from, range_to, (range_to-range_from)/40))#here the number of line
+                col.set_title('{'+temp[j]['configuration']['optimizers'].pprint()+"}\n "
+                              "last_f:"+str(temp[j]['tr_loss'][-1])+",gen_err:"+str(temp[j]['prediction'][0]),fontsize=20)
+
+                if hist:
+                    col.plot(temp[j]['history']['tr_loss'],label='tr err')
+                else:
+                    col.plot(temp[j]['tr_loss'], label='tr err')
+                #col.legend(loc=3,prop={'size':10})
+                col.tick_params(labelsize=13)
+                col.yaxis.grid()  # horizontal lines
+                col.set_ylim([range_from,range_to])
+                j+=1
+                i+=1
+
+        pdf.savefig(f)
+
+np.random.seed(5)
+time_name = str(time.time())
+
+dataset = preproc.Dataset()
+
+#dataset used
+train_data_path = "data/myTrain.csv"
+test_data_path = "data/myTest.csv"
+dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=0, targets=2))
+dataset.init_test(preproc.load_data(path=test_data_path, target=True, header_l=0, targets=2))
+preprocessor = preproc.Preprocessor()
+preprocessor.shuffle(dataset)
 
 
 acts=[["tanh","linear"]]
@@ -155,8 +154,6 @@ rlambdas = [[(0.0001,0),(0.0001,0)]]
 
 fgs = list()
 start = time.time()
-
-
 fgs = validation.grid_thread(dataset, epochs=[EPOCHS], batch_size=batches,
                                            n_layers=2, val_split=0,activations=acts,
                                            regularizations=regs, rlambda=rlambdas,
@@ -195,7 +192,6 @@ for fullgrid in fgs:
                     fgmean[j]['tr_acc']=np.array(i['history']['tr_acc'])
                     fgmean[j]['tr_loss']=np.array(i['history']['tr_loss'])
                     fgmean[j]['prediction']=np.array(i['prediction'])
-                #break
 
 for i in range(0,len(fgmean)):
     #fgmean[i]['val_acc']/=TRIALS
@@ -206,13 +202,10 @@ for i in range(0,len(fgmean)):
 
 with open("conjgrad2"+time_name+'.pkl', 'wb') as output:
     pickle.dump(fgmean, output, pickle.HIGHEST_PROTOCOL)
-    #pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
 pp = PdfPages(time_name +".pdf")
 
-# number of graph for row, and colum
-step1=2 #2
-step2=2 #3
+
 step = step1*step2
 
 
