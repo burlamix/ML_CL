@@ -4,6 +4,14 @@ from matplotlib import pyplot as plt
 from operator import itemgetter
 import matplotlib.cm as cm
 
+
+#-1 if you want take all combination of parameter, x if you want take maximun the best x parameter configuration 
+DATA_TO_TAKE = -1
+
+# 1 will show you a table, 0 a 2d plots
+TABLE_GRAPH=1
+
+
 def unstability(x):
     '''
     Calculates a measure of the unstability of the learning. More precisely the unstability
@@ -30,37 +38,17 @@ def conv_rate(x, eps=10):
 
 
 #list of file to upload
+opts_name = ['opts/adam1518335106.9898982.pkl','opts/adamax1518361193.7807884.pkl','opts/rmsprop1518335195.034857.pkl',
+        'opts/adine100k1518334988.7234812.pkl','opts/mome1518420364.732169.pkl' ]
+
+#opts_name = [ 'opts/simpleopt20k1518361023.1400704.pkl','opts/conjgrad1518336080.848611.pkl' ]
+
 opts = []
 
-#file to upload
-with open('opts/adam1518335106.9898982.pkl', 'rb') as handle:
-   opts.append(pickle.load(handle))
+for name_file in opts_name:
+    with open(name_file, 'rb') as handle:
+        opts.append(pickle.load(handle))
 
-with open('opts/adamax1518361193.7807884.pkl', 'rb') as handle:
-   opts.append(pickle.load(handle))
-
-#with open('opts/conjgrad1518336080.848611.pkl', 'rb') as handle:
-#    opts.append(pickle.load(handle))
-
-with open('opts/rmsprop1518335195.034857.pkl', 'rb') as handle:
-    opts.append(pickle.load(handle))
-
-#with open('opts/simpleopt20k1518361023.1400704.pkl', 'rb') as handle:
-#   opts.append(pickle.load(handle))
-
-with open('opts/adine100k1518334988.7234812.pkl', 'rb') as handle:
-   opts.append(pickle.load(handle))
-
-
-with open('opts/mome1518420364.732169.pkl', 'rb') as handle:
-   opts.append(pickle.load(handle))
-
-
-#-1 if you want take all combination of parameter, x if you want take maximun the best parameter configuration 
-data_to_take = -1
-
-# put 1 if you want a table, 0 if you want a 2d plots
-table_graph=1
 
 
 
@@ -96,20 +84,20 @@ for b in opts:
     points_x.append([])
     data = sorted(data, key=itemgetter(2))
 
-    if (data_to_take==-1):
-        to=min(data_to_take,len(data))
+    if (DATA_TO_TAKE!=-1):
+        to=min(DATA_TO_TAKE,len(data))
     else:
         to=len(data)
 
     for j in range(0, to):
         best_data.append(data[j])
-    print("\n\n")
     k=k+1
 
 
-"for graph"
 
-if (table_graph==0):
+if (TABLE_GRAPH==0):
+    "for graph"
+
     k=0
     colors = iter(cm.rainbow(np.linspace(0, 1, len(opts))))
     legend=[]
@@ -119,7 +107,6 @@ if (table_graph==0):
         legend.append(colorr)
         plt.scatter(points_y[k][0],points_x[k][0],color=colorr,label=b[i]['configuration']['optimizers'].pprint())
         for i in range(0,len(b)):
-            print("-"+str(i))
             if ll[i]>1.5: pass
             else:
                 plt.scatter(points_y[k][i],points_x[k][i],color=colorr)
@@ -130,10 +117,10 @@ if (table_graph==0):
 
     plt.legend()
     plt.show()  
+
 else:
 
     "for table"
-    print(data)
     best_data = sorted(best_data, key=itemgetter(2))
 
     digits=4
