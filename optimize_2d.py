@@ -142,7 +142,7 @@ iterations=1000 #Maximum number of iterations
 #See optimizers for a comprehensive list of the available optimzers
 opts = list()
 start = np.array([[-7, 8]])
-step = 0.003
+step = 0.0003
 
 #Just append the optimizers to the list to plot their behaviour
 opts.append((optimizers.Momentum(lr=step, eps=0.9), start))
