@@ -10,17 +10,13 @@ import numpy as np
 np.random.seed(5)
 dataset = preproc.Dataset()
 
+#Loading the dataset
 train_data_path = "data/ML-CUP17-TR.csv"
 test_data_path = "data/ML-CUP17-TS.csv"
-
-
 dataset.init_train(preproc.load_data(path=train_data_path, target=True, header_l=10, targets=2))
 dataset.init_test(preproc.load_data(path=test_data_path, target=False, header_l=10))
 
-
-
-
-
+#Creating optimizers to validate on
 adam1 = Adam(lr=0.03,b1=0.9,b2=0.999)
 adam2 = Adam(lr=0.4,b1=0.9,b2=0.999)
 adam3 = Adam(lr=0.007,b1=0.9,b2=0.999)
@@ -35,11 +31,13 @@ m3 = Momentum(lr=0.04,eps=0.9,nesterov=True)
 
 
 preprocessor = preproc.Preprocessor()
+#Uncomment lines below to remove outliers or normalize data
 #preprocessor.remove_outliers(dataset,sensitivity=2.5))
 #preprocessor.normalize(dataset,method='minmax')
-
-
 preprocessor.shuffle(dataset)
+
+
+#Create the configurations to build models and validate on.
 acts=[["sigmoid","linear"],["tanh","linear"],["relu","linear"]]
 opts=[adam1,adam2,adam3,adamax1,adamax2,adamax3,RMSP1,RMSP2,m1,m2,m3]
 neurs=[[20,2],[50,2],[80,2]]
@@ -49,10 +47,10 @@ regs = [[regularizations.reguls["EN"],regularizations.reguls["EN"]]]
 rlambdas = [[(0.0001,0.0001),(0.000,0.0001)],[(0.0006,0.0004),(0.0006,0.0004)],
 [(0.001,0.001),(0.01,0.01)],[(0.000,0.0001),(0.000,0.0001)],[(0.0001,0.000),(0.0001,0.000)]]
 
-
 fgs = list()
 
 trials = 2
+#Validate the models resulting from the combination of the parameters above
 for i in range(0,trials):
     fg,grid_res, pred = validation.grid_search(dataset, epochs=[30], batch_size=batches,
                                                n_layers=2, val_split=0,activations=acts,
@@ -64,10 +62,13 @@ for i in range(0,trials):
 
 fgmean = list() #List for holding means
 
+#Save the results of all configurations -- might eat up some space
 with open('grid_save.pkl', 'wb') as output:
     pickle.dump(fgs, output, pickle.HIGHEST_PROTOCOL)
     pickle.dump(grid_res, output, pickle.HIGHEST_PROTOCOL)
 
+
+########### ugly code for generating a pdf with the plots ###########
 
 #Create initial configs
 for i in fg:
@@ -91,6 +92,7 @@ for fullgrid in fgs:
                     fgmean[j]['tr_loss']=np.array(i['history']['tr_loss'])
                 break
 
+#Average over the trials
 for i in range(0,len(fgmean)):
     fgmean[i]['val_acc']/=trials
     fgmean[i]['val_loss']/=trials

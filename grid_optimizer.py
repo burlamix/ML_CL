@@ -19,7 +19,7 @@ EPOCHS = 100
 # verbosity of the program 1 show only the final value, 2 will show the value at each step
 VERBAVOLANT = 1
 
-#Number of plots to display per pdf page.
+#Number of plots to display per pdf page. Rows are given by step1 and columns by step2.
 step1=2
 step2=3
 opti = dict()

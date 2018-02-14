@@ -12,6 +12,7 @@ The core of the structure is inside of `NN_lib`. External files show sample usag
 * **activations:** Contains the implementation of a number of activation functions that can be used on the neural network' layers
 * **regularization:** Contains the implementation of a number of regularization methods that can be used on the neural network' layers
 * **loss_functions:** Contains the implementation of a number of loss functions that can be used for training a neural network
+* **preproc:** Contains functions to define and manipulate a dataset object
 * **validation:** Implements a number of methods such as cross validation and grid search for validating and exploring the parameters of a neural network model
 
 Custom activations, regularizations and loss_functions may be defined, provided they implement the required interface.
