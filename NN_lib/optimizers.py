@@ -205,13 +205,13 @@ class Adam:
         #Reset for adam => forget first moment and second moment moving averages.
         self.m = 0
         self.v = 0
+        self.lastf = 1000000
         self.t = 0
 
     def optimize(self, f, W):
 
         self.t+=1 #Update timestamp
         loss, grad = f(W) #Compute the gradient
-
         #First and second moment estimation(biased by b1 and b2)
         self.m = ((self.b1*self.m+(1-self.b1)*(grad)))
         self.v = ((self.b2*self.v+(1-self.b2)*(np.power((grad),2))))
@@ -223,6 +223,8 @@ class Adam:
         for i in range(len(vcap)):
             vcap[i] = np.sqrt(vcap[i])
 
+
+        self.lastf = loss
         return np.subtract(W,self.lr*mcap/((vcap+self.eps)))
 
 
@@ -461,9 +463,10 @@ class BFGS():
 
 optimizers = dict()
 optimizers["SGD"] = SGD()
-optimizers["adam"] = Adam()
 optimizers["momentum"] = Momentum()
+optimizers["adine"] = Adine()
+optimizers["adam"] = Adam()
 optimizers["adamax"] = Adamax()
 optimizers["rmsprop"] = RMSProp()
-optimizers["adine"] = Adine()
+optimizers["ConjugateGradient"] = ConjugateGradient()
 #optimizers["BFGS"] = BFGS()

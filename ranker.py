@@ -8,19 +8,19 @@ import matplotlib.cm as cm
 
 #-1 to consder all combinations of parameters, x to consider the best x parameters
 # configurations based on the final function value achieved
-DATA_TO_TAKE = -1
+DATA_TO_TAKE = 5
 
 #1 to display a table, 0 for a 2d plot
-TABLE_GRAPH = 0
+TABLE_GRAPH = 1
 
 #Sort data by last function value (change to 2 for gen_err, 3 for unstability, 4 for conv spd)
-SORT_CRIT = 1
+SORT_CRIT = 2
 
 #List of files containing the optimizers history (as output-ed by gird_optimizer.py)
 opts_name = ['opts/adam1518335106.9898982.pkl','opts/adamax1518361193.7807884.pkl','opts/rmsprop1518335195.034857.pkl',
         'opts/adine100k1518334988.7234812.pkl','opts/mome1518420364.732169.pkl' ]
 
-#opts_name = [ 'opts/simpleopt20k1518361023.1400704.pkl','opts/conjgrad1518336080.848611.pkl' ]
+#opts_name = [ 'opts/conjgrad1518336080.848611.pkl' ]
 
 opts = []
 
@@ -96,15 +96,14 @@ if (TABLE_GRAPH==0):
     plt.show()  
 
 else:
-
     "for table"
     best_data = sorted(best_data, key=itemgetter(SORT_CRIT))
 
     digits=4
-    best_data = [[el[0], np.round(el[1],digits), np.round(el[2],digits), np.round(el[3],digits), np.round(el[4],digits)]  for el in best_data]
-    columns = ('Param', 'final loss','gen_err', 'unstability', 'conv_speed')
+    best_data = [[el[0], np.round(el[1],digits), np.round(el[2],digits), np.round(el[3],digits), np.round(el[4],digits), np.round(el[1]/el[2],digits)]  for el in best_data]
+    columns = ('Param', 'final loss','gen_err', 'unstability', 'conv_speed','R')
     the_table = plt.table(cellText=best_data,
-                          colWidths=[0.40,0.06,0.06,0.06,0.06],
+                          colWidths=[0.40,0.06,0.06,0.06,0.06,0.06],
                           colLabels=columns, loc="upper center")
 
     the_table.auto_set_font_size(False)

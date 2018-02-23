@@ -13,16 +13,16 @@ def optimize_fun(fun,start,opt,epochs=100, min_f=None, min_r=None):
     '''
     Optimizes the given function with the given parameters and returns the history
     of iterations.
-    :param fun: The function to optimizes: must be of the form f(W, only_fp)
+    :param fun: The function to optimize: must be of the form f(W, only_fp)
     where W is the 2-arguments input matrix (e.g. np.array([[1,2]])) denoting
     the point to evaluate the function at and only_fp is a parameter that
     determines whether we want both the function value and the gradient at W
     or only the value. f must return the value only if only_fp is set to True
     and both the value and gradient (value,gradient) if only_fp is set to False.
-    :param start: Denoattes the starting point to begin optimizing the function from
+    :param start: Denotates the starting point to begin optimizing the function from
     :param opt: An object denoting the optimizer to utilize for the optimization of f.
     :param epochs: The number of epochs to optimize f over.
-    :param min_f: minumun of the function.
+    :param min_f: minimum of the function.
     :param min_r range within the minimun to stop at.
     :return: A dictionary of entries 'x', 'y', 'z', 'opt' denoting respectively
     the history of x coordinates, y coordinates, the corresponding function value
@@ -147,12 +147,13 @@ step = 0.0003
 #Just append the optimizers to the list to plot their behaviour
 opts.append((optimizers.Momentum(lr=step, eps=0.9), start))
 opts.append((optimizers.Momentum(lr=step, eps=0.5), start))
+opts.append((optimizers.Adam(lr=step*200), start))
+
 #opts.append((optimizers.Momentum(lr=step, eps=0.0), start))
 #opts.append((optimizers.Adine(lr=step,ms=0.9), start))
 #opts.append((optimizers.Adine(lr=step,ms=0.5), start))
 #opts.append((optimizers.Adine(lr=step,ms=0.0), start))
 #opts.append((optimizers.Adam(lr=step*50,b1=0.5,b2=0.5), start))
-#opts.append((optimizers.RMSProp(lr=step*20), start))
 #opts.append((optimizers.Adamax(lr=step*50), start))
 #opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=2,beta_f="FR"), start))
 #opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
