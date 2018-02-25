@@ -21,7 +21,7 @@ class Layer:
         self.neurons=neurons
         self.inputs=inputs
 
-        #If no weights were specified, initialized them randomly based
+        #If no weights were specified, initialize them randomly based
         #on the specified or default method.
         if weights.any()==None:
             self.initialize_random_weights(weights_init)

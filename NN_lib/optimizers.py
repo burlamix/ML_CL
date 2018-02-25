@@ -1,6 +1,4 @@
 import numpy as np
-import types
-import sys
 from NN_lib.linesearches import dir_der
 
 
@@ -109,7 +107,7 @@ class Momentum:
 
 class Adine:
     '''
-    An adapative momentum gradient descent method. Characterized by two momentum terms to
+    An adaptive momentum gradient descent method. Characterized by two momentum terms to
     switch between adaptively.
     Refer to https://arxiv.org/pdf/1712.07424.pdf for an in-depth description.
     '''
@@ -133,7 +131,7 @@ class Adine:
         :param lr: The step size to move by.
         :param ms: The standard momentum term.
         :param mg: The greater momentum term.
-        :param e: Tollerance parameter determining when to switch between the
+        :param e: Tolerance parameter determining when to switch between the
         standard and greater momentum terms.
         '''
         self.lr = lr
@@ -216,6 +214,16 @@ class Adam:
         self.m = ((self.b1*self.m+(1-self.b1)*(grad)))
         self.v = ((self.b2*self.v+(1-self.b2)*(np.power((grad),2))))
 
+        '''
+        if self.lastf < loss:
+            self.m=self.m/1.5
+            self.v = self.v/1.5
+
+        else:
+            self.v = self.v*1.5
+            self.m = self.m*1.5
+        '''
+
         #Correction on the estimations as to avoid 0-bias due to initialization
         mcap = self.m/(np.subtract(1,np.power(self.b1,self.t)))
         vcap = self.v/(np.subtract(1,np.power(self.b2,self.t)))
@@ -266,6 +274,7 @@ class Adamax:
         self.m = 0
         self.v = None
         self.t = 0
+        self.lastf = 10e9
 
     def optimize(self, f, W):
 
@@ -281,6 +290,7 @@ class Adamax:
         #Infinity norm here
         for e in range(0,len(o)):
             o[e] = np.maximum(k[e],np.abs(grad[e]))
+
 
         self.v = o
         return W-(self.lr/(1-self.b1**self.t))*self.m/(np.array(self.v)+self.eps)
@@ -429,7 +439,7 @@ class BFGS():
         self.lastg = None
 
 
-    def pprint(self): #if np.random.random()<0.01:self.p=None
+    def pprint(self):
 
         return "BFGS(DFP){lr:" + str(self.lr)+"}"
 

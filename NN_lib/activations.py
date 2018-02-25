@@ -48,8 +48,6 @@ def reludx(x):
 
 
 def softmax(x):
-    #Thanks to stackoverflow for suggestions on how to
-    #avoid numerical errors
     e = np.exp(x - np.max(x, axis=-1)[..., None])
     e /= np.sum(e, axis=-1)[..., None]
     #Clip to avoid numerical errors
@@ -58,7 +56,7 @@ def softmax(x):
 
 
 def softmaxdx( a):
-    #Again thanks to stackoverflow
+    #@stackoverflow
     return [np.diag(e) for e in a[..., None, :] * (np.eye(a.shape[-1], dtype=a.dtype) -
                               a[..., None])]
 

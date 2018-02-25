@@ -63,7 +63,6 @@ class BackTracking():
 
 class ArmijoWolfe():
     #Armijo-wolfe line search with strong wolfe condition
-    #Based on implementation by Antonio Frangioni
     def __eq__(self, other):
         if (other is None): return False
         return self.lr == other.lr \

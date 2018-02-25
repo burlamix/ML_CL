@@ -120,7 +120,7 @@ class NeuralNetwork:
         '''
         Evaluates the function represented by the neural network and returns
         either the value only or the gradient as well. Note that the second
-        case is cimputationally heavier.
+        case is computationally heavier.
         :param in_chunk: input values to propagate through the network
         :param out_chunk: real output
         :return: loss value or loss and gradient based on only_fp parameter

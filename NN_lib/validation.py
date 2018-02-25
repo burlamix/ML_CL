@@ -39,7 +39,7 @@ class grid_result:
                 net.addLayer(in_l, dataset.train[1].shape[1], activations[i], regularization=regularization[i],
                              rlambda=rlambda[i])
         #Re-train the best network on the whole dataset
-        #net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
+        net.fit_ds(dataset, self.epochs, self.optimizer, self.batch_size, self.loss_fun)
         self.NN = net
 
 
@@ -286,6 +286,8 @@ def k_fold_validation(dataset, NN, epochs, optimizer, cvfolds=3, batch_size=32,
     return np.average(val_loss), np.var(val_loss), np.average(val_acc), np.average(tr_loss), np.average(tr_acc), r
 
 
+
+#Multithreaded grid search
 def grid_thread(dataset, epochs, n_layers, neurons, activations=None, regularizations=None,
                 optimizers=None, batch_size=[32], loss_fun=None, cvfolds=None,
                 val_split=0, rlambda=None, verbose=0, val_set=None, val_loss_fun=None, trials=1):

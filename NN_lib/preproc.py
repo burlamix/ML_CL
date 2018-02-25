@@ -3,10 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
-
 class Dataset:
-    def __init__(self):# TODO option inizialization
+    def __init__(self):# TODO option initialization
         self.train = None
         self.test = None
 
@@ -49,7 +47,6 @@ class Preprocessor:
             if norm_output:
                 dataset.train[1] = (dataset.train[1] - dataset.train[1].min(axis=0)) / \
                                (dataset.train[1].max(axis=0) - dataset.train[1].min(axis=0))
-        #normalize training and test data
 
     def shuffle(self,dataset):
         '''randomly shuffles training data'''
@@ -74,7 +71,6 @@ class Preprocessor:
         dataset.train[1]=np.delete(dataset.train[1],out,axis=0)
         return len(out)
 
-    #print the number of outlier deleted
     def outlier_range(self,dataset,hop,start,end):
         mean = self.get_means(dataset)
         var = self.get_variance(dataset)
@@ -141,7 +137,6 @@ def load_monk(path):
             data.append(row)
 
     x = np.array([d[2:-1] for d in data]).astype('int')
-    #y = [(1*float(d[1])-0) for d in data]#TODO 
     y = [(2*float(d[1])-1) for d in data]
 
 

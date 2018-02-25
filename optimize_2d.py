@@ -1,7 +1,7 @@
 from NN_lib import optimizers
 import numpy as np
 from NN_lib import linesearches
-from test_functions import rosenbrock, matyas_fun, himmelblau, simple_fun
+from test_functions import rosenbrock, matyas_fun, himmelblau, simple_fun, ackley, ff_2, easom
 import pylab
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -61,19 +61,19 @@ def plot_contours(fun, xrange, yrange, contours=200):
     :return: The resulting plot handler (use it it @navigate_fun
     '''
     fig = plt.figure()
-    #ax = fig.gca(projection='3d') #Uncomment for 3d plot
-    ax = fig.gca()
+    ax = fig.gca(projection='3d') #Uncomment for 3d plot
+   # ax = fig.gca()
     X, Y = np.meshgrid(xrange, yrange)
     zs = np.array([fun([[xrange, yrange]], only_fp=True)
                    for xrange, yrange in zip(np.ravel(X), np.ravel(Y))])
     Z = zs.reshape(X.shape)
-    # surf=ax.plot_surface(Y,X,Z, cmap=cm.jet,cstride=1,rstride=1,alpha=0.3) #
+    surf=ax.plot_surface(X,Y,Z, cmap=cm.jet,cstride=1,rstride=1,alpha=0.8) #
     # surf = ax.contour(X, Y, Z, 10, lw=3, cmap="autumn_r", linestyles="solid", offset=-1)
-    surf = ax.contour(X, Y, Z, contours, lw=3, colors="k", linestyles="solid")
+    #surf = ax.contour(X, Y, Z, contours, lw=3, colors="k", linestyles="solid")
     #fig.colorbar(surf, shrink=0.5, aspect=5) #Uncomment for colorbar - useless for contours
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    #ax.set_zlabel('Z Label') #Uncomment for 3d plot
+    ax.set_zlabel('Z Label') #Uncomment for 3d plot
     return ax
 
 
@@ -101,7 +101,7 @@ def navigate_fun(navs, plot):
             py = [navs[j]['y'][i], navs[j]['y'][i + 1]]
             pz = [navs[j]['z'][i], navs[j]['z'][i + 1]]
             es = "no" if navs[j]['epochs_stop']==None else str(navs[j]['epochs_stop'])
-            plot.plot(px, py, 'k', alpha=0.8, linewidth=1.5,
+            plot.plot(px, py,pz, 'k', alpha=1, linewidth=1.5,
                     c=cols[j],label=navs[j]['opt'].pprint()+ ',ce:'+es)
             bbox_args = dict(boxstyle="round", fc="0.8")
             arrow_args = dict(arrowstyle="->")
@@ -131,25 +131,31 @@ amg = linesearches.ArmijoWolfe(m1=1e-4, m2=0.9, lr=0.0001,min_lr=1e-9, scale_r=0
 bt = linesearches.BackTracking(lr=2.1, m1=1e-4, scale_r=0.4, min_lr=1e-11, max_iter=100)
 
 
-fun = himmelblau #Available functions = {matyas_fun, rosenbrock, himmelblau, simple_fun}
-x = np.arange(-10, 10, 0.1) #x-range for the plot
-y = np.arange(-10, 10, 0.1) #y-range for the plot
+fun = easom #Available functions = {matyas_fun, rosenbrock, himmelblau, simple_fun}
+x = np.arange(-0, 5, 0.1) #x-range for the plot
+y = np.arange(-0, 5, 0.1) #y-range for the plot
 plot = plot_contours(fun, xrange=x, yrange=y, contours=200)
 
 min_r=1e-5   #Range within the optimum to stop at
-iterations=1000 #Maximum number of iterations
+iterations=100 #Maximum number of iterations
 
 #See optimizers for a comprehensive list of the available optimzers
 opts = list()
-start = np.array([[-7, 8]])
-step = 0.0003
-
+start = np.array([[4,2]])
+start1 = np.array([[np.pi-1.1,np.pi-0.8]])
+step = 0.03
 #Just append the optimizers to the list to plot their behaviour
-opts.append((optimizers.Momentum(lr=step, eps=0.9), start))
-opts.append((optimizers.Momentum(lr=step, eps=0.5), start))
-opts.append((optimizers.Adam(lr=step*200), start))
-
-#opts.append((optimizers.Momentum(lr=step, eps=0.0), start))
+#opts.append((optimizers.Momentum(lr=step, eps=0.9), start))
+#opts.append((optimizers.Adine(lr=step, ms=0.9,mg=2), start1))
+#opts.append((optimizers.Momentum(lr=step, eps=0.5), start))
+opts.append((optimizers.Adam(lr=step), start))
+opts.append((optimizers.Adam(lr=step,b2=0.3), start))
+#opts.append((optimizers.Adamax(lr=step*10), start))
+#opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=2,beta_f="FR"), start))
+#opts.append((optimizers.ConjugateGradient(lr=step,ls=amg,restart=-1,beta_f="PR"), start))
+#opts.append((optimizers.SGD(lr=step,ls=None),start))
+#opts.append((optimizers.SGD(lr=step,ls=amg),start))
+#opts.append((optimizers.Momentum(lr=step, eps=0.9), start))
 #opts.append((optimizers.Adine(lr=step,ms=0.9), start))
 #opts.append((optimizers.Adine(lr=step,ms=0.5), start))
 #opts.append((optimizers.Adine(lr=step,ms=0.0), start))
